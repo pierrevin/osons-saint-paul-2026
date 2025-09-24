@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osons Saint-Paul 2026 - Construisons ensemble le village vivant et partagé</title>
+    <meta name="description" content="Liste citoyenne Osons Saint-Paul pour les élections municipales 2026. Un projet participatif pour construire ensemble le village de demain.">
+    
+    <!-- Preconnect pour optimiser le chargement des polices -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Polices Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header fixe -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="Ofeuille.png" alt="Logo Osons Saint-Paul" class="logo-img">
+                <span class="logo-text">Osons Saint-Paul</span>
+            </div>
+            <nav class="nav">
+                <a href="#programme" class="nav-link">Programme</a>
+                <a href="#avis" class="nav-link">Votre avis</a>
+                <a href="#rencontres" class="nav-link">Rencontres</a>
+                <a href="#equipe" class="nav-link">Équipe</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Section Hero - La Première Carte Postale -->
+    <section class="hero" id="hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="container">
+                <h1 class="hero-title">Construisons ensemble le village vivant et partagé</h1>
+                <h2 class="hero-subtitle">Avec vous, pour Saint‑Paul 2026</h2>
+                <div class="hero-buttons">
+                    <a href="#programme" class="btn btn-primary">Découvrir le Programme</a>
+                    <a href="#avis" class="btn btn-secondary">Faire une Proposition</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Programme - Le présentoir à cartes postales -->
+    <section class="programme" id="programme">
+        <div class="container">
+            <h2 class="section-title">Notre Programme, vos idées</h2>
+            
+            <!-- Filtres -->
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fas fa-th"></i>
+                    <span>Tout</span>
+                </button>
+                <button class="filter-btn" data-filter="proteger">
+                    <i class="fas fa-leaf"></i>
+                    <span>Protéger</span>
+                </button>
+                <button class="filter-btn" data-filter="tisser">
+                    <i class="fas fa-users"></i>
+                    <span>Tisser</span>
+                </button>
+                <button class="filter-btn" data-filter="dessiner">
+                    <i class="fas fa-drafting-compass"></i>
+                    <span>Dessiner</span>
+                </button>
+                <button class="filter-btn" data-filter="ouvrir">
+                    <i class="fas fa-door-open"></i>
+                    <span>Ouvrir</span>
+                </button>
+            </div>
+
+            <!-- Grille de propositions -->
+            <div class="propositions-grid">
+                <!-- Proposition 1 -->
+                <div class="proposition-card" data-category="proteger">
+                    <div class="card-inner">
+                        <div class="card-front proteger">
+                            <div class="card-image">
+                                <div class="card-badge citoyenne"><i class="fas fa-users"></i></div>
+                                <div class="card-category proteger">Protéger</div>
+                                <div class="card-title-overlay">
+                                    <h3>Préserver nos espaces naturels</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-content">
+                                <h3>Préserver nos espaces naturels</h3>
+                                <p>Création d'un parc naturel communal et protection des zones humides.</p>
+                                <ul>
+                                    <li>Aménagement de sentiers pédagogiques</li>
+                                    <li>Protection de la biodiversité locale</li>
+                                    <li>Éducation environnementale</li>
+                                </ul>
+                                <a href="#" class="card-link">En savoir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proposition 2 -->
+                <div class="proposition-card" data-category="tisser">
+                    <div class="card-inner">
+                        <div class="card-front tisser">
+                            <div class="card-image">
+                                <div class="card-category tisser">Tisser</div>
+                                <div class="card-title-overlay">
+                                    <h3>Renforcer les liens sociaux</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-content">
+                                <h3>Renforcer les liens sociaux</h3>
+                                <p>Développement d'espaces de rencontre et d'activités intergénérationnelles.</p>
+                                <ul>
+                                    <li>Maison des associations</li>
+                                    <li>Fêtes de quartier régulières</li>
+                                    <li>Système d'entraide citoyenne</li>
+                                </ul>
+                                <a href="#" class="card-link">En savoir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proposition 3 -->
+                <div class="proposition-card" data-category="dessiner">
+                    <div class="card-inner">
+                        <div class="card-front dessiner">
+                            <div class="card-image">
+                                <div class="card-category dessiner">Dessiner</div>
+                                <div class="card-title-overlay">
+                                    <h3>Aménager le centre-ville</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-content">
+                                <h3>Aménager le centre-ville</h3>
+                                <p>Rénovation et embellissement du cœur du village pour en faire un lieu de vie.</p>
+                                <ul>
+                                    <li>Place piétonne centrale</li>
+                                    <li>Éclairage LED intelligent</li>
+                                    <li>Mobilier urbain design</li>
+                                </ul>
+                                <a href="#" class="card-link">En savoir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proposition 4 -->
+                <div class="proposition-card" data-category="ouvrir">
+                    <div class="card-inner">
+                        <div class="card-front ouvrir">
+                            <div class="card-image">
+                                <div class="card-badge citoyenne"><i class="fas fa-users"></i></div>
+                                <div class="card-category ouvrir">Ouvrir</div>
+                                <div class="card-title-overlay">
+                                    <h3>Gouvernance transparente</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-content">
+                                <h3>Gouvernance transparente</h3>
+                                <p>Transparence totale et participation citoyenne dans les décisions municipales.</p>
+                                <ul>
+                                    <li>Conseils municipaux en direct</li>
+                                    <li>Budget participatif</li>
+                                    <li>Consultations régulières</li>
+                                </ul>
+                                <a href="#" class="card-link">En savoir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proposition 5 -->
+                <div class="proposition-card" data-category="proteger">
+                    <div class="card-inner">
+                        <div class="card-front proteger">
+                            <div class="card-image">
+                                <div class="card-category proteger">Protéger</div>
+                                <div class="card-title-overlay">
+                                    <h3>Transition écologique</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-content">
+                                <h3>Transition écologique</h3>
+                                <p>Engagement fort pour l'environnement et la durabilité.</p>
+                                <ul>
+                                    <li>Énergies renouvelables</li>
+                                    <li>Réduction des déchets</li>
+                                    <li>Mobilité douce</li>
+                                </ul>
+                                <a href="#" class="card-link">En savoir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proposition 6 -->
+                <div class="proposition-card" data-category="tisser">
+                    <div class="card-inner">
+                        <div class="card-front tisser">
+                            <div class="card-image">
+                                <div class="card-category tisser">Tisser</div>
+                                <div class="card-title-overlay">
+                                    <h3>Éducation et jeunesse</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-content">
+                                <h3>Éducation et jeunesse</h3>
+                                <p>Investissement dans l'éducation et l'épanouissement de nos jeunes.</p>
+                                <ul>
+                                    <li>Rénovation de l'école</li>
+                                    <li>Activités périscolaires</li>
+                                    <li>Accompagnement parental</li>
+                                </ul>
+                                <a href="#" class="card-link">En savoir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Votre Avis Compte - La boîte aux lettres -->
+    <section class="avis" id="avis">
+        <div class="container">
+            <div class="avis-content">
+                <div class="avis-text">
+                    <h2 class="section-title">Votre avis compte.</h2>
+                    <p class="avis-description">Ce projet ne se construit pas pour vous, mais avec vous. Chaque idée, chaque suggestion est une pierre à l'édifice de notre village de demain. Partagez la vôtre.</p>
+                    <a href="#" class="btn btn-yellow">Je donne mon avis</a>
+                </div>
+                <div class="avis-image">
+                    <img src="https://images.unsplash.com/photo-1587560699334-cc4ff634909a?w=600&h=400&fit=crop" alt="Boîte aux lettres" class="lettre-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Construisons Ensemble - L'agenda des rencontres -->
+    <section class="rencontres" id="rencontres">
+        <div class="container">
+            <h2 class="section-title">Rencontrons-nous !</h2>
+            <div class="events-timeline">
+                <div class="event">
+                    <div class="event-date">
+                        <span class="day">15</span>
+                        <span class="month">OCT</span>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Apéro-projet au café du village</h3>
+                        <p class="event-description">Venez échanger autour d'un verre sur nos propositions pour Saint-Paul. Discussion libre et conviviale.</p>
+                        <div class="event-details">
+                            <span class="event-time"><i class="fas fa-clock"></i> 18h30</span>
+                            <span class="event-location"><i class="fas fa-map-marker-alt"></i> Café du Village</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <div class="event-date">
+                        <span class="day">22</span>
+                        <span class="month">OCT</span>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Balade de quartier - Centre historique</h3>
+                        <p class="event-description">Découvrons ensemble le patrimoine de notre village et imaginons son avenir. Visite guidée et échanges.</p>
+                        <div class="event-details">
+                            <span class="event-time"><i class="fas fa-clock"></i> 14h00</span>
+                            <span class="event-location"><i class="fas fa-map-marker-alt"></i> Place de l'Église</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <div class="event-date">
+                        <span class="day">29</span>
+                        <span class="month">OCT</span>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Réunion publique - Salle des fêtes</h3>
+                        <p class="event-description">Présentation complète de notre programme et réponse à toutes vos questions. Moment d'échange démocratique.</p>
+                        <div class="event-details">
+                            <span class="event-time"><i class="fas fa-clock"></i> 20h00</span>
+                            <span class="event-location"><i class="fas fa-map-marker-alt"></i> Salle des Fêtes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Notre Équipe -->
+    <section class="equipe" id="equipe">
+        <div class="container">
+            <h2 class="section-title">Notre Équipe</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face" alt="Marie Dubois">
+                        <div class="member-overlay">
+                            <h3 class="member-name">Marie Dubois</h3>
+                            <p class="member-role">Tête de liste</p>
+                            <p class="member-description">"Passionnée par notre village, je veux construire avec vous un avenir serein et dynamique pour Saint-Paul."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face" alt="Sophie Martin">
+                        <div class="member-overlay">
+                            <h3 class="member-name">Sophie Martin</h3>
+                            <p class="member-role">Adjointe Environnement</p>
+                            <p class="member-description">"Protéger notre patrimoine naturel pour les générations futures, c'est notre responsabilité commune."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face" alt="Pierre Leroy">
+                        <div class="member-overlay">
+                            <h3 class="member-name">Pierre Leroy</h3>
+                            <p class="member-role">Adjoint Urbanisme</p>
+                            <p class="member-description">"Un village qui grandit harmonieusement, c'est un village où il fait bon vivre ensemble."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face" alt="Claire Rousseau">
+                        <div class="member-overlay">
+                            <h3 class="member-name">Claire Rousseau</h3>
+                            <p class="member-role">Adjointe Social</p>
+                            <p class="member-description">"Renforcer les liens entre habitants, c'est créer la solidarité qui fait la force de notre village."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face" alt="Thomas Bernard">
+                        <div class="member-overlay">
+                            <h3 class="member-name">Thomas Bernard</h3>
+                            <p class="member-role">Adjoint Économie</p>
+                            <p class="member-description">"Soutenir nos commerces et artisans, c'est préserver l'âme économique de Saint-Paul."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face" alt="Isabelle Moreau">
+                        <div class="member-overlay">
+                            <h3 class="member-name">Isabelle Moreau</h3>
+                            <p class="member-role">Adjointe Éducation</p>
+                            <p class="member-description">"Nos enfants sont l'avenir. Investir dans leur éducation, c'est investir dans notre futur."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="Ofeuille.png" alt="Logo Osons Saint-Paul" class="footer-logo-img">
+                        <span class="footer-logo-text">Osons Saint-Paul</span>
+                    </div>
+                    <p class="footer-description">Une liste citoyenne qui place l'humain au cœur de ses préoccupations. Ensemble, construisons le Saint-Paul de demain.</p>
+                </div>
+
+                <div class="footer-column">
+                    <h3 class="footer-title">Restons en contact</h3>
+                    <div class="newsletter">
+                        <input type="email" placeholder="Votre email" class="newsletter-input">
+                        <button class="newsletter-btn">S'inscrire</button>
+                    </div>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> contact@osonssaintpaul.fr</p>
+                        <p><i class="fas fa-phone"></i> 05 61 XX XX XX</p>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3 class="footer-title">Suivez-nous</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <a href="#" class="legal-link">Mentions légales</a>
+                    <a href="#" class="legal-link">Gestion des cookies</a>
+                </div>
+                <p class="footer-copyright">&copy; 2025 Osons Saint-Paul. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
