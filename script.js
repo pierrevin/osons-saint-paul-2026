@@ -106,8 +106,19 @@ document.addEventListener('DOMContentLoaded', function() {
             // Filtrer les cartes
             propositionCards.forEach(card => {
                 const category = card.getAttribute('data-category');
+                const isCitizenCard = card.querySelector('.card-badge.citoyenne') !== null;
                 
-                if (filter === 'all' || category === filter) {
+                let shouldShow = false;
+                
+                if (filter === 'all') {
+                    shouldShow = true;
+                } else if (filter === 'citoyens') {
+                    shouldShow = isCitizenCard;
+                } else {
+                    shouldShow = category === filter && !isCitizenCard;
+                }
+                
+                if (shouldShow) {
                     card.style.display = 'block';
                     // Animation d'apparition
                     setTimeout(() => {
@@ -392,12 +403,145 @@ function printPage() {
     trackEvent('Action', 'Print', 'Page');
 }
 
+// ===== TRANSITIONS PAR DÉGRADÉ AU SCROLL =====
+function initializeGradientTransitions() {
+    const sections = document.querySelectorAll('section');
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '-50px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+}
+
+// ===== FIL D'ARIANE DYNAMIQUE =====
+function initializeBreadcrumb() {
+    const breadcrumb = document.getElementById('breadcrumb');
+    const breadcrumbList = breadcrumb.querySelector('.breadcrumb-list');
+    
+           // Configuration des sections et leurs titres
+           const sections = [
+               { id: 'hero', title: 'Accueil', short: 'Accueil' },
+               { id: 'programme', title: 'Notre Programme', short: 'Programme' },
+               { id: 'equipe', title: 'Notre Équipe', short: 'Équipe' },
+               { id: 'rencontres', title: 'Rencontrons-nous !', short: 'Rencontres' },
+               { id: 'charte', title: 'Notre Charte', short: 'Charte' },
+               { id: 'idees', title: 'Vos idées comptent !', short: 'Idées' }
+           ];
+    
+    let updateTimeout;
+    
+    // Observer pour détecter la section visible
+    const observer = new IntersectionObserver((entries) => {
+        let visibleSection = null;
+        let maxRatio = 0;
+        
+        entries.forEach(entry => {
+            if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+                maxRatio = entry.intersectionRatio;
+                visibleSection = sections.find(s => s.id === entry.target.id);
+            }
+        });
+        
+        if (visibleSection) {
+            // Délai pour éviter les mises à jour trop fréquentes
+            clearTimeout(updateTimeout);
+            updateTimeout = setTimeout(() => {
+                updateBreadcrumb(visibleSection, sections);
+            }, 50);
+        }
+    }, {
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+        rootMargin: '-20px 0px -20px 0px'
+    });
+    
+    // Observer toutes les sections
+    sections.forEach(section => {
+        const element = document.getElementById(section.id);
+        if (element) {
+            observer.observe(element);
+        }
+    });
+    
+    // Afficher le fil d'Ariane dès le chargement (section hero par défaut)
+    updateBreadcrumb(sections[0], sections);
+    
+    // Détection spéciale pour quand on est tout en haut (section hero)
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            if (window.scrollY < 100) {
+                updateBreadcrumb(sections[0], sections);
+            }
+        }, 100);
+    });
+    
+    // Fonction pour mettre à jour le fil d'Ariane
+    function updateBreadcrumb(currentSection, allSections) {
+        const currentIndex = allSections.findIndex(s => s.id === currentSection.id);
+        
+        // Créer le fil d'Ariane avec TOUTES les sections
+        let breadcrumbHTML = '';
+        
+        allSections.forEach((section, index) => {
+            const isCurrent = index === currentIndex;
+            
+            breadcrumbHTML += `
+                <li class="breadcrumb-item">
+                    ${isCurrent 
+                        ? `<span class="breadcrumb-current">${section.short}</span>`
+                        : `<a href="#${section.id}" class="breadcrumb-link" data-section="${section.id}">${section.short}</a>`
+                    }
+                </li>
+            `;
+        });
+        
+        breadcrumbList.innerHTML = breadcrumbHTML;
+        
+        // Ajouter les event listeners pour la navigation
+        const links = breadcrumbList.querySelectorAll('.breadcrumb-link');
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('data-section');
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Afficher le fil d'Ariane avec animation
+        breadcrumb.classList.add('visible');
+    }
+}
+
 // ===== INITIALISATION FINALE =====
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Site Osons Saint-Paul 2026 chargé avec succès !');
     
     // Ajouter une classe au body pour indiquer que JS est activé
     document.body.classList.add('js-enabled');
+    
+    // Initialiser les transitions par dégradé
+    initializeGradientTransitions();
+    
+    // Initialiser le fil d'Ariane
+    initializeBreadcrumb();
     
     // Animation d'entrée du hero
     setTimeout(() => {
