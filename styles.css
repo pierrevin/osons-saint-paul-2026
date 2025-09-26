@@ -456,7 +456,7 @@ section.visible::after {
 .section-title {
     /* Application de la charte typographique */
     font-family: var(--font-title);
-    font-size: var(--font-title-size);
+    font-size: clamp(3rem, 5.5vw, 4.5rem);
     font-weight: var(--font-title-weight);
     text-transform: var(--font-title-transform);
     letter-spacing: var(--font-title-spacing);
@@ -464,10 +464,24 @@ section.visible::after {
     
     /* Mise en page */
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.2rem;
     position: relative;
     transform: none;
     margin-left: 0;
+}
+
+/* Sous-titre sur ligne séparée, manuscrit corail */
+.section-subtitle {
+    font-family: var(--font-subtitle);
+    font-size: clamp(1.6rem, 3vw, 2.8rem);
+    font-weight: var(--font-subtitle-weight);
+    font-style: var(--font-subtitle-style);
+    color: var(--font-subtitle-color);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-top: 0.1rem;
+    margin-bottom: 2rem;
+    text-align: center;
 }
 
 .section-title .subtitle {
@@ -497,19 +511,6 @@ section.visible::after {
     letter-spacing: 0px;
 }
 
-/* Accent décoratif minimaliste */
-.section-title::before {
-    content: '';
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: var(--deep-green); /* ✅ Utilise une couleur secondaire */
-    border-radius: 2px;
-    opacity: 0.6;
-}
 
 /* ===== SECTION PROGRAMME ===== */
 .programme {
@@ -546,6 +547,97 @@ section.visible::after {
     font-style: italic;
     margin: 0;
     opacity: 0.8;
+}
+
+/* ===== APPEL À L'ACTION RENCONTRES ===== */
+.cta-section {
+    text-align: center;
+    margin: 3rem 0;
+    padding: 2.5rem;
+    background: rgba(236, 101, 79, 0.05);
+    border-radius: 15px;
+    border: 1px solid rgba(236, 101, 79, 0.1);
+}
+
+.cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.cta-title {
+    font-family: var(--font-script);
+    font-size: 2rem;
+    color: var(--coral);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.cta-description {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    color: var(--dark-blue);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-buttons .btn {
+    min-width: 200px;
+}
+
+/* ===== FORMULAIRE NEWSLETTER ===== */
+.newsletter-form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter-form .form-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.newsletter-form input[type="email"] {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: 2px solid rgba(236, 101, 79, 0.2);
+    border-radius: 8px;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.newsletter-form input[type="email"]:focus {
+    outline: none;
+    border-color: var(--coral);
+    box-shadow: 0 0 0 3px rgba(236, 101, 79, 0.1);
+}
+
+.newsletter-form input[type="email"]::placeholder {
+    color: rgba(0, 74, 109, 0.5);
+}
+
+.newsletter-form .btn {
+    padding: 1rem 2rem;
+    white-space: nowrap;
+    min-width: auto;
+}
+
+.newsletter-note {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--deep-green);
+    font-style: italic;
+    margin: 0;
+    opacity: 0.8;
+    text-align: center;
 }
 
 /* Bouton proposition utilise maintenant btn-primary (corail) */
@@ -858,173 +950,185 @@ section.visible::after {
     color: var(--deep-green);
 }
 
-/* ===== FIL D'ARIANE VERTICAL ===== */
-.breadcrumb {
+/* ===== HEADER STICKY ===== */
+.header-sticky {
     position: fixed;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #FFFFFF;
-    border-radius: 10px;
-    padding: 1rem 0.6rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    z-index: 999;
-    opacity: 0;
-    transform: translateY(-50%) translateX(-20px);
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(236, 101, 79, 0.1);
     transition: all 0.3s ease;
-    font-size: 0.75rem;
-    border: 1px solid rgba(236, 101, 79, 0.2);
-    max-height: 70vh;
-    overflow-y: auto;
+    transform: translateY(-100%);
+    opacity: 0;
 }
 
-.breadcrumb.visible {
+.header-sticky.visible {
+    transform: translateY(0);
     opacity: 1;
-    transform: translateY(-50%) translateX(0);
 }
 
-.breadcrumb-list {
+.header-content {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.header-logo .logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.header-logo .logo-text {
+    font-family: var(--font-script);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--coral);
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-list {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-.breadcrumb-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.3rem;
-    position: relative;
-}
-
-.breadcrumb-item:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    bottom: -0.8rem;
-    width: 2px;
-    height: 1rem;
-    background: linear-gradient(180deg, var(--coral) 0%, transparent 100%);
-}
-
-.breadcrumb-link {
-    color: rgba(0, 74, 109, 0.7);
+.nav-link {
+    color: var(--dark-blue);
     text-decoration: none;
-    font-family: var(--font-sans); /* Lato - police moderne pour les autres sections */
-    font-weight: 400;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     transition: all 0.3s ease;
-    padding: 0.4rem 0.6rem;
-    border-radius: 8px;
-    text-align: center;
-    min-width: 50px;
     position: relative;
+    padding: 0.5rem 0;
 }
 
-.breadcrumb-link:hover {
+.nav-link:hover,
+.nav-link.active {
     color: var(--coral);
-    background: rgba(236, 101, 79, 0.1);
-    transform: scale(1.05);
 }
 
-.breadcrumb-link::before {
+.nav-link::after {
     content: '';
     position: absolute;
-    left: -1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(236, 101, 79, 0.3);
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--coral);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.mobile-menu-toggle span {
+    width: 20px;
+    height: 2px;
+    background: var(--coral);
     transition: all 0.3s ease;
+    border-radius: 1px;
 }
 
-.breadcrumb-link:hover::before {
-    background: var(--coral);
-    transform: translateY(-50%) scale(1.2);
-}
-
-/* Toutes les sections sont maintenant cliquables */
-
-.breadcrumb-current {
-    color: var(--coral);
-    font-weight: 600;
-    font-family: var(--font-script); /* Caveat - manuscrit pour la section actuelle */
-    font-style: italic;
-    font-size: 0.8rem;
-    padding: 0.4rem 0.6rem;
-    border-radius: 8px;
-    background: rgba(236, 101, 79, 0.08);
-    text-align: center;
-    min-width: 50px;
-    position: relative;
-}
-
-.breadcrumb-current::before {
-    content: '';
-    position: absolute;
-    left: -1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--coral);
-    box-shadow: 0 0 0 3px rgba(236, 101, 79, 0.2);
-}
-
-/* Responsive pour le fil d'Ariane vertical */
-@media (max-width: 1024px) {
-    .breadcrumb {
-        left: 15px;
-        padding: 1rem 0.6rem;
-        font-size: 0.75rem;
-    }
-    
-    .breadcrumb-list {
-        gap: 0.8rem;
-    }
-    
-    .breadcrumb-link,
-    .breadcrumb-current {
-        padding: 0.4rem 0.6rem;
-        min-width: 50px;
-    }
-}
-
+/* Responsive */
 @media (max-width: 768px) {
-    .breadcrumb {
-        left: 10px;
-        top: 50%;
-        padding: 0.8rem 0.4rem;
-        font-size: 0.7rem;
-        max-height: 60vh;
+    .header-content {
+        padding: 1rem;
     }
     
-    .breadcrumb-list {
-        gap: 0.6rem;
+    .header-nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(236, 101, 79, 0.1);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
     }
     
-    .breadcrumb-link,
-    .breadcrumb-current {
-        padding: 0.3rem 0.4rem;
-        min-width: 40px;
-        font-size: 0.7rem;
+    .header-nav.mobile-active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
     }
     
-    .breadcrumb-link::before,
-    .breadcrumb-current::before {
-        width: 6px;
-        height: 6px;
-        left: -0.8rem;
+    .nav-list {
+        flex-direction: column;
+        gap: 0;
+        padding: 1rem;
     }
     
-    .breadcrumb-current::before {
-        width: 8px;
-        height: 8px;
+    .nav-link {
+        display: block;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(236, 101, 79, 0.1);
+    }
+    
+    .nav-link:last-child {
+        border-bottom: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .mobile-menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .mobile-menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+    
+    .header-logo .logo-text {
+        font-size: 1.2rem;
+    }
+    
+    .header-logo .logo-img {
+        width: 35px;
+        height: 35px;
     }
 }
 
@@ -1106,7 +1210,7 @@ section.visible::after {
 .transition-quote-text {
     /* Application de la charte typographique */
     font-family: var(--font-quote);
-    font-size: var(--font-quote-size);
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
     font-weight: var(--font-quote-weight);
     font-style: var(--font-quote-style);
     color: #FFFFFF; /* Blanc pour contraste avec overlay sombre */
@@ -1122,7 +1226,7 @@ section.visible::after {
 .transition-quote-text .quote-text {
     /* Application de la charte typographique */
     font-family: var(--font-quote);
-    font-size: var(--font-quote-size);
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
     font-weight: var(--font-quote-weight);
     font-style: var(--font-quote-style);
     color: #FFFFFF; /* Blanc pour contraste */
@@ -1136,7 +1240,7 @@ section.visible::after {
 .transition-quote-text .quote-author {
     /* Application de la charte typographique */
     font-family: var(--font-attribution);
-    font-size: var(--font-attribution-size);
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
     font-weight: var(--font-attribution-weight);
     text-transform: var(--font-attribution-transform);
     letter-spacing: var(--font-attribution-spacing);
@@ -1945,6 +2049,44 @@ section.visible::after {
     .programme-cta {
         margin: 2rem 0;
         padding: 1.5rem;
+    }
+    
+    .cta-section {
+        margin: 2rem 0;
+        padding: 2rem 1.5rem;
+    }
+    
+    .cta-title {
+        font-size: 1.6rem;
+    }
+    
+    .cta-description {
+        font-size: 1rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons .btn {
+        min-width: 250px;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .newsletter-form .form-group {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .newsletter-form input[type="email"] {
+        width: 100%;
+    }
+    
+    .newsletter-form .btn {
+        width: 100%;
+        padding: 1rem;
     }
 
     .filters {

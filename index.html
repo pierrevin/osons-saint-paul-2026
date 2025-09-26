@@ -20,17 +20,42 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Fil d'Ariane -->
-    <nav class="breadcrumb" id="breadcrumb">
-        <ol class="breadcrumb-list">
-            <li class="breadcrumb-item">
-                <a href="#hero" class="breadcrumb-link">Accueil</a>
-            </li>
-            <li class="breadcrumb-item">
-                <span class="breadcrumb-current">Programme</span>
-            </li>
-        </ol>
-    </nav>
+    <!-- Header sticky -->
+    <header class="header-sticky" id="headerSticky">
+        <div class="header-content">
+            <div class="header-logo">
+                <img src="Ofeuille.png" alt="Logo Osons Saint-Paul" class="logo-img">
+                <span class="logo-text">Osons Saint-Paul</span>
+            </div>
+            <nav class="header-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#hero" class="nav-link">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#programme" class="nav-link">Programme</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#equipe" class="nav-link">Équipe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#rencontres" class="nav-link">Rendez-vous</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#charte" class="nav-link">Charte</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#idees" class="nav-link">Idées</a>
+                    </li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
 
     <!-- Section Hero - La Première Carte Postale -->
     <section class="hero" id="hero">
@@ -66,9 +91,8 @@
         <div class="surprise-bubble" style="bottom: 40%; left: 5%;"></div>
         
         <div class="container">
-            <h2 class="section-title">
-                Notre Programme <span class="inline-subtitle">vos idées</span>
-            </h2>
+            <h2 class="section-title">Notre Programme</h2>
+            <h3 class="section-subtitle">Osons intégrer vos idées</h3>
             
             <!-- Filtres -->
             <div class="filters">
@@ -289,9 +313,8 @@
         <div class="surprise-bubble" style="bottom: 30%; left: 10%;"></div>
         
         <div class="container">
-            <h2 class="section-title">
-                Notre Équipe <span class="inline-subtitle">Votre équipe</span>
-            </h2>
+            <h2 class="section-title">Notre Équipe</h2>
+            <h3 class="section-subtitle">Osez nous aborder</h3>
             
             <div class="team-grid">
                 <div class="team-member">
@@ -503,6 +526,18 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Appel à l'action -->
+            <div class="cta-section">
+                <div class="cta-content">
+                    <h3 class="cta-title">Rencontrons-nous !</h3>
+                    <p class="cta-description">Vous avez des questions ? Des idées à partager ? N'hésitez pas à nous contacter directement.</p>
+                    <div class="cta-buttons">
+                        <a href="#idees" class="btn btn-primary">Nous contacter</a>
+                        <a href="#rencontres" class="btn btn-secondary">Voir nos rendez-vous</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -519,9 +554,8 @@
     <!-- Section Construisons Ensemble - L'agenda des rencontres -->
     <section class="rencontres" id="rencontres">
         <div class="container">
-            <h2 class="section-title">
-                Rencontrons-nous ! <span class="inline-subtitle">Rendez-vous</span>
-            </h2>
+            <h2 class="section-title">Nos rendez-vous</h2>
+            <h3 class="section-subtitle">Osons échanger</h3>
             
             <div class="events-timeline">
                 <div class="event">
@@ -569,19 +603,24 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Appel à l'action - Newsletter -->
+            <div class="cta-section">
+                <div class="cta-content">
+                    <h3 class="cta-title">Restez informé !</h3>
+                    <p class="cta-description">Recevez nos actualités et invitations aux événements directement dans votre boîte mail.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <div class="form-group">
+                            <input type="email" id="newsletterEmail" name="email" placeholder="Votre adresse email" required>
+                            <button type="submit" class="btn btn-primary">S'inscrire</button>
+                        </div>
+                        <p class="newsletter-note">Nous respectons votre vie privée. Désabonnement possible à tout moment.</p>
+                    </form>
+                </div>
+            </div>
         </div>
         
     </section>
-
-    <!-- Citation de transition : Rencontres → Équipe -->
-    <div class="transition-quote rencontres-equipe">
-        <div class="transition-quote-content">
-            <blockquote class="transition-quote-text">
-                <span class="quote-text">Concevoir et élaborer la dépense publique en terme de transparence et de responsabilité</span>
-                <span class="quote-author">Notre méthode</span>
-            </blockquote>
-        </div>
-    </div>
 
     <!-- Citation de transition : Rencontres → Charte -->
     <div class="transition-quote rencontres-charte">
@@ -596,9 +635,8 @@
     <!-- Section Notre Charte -->
     <section class="charte" id="charte">
         <div class="container">
-            <h2 class="section-title">
-                Notre Charte <span class="inline-subtitle">Nos engagements</span>
-            </h2>
+            <h2 class="section-title">Notre charte</h2>
+            <h3 class="section-subtitle">Osons nous engager</h3>
             
             <!-- Citation d'introduction -->
             
@@ -685,22 +723,12 @@
         </div>
     </section>
 
-    <!-- Citation de transition : Charte → Footer -->
-    <div class="transition-quote charte-footer">
-        <div class="transition-quote-content">
-            <blockquote class="transition-quote-text">
-                <span class="quote-text">Articuler démocratie représentative et démocratie participative pour favoriser l'investissement citoyen</span>
-                <span class="quote-author">Notre démocratie</span>
-            </blockquote>
-        </div>
-    </div>
-
     <!-- Citation de transition : Charte → Vos idées -->
     <div class="transition-quote charte-idees">
         <div class="transition-quote-content">
             <blockquote class="transition-quote-text">
-                <span class="quote-text">Articuler démocratie représentative et démocratie participative pour favoriser l'investissement citoyen</span>
-                <span class="quote-author">Notre démocratie</span>
+                <span class="quote-text">S'engager à être cohérent.es entre nos intentions et nos actes</span>
+                <span class="quote-author">Notre cohérence</span>
             </blockquote>
         </div>
     </div>
@@ -708,9 +736,8 @@
     <!-- Section Vos idées comptent -->
     <section class="idees" id="idees">
         <div class="container">
-            <h2 class="section-title">
-                Vos idées comptent ! <span class="inline-subtitle">Participez</span>
-            </h2>
+            <h2 class="section-title">Vos idées comptent</h2>
+            <h3 class="section-subtitle">Osez proposer</h3>
             
             <div class="idees-content">
                 <div class="idees-text">

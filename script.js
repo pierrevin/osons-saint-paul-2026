@@ -424,109 +424,155 @@ function initializeGradientTransitions() {
     });
 }
 
-// ===== FIL D'ARIANE DYNAMIQUE =====
-function initializeBreadcrumb() {
-    const breadcrumb = document.getElementById('breadcrumb');
-    const breadcrumbList = breadcrumb.querySelector('.breadcrumb-list');
+// ===== HEADER STICKY =====
+function initializeHeaderSticky() {
+    const header = document.getElementById('headerSticky');
+    const navLinks = document.querySelectorAll('.nav-link');
     
-           // Configuration des sections et leurs titres
-           const sections = [
-               { id: 'hero', title: 'Accueil', short: 'Accueil' },
-               { id: 'programme', title: 'Notre Programme', short: 'Programme' },
-               { id: 'equipe', title: 'Notre Équipe', short: 'Équipe' },
-               { id: 'rencontres', title: 'Rencontrons-nous !', short: 'Rencontres' },
-               { id: 'charte', title: 'Notre Charte', short: 'Charte' },
-               { id: 'idees', title: 'Vos idées comptent !', short: 'Idées' }
-           ];
+    // Configuration des sections
+    const sections = [
+        { id: 'hero', title: 'Accueil' },
+        { id: 'programme', title: 'Programme' },
+        { id: 'equipe', title: 'Équipe' },
+        { id: 'rencontres', title: 'Rendez-vous' },
+        { id: 'charte', title: 'Charte' },
+        { id: 'idees', title: 'Idées' }
+    ];
     
-    let updateTimeout;
+    let lastScrollY = window.scrollY;
+    let ticking = false;
     
-    // Observer pour détecter la section visible
-    const observer = new IntersectionObserver((entries) => {
-        let visibleSection = null;
-        let maxRatio = 0;
+    // Fonction pour gérer l'affichage du header
+    function updateHeader() {
+        const scrollY = window.scrollY;
         
-        entries.forEach(entry => {
-            if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
-                maxRatio = entry.intersectionRatio;
-                visibleSection = sections.find(s => s.id === entry.target.id);
-            }
-        });
-        
-        if (visibleSection) {
-            // Délai pour éviter les mises à jour trop fréquentes
-            clearTimeout(updateTimeout);
-            updateTimeout = setTimeout(() => {
-                updateBreadcrumb(visibleSection, sections);
-            }, 50);
+        // Afficher le header après avoir scrollé un peu
+        if (scrollY > 100) {
+            header.classList.add('visible');
+        } else {
+            header.classList.remove('visible');
         }
-    }, {
-        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-        rootMargin: '-20px 0px -20px 0px'
-    });
-    
-    // Observer toutes les sections
-    sections.forEach(section => {
-        const element = document.getElementById(section.id);
-        if (element) {
-            observer.observe(element);
-        }
-    });
-    
-    // Afficher le fil d'Ariane dès le chargement (section hero par défaut)
-    updateBreadcrumb(sections[0], sections);
-    
-    // Détection spéciale pour quand on est tout en haut (section hero)
-    let scrollTimeout;
-    window.addEventListener('scroll', function() {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-            if (window.scrollY < 100) {
-                updateBreadcrumb(sections[0], sections);
-            }
-        }, 100);
-    });
-    
-    // Fonction pour mettre à jour le fil d'Ariane
-    function updateBreadcrumb(currentSection, allSections) {
-        const currentIndex = allSections.findIndex(s => s.id === currentSection.id);
         
-        // Créer le fil d'Ariane avec TOUTES les sections
-        let breadcrumbHTML = '';
+        lastScrollY = scrollY;
+        ticking = false;
+    }
+    
+    // Fonction pour mettre à jour le lien actif
+    function updateActiveLink() {
+        let current = '';
         
-        allSections.forEach((section, index) => {
-            const isCurrent = index === currentIndex;
-            
-            breadcrumbHTML += `
-                <li class="breadcrumb-item">
-                    ${isCurrent 
-                        ? `<span class="breadcrumb-current">${section.short}</span>`
-                        : `<a href="#${section.id}" class="breadcrumb-link" data-section="${section.id}">${section.short}</a>`
-                    }
-                </li>
-            `;
-        });
-        
-        breadcrumbList.innerHTML = breadcrumbHTML;
-        
-        // Ajouter les event listeners pour la navigation
-        const links = breadcrumbList.querySelectorAll('.breadcrumb-link');
-        links.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('data-section');
-                const targetElement = document.getElementById(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        sections.forEach(section => {
+            const element = document.getElementById(section.id);
+            if (element) {
+                const rect = element.getBoundingClientRect();
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    current = section.id;
                 }
+            }
+        });
+        
+        // Mettre à jour les liens
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+    
+    // Event listener pour le scroll
+    function onScroll() {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                updateHeader();
+                updateActiveLink();
+            });
+            ticking = true;
+        }
+    }
+    
+    window.addEventListener('scroll', onScroll);
+    
+    // Navigation smooth scroll
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                const headerHeight = header.offsetHeight;
+                const targetPosition = targetElement.offsetTop - headerHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Initialiser l'état
+    updateHeader();
+    updateActiveLink();
+}
+
+// ===== MENU MOBILE =====
+function initializeMobileMenu() {
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const headerNav = document.querySelector('.header-nav');
+    
+    if (mobileMenuToggle && headerNav) {
+        mobileMenuToggle.addEventListener('click', function() {
+            headerNav.classList.toggle('mobile-active');
+            mobileMenuToggle.classList.toggle('active');
+        });
+        
+        // Fermer le menu en cliquant sur un lien
+        const navLinks = headerNav.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                headerNav.classList.remove('mobile-active');
+                mobileMenuToggle.classList.remove('active');
             });
         });
-        
-        // Afficher le fil d'Ariane avec animation
-        breadcrumb.classList.add('visible');
+    }
+}
+
+// ===== NEWSLETTER =====
+function initializeNewsletter() {
+    const newsletterForm = document.getElementById('newsletterForm');
+    
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('newsletterEmail').value;
+            const submitBtn = newsletterForm.querySelector('.btn');
+            const originalText = submitBtn.textContent;
+            
+            // Animation de chargement
+            submitBtn.textContent = 'Inscription...';
+            submitBtn.disabled = true;
+            
+            // Simulation d'envoi (à remplacer par un vrai appel API)
+            setTimeout(() => {
+                // Message de succès
+                submitBtn.textContent = 'Inscrit !';
+                submitBtn.style.background = 'var(--deep-green)';
+                
+                // Réinitialiser après 3 secondes
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.style.background = '';
+                    newsletterForm.reset();
+                }, 3000);
+                
+                // Ici vous pourriez ajouter un appel à votre API
+                console.log('Newsletter subscription:', email);
+            }, 1500);
+        });
     }
 }
 
@@ -540,8 +586,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialiser les transitions par dégradé
     initializeGradientTransitions();
     
-    // Initialiser le fil d'Ariane
-    initializeBreadcrumb();
+    // Initialiser le header sticky
+    initializeHeaderSticky();
+    
+    // Initialiser le menu mobile
+    initializeMobileMenu();
+    
+    // Initialiser la newsletter
+    initializeNewsletter();
     
     // Animation d'entrée du hero
     setTimeout(() => {
