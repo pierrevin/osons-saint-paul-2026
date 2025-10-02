@@ -11,8 +11,8 @@
         "title": "Notre Programme",
         "subtitle": "Osons intégrer vos idées",
         "description": "Un programme co-construit avec les habitants",
-        "proposals": [
-            {
+        "proposals": {
+            "0": {
                 "id": 1,
                 "title": "Préserver 11h15",
                 "description": "Protéger et valoriser notre patrimoine naturel pour les générations futures.",
@@ -26,7 +26,7 @@
                     "Gestion durable des ressources"
                 ]
             },
-            {
+            "1": {
                 "id": 2,
                 "title": "Renforcer les liens sociaux",
                 "description": "Créer des espaces de rencontre et de solidarité pour tous les habitants.",
@@ -40,7 +40,7 @@
                     "Événements communautaires"
                 ]
             },
-            {
+            "2": {
                 "id": 3,
                 "title": "Aménager le centre-ville",
                 "description": "Rénover et moderniser le cœur du village pour le rendre plus attractif.",
@@ -54,7 +54,7 @@
                     "Création d'espaces publics"
                 ]
             },
-            {
+            "3": {
                 "id": 4,
                 "title": "Gouvernance transparente",
                 "description": "Assurer une gestion transparente et participative de la commune.",
@@ -68,7 +68,7 @@
                     "Communication régulière"
                 ]
             },
-            {
+            "4": {
                 "id": 5,
                 "title": "Transition écologique",
                 "description": "Accompagner la commune vers un modèle plus durable et respectueux de l'environnement.",
@@ -82,7 +82,7 @@
                     "Réduction des déchets"
                 ]
             },
-            {
+            "5": {
                 "id": 6,
                 "title": "Éducation et jeunesse",
                 "description": "Investir dans l'avenir en soutenant l'éducation et les activités pour les jeunes.",
@@ -96,7 +96,7 @@
                     "Accompagnement des familles"
                 ]
             },
-            {
+            "6": {
                 "id": 7,
                 "title": "test Pierre11h31",
                 "description": "frz;jnzkrn gzklnzrg lze",
@@ -111,7 +111,7 @@
                     "fff"
                 ]
             },
-            {
+            "7": {
                 "id": 8,
                 "title": "Test proposition - Créer un jardin partagé",
                 "description": "Cette proposition vise à créer un jardin partagé au centre-ville pour favoriser les rencontres entre habitants et promouvoir une alimentation saine.",
@@ -130,7 +130,7 @@
                 },
                 "date_added": "2025-09-28 07:22:52"
             },
-            {
+            "8": {
                 "id": 9,
                 "title": "Test prop citoyenne",
                 "description": "fff\r\nfff\r\nff",
@@ -149,7 +149,7 @@
                 },
                 "date_added": "2025-09-28 07:32:50"
             },
-            {
+            "9": {
                 "id": 10,
                 "title": "Test proposition - Créer un jardin partagé bis",
                 "description": "Cette proposition vise à créer un jardin partagé au centre-ville pour favoriser les rencontres entre habitants et promouvoir une alimentation saine.",
@@ -167,7 +167,7 @@
                 "date_added": "2025-09-28 07:53:19",
                 "citizen_proposal": false
             },
-            {
+            "10": {
                 "id": 11,
                 "title": "eefzfzgg",
                 "description": "gzrgzg",
@@ -180,7 +180,7 @@
                     "fgrzg"
                 ]
             },
-            {
+            "11": {
                 "id": 12,
                 "title": "test ajout 12h11",
                 "description": "test flzjkgr lkrjgv er",
@@ -194,7 +194,7 @@
                     "ghtrjhy"
                 ]
             },
-            {
+            "12": {
                 "id": 13,
                 "title": "14h12",
                 "description": "14h12 test",
@@ -208,21 +208,7 @@
                     "ccvv"
                 ]
             },
-            {
-                "id": 14,
-                "title": "15h16",
-                "description": "frfzg",
-                "icon": "default",
-                "color": "#004a6d",
-                "pillar": "ouvrir",
-                "citizen_proposal": false,
-                "items": [
-                    "zgrgzrg",
-                    "grzg",
-                    "grzzg"
-                ]
-            },
-            {
+            "14": {
                 "id": 15,
                 "title": "ajout 16h01",
                 "description": "fzfrrggrz",
@@ -236,7 +222,7 @@
                     "ddd"
                 ]
             }
-        ]
+        }
     },
     "equipe": {
         "h2": "Notre Équipe",
@@ -251,7 +237,7 @@
                 "role": "Conseillère Éducation",
                 "description": "\"L'éducation de nos enfants est notre priorité. Je veux des écoles modernes et des activités enrichissantes.\"",
                 "photo": "https:\/\/images.unsplash.com\/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face&auto=format&q=80",
-                "image": "uploads\/member_2_1759323852.jpg"
+                "image": "uploads\/member_2_1759346918.jpg"
             },
             {
                 "id": 3,

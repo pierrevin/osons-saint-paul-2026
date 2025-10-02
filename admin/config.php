@@ -150,29 +150,28 @@ function save_json_data($filename, $data) {
 }
 
 function check_auth() {
-    // AUTHENTIFICATION TEMPORAIREMENT DÉSACTIVÉE
-    // TODO: Réactiver l'authentification plus tard
-    return true;
-    
+    // AUTHENTIFICATION RÉACTIVÉE
     // Démarrer la session si elle n'est pas déjà démarrée
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
     
     if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-        header('Location: login');
+        header('Location: ' . dirname($_SERVER['PHP_SELF']) . '/login.php');
         exit;
     }
     
     // Vérifier le timeout de session
     if (isset($_SESSION['login_time']) && (time() - $_SESSION['login_time']) > SESSION_TIMEOUT) {
         session_destroy();
-        header('Location: login?timeout=1');
+        header('Location: ' . dirname($_SERVER['PHP_SELF']) . '/login.php?timeout=1');
         exit;
     }
     
     // Mettre à jour le temps de dernière activité
     $_SESSION['login_time'] = time();
+    
+    return true;
 }
 
 function format_file_size($bytes) {

@@ -2209,6 +2209,9 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
                 <a href="../../index.php" target="_blank" class="view-site-btn">
                     <i class="fas fa-external-link-alt"></i> Voir le site
                 </a>
+                <a href="../logout.php" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Déconnexion
+                </a>
             </div>
             <ul class="sidebar-menu">
                 <li class="menu-item"><a href="#" onclick="selectSection('hero'); return false;"><i class="fas fa-home"></i> Hero</a></li>
@@ -2224,7 +2227,7 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
                 <li class="menu-item"><a href="#" onclick="selectSection('mediatheque'); return false;"><i class="fas fa-photo-video"></i> Médiathèque</a></li>
                 <li class="menu-item"><a href="#" onclick="selectTransitionsAll(); return false;"><i class="fas fa-quote-right"></i> Transitions (toutes)</a></li>
                 <li class="menu-item"><a href="#" onclick="switchTab('citizen-proposals'); return false;"><i class="fas fa-user-edit"></i> Propositions</a></li>
-                <li class="menu-item"><a href="propositions-analytics.php" target="_blank"><i class="fas fa-chart-bar"></i> Analyse</a></li>
+                <li class="menu-item"><a href="reponse-questionnaire.php" target="_blank"><i class="fas fa-chart-bar"></i> Analyse</a></li>
             </ul>
             <div class="sidebar-footer">
                 <a class="logout-btn" href="../index.php"><i class="fas fa-arrow-left"></i> Retour</a>

@@ -282,17 +282,51 @@ body {
         margin-bottom: 2rem; /* Espacement avant la section équipe */
     }
     
+    /* Cartes équipe mobile - format portrait */
+    .team-grid {
+        display: grid !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        min-height: 200px !important;
+    }
+    
+    .team-member {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important; /* Largeur pleine */
+        height: 400px !important; /* Hauteur fixe pour format portrait */
+        max-width: none !important; /* Pas de limite de largeur */
+        position: relative !important; /* Pour le positionnement relatif */
+        overflow: hidden !important; /* Masquer les débordements */
+        margin-bottom: 1rem !important; /* Espacement entre les cartes */
+    }
+    
+    .member-photo {
+        position: relative !important; /* Position relative pour éviter le chevauchement */
+        width: 100% !important; /* Largeur pleine de la carte */
+        height: 100% !important; /* Hauteur pleine de la carte */
+        padding: 0 !important; /* Pas de padding */
+        margin: 0 !important; /* Pas de marge */
+        overflow: hidden !important; /* Masquer les débordements */
+    }
+    
+    .member-photo img {
+        position: relative !important; /* Position relative */
+        width: 100% !important; /* Largeur pleine */
+        height: 100% !important; /* Hauteur pleine */
+        object-fit: cover !important; /* Couvrir toute la surface */
+        object-position: center !important; /* Centrer l'image */
+        margin: 0 !important; /* Pas de marge */
+        padding: 0 !important; /* Pas de padding */
+        display: block !important; /* Éviter les espaces inline */
+    }
 }
 
-/* Keyframes conservés (compat) */
+/* Keyframes optimisés */
 @keyframes heroImageIntro {
-    0% { opacity: 0; transform: scale(1.06); }
+    0% { opacity: 0; transform: scale(1.02); }
     100% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes heroOverlayIntro {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
 }
 
 /* Mode focus photo (toggle) */
@@ -932,30 +966,19 @@ section.visible::after {
 }
 
 .card-title-overlay h3 {
-    font-family: var(--font-script);
+    font-family: var(--font-sans);
     font-size: clamp(1.8rem, 3.5vw, 2.5rem);
     font-weight: 600;
     color: white;
     text-align: center;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
     line-height: 1.3;
-    transform: rotate(-1.5deg);
+    transform: none;
     letter-spacing: 0.5px;
     position: relative;
 }
 
-/* Effet "écrit à la main" pour les titres de cartes */
-.card-title-overlay h3::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 10%;
-    right: 10%;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 1px;
-    transform: rotate(0.5deg);
-}
+/* Trait sous les titres supprimé */
 
 .card-badge {
     position: absolute;
