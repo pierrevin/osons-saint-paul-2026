@@ -24,12 +24,12 @@ $content = get_json_data('site_content.json');
 </head>
 <body>
     <!-- Header sticky -->
-    <header class="header-sticky" id="headerSticky">
+    <header class="header-sticky" id="headerSticky" role="banner">
         <div class="header-content">
             <a href="#hero" class="header-logo">
                 <img src="uploads/Osons1.png" alt="Logo Osons Saint-Paul" class="logo-img">
             </a>
-            <nav class="header-nav">
+            <nav class="header-nav" role="navigation" aria-label="Navigation principale">
                 <ul class="nav-list">
                     <li class="nav-item">
                         <a href="#programme" class="nav-link">Programme</a>
@@ -67,7 +67,7 @@ $content = get_json_data('site_content.json');
         <div class="hero-background">
             <picture>
                 <source media="(max-width: 768px)" srcset="<?= htmlspecialchars($content['hero']['background_image_mobile'] ?? ($content['hero']['background_image'] ?? 'Images/hero_test.png')) ?>">
-                <img src="<?= htmlspecialchars($content['hero']['background_image'] ?? 'Images/hero_test.png') ?>" alt="Hero" style="width:0;height:0;opacity:0;position:absolute;" onload="this.parentElement.parentElement.style.backgroundImage='url(' + this.src + ')'">
+                <img src="<?= htmlspecialchars($content['hero']['background_image'] ?? 'Images/hero_test.png') ?>" alt="Équipe Osons Saint-Paul lors d'une réunion" style="width:0;height:0;opacity:0;position:absolute;" onload="this.parentElement.parentElement.style.backgroundImage='url(' + this.src + ')'">
             </picture>
             <div class="hero-overlay"></div>
         </div>
@@ -209,7 +209,7 @@ $content = get_json_data('site_content.json');
             
             <!-- Image Hero Mobile (visible uniquement sur mobile) -->
             <div class="hero-mobile-image">
-                <img src="<?= htmlspecialchars($content['hero']['background_image'] ?? 'Images/hero_test.png') ?>" alt="Image hero mobile" loading="lazy">
+                <img src="<?= htmlspecialchars($content['hero']['background_image'] ?? 'Images/hero_test.png') ?>" alt="Équipe Osons Saint-Paul - Photo de groupe" loading="lazy">
             </div>
             
             <div class="team-grid">
@@ -237,8 +237,8 @@ $content = get_json_data('site_content.json');
                 <h3 class="cta-box__title">Rencontrons-nous !</h3>
                 <p class="text-description">Vous avez des questions ? Des idées à partager ? N'hésitez pas à nous contacter directement.</p>
                 <div class="cta-box__buttons">
-                    <a href="#idees" class="btn btn-primary">Nous contacter</a>
-                    <a href="#rendez-vous" class="btn btn-secondary">Voir nos rendez-vous</a>
+                        <a href="#idees" class="btn btn-primary">Nous contacter</a>
+                        <a href="#rendez-vous" class="btn btn-secondary">Voir nos rendez-vous</a>
                 </div>
             </div>
         </div>
@@ -373,16 +373,16 @@ $content = get_json_data('site_content.json');
             <div class="cta-box">
                 <h3 class="cta-box__title">Restez informé !</h3>
                 <p class="text-description">Recevez nos actualités et invitations aux événements directement dans votre boîte mail.</p>
-                <!-- Newsletter Form -->
-                <form class="newsletter-form" id="newsletter-section">
-                    <div class="form-group">
-                        <input type="text" name="PRENOM" placeholder="Votre prénom" required>
-                        <input type="email" name="EMAIL" placeholder="Votre adresse email" required>
+                    <!-- Newsletter Form -->
+                    <form class="newsletter-form" id="newsletter-section">
+                        <div class="form-group">
+                            <input type="text" name="PRENOM" placeholder="Votre prénom" required>
+                            <input type="email" name="EMAIL" placeholder="Votre adresse email" required>
                         <input type="text" name="email_address_check" value="" class="hidden" tabindex="-1" autocomplete="off">
-                        <button type="submit" class="btn btn-primary">S'inscrire</button>
-                    </div>
+                            <button type="submit" class="btn btn-primary">S'inscrire</button>
+                        </div>
                     <p class="text-note">Nous respectons votre vie privée. Désabonnement possible à tout moment.</p>
-                </form>
+                    </form>
                 <div id="newsletter-success-section" class="hidden text-center mt-1" style="color: var(--primary-color); font-weight: 500;">✓ Merci ! Un email de confirmation vient de vous être envoyé. Pensez à vérifier vos spams.</div>
                 <div id="newsletter-error-section" class="hidden text-center mt-1" style="color: #dc3545;"></div>
             </div>
@@ -408,12 +408,12 @@ $content = get_json_data('site_content.json');
             
             <div class="charte-intro">
                 <p>
-                    <?php if (!empty($content['charte']['intro_text'])): ?>
+                <?php if (!empty($content['charte']['intro_text'])): ?>
                         <?= htmlspecialchars($content['charte']['intro_text']) ?>
-                    <?php endif; ?>
-                    <?php if (!empty($content['charte']['intro_highlight'])): ?>
+                <?php endif; ?>
+                <?php if (!empty($content['charte']['intro_highlight'])): ?>
                         <strong><?= htmlspecialchars($content['charte']['intro_highlight']) ?></strong>
-                    <?php endif; ?>
+                <?php endif; ?>
                 </p>
             </div>
             
