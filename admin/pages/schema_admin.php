@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             }
             
             // Rediriger pour éviter la resoumission
-            header('Location: ' . $_SERVER['REQUEST_URI']);
+            header('Location: schema_admin.php');
             exit;
             break;
             
@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             }
             
             // Rediriger pour éviter la resoumission
-            header('Location: ' . $_SERVER['REQUEST_URI']);
+            header('Location: schema_admin.php');
             exit;
             break;
             
@@ -129,7 +129,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $content = get_json_data('site_content.json');
             $proposal_id = (int)$_POST['proposal_id'];
             
+            // Debug: vérifier les données reçues
+            error_log("Tentative de suppression - ID: " . $proposal_id);
+            error_log("Nombre de propositions avant: " . count($content['programme']['proposals']));
+            
             // Supprimer la proposition
+            $original_count = count($content['programme']['proposals']);
             $content['programme']['proposals'] = array_filter(
                 $content['programme']['proposals'],
                 function($proposal) use ($proposal_id) {
@@ -137,15 +142,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 }
             );
             
-            // Sauvegarder
-            if (save_json_data('site_content.json', $content)) {
-                $_SESSION['success_message'] = 'Proposition supprimée avec succès !';
+            $new_count = count($content['programme']['proposals']);
+            error_log("Nombre de propositions après: " . $new_count);
+            
+            // Vérifier si une proposition a été supprimée
+            if ($new_count < $original_count) {
+                // Sauvegarder
+                if (save_json_data('site_content.json', $content)) {
+                    $_SESSION['success_message'] = 'Proposition supprimée avec succès !';
+                    error_log("Suppression réussie pour l'ID: " . $proposal_id);
+                } else {
+                    $_SESSION['error_message'] = 'Erreur lors de la sauvegarde.';
+                    error_log("Erreur de sauvegarde pour l'ID: " . $proposal_id);
+                }
             } else {
-                $_SESSION['error_message'] = 'Erreur lors de la sauvegarde.';
+                $_SESSION['error_message'] = 'Proposition non trouvée ou déjà supprimée.';
+                error_log("Proposition non trouvée pour l'ID: " . $proposal_id);
             }
             
             // Rediriger pour éviter la resoumission
-            header('Location: ' . $_SERVER['REQUEST_URI']);
+            header('Location: schema_admin.php');
             exit;
             break;
             
@@ -2190,6 +2206,9 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
             <div class="sidebar-header">
                 <img src="../../uploads/Osons1.png" alt="Logo" class="sidebar-logo" />
                 <h2>Administration</h2>
+                <a href="../../index.php" target="_blank" class="view-site-btn">
+                    <i class="fas fa-external-link-alt"></i> Voir le site
+                </a>
             </div>
             <ul class="sidebar-menu">
                 <li class="menu-item"><a href="#" onclick="selectSection('hero'); return false;"><i class="fas fa-home"></i> Hero</a></li>
@@ -3645,7 +3664,7 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
                 // Créer un formulaire pour la suppression
                 const form = document.createElement('form');
                 form.method = 'POST';
-                form.action = 'programme.php';
+                form.action = 'schema_admin.php';
                 
                 const csrfToken = document.createElement('input');
                 csrfToken.type = 'hidden';
