@@ -82,11 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         case 'edit_proposal':
             // Modifier une proposition existante
             $content = get_json_data('site_content.json');
-            $proposal_id = (int)$_POST['proposal_id'];
+            $proposal_id = $_POST['proposal_id']; // Peut être un ID numérique ou string pour les propositions citoyennes
             
-            // Trouver et modifier la proposition
-            foreach ($content['programme']['proposals'] as &$proposal) {
-                if ($proposal['id'] == $proposal_id) {
                     // Déterminer la couleur selon le pilier
                     $pillar_colors = [
                         'proteger' => '#65ae99',
@@ -104,6 +101,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                         $items = array_filter(array_map('trim', explode("\n", $_POST['items'])));
                     }
                     
+            // Vérifier si c'est une proposition citoyenne (ID commence par "prop_")
+            if (strpos($proposal_id, 'prop_') === 0) {
+                // C'est une proposition citoyenne - créer une nouvelle proposition dans le programme
+                $new_id = max(array_keys($content['programme']['proposals'])) + 1;
+                
+                $new_proposal = [
+                    'id' => $new_id,
+                    'title' => trim($_POST['title']),
+                    'description' => trim($_POST['description']),
+                    'icon' => 'default',
+                    'color' => $color,
+                    'pillar' => $pillar,
+                    'citizen_proposal' => true, // Toujours true pour les propositions citoyennes
+                    'items' => $items
+                ];
+                
+                $content['programme']['proposals'][$new_id] = $new_proposal;
+                
+                // Mettre à jour le statut dans propositions.json
+                $propositions_data = json_decode(file_get_contents('../../data/propositions.json'), true);
+                foreach ($propositions_data['propositions'] as &$citizen_prop) {
+                    if ($citizen_prop['id'] === $proposal_id) {
+                        $citizen_prop['status'] = 'approved';
+                        $citizen_prop['integrated'] = true;
+                        $citizen_prop['integrated_at'] = date('Y-m-d H:i:s');
+                        $citizen_prop['programme_id'] = $new_id;
+                        break;
+                    }
+                }
+                
+                // Sauvegarder propositions.json
+                file_put_contents('../../data/propositions.json', json_encode($propositions_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                
+                $_SESSION['success_message'] = 'Proposition citoyenne approuvée et intégrée au programme avec succès !';
+                
+            } else {
+                // C'est une proposition classique - modifier l'existante
+                $proposal_id = (int)$proposal_id;
+                foreach ($content['programme']['proposals'] as &$proposal) {
+                    if ($proposal['id'] == $proposal_id) {
                     // Mettre à jour la proposition
                     $proposal['title'] = trim($_POST['title']);
                     $proposal['description'] = trim($_POST['description']);
@@ -114,11 +151,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     
                     break;
                 }
+                }
+                $_SESSION['success_message'] = 'Proposition modifiée avec succès !';
             }
             
-            // Sauvegarder
+            // Sauvegarder site_content.json
             if (save_json_data('site_content.json', $content)) {
-                $_SESSION['success_message'] = 'Proposition modifiée avec succès !';
+                // Message déjà défini ci-dessus
             } else {
                 $_SESSION['error_message'] = 'Erreur lors de la sauvegarde.';
             }
@@ -151,12 +190,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             
             // Vérifier si une proposition a été supprimée
             if ($new_count < $original_count) {
-                // Sauvegarder
-                if (save_json_data('site_content.json', $content)) {
-                    $_SESSION['success_message'] = 'Proposition supprimée avec succès !';
+            // Sauvegarder
+            if (save_json_data('site_content.json', $content)) {
+                $_SESSION['success_message'] = 'Proposition supprimée avec succès !';
                     error_log("Suppression réussie pour l'ID: " . $proposal_id);
-                } else {
-                    $_SESSION['error_message'] = 'Erreur lors de la sauvegarde.';
+            } else {
+                $_SESSION['error_message'] = 'Erreur lors de la sauvegarde.';
                     error_log("Erreur de sauvegarde pour l'ID: " . $proposal_id);
                 }
             } else {
@@ -1283,6 +1322,14 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
             display: flex;
             align-items: center;
             gap: 8px;
+            cursor: pointer;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            margin: 0;
+            vertical-align: middle;
+            width: auto;
+            height: auto;
         }
         
         /* Formulaires intégrés dans les sections */
@@ -1636,6 +1683,45 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
             font-size: 0.7rem;
             font-weight: 600;
             margin-left: 0.5rem;
+            display: inline-block;
+        }
+        
+        /* Section propositions */
+        .proposals-section {
+            margin-top: 1.5rem;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .section-header h4 {
+            margin: 0;
+            color: #2d5a3d;
+            font-size: 1.1rem;
+        }
+        
+        .section-actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        .pending-count {
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            min-width: 1.5rem;
+            text-align: center;
             display: inline-block;
         }
         
@@ -2220,25 +2306,25 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
             <ul class="sidebar-menu">
                 <?php if ($_SESSION['user_role'] === 'admin'): ?>
                     <!-- Menu complet pour l'admin -->
-                    <li class="menu-item"><a href="#" onclick="selectSection('hero'); return false;"><i class="fas fa-home"></i> Hero</a></li>
-                    <li class="menu-item"><a href="#" onclick="selectSection('programme'); return false;"><i class="fas fa-list-alt"></i> Programme</a></li>
-                    <li class="menu-item"><a href="#" onclick="selectSection('citation1'); return false;"><i class="fas fa-quote-left"></i> Transition 1</a></li>
-                    <li class="menu-item"><a href="#" onclick="selectSection('equipe'); return false;"><i class="fas fa-users"></i> Équipe</a></li>
-                    <li class="menu-item"><a href="#" onclick="selectSection('citation2'); return false;"><i class="fas fa-quote-left"></i> Transition 2</a></li>
-                    <li class="menu-item"><a href="#" onclick="selectSection('rendez_vous'); return false;"><i class="fas fa-calendar"></i> Rendez-vous</a></li>
-                    <li class="menu-item"><a href="#" onclick="selectSection('citation3'); return false;"><i class="fas fa-quote-left"></i> Transition 3</a></li>
-                    <li class="menu-item"><a href="#" onclick="selectSection('charte'); return false;"><i class="fas fa-handshake"></i> Charte</a></li>
-                    <li class="menu-item"><a href="#" onclick="selectSection('citation4'); return false;"><i class="fas fa-quote-left"></i> Transition 4</a></li>
-                    <li class="menu-item"><a href="#" onclick="selectSection('idees'); return false;"><i class="fas fa-lightbulb"></i> Idées</a></li>
-                    <li class="menu-item"><a href="#" onclick="selectSection('mediatheque'); return false;"><i class="fas fa-photo-video"></i> Médiathèque</a></li>
-                    <li class="menu-item"><a href="#" onclick="selectTransitionsAll(); return false;"><i class="fas fa-quote-right"></i> Transitions (toutes)</a></li>
-                    <li class="menu-item"><a href="#" onclick="switchTab('citizen-proposals'); return false;"><i class="fas fa-user-edit"></i> Propositions</a></li>
+                <li class="menu-item"><a href="#" onclick="selectSection('hero'); return false;"><i class="fas fa-home"></i> Hero</a></li>
+                <li class="menu-item"><a href="#" onclick="selectSection('programme'); return false;"><i class="fas fa-list-alt"></i> Programme</a></li>
+                <li class="menu-item"><a href="#" onclick="selectSection('citation1'); return false;"><i class="fas fa-quote-left"></i> Transition 1</a></li>
+                <li class="menu-item"><a href="#" onclick="selectSection('equipe'); return false;"><i class="fas fa-users"></i> Équipe</a></li>
+                <li class="menu-item"><a href="#" onclick="selectSection('citation2'); return false;"><i class="fas fa-quote-left"></i> Transition 2</a></li>
+                <li class="menu-item"><a href="#" onclick="selectSection('rendez_vous'); return false;"><i class="fas fa-calendar"></i> Rendez-vous</a></li>
+                <li class="menu-item"><a href="#" onclick="selectSection('citation3'); return false;"><i class="fas fa-quote-left"></i> Transition 3</a></li>
+                <li class="menu-item"><a href="#" onclick="selectSection('charte'); return false;"><i class="fas fa-handshake"></i> Charte</a></li>
+                <li class="menu-item"><a href="#" onclick="selectSection('citation4'); return false;"><i class="fas fa-quote-left"></i> Transition 4</a></li>
+                <li class="menu-item"><a href="#" onclick="selectSection('idees'); return false;"><i class="fas fa-lightbulb"></i> Idées</a></li>
+                <li class="menu-item"><a href="#" onclick="selectSection('mediatheque'); return false;"><i class="fas fa-photo-video"></i> Médiathèque</a></li>
+                <li class="menu-item"><a href="#" onclick="selectTransitionsAll(); return false;"><i class="fas fa-quote-right"></i> Transitions (toutes)</a></li>
+                <li class="menu-item"><a href="reponse-questionnaire.php" target="_blank"><i class="fas fa-user-edit"></i> Propositions citoyennes</a></li>
                     <li class="menu-item"><a href="reponse-questionnaire.php" target="_blank"><i class="fas fa-chart-bar"></i> Analyse</a></li>
                     
-                    <!-- Menu d'administration (admin seulement) -->
-                    <li class="menu-separator"><hr></li>
-                    <li class="menu-item"><a href="gestion-utilisateurs.php"><i class="fas fa-users-cog"></i> Gestion Utilisateurs</a></li>
-                    <li class="menu-item"><a href="logs.php"><i class="fas fa-shield-alt"></i> Logs de Sécurité</a></li>
+                <!-- Menu d'administration (admin seulement) -->
+                <li class="menu-separator"><hr></li>
+                <li class="menu-item"><a href="gestion-utilisateurs.php"><i class="fas fa-users-cog"></i> Gestion Utilisateurs</a></li>
+                <li class="menu-item"><a href="logs.php"><i class="fas fa-shield-alt"></i> Logs de Sécurité</a></li>
                     
                 <?php else: ?>
                     <!-- Menu limité pour l'éditeur -->
@@ -2386,20 +2472,19 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
                                 </form>
                             </div>
                             
-                            <!-- Onglets pour les propositions -->
-                            <div class="proposals-tabs">
-                                <div class="tab-buttons">
-                                    <button class="tab-button active" onclick="switchTab('programme-proposals')">
-                                        📋 Propositions du programme (<?= $programme_count ?>)
-                                    </button>
-                                    <button class="tab-button" onclick="switchTab('citizen-proposals')">
-                                        💡 Propositions citoyennes
-                                        <span class="citizen-count" id="citizen-count">0</span>
-                                    </button>
+                            <!-- Section Propositions du programme -->
+                            <div class="proposals-section">
+                                <div class="section-header">
+                                    <h4>📋 Propositions du programme (<?= $programme_count ?>)</h4>
+                                    <div class="section-actions">
+                                        <a href="reponse-questionnaire.php" target="_blank" class="btn btn-secondary btn-sm" id="citizen-proposals-btn">
+                                            💡 Propositions citoyennes à traiter
+                                            <span class="pending-count" id="pending-citizen-count">0</span>
+                                        </a>
+                                    </div>
                                 </div>
                                 
-                                <!-- Onglet Propositions du programme -->
-                                <div class="tab-content active" id="programme-proposals">
+                                <div class="proposals-content" id="programme-proposals">
                             <div class="components-grid" id="programme-grid">
                                 <?php foreach($content['programme']['proposals'] ?? [] as $proposal): ?>
                                     <div class="component-card" draggable="true" data-id="<?= $proposal['id'] ?>">
@@ -2442,38 +2527,6 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
                                         Cliquez pour créer une nouvelle proposition
                                     </div>
                                 </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Onglet Propositions citoyennes -->
-                                <div class="tab-content" id="citizen-proposals">
-                                    <div class="citizen-proposals-container">
-                                        <div class="citizen-proposals-header">
-                                            <h4>💡 Propositions citoyennes</h4>
-                                            <div class="citizen-actions">
-                                                <a href="../../forms/proposition-citoyenne.php" target="_blank" class="btn btn-secondary btn-sm">
-                                                    📝 Nouveau formulaire
-                                                </a>
-                                                <button onclick="loadCitizenProposals()" class="btn btn-primary btn-sm">
-                                                    🔄 Actualiser
-                                                </button>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Filtres -->
-                                        <div class="citizen-filters">
-                                            <button class="filter-btn active" onclick="filterProposals('all')">Toutes</button>
-                                            <button class="filter-btn" onclick="filterProposals('pending')">En attente</button>
-                                            <button class="filter-btn" onclick="filterProposals('approved')">Approuvées</button>
-                                            <button class="filter-btn" onclick="filterProposals('rejected')">Rejetées</button>
-                                        </div>
-                                        
-                                        <div class="citizen-proposals-list" id="citizen-proposals-list">
-                                            <!-- Les propositions citoyennes seront chargées ici via AJAX -->
-                                            <div class="loading-message">
-                                                <i class="fas fa-spinner fa-spin"></i> Chargement des propositions...
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -3850,46 +3903,84 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
             }
         }
         
-        // Fonction pour changer d'onglet
-        function switchTab(tabName) {
-            // Désactiver tous les onglets
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            
-            // Activer l'onglet sélectionné
-            document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
-            document.getElementById(tabName).classList.add('active');
-            
-            // Charger les propositions citoyennes si c'est l'onglet sélectionné
-            if (tabName === 'citizen-proposals') {
-                loadCitizenProposals();
-            }
-        }
-        
-        // Fonction pour charger les propositions citoyennes
-        function loadCitizenProposals() {
-            const container = document.getElementById('citizen-proposals-list');
-            container.innerHTML = '<div class="loading-message"><i class="fas fa-spinner fa-spin"></i> Chargement des propositions...</div>';
-            
+        // Fonction pour charger le compteur de propositions en attente
+        function loadPendingCitizenCount() {
             fetch('../../data/propositions.json')
                 .then(response => response.json())
                 .then(data => {
-                    displayCitizenProposals(data.propositions || []);
-                    updateCitizenCount(data.propositions || []);
+                    const pendingCount = data.propositions.filter(p => p.status === 'pending').length;
+                    const countElement = document.getElementById('pending-citizen-count');
+                    if (countElement) {
+                        countElement.textContent = pendingCount;
+                        
+                        // Mettre à jour le style du bouton selon le nombre
+                        const btn = document.getElementById('citizen-proposals-btn');
+                        if (btn) {
+                            if (pendingCount > 0) {
+                                btn.classList.add('has-pending');
+                                btn.style.background = '#dc3545';
+                                btn.style.color = 'white';
+                            } else {
+                                btn.classList.remove('has-pending');
+                                btn.style.background = '';
+                                btn.style.color = '';
+                            }
+                        }
+                    }
                 })
                 .catch(error => {
-                    console.error('Erreur lors du chargement:', error);
-                    container.innerHTML = '<div class="loading-message">❌ Erreur lors du chargement des propositions</div>';
+                    console.error('Erreur lors du chargement du compteur:', error);
                 });
         }
-        
+
         // Charger automatiquement les propositions au chargement de la page
         document.addEventListener('DOMContentLoaded', function() {
-            // Charger les propositions citoyennes si l'onglet est actif
-            if (document.getElementById('citizen-proposals').classList.contains('active')) {
-                loadCitizenProposals();
-            }
+            // Charger le compteur de propositions en attente
+            loadPendingCitizenCount();
+            
+            // Actualiser le compteur toutes les 30 secondes
+            setInterval(loadPendingCitizenCount, 30000);
         });
+        
+        // Fonction pour ouvrir le modal d'édition d'une proposition citoyenne
+        function openEditCitizenProposalModal(proposalId) {
+            // Charger les propositions citoyennes
+            fetch('../../data/propositions.json')
+                .then(response => response.json())
+                .then(data => {
+                    const citizenProposal = data.propositions.find(p => p.id === proposalId);
+                    
+                    if (citizenProposal) {
+                        // Créer une proposition temporaire au format attendu par le modal
+                        const tempProposal = {
+                            id: proposalId,
+                            title: citizenProposal.data.titre,
+                            description: citizenProposal.data.description,
+                            color: '#ec654f', // Couleur par défaut pour les propositions citoyennes
+                            citizen_proposal: true, // Marquer comme proposition citoyenne
+                            items: [
+                                `Catégories: ${citizenProposal.data.categories.join(', ')}`,
+                                `Bénéficiaires: ${citizenProposal.data.beneficiaires || 'Non spécifié'}`,
+                                `Coût estimé: ${citizenProposal.data.cout || 'Non spécifié'}`
+                            ]
+                        };
+                        
+                        // Ajouter temporairement la proposition aux données pour le modal
+                        proposalsData[proposalId] = tempProposal;
+                        
+                        // Ouvrir le modal de modification existant
+                        openEditProgrammeProposalModal(proposalId);
+                        
+                    } else {
+                        console.error('Proposition citoyenne non trouvée:', proposalId);
+                        alert('Proposition citoyenne non trouvée');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur lors du chargement des propositions:', error);
+                    alert('Erreur lors du chargement des propositions');
+                });
+        }
         
         // Fonction pour afficher les propositions citoyennes
         function displayCitizenProposals(propositions) {
@@ -4025,10 +4116,21 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
         // Gérer les ancres au chargement de la page
         document.addEventListener('DOMContentLoaded', function() {
             if (window.location.hash) {
-                const sectionId = window.location.hash.substring(1);
-                setTimeout(() => {
-                    scrollToSection(sectionId);
+                const hash = window.location.hash.substring(1);
+                
+                // Gérer le format #citizen-proposals&edit=ID
+                if (hash.startsWith('citizen-proposals&edit=')) {
+                    const proposalId = hash.split('&edit=')[1];
+                    // Ouvrir directement le modal d'édition de la proposition citoyenne
+                    setTimeout(() => {
+                        openEditCitizenProposalModal(proposalId);
+                    }, 500);
+                } else {
+                    // Gérer les sections normales
+                    setTimeout(() => {
+                        scrollToSection(hash);
                 }, 500);
+                }
             }
         });
         

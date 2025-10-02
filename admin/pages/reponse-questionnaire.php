@@ -436,7 +436,7 @@ foreach ($propositions as $proposition) {
                                         <a href="../../forms/admin/manage-proposition.php?id=<?= $proposition['id'] ?>" 
                                            class="btn-sm btn-primary" target="_blank">👁️ Voir</a>
                                         <?php if ($proposition['status'] === 'pending'): ?>
-                                            <button class="btn-sm btn-success" onclick="goToAdminEdit('<?= $proposition['id'] ?>')">✅ Approuver & Modifier</button>
+                                            <button class="btn-sm btn-success" onclick="goToAdminEdit('<?= $proposition['id'] ?>')">✅ Modifier et approuver</button>
                                             <button class="btn-sm btn-danger" onclick="updateCitizenProposalStatus('<?= $proposition['id'] ?>', 'rejected')">❌ Rejeter</button>
                                         <?php endif; ?>
                                     </div>
@@ -591,7 +591,9 @@ foreach ($propositions as $proposition) {
 
         // Actions sur les propositions
         function goToAdminEdit(proposalId) {
-            window.location.href = 'schema_admin.php#citizen-proposals&edit=' + proposalId;
+            // Ouvrir l'admin dans un nouvel onglet avec le hash pour ouvrir directement le modal
+            const adminUrl = 'schema_admin.php#citizen-proposals&edit=' + proposalId;
+            window.open(adminUrl, '_blank');
         }
         
         function updateCitizenProposalStatus(proposalId, status) {
