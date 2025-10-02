@@ -596,5 +596,53 @@ class UserManager {
         
         return $menu_items[$role] ?? [];
     }
+    
+    /**
+     * Déverrouiller un compte
+     */
+    public function unlockAccount($username) {
+        $attempts_file = __DIR__ . '/../logs/login_attempts.json';
+        
+        if (file_exists($attempts_file)) {
+            $attempts_data = json_decode(file_get_contents($attempts_file), true);
+            if (isset($attempts_data[$username])) {
+                unset($attempts_data[$username]);
+                file_put_contents($attempts_file, json_encode($attempts_data, JSON_PRETTY_PRINT));
+            }
+        }
+        
+        return ['success' => true, 'message' => 'Compte déverrouillé'];
+    }
+    
+    /**
+     * Obtenir les tentatives de connexion
+     */
+    public function getLoginAttempts($username) {
+        $attempts_file = __DIR__ . '/../logs/login_attempts.json';
+        
+        if (file_exists($attempts_file)) {
+            $attempts_data = json_decode(file_get_contents($attempts_file), true);
+            return $attempts_data[$username] ?? [];
+        }
+        
+        return [];
+    }
+    
+    /**
+     * Effacer les tentatives de connexion
+     */
+    public function clearLoginAttempts($username) {
+        $attempts_file = __DIR__ . '/../logs/login_attempts.json';
+        
+        if (file_exists($attempts_file)) {
+            $attempts_data = json_decode(file_get_contents($attempts_file), true);
+            if (isset($attempts_data[$username])) {
+                unset($attempts_data[$username]);
+                file_put_contents($attempts_file, json_encode($attempts_data, JSON_PRETTY_PRINT));
+            }
+        }
+        
+        return ['success' => true, 'message' => 'Tentatives effacées'];
+    }
 }
 ?>
