@@ -330,6 +330,187 @@ class UserManager {
     }
     
     /**
+     * Générer un code 2FA
+     */
+    public function generate2FACode($user_id) {
+        $code = sprintf('%06d', mt_rand(100000, 999999));
+        $expires = time() + 300; // 5 minutes
+        
+        // Stocker le code temporairement
+        $temp_codes = $this->loadTempCodes();
+        $temp_codes[$user_id] = [
+            'code' => $code,
+            'expires' => $expires,
+            'attempts' => 0
+        ];
+        $this->saveTempCodes($temp_codes);
+        
+        return $code;
+    }
+    
+    /**
+     * Vérifier un code 2FA
+     */
+    public function verify2FACode($user_id, $code) {
+        $temp_codes = $this->loadTempCodes();
+        
+        if (!isset($temp_codes[$user_id])) {
+            return ['success' => false, 'message' => 'Code non trouvé'];
+        }
+        
+        $temp_code = $temp_codes[$user_id];
+        
+        // Vérifier l'expiration
+        if (time() > $temp_code['expires']) {
+            unset($temp_codes[$user_id]);
+            $this->saveTempCodes($temp_codes);
+            return ['success' => false, 'message' => 'Code expiré'];
+        }
+        
+        // Vérifier les tentatives
+        if ($temp_code['attempts'] >= 3) {
+            unset($temp_codes[$user_id]);
+            $this->saveTempCodes($temp_codes);
+            return ['success' => false, 'message' => 'Trop de tentatives'];
+        }
+        
+        // Vérifier le code
+        if ($temp_code['code'] === $code) {
+            unset($temp_codes[$user_id]);
+            $this->saveTempCodes($temp_codes);
+            return ['success' => true, 'message' => 'Code valide'];
+        } else {
+            $temp_codes[$user_id]['attempts']++;
+            $this->saveTempCodes($temp_codes);
+            return ['success' => false, 'message' => 'Code incorrect'];
+        }
+    }
+    
+    /**
+     * Charger les codes temporaires
+     */
+    private function loadTempCodes() {
+        $file = __DIR__ . '/../logs/temp_2fa_codes.json';
+        if (file_exists($file)) {
+            return json_decode(file_get_contents($file), true) ?: [];
+        }
+        return [];
+    }
+    
+    /**
+     * Sauvegarder les codes temporaires
+     */
+    private function saveTempCodes($codes) {
+        $file = __DIR__ . '/../logs/temp_2fa_codes.json';
+        file_put_contents($file, json_encode($codes, JSON_PRETTY_PRINT));
+    }
+    
+    /**
+     * Générer un secret Google Authenticator
+     */
+    public function generateGoogleAuthSecret($user_id) {
+        $secret = $this->generateRandomSecret();
+        
+        // Sauvegarder le secret pour l'utilisateur
+        $users = $this->loadUsers();
+        foreach ($users['users'] as &$user) {
+            if ($user['id'] == $user_id) {
+                $user['google_auth_secret'] = $secret;
+                break;
+            }
+        }
+        $this->saveUsers($users);
+        
+        return $secret;
+    }
+    
+    /**
+     * Vérifier un code Google Authenticator
+     */
+    public function verifyGoogleAuthCode($user_id, $code) {
+        $users = $this->loadUsers();
+        $user = null;
+        
+        foreach ($users['users'] as $u) {
+            if ($u['id'] == $user_id) {
+                $user = $u;
+                break;
+            }
+        }
+        
+        if (!$user || !isset($user['google_auth_secret'])) {
+            return ['success' => false, 'message' => 'Secret Google Auth non configuré'];
+        }
+        
+        // Vérification simple (en production, utiliser une librairie dédiée)
+        $secret = $user['google_auth_secret'];
+        $current_time = floor(time() / 30);
+        
+        for ($i = -1; $i <= 1; $i++) {
+            $time = $current_time + $i;
+            $expected_code = $this->generateTOTPCode($secret, $time);
+            if ($expected_code === $code) {
+                return ['success' => true, 'message' => 'Code valide'];
+            }
+        }
+        
+        return ['success' => false, 'message' => 'Code incorrect'];
+    }
+    
+    /**
+     * Générer un secret aléatoire
+     */
+    private function generateRandomSecret($length = 16) {
+        $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+        $secret = '';
+        for ($i = 0; $i < $length; $i++) {
+            $secret .= $chars[mt_rand(0, strlen($chars) - 1)];
+        }
+        return $secret;
+    }
+    
+    /**
+     * Générer un code TOTP
+     */
+    private function generateTOTPCode($secret, $time) {
+        $key = $this->base32Decode($secret);
+        $time = pack('N*', 0) . pack('N*', $time);
+        $hash = hash_hmac('sha1', $time, $key, true);
+        $offset = ord($hash[19]) & 0xf;
+        $code = (
+            ((ord($hash[$offset + 0]) & 0x7f) << 24) |
+            ((ord($hash[$offset + 1]) & 0xff) << 16) |
+            ((ord($hash[$offset + 2]) & 0xff) << 8) |
+            (ord($hash[$offset + 3]) & 0xff)
+        ) % 1000000;
+        return sprintf('%06d', $code);
+    }
+    
+    /**
+     * Décoder base32
+     */
+    private function base32Decode($input) {
+        $map = array_flip(str_split('ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'));
+        $input = strtoupper($input);
+        $output = '';
+        $v = 0;
+        $vbits = 0;
+        
+        for ($i = 0; $i < strlen($input); $i++) {
+            $v <<= 5;
+            $v += $map[$input[$i]];
+            $vbits += 5;
+            
+            if ($vbits >= 8) {
+                $output .= chr(($v >> ($vbits - 8)) & 255);
+                $vbits -= 8;
+            }
+        }
+        
+        return $output;
+    }
+
+    /**
      * Vérifier les permissions spécifiques selon le rôle
      */
     public function canAccess($section) {
