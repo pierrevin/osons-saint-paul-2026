@@ -436,7 +436,7 @@ foreach ($propositions as $proposition) {
                                         <a href="../../forms/admin/manage-proposition.php?id=<?= $proposition['id'] ?>" 
                                            class="btn-sm btn-primary" target="_blank">👁️ Voir</a>
                                         <?php if ($proposition['status'] === 'pending'): ?>
-                                            <button class="btn-sm btn-success" onclick="approveAndEditProposal('<?= $proposition['id'] ?>')">✅ Approuver & Modifier</button>
+                                            <button class="btn-sm btn-success" onclick="approveAndEditProposalFromQuestionnaire('<?= $proposition['id'] ?>')">✅ Approuver & Modifier</button>
                                             <button class="btn-sm btn-danger" onclick="updateCitizenProposalStatus('<?= $proposition['id'] ?>', 'rejected')">❌ Rejeter</button>
                                         <?php endif; ?>
                                     </div>
@@ -590,7 +590,7 @@ foreach ($propositions as $proposition) {
         }
 
         // Actions sur les propositions
-        function approveAndEditProposal(proposalId) {
+        function approveAndEditProposalFromQuestionnaire(proposalId) {
             if (confirm('Approuver cette proposition et aller à la page de modification ?')) {
                 // Rediriger directement vers schema_admin.php pour l'approbation et modification
                 window.location.href = 'schema_admin.php#citizen-proposals&approve=' + proposalId;
