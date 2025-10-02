@@ -614,19 +614,6 @@ class UserManager {
         return ['success' => true, 'message' => 'Compte déverrouillé'];
     }
     
-    /**
-     * Obtenir les tentatives de connexion
-     */
-    public function getLoginAttempts($username) {
-        $attempts_file = __DIR__ . '/../logs/login_attempts.json';
-        
-        if (file_exists($attempts_file)) {
-            $attempts_data = json_decode(file_get_contents($attempts_file), true);
-            return $attempts_data[$username] ?? [];
-        }
-        
-        return [];
-    }
     
     /**
      * Effacer les tentatives de connexion
