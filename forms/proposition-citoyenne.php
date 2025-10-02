@@ -246,7 +246,7 @@ $content = file_exists($data_path) ? json_decode(file_get_contents($data_path), 
                 <p>Partagez vos idées pour améliorer Saint-Paul ! Vos propositions seront étudiées par l'équipe et pourront être intégrées à notre programme.</p>
             </div>
 
-            <form action="process-form.php" method="POST" id="propositionForm">
+            <form action="forms/process-form.php" method="POST" id="propositionForm">
                 <input type="hidden" name="csrf_token" value="<?= generateCSRFToken() ?>">
 
                 <!-- Section 1: Informations personnelles -->
