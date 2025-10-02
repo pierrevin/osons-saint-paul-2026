@@ -2,6 +2,8 @@
 // Page de connexion admin
 session_start();
 
+require_once __DIR__ . '/includes/user_manager.php';
+
 // Si déjà connecté, rediriger vers l'admin
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
                 header('Location: pages/schema_admin.php');
@@ -21,17 +23,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
     
-    // Vérification des identifiants (pour l'instant en dur)
-    if ($username === 'admin' && $password === 'admin2026') {
+    // Utiliser le gestionnaire d'utilisateurs sécurisé
+    $user_manager = new UserManager();
+    $result = $user_manager->authenticate($username, $password);
+    
+    if ($result['success']) {
         $_SESSION['admin_logged_in'] = true;
-        $_SESSION['admin_user'] = $username;
+        $_SESSION['admin_user'] = $result['user']['username'];
+        $_SESSION['user_role'] = $result['user']['role'];
+        $_SESSION['user_id'] = $result['user']['id'];
         $_SESSION['login_time'] = time();
         
         // Rediriger vers l'admin
-                header('Location: pages/schema_admin.php');
+        header('Location: pages/schema_admin.php');
         exit;
     } else {
-        $error_message = 'Identifiants incorrects.';
+        $error_message = $result['message'];
     }
 }
 ?>
