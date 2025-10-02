@@ -80,7 +80,7 @@
         {
             "id": "prop_68d8ec76832931.55818788",
             "date": "2025-09-28 08:06:14",
-            "status": "pending",
+            "status": "approved",
             "data": {
                 "nom": "Pierre Vincenot",
                 "email": "pierre.vincenot@gmail.com",
@@ -97,7 +97,11 @@
                 "engagement_details": "ddd",
                 "acceptation_publication": true,
                 "acceptation_rgpd": true
-            }
+            },
+            "integrated": true,
+            "integrated_at": "2025-10-02 19:50:31",
+            "programme_id": 11,
+            "updated_at": "2025-10-02 19:39:34"
         }
     ],
     "statistics": {
@@ -106,5 +110,5 @@
         "approved": 3,
         "rejected": 0
     },
-    "last_updated": "2025-09-28T07:53:19+00:00"
+    "last_updated": "2025-10-02T19:39:34+00:00"
 }
