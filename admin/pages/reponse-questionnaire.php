@@ -184,9 +184,24 @@ foreach ($propositions as $proposition) {
         }
         
         th, td {
-            padding: 0.75rem;
+            padding: 0.5rem;
             text-align: left;
             border-bottom: 1px solid #e5e7eb;
+            font-size: 0.85rem;
+        }
+        
+        td.description {
+            max-width: 300px;
+            min-width: 200px;
+        }
+        
+        td.title {
+            font-weight: 600;
+            min-width: 150px;
+        }
+        
+        td.engagement {
+            font-size: 0.75rem;
         }
         
         th {
@@ -368,7 +383,6 @@ foreach ($propositions as $proposition) {
                             <th>Catégories</th>
                             <th>Contact</th>
                             <th>Bénéficiaires</th>
-                            <th>Coût</th>
                             <th>Engagement</th>
                             <th>Actions</th>
                         </tr>
@@ -386,8 +400,8 @@ foreach ($propositions as $proposition) {
                                             ($proposition['status'] === 'approved' ? 'Approuvée' : 'Rejetée') ?>
                                     </span>
                                 </td>
-                                <td><strong><?= htmlspecialchars($proposition['data']['titre'], ENT_QUOTES, 'UTF-8') ?></strong></td>
-                                <td><?= htmlspecialchars(substr($proposition['data']['description'], 0, 100), ENT_QUOTES, 'UTF-8') ?>...</td>
+                                <td class="title"><strong><?= htmlspecialchars(html_entity_decode($proposition['data']['titre'], ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8') ?></strong></td>
+                                <td class="description"><?= htmlspecialchars(html_entity_decode(substr($proposition['data']['description'], 0, 150), ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8') ?>...</td>
                                 <td>
                                     <?php foreach ($proposition['data']['categories'] ?? [] as $category): ?>
                                         <?php $clean_category = html_entity_decode($category, ENT_QUOTES, 'UTF-8'); ?>
@@ -407,12 +421,11 @@ foreach ($propositions as $proposition) {
                                     </div>
                                 </td>
                                 <td><?= htmlspecialchars($proposition['data']['beneficiaires'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
-                                <td><?= htmlspecialchars($proposition['data']['cout'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
-                                <td>
+                                <td class="engagement">
                                     <?php if ($proposition['data']['engagement'] ?? false): ?>
                                         ✅ Oui
                                         <?php if ($proposition['data']['engagement_details'] ?? ''): ?>
-                                            <br><small><?= htmlspecialchars($proposition['data']['engagement_details'], ENT_QUOTES, 'UTF-8') ?></small>
+                                            <br><small><?= htmlspecialchars(html_entity_decode($proposition['data']['engagement_details'], ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8') ?></small>
                                         <?php endif; ?>
                                     <?php else: ?>
                                         ❌ Non
@@ -576,16 +589,15 @@ foreach ($propositions as $proposition) {
             window.print();
         }
 
-        // Actions sur les propositions - Fonctions importées de schema_admin.php
+        // Actions sur les propositions
         function approveAndEditProposal(proposalId) {
-            // D'abord approuver la proposition
-            updateCitizenProposalStatus(proposalId, 'approved', function() {
-                // Puis ouvrir le modal de modification
-                openEditProposalModal(proposalId);
-            });
+            if (confirm('Approuver cette proposition et aller à la page de modification ?')) {
+                // Rediriger directement vers schema_admin.php pour l'approbation et modification
+                window.location.href = 'schema_admin.php#citizen-proposals&approve=' + proposalId;
+            }
         }
         
-        function updateCitizenProposalStatus(proposalId, status, callback = null) {
+        function updateCitizenProposalStatus(proposalId, status) {
             if (!confirm(`Êtes-vous sûr de vouloir ${status === 'approved' ? 'approuver' : 'rejeter'} cette proposition ?`)) {
                 return;
             }
@@ -606,7 +618,6 @@ foreach ($propositions as $proposition) {
                 if (data.success) {
                     // Recharger la page pour mettre à jour l'affichage
                     location.reload();
-                    if (callback) callback();
                 } else {
                     alert('Erreur: ' + (data.message || 'Impossible de mettre à jour le statut'));
                 }
@@ -615,11 +626,6 @@ foreach ($propositions as $proposition) {
                 console.error('Erreur:', error);
                 alert('Erreur lors de la mise à jour du statut');
             });
-        }
-        
-        function openEditProposalModal(proposalId) {
-            // Ouvrir le modal d'édition dans schema_admin.php
-            window.open('schema_admin.php#citizen-proposals&edit=' + proposalId, '_blank');
         }
     </script>
 </body>
