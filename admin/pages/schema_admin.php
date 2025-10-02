@@ -2218,30 +2218,33 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
                 </a>
             </div>
             <ul class="sidebar-menu">
-                <!-- Menu de gestion du contenu -->
-                <li class="menu-item"><a href="#" onclick="selectSection('hero'); return false;"><i class="fas fa-home"></i> Hero</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('programme'); return false;"><i class="fas fa-list-alt"></i> Programme</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('citation1'); return false;"><i class="fas fa-quote-left"></i> Transition 1</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('equipe'); return false;"><i class="fas fa-users"></i> Équipe</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('citation2'); return false;"><i class="fas fa-quote-left"></i> Transition 2</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('rendez_vous'); return false;"><i class="fas fa-calendar"></i> Rendez-vous</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('citation3'); return false;"><i class="fas fa-quote-left"></i> Transition 3</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('charte'); return false;"><i class="fas fa-handshake"></i> Charte</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('citation4'); return false;"><i class="fas fa-quote-left"></i> Transition 4</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('idees'); return false;"><i class="fas fa-lightbulb"></i> Idées</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('mediatheque'); return false;"><i class="fas fa-photo-video"></i> Médiathèque</a></li>
-                <li class="menu-item"><a href="#" onclick="selectTransitionsAll(); return false;"><i class="fas fa-quote-right"></i> Transitions (toutes)</a></li>
-                <li class="menu-item"><a href="#" onclick="switchTab('citizen-proposals'); return false;"><i class="fas fa-user-edit"></i> Propositions</a></li>
-                <li class="menu-item"><a href="reponse-questionnaire.php" target="_blank"><i class="fas fa-chart-bar"></i> Analyse</a></li>
-                
-                <!-- Menu d'administration (selon les permissions) -->
-                <?php if ($user_manager->canAccess('gestion_utilisateurs')): ?>
+                <?php if ($_SESSION['user_role'] === 'admin'): ?>
+                    <!-- Menu complet pour l'admin -->
+                    <li class="menu-item"><a href="#" onclick="selectSection('hero'); return false;"><i class="fas fa-home"></i> Hero</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('programme'); return false;"><i class="fas fa-list-alt"></i> Programme</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('citation1'); return false;"><i class="fas fa-quote-left"></i> Transition 1</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('equipe'); return false;"><i class="fas fa-users"></i> Équipe</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('citation2'); return false;"><i class="fas fa-quote-left"></i> Transition 2</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('rendez_vous'); return false;"><i class="fas fa-calendar"></i> Rendez-vous</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('citation3'); return false;"><i class="fas fa-quote-left"></i> Transition 3</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('charte'); return false;"><i class="fas fa-handshake"></i> Charte</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('citation4'); return false;"><i class="fas fa-quote-left"></i> Transition 4</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('idees'); return false;"><i class="fas fa-lightbulb"></i> Idées</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('mediatheque'); return false;"><i class="fas fa-photo-video"></i> Médiathèque</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectTransitionsAll(); return false;"><i class="fas fa-quote-right"></i> Transitions (toutes)</a></li>
+                    <li class="menu-item"><a href="#" onclick="switchTab('citizen-proposals'); return false;"><i class="fas fa-user-edit"></i> Propositions</a></li>
+                    <li class="menu-item"><a href="reponse-questionnaire.php" target="_blank"><i class="fas fa-chart-bar"></i> Analyse</a></li>
+                    
+                    <!-- Menu d'administration (admin seulement) -->
                     <li class="menu-separator"><hr></li>
                     <li class="menu-item"><a href="gestion-utilisateurs.php"><i class="fas fa-users-cog"></i> Gestion Utilisateurs</a></li>
-                <?php endif; ?>
-                
-                <?php if ($user_manager->canAccess('logs')): ?>
                     <li class="menu-item"><a href="logs.php"><i class="fas fa-shield-alt"></i> Logs de Sécurité</a></li>
+                    
+                <?php else: ?>
+                    <!-- Menu limité pour l'éditeur -->
+                    <li class="menu-item"><a href="#" onclick="selectSection('programme'); return false;"><i class="fas fa-list-alt"></i> Gestion Programme</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('rendez_vous'); return false;"><i class="fas fa-calendar"></i> Gestion RDV</a></li>
+                    <li class="menu-item"><a href="reponse-questionnaire.php" target="_blank"><i class="fas fa-chart-bar"></i> Réponse Questionnaire</a></li>
                 <?php endif; ?>
             </ul>
             <div class="sidebar-footer">
