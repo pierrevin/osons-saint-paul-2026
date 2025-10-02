@@ -2761,32 +2761,30 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
         // Workspace unique: logique d'affichage d'une seule section
         function selectSection(sectionName) {
             try {
-                const workspace = document.getElementById('adminWorkspace');
-                if (!workspace) return;
+                // Masquer toutes les sections existantes se terminant par -content
+                const sections = document.querySelectorAll('[id$="-content"]');
+                sections.forEach(sec => sec.style.display = 'none');
 
-                // Récupère le contenu de la section existante
-                const contentEl = document.getElementById(`${sectionName}-content`);
-                if (!contentEl) {
+                // Afficher la section demandée si elle existe
+                const target = document.getElementById(`${sectionName}-content`);
+                if (!target) {
                     console.warn('Section introuvable:', sectionName);
                     return;
                 }
+                target.style.display = 'block';
 
-                // Injecte uniquement le contenu HTML (évite de dupliquer l'ID conteneur)
-                workspace.innerHTML = contentEl.innerHTML;
-
-                // S'assurer que la zone est visible et au focus
-                workspace.style.display = 'block';
-                const firstInput = workspace.querySelector('input, textarea, select, button');
+                // Focus premier champ si présent
+                const firstInput = target.querySelector('input, textarea, select, button');
                 if (firstInput) firstInput.focus();
 
-                // Met à jour l'URL (hash) sans scroll
+                // Mettre à jour le hash (sans scroll automatique intempestif)
                 history.replaceState(null, '', `#${sectionName}-content`);
-                
-                // Mémorise la dernière section ouverte pour restauration après reload
+
+                // Mémoriser la dernière section
                 try { localStorage.setItem('adminLastSection', sectionName); } catch(_) {}
-                
-                // Fait apparaître la zone d'édition
-                workspace.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                // Scroll visible
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             } catch (e) {
                 console.error('selectSection error', e);
             }
@@ -2796,14 +2794,15 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
         function scrollToSection() { /* désactivé par workspace unique */ }
         function toggleSection() { /* désactivé par workspace unique */ }
 
-        // Restaurer automatiquement la dernière section ouverte
+        // Restaurer automatiquement la dernière section ouverte, par défaut "programme"
         document.addEventListener('DOMContentLoaded', function() {
             try {
-                const last = localStorage.getItem('adminLastSection');
-                if (last) {
-                    // Laisse un petit délai pour que le DOM soit prêt
-                    setTimeout(() => selectSection(last), 50);
-                }
+                const last = localStorage.getItem('adminLastSection') || 'programme';
+                // Masquer toutes les sections au départ
+                const sections = document.querySelectorAll('[id$="-content"]');
+                sections.forEach(sec => sec.style.display = 'none');
+                // Afficher la section mémorisée
+                setTimeout(() => selectSection(last), 50);
             } catch(_) {}
         });
 
