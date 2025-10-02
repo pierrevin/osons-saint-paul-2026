@@ -3,7 +3,6 @@
 session_start();
 
 require_once __DIR__ . '/includes/user_manager.php';
-require_once __DIR__ . '/includes/email_service.php';
 
 // Si déjà connecté, rediriger vers l'admin
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
@@ -23,69 +22,21 @@ if (isset($_GET['timeout'])) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = $_POST['username'] ?? '';
             $password = $_POST['password'] ?? '';
-            $twofa_code = $_POST['twofa_code'] ?? '';
 
             // Utiliser le gestionnaire d'utilisateurs sécurisé
             $user_manager = new UserManager();
             $result = $user_manager->authenticate($username, $password);
 
             if ($result['success']) {
-                $user = $result['user'];
-                
-                // Vérifier si 2FA est requis
-                if (!isset($_SESSION['2fa_required']) || !$_SESSION['2fa_required']) {
-                    // Première étape : vérifier les identifiants
-                    $_SESSION['2fa_required'] = true;
-                    $_SESSION['temp_user'] = $user;
-                    
-                    // Générer et envoyer le code 2FA par email pour tous
-                    $code = $user_manager->generate2FACode($user['id']);
-                    
-                    // Envoyer l'email avec le code
-                    $email_service = new EmailService();
-                    $email_result = $email_service->send2FACode($user['email'], $user['username'], $code);
-                    
-                    if ($email_result['success']) {
-                        $_SESSION['2fa_code_sent'] = $code; // Garder pour debug
-                        $_SESSION['email_sent'] = true;
-                    } else {
-                        // En cas d'échec d'envoi, afficher le code en mode debug
-                        $_SESSION['2fa_code_sent'] = $code;
-                        $_SESSION['email_sent'] = false;
-                        $_SESSION['email_error'] = $email_result['message'];
-                    }
-                    
-                    $error_message = ''; // Pas d'erreur, on passe à l'étape 2FA
-                } else {
-                    // Deuxième étape : vérifier le code 2FA
-                    if (empty($twofa_code)) {
-                        $error_message = 'Veuillez saisir le code de vérification.';
-                    } else {
-                        $user = $_SESSION['temp_user'];
-                        // Vérification 2FA par email pour tous
-                        $twofa_result = $user_manager->verify2FACode($user['id'], $twofa_code);
-                        
-                        if ($twofa_result['success']) {
-                            // 2FA réussi, finaliser la connexion
-                            $_SESSION['admin_logged_in'] = true;
-                            $_SESSION['admin_user'] = $user['username'];
-                            $_SESSION['user_role'] = $user['role'];
-                            $_SESSION['user_id'] = $user['id'];
-                            $_SESSION['login_time'] = time();
-                            
-                            // Nettoyer les variables temporaires
-                            unset($_SESSION['2fa_required']);
-                            unset($_SESSION['temp_user']);
-                            unset($_SESSION['2fa_code_sent']);
-                            
-                            // Rediriger vers l'admin
-                            header('Location: pages/schema_admin.php');
-                            exit;
-                        } else {
-                            $error_message = $twofa_result['message'];
-                        }
-                    }
-                }
+                $_SESSION['admin_logged_in'] = true;
+                $_SESSION['admin_user'] = $result['user']['username'];
+                $_SESSION['user_role'] = $result['user']['role'];
+                $_SESSION['user_id'] = $result['user']['id'];
+                $_SESSION['login_time'] = time();
+
+                // Rediriger vers l'admin
+                header('Location: pages/schema_admin.php');
+                exit;
             } else {
                 $error_message = $result['message'];
             }
@@ -230,55 +181,17 @@ if (isset($_GET['timeout'])) {
             <?php endif; ?>
             
             <form method="POST">
-                <?php if (!isset($_SESSION['2fa_required']) || !$_SESSION['2fa_required']): ?>
-                    <!-- Étape 1 : Identifiants -->
-                    <div class="form-group">
-                        <label for="username">Nom d'utilisateur</label>
-                        <input type="text" id="username" name="username" required autofocus>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="password">Mot de passe</label>
-                        <input type="password" id="password" name="password" required>
-                    </div>
-                    
-                    <button type="submit" class="btn-login">Se connecter</button>
-                <?php else: ?>
-                    <!-- Étape 2 : Code 2FA -->
-                    <?php 
-                    $user = $_SESSION['temp_user'] ?? null;
-                    $is_admin = $user && $user['role'] === 'admin';
-                    ?>
-                    
-                    <div class="twofa-step">
-                        <h3>Vérification en deux étapes</h3>
-                        <p>Bonjour <strong><?= htmlspecialchars($user['username'] ?? '') ?></strong></p>
-                        
-                        <!-- Code Email pour tous -->
-                        <div class="email-code">
-                            <?php if (isset($_SESSION['email_sent']) && $_SESSION['email_sent']): ?>
-                                <p>✅ Un code de vérification a été envoyé à votre adresse email.</p>
-                            <?php else: ?>
-                                <p>⚠️ Problème d'envoi d'email. Code de test affiché :</p>
-                                <?php if (isset($_SESSION['email_error'])): ?>
-                                    <p class="error-message">Erreur : <?= htmlspecialchars($_SESSION['email_error']) ?></p>
-                                <?php endif; ?>
-                            <?php endif; ?>
-                            
-                            <?php if (isset($_SESSION['2fa_code_sent'])): ?>
-                                <p class="debug-code">Code de vérification : <strong><?= $_SESSION['2fa_code_sent'] ?></strong></p>
-                            <?php endif; ?>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="twofa_code">Code de vérification</label>
-                            <input type="text" id="twofa_code" name="twofa_code" placeholder="123456" maxlength="6" required autofocus>
-                        </div>
-                        
-                        <button type="submit" class="btn-login">Vérifier</button>
-                        <a href="login.php" class="btn-secondary">Retour</a>
-                    </div>
-                <?php endif; ?>
+                <div class="form-group">
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="username" required autofocus>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" class="btn-login">Se connecter</button>
             </form>
             
             <div class="back-link">
