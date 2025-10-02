@@ -5604,6 +5604,41 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
         observer.observe(document.body, { childList: true, subtree: true });
     </script>
 
+    <script>
+    // ... existing code ...
+
+    // Ouvrir automatiquement l'onglet et le modal selon le hash
+    document.addEventListener('DOMContentLoaded', function() {
+        const hash = window.location.hash || '';
+        if (!hash) return;
+
+        // Exemple: #citizen-proposals&edit=prop_123
+        const [anchor, params] = hash.replace('#', '').split('&');
+        if (anchor === 'citizen-proposals') {
+            try { switchTab('citizen-proposals'); } catch (e) {}
+            const map = new URLSearchParams(params);
+            const editId = map.get('edit');
+            const approveId = map.get('approve');
+            if (approveId) {
+                // Approve puis ouvrir le modal citoyen
+                try { approveAndEditProposal(approveId); } catch (e) {}
+            } else if (editId) {
+                // Ouvrir le modal d'édition citoyenne directement
+                try { openEditProposalModal(editId); } catch (e) {}
+            }
+        } else if (anchor === 'programme-proposals') {
+            try { switchTab('programme-proposals'); } catch (e) {}
+            const map = new URLSearchParams(params);
+            const editProgId = map.get('edit');
+            if (editProgId) {
+                try { openEditProgrammeProposalModal(editProgId); } catch (e) {}
+            }
+        }
+    });
+
+    // ... existing code ...
+    </script>
+
 </body>
 </html>
 
