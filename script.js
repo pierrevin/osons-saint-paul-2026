@@ -258,6 +258,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ===== FORMULAIRE DE CONTACT =====
 document.addEventListener('DOMContentLoaded', function() {
+    // Gestion des messages de retour du formulaire de contact
+    const urlParams = new URLSearchParams(window.location.search);
+    const success = urlParams.get('success');
+    const error = urlParams.get('error');
+    
+    if (success === '1' || error) {
+        // Scroll vers la section idées
+        const ideesSection = document.getElementById('idees');
+        if (ideesSection) {
+            ideesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // Nettoyer l'URL après 3 secondes
+        setTimeout(() => {
+            const newUrl = window.location.pathname + window.location.hash;
+            window.history.replaceState({}, document.title, newUrl);
+        }, 3000);
+    }
+    
     const contactForm = document.querySelector('.contact-form form');
     
     if (contactForm) {

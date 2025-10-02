@@ -17,23 +17,98 @@ function validateEmail($email) {
 
 // Fonction d'envoi d'email
 function sendContactEmail($nom, $email, $objet, $message, $to_email, $from_email, $site_name) {
-    $subject = "[$site_name] Contact: " . $objet;
+    $subject = "[$site_name] - " . $objet;
     
-    $body = "Nouveau message de contact reçu sur le site $site_name\n\n";
-    $body .= "Nom: $nom\n";
-    $body .= "Email: $email\n";
-    $body .= "Objet: $objet\n\n";
-    $body .= "Message:\n";
-    $body .= $message . "\n\n";
-    $body .= "---\n";
-    $body .= "Envoyé depuis le formulaire de contact du site $site_name\n";
-    $body .= "Date: " . date('d/m/Y à H:i:s') . "\n";
-    $body .= "IP: " . ($_SERVER['REMOTE_ADDR'] ?? 'Inconnue');
+    // Corps HTML du message
+    $body = "
+    <!DOCTYPE html>
+    <html lang='fr'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Message de contact</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #f9f9f9;
+            }
+            .container {
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            .header {
+                text-align: center;
+                margin-bottom: 30px;
+                padding-bottom: 20px;
+                border-bottom: 2px solid #004a6d;
+            }
+            .header h1 {
+                color: #004a6d;
+                margin: 0;
+                font-size: 24px;
+            }
+            .sender {
+                background: #f8f9fa;
+                padding: 15px;
+                border-radius: 8px;
+                margin-bottom: 20px;
+                border-left: 4px solid #004a6d;
+            }
+            .sender-name {
+                font-weight: bold;
+                color: #004a6d;
+                font-size: 16px;
+            }
+            .message {
+                background: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                border: 1px solid #e9ecef;
+                white-space: pre-wrap;
+                font-size: 14px;
+                line-height: 1.8;
+            }
+            .footer {
+                text-align: center;
+                margin-top: 30px;
+                padding-top: 20px;
+                border-top: 1px solid #e9ecef;
+                color: #666;
+                font-size: 12px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class='container'>
+            <div class='header'>
+                <h1>🍃 Osons Saint-Paul</h1>
+                <p>Nouveau message de contact</p>
+            </div>
+            
+            <div class='sender'>
+                <div class='sender-name'>" . htmlspecialchars($nom) . "</div>
+            </div>
+            
+            <div class='message'>" . htmlspecialchars($message) . "</div>
+            
+            <div class='footer'>
+                <p>Message envoyé depuis le formulaire de contact du site Osons Saint-Paul</p>
+            </div>
+        </div>
+    </body>
+    </html>";
     
     $headers = "From: $from_email\r\n";
     $headers .= "Reply-To: $email\r\n";
     $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-    $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
     
     return mail($to_email, $subject, $body, $headers);
 }
@@ -114,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $redirect_url = '/#idees';
     
     if ($success) {
-        $redirect_url .= '?success=1';
+        $redirect_url .= '?success=1&message=envoye';
     } else {
         $redirect_url .= '?error=' . urlencode(implode(', ', $errors));
     }
