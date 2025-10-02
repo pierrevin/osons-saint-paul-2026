@@ -1,13 +1,7 @@
-# Configuration pour l'interface admin
-RewriteEngine On
-
-# Redirection des requêtes vers des fichiers inexistants
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php [QSA,L]
+# Configuration pour l'interface admin - VERSION CORRIGÉE
 
 # Sécurité - Bloquer l'accès direct aux fichiers sensibles
-<FilesMatch "\.(json|log|bak)$">
+<FilesMatch "\.(json|log|bak|backup)$">
     Require all denied
 </FilesMatch>
 
@@ -16,3 +10,17 @@ php_value session.cookie_httponly 1
 php_value session.cookie_secure 0
 php_value session.use_strict_mode 1
 php_value session.use_only_cookies 1
+
+# Limites PHP
+php_value memory_limit 256M
+php_value upload_max_filesize 10M
+php_value post_max_size 12M
+php_value max_execution_time 300
+
+# Gestion d'erreur
+php_flag display_errors Off
+php_flag log_errors On
+php_value error_log logs/php_errors.log
+
+# SUPPRESSION DES RÈGLES DE RÉÉCRITURE QUI CAUSAIENT LE PROBLÈME
+# Les règles RewriteRule redirigeaient tout vers index.php
