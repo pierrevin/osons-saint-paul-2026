@@ -3,6 +3,7 @@
 session_start();
 
 require_once __DIR__ . '/includes/user_manager.php';
+require_once __DIR__ . '/includes/email_service.php';
 
 // Si déjà connecté, rediriger vers l'admin
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
@@ -39,9 +40,20 @@ if (isset($_GET['timeout'])) {
                     
                     // Générer et envoyer le code 2FA par email pour tous
                     $code = $user_manager->generate2FACode($user['id']);
-                    // Ici, vous devriez envoyer l'email avec le code
-                    // Pour l'instant, on l'affiche (à remplacer par un vrai envoi d'email)
-                    $_SESSION['2fa_code_sent'] = $code;
+                    
+                    // Envoyer l'email avec le code
+                    $email_service = new EmailService();
+                    $email_result = $email_service->send2FACode($user['email'], $user['username'], $code);
+                    
+                    if ($email_result['success']) {
+                        $_SESSION['2fa_code_sent'] = $code; // Garder pour debug
+                        $_SESSION['email_sent'] = true;
+                    } else {
+                        // En cas d'échec d'envoi, afficher le code en mode debug
+                        $_SESSION['2fa_code_sent'] = $code;
+                        $_SESSION['email_sent'] = false;
+                        $_SESSION['email_error'] = $email_result['message'];
+                    }
                     
                     $error_message = ''; // Pas d'erreur, on passe à l'étape 2FA
                 } else {
@@ -244,9 +256,17 @@ if (isset($_GET['timeout'])) {
                         
                         <!-- Code Email pour tous -->
                         <div class="email-code">
-                            <p>Un code de vérification a été envoyé à votre adresse email.</p>
+                            <?php if (isset($_SESSION['email_sent']) && $_SESSION['email_sent']): ?>
+                                <p>✅ Un code de vérification a été envoyé à votre adresse email.</p>
+                            <?php else: ?>
+                                <p>⚠️ Problème d'envoi d'email. Code de test affiché :</p>
+                                <?php if (isset($_SESSION['email_error'])): ?>
+                                    <p class="error-message">Erreur : <?= htmlspecialchars($_SESSION['email_error']) ?></p>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                            
                             <?php if (isset($_SESSION['2fa_code_sent'])): ?>
-                                <p class="debug-code">Code de test : <strong><?= $_SESSION['2fa_code_sent'] ?></strong></p>
+                                <p class="debug-code">Code de vérification : <strong><?= $_SESSION['2fa_code_sent'] ?></strong></p>
                             <?php endif; ?>
                         </div>
                         
