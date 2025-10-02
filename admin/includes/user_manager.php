@@ -234,7 +234,7 @@ class UserManager {
         $users_data['users'][] = $new_user;
         
         if (file_put_contents($this->users_file, json_encode($users_data, JSON_PRETTY_PRINT))) {
-            $this->logSecurityEvent('user_created', $username, "User created by {$_SESSION['username']}");
+            $this->logSecurityEvent('user_created', $username, "User created by {$_SESSION['admin_user']}");
             return ['success' => true, 'message' => 'Utilisateur créé avec succès.'];
         }
         
@@ -252,6 +252,152 @@ class UserManager {
             }
         }
         return $max_id + 1;
+    }
+    
+    /**
+     * Récupérer tous les utilisateurs (admin seulement)
+     */
+    public function getAllUsers() {
+        if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
+            return ['success' => false, 'message' => 'Permissions insuffisantes.'];
+        }
+        
+        $users_data = $this->loadUsers();
+        return ['success' => true, 'users' => $users_data['users']];
+    }
+    
+    /**
+     * Modifier un utilisateur (admin seulement)
+     */
+    public function updateUser($user_id, $data) {
+        if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
+            return ['success' => false, 'message' => 'Permissions insuffisantes.'];
+        }
+        
+        $users_data = $this->loadUsers();
+        
+        foreach ($users_data['users'] as &$user) {
+            if ($user['id'] == $user_id) {
+                if (isset($data['username'])) $user['username'] = $data['username'];
+                if (isset($data['email'])) $user['email'] = $data['email'];
+                if (isset($data['role'])) $user['role'] = $data['role'];
+                if (isset($data['active'])) $user['active'] = (bool)$data['active'];
+                if (isset($data['password']) && !empty($data['password'])) {
+                    $user['password_hash'] = password_hash($data['password'], PASSWORD_DEFAULT);
+                }
+                
+                if (file_put_contents($this->users_file, json_encode($users_data, JSON_PRETTY_PRINT))) {
+                    $this->logSecurityEvent('user_updated', $user['username'], "User updated by {$_SESSION['admin_user']}");
+                    return ['success' => true, 'message' => 'Utilisateur modifié avec succès.'];
+                }
+                break;
+            }
+        }
+        
+        return ['success' => false, 'message' => 'Utilisateur non trouvé.'];
+    }
+    
+    /**
+     * Supprimer un utilisateur (admin seulement)
+     */
+    public function deleteUser($user_id) {
+        if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
+            return ['success' => false, 'message' => 'Permissions insuffisantes.'];
+        }
+        
+        // Empêcher la suppression de son propre compte
+        if ($user_id == $_SESSION['user_id']) {
+            return ['success' => false, 'message' => 'Vous ne pouvez pas supprimer votre propre compte.'];
+        }
+        
+        $users_data = $this->loadUsers();
+        
+        foreach ($users_data['users'] as $index => $user) {
+            if ($user['id'] == $user_id) {
+                $username = $user['username'];
+                unset($users_data['users'][$index]);
+                $users_data['users'] = array_values($users_data['users']); // Réindexer
+                
+                if (file_put_contents($this->users_file, json_encode($users_data, JSON_PRETTY_PRINT))) {
+                    $this->logSecurityEvent('user_deleted', $username, "User deleted by {$_SESSION['admin_user']}");
+                    return ['success' => true, 'message' => 'Utilisateur supprimé avec succès.'];
+                }
+                break;
+            }
+        }
+        
+        return ['success' => false, 'message' => 'Utilisateur non trouvé.'];
+    }
+    
+    /**
+     * Vérifier les permissions spécifiques selon le rôle
+     */
+    public function canAccess($section) {
+        // Démarrer la session si elle n'est pas déjà démarrée
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['user_role'])) {
+            return false;
+        }
+        
+        $role = $_SESSION['user_role'];
+        
+        // Permissions par section
+        $permissions = [
+            'admin' => [
+                'gestion_utilisateurs' => true,
+                'gestion_programme' => true,
+                'gestion_rdv' => true,
+                'bilan_propositions' => true,
+                'parametres' => true,
+                'logs' => true
+            ],
+            'editeur' => [
+                'gestion_utilisateurs' => false,
+                'gestion_programme' => true,
+                'gestion_rdv' => true,
+                'bilan_propositions' => true,
+                'parametres' => false,
+                'logs' => false
+            ]
+        ];
+        
+        return $permissions[$role][$section] ?? false;
+    }
+    
+    /**
+     * Obtenir le menu selon le rôle
+     */
+    public function getMenuItems() {
+        // Démarrer la session si elle n'est pas déjà démarrée
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['user_role'])) {
+            return [];
+        }
+        
+        $role = $_SESSION['user_role'];
+        
+        $menu_items = [
+            'admin' => [
+                ['id' => 'gestion-programme', 'title' => 'Gestion Programme', 'icon' => 'fas fa-list', 'section' => 'gestion_programme'],
+                ['id' => 'gestion-rdv', 'title' => 'Gestion RDV', 'icon' => 'fas fa-calendar', 'section' => 'gestion_rdv'],
+                ['id' => 'bilan-propositions', 'title' => 'Réponse Questionnaire', 'icon' => 'fas fa-chart-bar', 'section' => 'bilan_propositions'],
+                ['id' => 'gestion-utilisateurs', 'title' => 'Gestion Utilisateurs', 'icon' => 'fas fa-users', 'section' => 'gestion_utilisateurs'],
+                ['id' => 'logs', 'title' => 'Logs de Sécurité', 'icon' => 'fas fa-shield-alt', 'section' => 'logs']
+            ],
+            'editeur' => [
+                ['id' => 'gestion-programme', 'title' => 'Gestion Programme', 'icon' => 'fas fa-list', 'section' => 'gestion_programme'],
+                ['id' => 'gestion-rdv', 'title' => 'Gestion RDV', 'icon' => 'fas fa-calendar', 'section' => 'gestion_rdv'],
+                ['id' => 'bilan-propositions', 'title' => 'Réponse Questionnaire', 'icon' => 'fas fa-chart-bar', 'section' => 'bilan_propositions']
+            ]
+        ];
+        
+        return $menu_items[$role] ?? [];
     }
 }
 ?>

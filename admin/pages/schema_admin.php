@@ -6,6 +6,10 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/../includes/image_processor.php';
+require_once __DIR__ . '/../includes/user_manager.php';
+
+// Initialiser le gestionnaire d'utilisateurs
+$user_manager = new UserManager();
 
 // Traitement des actions POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
@@ -2214,6 +2218,7 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
                 </a>
             </div>
             <ul class="sidebar-menu">
+                <!-- Menu de gestion du contenu -->
                 <li class="menu-item"><a href="#" onclick="selectSection('hero'); return false;"><i class="fas fa-home"></i> Hero</a></li>
                 <li class="menu-item"><a href="#" onclick="selectSection('programme'); return false;"><i class="fas fa-list-alt"></i> Programme</a></li>
                 <li class="menu-item"><a href="#" onclick="selectSection('citation1'); return false;"><i class="fas fa-quote-left"></i> Transition 1</a></li>
@@ -2228,6 +2233,16 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
                 <li class="menu-item"><a href="#" onclick="selectTransitionsAll(); return false;"><i class="fas fa-quote-right"></i> Transitions (toutes)</a></li>
                 <li class="menu-item"><a href="#" onclick="switchTab('citizen-proposals'); return false;"><i class="fas fa-user-edit"></i> Propositions</a></li>
                 <li class="menu-item"><a href="reponse-questionnaire.php" target="_blank"><i class="fas fa-chart-bar"></i> Analyse</a></li>
+                
+                <!-- Menu d'administration (selon les permissions) -->
+                <?php if ($user_manager->canAccess('gestion_utilisateurs')): ?>
+                    <li class="menu-separator"><hr></li>
+                    <li class="menu-item"><a href="gestion-utilisateurs.php"><i class="fas fa-users-cog"></i> Gestion Utilisateurs</a></li>
+                <?php endif; ?>
+                
+                <?php if ($user_manager->canAccess('logs')): ?>
+                    <li class="menu-item"><a href="logs.php"><i class="fas fa-shield-alt"></i> Logs de Sécurité</a></li>
+                <?php endif; ?>
             </ul>
             <div class="sidebar-footer">
                 <a class="logout-btn" href="../index.php"><i class="fas fa-arrow-left"></i> Retour</a>
