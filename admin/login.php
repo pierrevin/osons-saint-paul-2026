@@ -40,15 +40,10 @@ if (isset($_GET['timeout'])) {
                     // Générer et envoyer le code 2FA selon le rôle
                     if ($user['role'] === 'admin') {
                         // Pour l'admin : Google Authenticator
-                        if (!isset($user['google_auth_secret'])) {
-                            $secret = $user_manager->generateGoogleAuthSecret($user['id']);
-                            $_SESSION['google_auth_secret'] = $secret;
-                            $_SESSION['setup_google_auth'] = true;
-                        } else {
-                            // L'admin a déjà un secret, on l'utilise
-                            $_SESSION['google_auth_secret'] = $user['google_auth_secret'];
-                            $_SESSION['setup_google_auth'] = false;
-                        }
+                        // Toujours régénérer un nouveau secret pour éviter les problèmes
+                        $secret = $user_manager->generateGoogleAuthSecret($user['id']);
+                        $_SESSION['google_auth_secret'] = $secret;
+                        $_SESSION['setup_google_auth'] = true;
                     } else {
                         // Pour l'éditeur : Email
                         $code = $user_manager->generate2FACode($user['id']);
