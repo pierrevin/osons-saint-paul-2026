@@ -2235,10 +2235,11 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
                     <li class="menu-item"><a href="#" onclick="switchTab('citizen-proposals'); return false;"><i class="fas fa-user-edit"></i> Propositions</a></li>
                     <li class="menu-item"><a href="reponse-questionnaire.php" target="_blank"><i class="fas fa-chart-bar"></i> Analyse</a></li>
                     
-                    <!-- Menu d'administration (admin seulement) -->
-                    <li class="menu-separator"><hr></li>
-                    <li class="menu-item"><a href="gestion-utilisateurs.php"><i class="fas fa-users-cog"></i> Gestion Utilisateurs</a></li>
-                    <li class="menu-item"><a href="logs.php"><i class="fas fa-shield-alt"></i> Logs de Sécurité</a></li>
+                <!-- Menu d'administration (admin seulement) -->
+                <li class="menu-separator"><hr></li>
+                <li class="menu-item"><a href="gestion-utilisateurs.php"><i class="fas fa-users-cog"></i> Gestion Utilisateurs</a></li>
+                <li class="menu-item"><a href="logs.php"><i class="fas fa-shield-alt"></i> Logs de Sécurité</a></li>
+                <li class="menu-item"><a href="sync-git.php"><i class="fas fa-sync-alt"></i> Sync Git</a></li>
                     
                 <?php else: ?>
                     <!-- Menu limité pour l'éditeur -->
