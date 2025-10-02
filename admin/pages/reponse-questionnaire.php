@@ -25,7 +25,9 @@ $integrated = count(array_filter($propositions, fn($p) => $p['integrated'] ?? fa
 $categories_stats = [];
 foreach ($propositions as $proposition) {
     foreach ($proposition['data']['categories'] ?? [] as $category) {
-        $categories_stats[$category] = ($categories_stats[$category] ?? 0) + 1;
+        // Décoder les entités HTML dans les catégories
+        $clean_category = html_entity_decode($category, ENT_QUOTES, 'UTF-8');
+        $categories_stats[$clean_category] = ($categories_stats[$clean_category] ?? 0) + 1;
     }
 }
 
@@ -301,10 +303,6 @@ foreach ($propositions as $proposition) {
                 <canvas id="categoryChart"></canvas>
             </div>
             <div class="chart-container">
-                <div class="chart-title">🏘️ Répartition par commune</div>
-                <canvas id="communeChart"></canvas>
-            </div>
-            <div class="chart-container">
                 <div class="chart-title">📊 Statuts des propositions</div>
                 <canvas id="statusChart"></canvas>
             </div>
@@ -378,7 +376,7 @@ foreach ($propositions as $proposition) {
                     <tbody>
                         <?php foreach ($propositions as $proposition): ?>
                             <tr data-status="<?= $proposition['status'] ?>" 
-                                data-categories="<?= htmlspecialchars(implode(',', $proposition['data']['categories'] ?? [])) ?>"
+                                data-categories="<?= htmlspecialchars(implode(',', array_map(function($cat) { return html_entity_decode($cat, ENT_QUOTES, 'UTF-8'); }, $proposition['data']['categories'] ?? []))) ?>"
                                 data-commune="<?= htmlspecialchars($proposition['data']['commune'] ?: 'Non renseignée') ?>"
                                 data-search="<?= htmlspecialchars(strtolower($proposition['data']['titre'] . ' ' . $proposition['data']['description'])) ?>">
                                 <td><?= date('d/m/Y H:i', strtotime($proposition['date'])) ?></td>
@@ -388,32 +386,33 @@ foreach ($propositions as $proposition) {
                                             ($proposition['status'] === 'approved' ? 'Approuvée' : 'Rejetée') ?>
                                     </span>
                                 </td>
-                                <td><strong><?= htmlspecialchars($proposition['data']['titre']) ?></strong></td>
-                                <td><?= htmlspecialchars(substr($proposition['data']['description'], 0, 100)) ?>...</td>
+                                <td><strong><?= htmlspecialchars($proposition['data']['titre'], ENT_QUOTES, 'UTF-8') ?></strong></td>
+                                <td><?= htmlspecialchars(substr($proposition['data']['description'], 0, 100), ENT_QUOTES, 'UTF-8') ?>...</td>
                                 <td>
                                     <?php foreach ($proposition['data']['categories'] ?? [] as $category): ?>
-                                        <span class="category-tag"><?= htmlspecialchars($category) ?></span>
+                                        <?php $clean_category = html_entity_decode($category, ENT_QUOTES, 'UTF-8'); ?>
+                                        <span class="category-tag"><?= htmlspecialchars($clean_category, ENT_QUOTES, 'UTF-8') ?></span>
                                     <?php endforeach; ?>
                                 </td>
                                 <td>
-                                    <div><?= htmlspecialchars($proposition['data']['nom']) ?></div>
+                                    <div><?= htmlspecialchars($proposition['data']['nom'], ENT_QUOTES, 'UTF-8') ?></div>
                                     <div style="font-size: 0.8rem; color: #6c757d;">
-                                        <?= htmlspecialchars($proposition['data']['email']) ?>
+                                        <?= htmlspecialchars($proposition['data']['email'], ENT_QUOTES, 'UTF-8') ?>
                                         <?php if ($proposition['data']['telephone']): ?>
-                                            <br><?= htmlspecialchars($proposition['data']['telephone']) ?>
+                                            <br><?= htmlspecialchars($proposition['data']['telephone'], ENT_QUOTES, 'UTF-8') ?>
                                         <?php endif; ?>
                                         <?php if ($proposition['data']['commune']): ?>
-                                            <br><?= htmlspecialchars($proposition['data']['commune']) ?>
+                                            <br><?= htmlspecialchars($proposition['data']['commune'], ENT_QUOTES, 'UTF-8') ?>
                                         <?php endif; ?>
                                     </div>
                                 </td>
-                                <td><?= htmlspecialchars($proposition['data']['beneficiaires'] ?? '') ?></td>
-                                <td><?= htmlspecialchars($proposition['data']['cout'] ?? '') ?></td>
+                                <td><?= htmlspecialchars($proposition['data']['beneficiaires'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                                <td><?= htmlspecialchars($proposition['data']['cout'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
                                 <td>
                                     <?php if ($proposition['data']['engagement'] ?? false): ?>
                                         ✅ Oui
                                         <?php if ($proposition['data']['engagement_details'] ?? ''): ?>
-                                            <br><small><?= htmlspecialchars($proposition['data']['engagement_details']) ?></small>
+                                            <br><small><?= htmlspecialchars($proposition['data']['engagement_details'], ENT_QUOTES, 'UTF-8') ?></small>
                                         <?php endif; ?>
                                     <?php else: ?>
                                         ❌ Non
@@ -424,8 +423,8 @@ foreach ($propositions as $proposition) {
                                         <a href="../../forms/admin/manage-proposition.php?id=<?= $proposition['id'] ?>" 
                                            class="btn-sm btn-primary" target="_blank">👁️ Voir</a>
                                         <?php if ($proposition['status'] === 'pending'): ?>
-                                            <button class="btn-sm btn-success" onclick="approveProposal('<?= $proposition['id'] ?>')">✅ Approuver</button>
-                                            <button class="btn-sm btn-danger" onclick="rejectProposal('<?= $proposition['id'] ?>')">❌ Rejeter</button>
+                                            <button class="btn-sm btn-success" onclick="approveAndEditProposal('<?= $proposition['id'] ?>')">✅ Approuver & Modifier</button>
+                                            <button class="btn-sm btn-danger" onclick="updateCitizenProposalStatus('<?= $proposition['id'] ?>', 'rejected')">❌ Rejeter</button>
                                         <?php endif; ?>
                                     </div>
                                 </td>
@@ -496,27 +495,6 @@ foreach ($propositions as $proposition) {
             }
         });
 
-        // Graphique communes
-        const communeCtx = document.getElementById('communeChart').getContext('2d');
-        new Chart(communeCtx, {
-            type: 'bar',
-            data: {
-                labels: Object.keys(communeData),
-                datasets: [{
-                    label: 'Propositions',
-                    data: Object.values(communeData),
-                    backgroundColor: '#ec654f'
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            }
-        });
 
         // Graphique statuts
         const statusCtx = document.getElementById('statusChart').getContext('2d');
@@ -598,19 +576,50 @@ foreach ($propositions as $proposition) {
             window.print();
         }
 
-        // Actions sur les propositions
-        function approveProposal(id) {
-            if (confirm('Approuver cette proposition ?')) {
-                // Rediriger vers l'admin avec l'action
-                window.open('schema_admin.php#citizen-proposals', '_blank');
-            }
+        // Actions sur les propositions - Fonctions importées de schema_admin.php
+        function approveAndEditProposal(proposalId) {
+            // D'abord approuver la proposition
+            updateCitizenProposalStatus(proposalId, 'approved', function() {
+                // Puis ouvrir le modal de modification
+                openEditProposalModal(proposalId);
+            });
         }
-
-        function rejectProposal(id) {
-            if (confirm('Rejeter cette proposition ?')) {
-                // Rediriger vers l'admin avec l'action
-                window.open('schema_admin.php#citizen-proposals', '_blank');
+        
+        function updateCitizenProposalStatus(proposalId, status, callback = null) {
+            if (!confirm(`Êtes-vous sûr de vouloir ${status === 'approved' ? 'approuver' : 'rejeter'} cette proposition ?`)) {
+                return;
             }
+            
+            fetch('citizen-proposals-ajax.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    action: 'update_status',
+                    id: proposalId,
+                    status: status
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Recharger la page pour mettre à jour l'affichage
+                    location.reload();
+                    if (callback) callback();
+                } else {
+                    alert('Erreur: ' + (data.message || 'Impossible de mettre à jour le statut'));
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Erreur lors de la mise à jour du statut');
+            });
+        }
+        
+        function openEditProposalModal(proposalId) {
+            // Ouvrir le modal d'édition dans schema_admin.php
+            window.open('schema_admin.php#citizen-proposals&edit=' + proposalId, '_blank');
         }
     </script>
 </body>
