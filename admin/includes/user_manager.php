@@ -409,7 +409,7 @@ class UserManager {
      * Générer un secret Google Authenticator
      */
     public function generateGoogleAuthSecret($user_id) {
-        $secret = $this->generateRandomSecret();
+        $secret = $this->generateValidGoogleAuthSecret();
         
         // Sauvegarder le secret pour l'utilisateur
         $users = $this->loadUsers();
@@ -470,9 +470,25 @@ class UserManager {
     }
     
     /**
+     * Générer un secret Google Authenticator valide
+     */
+    public function generateValidGoogleAuthSecret() {
+        // Générer un secret de 32 caractères (recommandé par Google)
+        $secret = $this->generateRandomSecret(32);
+        
+        // S'assurer que le secret est valide pour Google Authenticator
+        // Format: base32, longueur multiple de 8
+        while (strlen($secret) % 8 !== 0) {
+            $secret .= 'A'; // Padding avec 'A'
+        }
+        
+        return $secret;
+    }
+    
+    /**
      * Générer un code TOTP
      */
-    private function generateTOTPCode($secret, $time) {
+    public function generateTOTPCode($secret, $time) {
         $key = $this->base32Decode($secret);
         $time = pack('N*', 0) . pack('N*', $time);
         $hash = hash_hmac('sha1', $time, $key, true);
