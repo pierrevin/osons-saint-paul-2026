@@ -44,6 +44,10 @@ if (isset($_GET['timeout'])) {
                             $secret = $user_manager->generateGoogleAuthSecret($user['id']);
                             $_SESSION['google_auth_secret'] = $secret;
                             $_SESSION['setup_google_auth'] = true;
+                        } else {
+                            // L'admin a déjà un secret, on l'utilise
+                            $_SESSION['google_auth_secret'] = $user['google_auth_secret'];
+                            $_SESSION['setup_google_auth'] = false;
                         }
                     } else {
                         // Pour l'éditeur : Email
@@ -260,18 +264,21 @@ if (isset($_GET['timeout'])) {
                         <p>Bonjour <strong><?= htmlspecialchars($user['username'] ?? '') ?></strong></p>
                         
                         <?php if ($is_admin): ?>
-                            <?php if (isset($_SESSION['setup_google_auth'])): ?>
-                                <!-- Configuration Google Authenticator -->
-                                <div class="google-auth-setup">
-                                    <h4>Configuration Google Authenticator</h4>
-                                    <p>Scannez ce QR code avec Google Authenticator :</p>
-                                    <div class="qr-code">
-                                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=otpauth://totp/Osons%20Saint-Paul%20Admin?secret=<?= $_SESSION['google_auth_secret'] ?>&issuer=Osons%20Saint-Paul" alt="QR Code">
-                                    </div>
-                                    <p><strong>Code secret :</strong> <?= $_SESSION['google_auth_secret'] ?></p>
-                                    <p>Ou saisissez manuellement le code secret dans Google Authenticator.</p>
+                            <!-- Configuration Google Authenticator -->
+                            <div class="google-auth-setup">
+                                <h4>Google Authenticator</h4>
+                                <?php if (isset($_SESSION['setup_google_auth']) && $_SESSION['setup_google_auth']): ?>
+                                    <p><strong>Première configuration :</strong> Scannez ce QR code avec Google Authenticator :</p>
+                                <?php else: ?>
+                                    <p>Utilisez Google Authenticator pour obtenir votre code de vérification :</p>
+                                <?php endif; ?>
+                                
+                                <div class="qr-code">
+                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=otpauth://totp/Osons%20Saint-Paul%20Admin?secret=<?= $_SESSION['google_auth_secret'] ?>&issuer=Osons%20Saint-Paul" alt="QR Code">
                                 </div>
-                            <?php endif; ?>
+                                <p><strong>Code secret :</strong> <?= $_SESSION['google_auth_secret'] ?></p>
+                                <p>Ou saisissez manuellement le code secret dans Google Authenticator.</p>
+                            </div>
                             
                             <div class="form-group">
                                 <label for="twofa_code">Code Google Authenticator</label>
