@@ -151,12 +151,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             
             // Vérifier si une proposition a été supprimée
             if ($new_count < $original_count) {
-            // Sauvegarder
-            if (save_json_data('site_content.json', $content)) {
-                $_SESSION['success_message'] = 'Proposition supprimée avec succès !';
+                // Sauvegarder
+                if (save_json_data('site_content.json', $content)) {
+                    $_SESSION['success_message'] = 'Proposition supprimée avec succès !';
                     error_log("Suppression réussie pour l'ID: " . $proposal_id);
-            } else {
-                $_SESSION['error_message'] = 'Erreur lors de la sauvegarde.';
+                } else {
+                    $_SESSION['error_message'] = 'Erreur lors de la sauvegarde.';
                     error_log("Erreur de sauvegarde pour l'ID: " . $proposal_id);
                 }
             } else {
@@ -2220,26 +2220,25 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
             <ul class="sidebar-menu">
                 <?php if ($_SESSION['user_role'] === 'admin'): ?>
                     <!-- Menu complet pour l'admin -->
-                <li class="menu-item"><a href="#" onclick="selectSection('hero'); return false;"><i class="fas fa-home"></i> Hero</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('programme'); return false;"><i class="fas fa-list-alt"></i> Programme</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('citation1'); return false;"><i class="fas fa-quote-left"></i> Transition 1</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('equipe'); return false;"><i class="fas fa-users"></i> Équipe</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('citation2'); return false;"><i class="fas fa-quote-left"></i> Transition 2</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('rendez_vous'); return false;"><i class="fas fa-calendar"></i> Rendez-vous</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('citation3'); return false;"><i class="fas fa-quote-left"></i> Transition 3</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('charte'); return false;"><i class="fas fa-handshake"></i> Charte</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('citation4'); return false;"><i class="fas fa-quote-left"></i> Transition 4</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('idees'); return false;"><i class="fas fa-lightbulb"></i> Idées</a></li>
-                <li class="menu-item"><a href="#" onclick="selectSection('mediatheque'); return false;"><i class="fas fa-photo-video"></i> Médiathèque</a></li>
-                <li class="menu-item"><a href="#" onclick="selectTransitionsAll(); return false;"><i class="fas fa-quote-right"></i> Transitions (toutes)</a></li>
-                <li class="menu-item"><a href="#" onclick="switchTab('citizen-proposals'); return false;"><i class="fas fa-user-edit"></i> Propositions</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('hero'); return false;"><i class="fas fa-home"></i> Hero</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('programme'); return false;"><i class="fas fa-list-alt"></i> Programme</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('citation1'); return false;"><i class="fas fa-quote-left"></i> Transition 1</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('equipe'); return false;"><i class="fas fa-users"></i> Équipe</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('citation2'); return false;"><i class="fas fa-quote-left"></i> Transition 2</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('rendez_vous'); return false;"><i class="fas fa-calendar"></i> Rendez-vous</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('citation3'); return false;"><i class="fas fa-quote-left"></i> Transition 3</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('charte'); return false;"><i class="fas fa-handshake"></i> Charte</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('citation4'); return false;"><i class="fas fa-quote-left"></i> Transition 4</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('idees'); return false;"><i class="fas fa-lightbulb"></i> Idées</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectSection('mediatheque'); return false;"><i class="fas fa-photo-video"></i> Médiathèque</a></li>
+                    <li class="menu-item"><a href="#" onclick="selectTransitionsAll(); return false;"><i class="fas fa-quote-right"></i> Transitions (toutes)</a></li>
+                    <li class="menu-item"><a href="#" onclick="switchTab('citizen-proposals'); return false;"><i class="fas fa-user-edit"></i> Propositions</a></li>
                     <li class="menu-item"><a href="reponse-questionnaire.php" target="_blank"><i class="fas fa-chart-bar"></i> Analyse</a></li>
                     
-                <!-- Menu d'administration (admin seulement) -->
-                <li class="menu-separator"><hr></li>
-                <li class="menu-item"><a href="gestion-utilisateurs.php"><i class="fas fa-users-cog"></i> Gestion Utilisateurs</a></li>
-                <li class="menu-item"><a href="logs.php"><i class="fas fa-shield-alt"></i> Logs de Sécurité</a></li>
-                <li class="menu-item"><a href="sync-git.php"><i class="fas fa-sync-alt"></i> Sync Git</a></li>
+                    <!-- Menu d'administration (admin seulement) -->
+                    <li class="menu-separator"><hr></li>
+                    <li class="menu-item"><a href="gestion-utilisateurs.php"><i class="fas fa-users-cog"></i> Gestion Utilisateurs</a></li>
+                    <li class="menu-item"><a href="logs.php"><i class="fas fa-shield-alt"></i> Logs de Sécurité</a></li>
                     
                 <?php else: ?>
                     <!-- Menu limité pour l'éditeur -->
@@ -2393,6 +2392,10 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
                                     <button class="tab-button active" onclick="switchTab('programme-proposals')">
                                         📋 Propositions du programme (<?= $programme_count ?>)
                                     </button>
+                                    <button class="tab-button" onclick="switchTab('citizen-proposals')">
+                                        💡 Propositions citoyennes
+                                        <span class="citizen-count" id="citizen-count">0</span>
+                                    </button>
                                 </div>
                                 
                                 <!-- Onglet Propositions du programme -->
@@ -2443,8 +2446,613 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
                                 </div>
                                 
                                 <!-- Onglet Propositions citoyennes -->
-                                <!-- Supprimé: doublon avec page Réponse Questionnaire -->
+                                <div class="tab-content" id="citizen-proposals">
+                                    <div class="citizen-proposals-container">
+                                        <div class="citizen-proposals-header">
+                                            <h4>💡 Propositions citoyennes</h4>
+                                            <div class="citizen-actions">
+                                                <a href="../../forms/proposition-citoyenne.php" target="_blank" class="btn btn-secondary btn-sm">
+                                                    📝 Nouveau formulaire
+                                                </a>
+                                                <button onclick="loadCitizenProposals()" class="btn btn-primary btn-sm">
+                                                    🔄 Actualiser
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Filtres -->
+                                        <div class="citizen-filters">
+                                            <button class="filter-btn active" onclick="filterProposals('all')">Toutes</button>
+                                            <button class="filter-btn" onclick="filterProposals('pending')">En attente</button>
+                                            <button class="filter-btn" onclick="filterProposals('approved')">Approuvées</button>
+                                            <button class="filter-btn" onclick="filterProposals('rejected')">Rejetées</button>
+                                        </div>
+                                        
+                                        <div class="citizen-proposals-list" id="citizen-proposals-list">
+                                            <!-- Les propositions citoyennes seront chargées ici via AJAX -->
+                                            <div class="loading-message">
+                                                <i class="fas fa-spinner fa-spin"></i> Chargement des propositions...
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Citation 1: Programme → Équipe -->
+                    <div class="block-card block-quote">
+                        <div class="status-indicator"></div>
+                        <div class="block-header" onclick="toggleSection('citation1')">
+                            <div class="block-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <div class="block-title">
+                                <h3>Citation 1</h3>
+                                <div class="block-count">Programme → Équipe</div>
+                            </div>
+                            <div class="expand-icon">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="block-content" id="citation1-content">
+                            <div class="block-edit-form">
+                                <form method="POST" action="" id="citation1-form-element" enctype="multipart/form-data">
+                                    <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
+                                    <input type="hidden" name="action" value="update_citation1">
+                                    
+                                    <div class="form-group">
+                                        <label for="citation1_text">Texte de la citation *</label>
+                                        <textarea id="citation1_text" name="text" rows="3" required onchange="markFormChanged('citation1')"><?= htmlspecialchars($content['citations']['citation1']['text'] ?? 'Considérer l\'être humain et la préservation de la nature comme composante centrale de l\'action publique') ?></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="citation1_author">Auteur</label>
+                                        <input type="text" id="citation1_author" name="author" value="<?= htmlspecialchars($content['citations']['citation1']['author'] ?? '') ?>" onchange="markFormChanged('citation1')">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="citation1_background_image">Image de fond</label>
+                                        <?php 
+                                        $citation1_image = $content['citations']['citation1']['background_image'] ?? 'Images/hero_test.png';
+                                        if (file_exists(__DIR__ . '/../../' . $citation1_image)): ?>
+                                        <div class="current-image-preview">
+                                            <img src="../<?= htmlspecialchars($citation1_image) ?>" alt="Image actuelle" class="image-thumbnail">
+                                            <small class="form-help">Image actuelle : <?= htmlspecialchars(basename($citation1_image)) ?></small>
+                                        </div>
+                                        <?php else: ?>
+                                        <div class="current-image-preview">
+                                            <div class="image-placeholder">
+                                                <i class="fas fa-image"></i>
+                                                <span>Aucune image</span>
+                                            </div>
+                                            <small class="form-help">Aucune image trouvée</small>
+                                        </div>
+                                        <?php endif; ?>
+                                        <input type="file" id="citation1_background_image" name="background_image" accept="image/*" onchange="markFormChanged('citation1')" style="width: 100%; margin-top: 10px;">
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Équipe Section -->
+                    <div class="block-card">
+                        <div class="status-indicator"></div>
+                        <div class="block-header" onclick="toggleSection('equipe')">
+                            <div class="block-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="block-title">
+                                <h3>3. Section Équipe</h3>
+                                <div class="block-count"><?= $equipe_count ?> membres</div>
+                            </div>
+                            <div class="expand-icon">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="block-content" id="equipe-content">
+                            <!-- Formulaire de modification des titres -->
+                            <div class="block-edit-form">
+                                <form method="POST" action="" id="equipe-form-element">
+                                    <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
+                                    <input type="hidden" name="action" value="update_equipe_section">
+                                    
+                                    <div class="form-group">
+                                        <label for="equipe_title">Titre principal (H2) *</label>
+                                        <input type="text" id="equipe_title" name="title" value="<?= htmlspecialchars($content['equipe']['title'] ?? 'Notre Équipe') ?>" required onchange="markFormChanged('equipe')">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="equipe_subtitle">Sous-titre (H3)</label>
+                                        <input type="text" id="equipe_subtitle" name="subtitle" value="<?= htmlspecialchars($content['equipe']['subtitle'] ?? 'Des citoyens engagés') ?>" onchange="markFormChanged('equipe')">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="equipe_description">Description</label>
+                                        <textarea id="equipe_description" name="description" rows="3" onchange="markFormChanged('equipe')"><?= htmlspecialchars($content['equipe']['description'] ?? 'Une équipe de citoyens engagés pour Saint-Paul') ?></textarea>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                            
+                            <!-- Composants de l'équipe -->
+                            <div class="components-grid" id="equipe-grid">
+                                <?php foreach($content['equipe']['members'] ?? [] as $member): ?>
+                                    <div class="component-card" draggable="true" data-id="<?= $member['id'] ?>">
+                                        <div class="drag-handle">
+                                            <i class="fas fa-grip-vertical"></i>
+                                        </div>
+                                        <div class="member-photo">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <div class="component-title"><?= htmlspecialchars($member['name']) ?></div>
+                                        <div class="component-description">
+                                            <strong><?= htmlspecialchars($member['role']) ?></strong><br>
+                                            <?= htmlspecialchars($member['quote'] ?? '') ?>
+                                        </div>
+                                        <div class="component-actions">
+                                            <button class="btn-component edit" onclick="editMember(<?= $member['id'] ?>)">
+                                                <i class="fas fa-edit"></i> Modifier
+                                            </button>
+                                            <button class="btn-component delete" onclick="deleteMember(<?= $member['id'] ?>)">
+                                                <i class="fas fa-trash"></i> Supprimer
+                                            </button>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
                                 
+                                <!-- Carte d'ajout de membre -->
+                                <div class="component-card add-card" onclick="openAddMemberModal()">
+                                    <div class="add-icon">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                    <div class="component-title">Ajouter un membre</div>
+                                    <div class="component-description">
+                                        Cliquez pour ajouter un nouveau membre
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Citation 2: Équipe → Rendez-vous -->
+                    <div class="block-card block-quote">
+                        <div class="status-indicator"></div>
+                        <div class="block-header" onclick="toggleSection('citation2')">
+                            <div class="block-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <div class="block-title">
+                                <h3>Citation 2</h3>
+                                <div class="block-count">Équipe → Rendez-vous</div>
+                            </div>
+                            <div class="expand-icon">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="block-content" id="citation2-content">
+                            <div class="block-edit-form">
+                                <form method="POST" action="" id="citation2-form-element">
+                                    <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
+                                    <input type="hidden" name="action" value="update_citation2">
+                                    
+                                    <div class="form-group">
+                                        <label for="citation2_text">Texte de la citation *</label>
+                                        <textarea id="citation2_text" name="text" rows="3" required onchange="markFormChanged('citation2')"><?= htmlspecialchars($content['citations']['citation2']['text'] ?? 'Favoriser, au sein du conseil municipal, le débat d\'idées dans le respect des points de vue') ?></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="citation2_author">Auteur</label>
+                                        <input type="text" id="citation2_author" name="author" value="<?= htmlspecialchars($content['citations']['citation2']['author'] ?? '') ?>" onchange="markFormChanged('citation2')">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="citation2_background_image">Image de fond</label>
+                                        <?php 
+                                        $citation2_image = $content['citations']['citation2']['background_image'] ?? 'Images/hero_test.png';
+                                        if (file_exists(__DIR__ . '/../../' . $citation2_image)): ?>
+                                        <div class="current-image-preview">
+                                            <img src="../<?= htmlspecialchars($citation2_image) ?>" alt="Image actuelle" class="image-thumbnail">
+                                            <small class="form-help">Image actuelle : <?= htmlspecialchars(basename($citation2_image)) ?></small>
+                                        </div>
+                                        <?php else: ?>
+                                        <div class="current-image-preview">
+                                            <div class="image-placeholder">
+                                                <i class="fas fa-image"></i>
+                                                <span>Aucune image</span>
+                                            </div>
+                                            <small class="form-help">Aucune image trouvée</small>
+                                        </div>
+                                        <?php endif; ?>
+                                        <input type="file" id="citation2_background_image" name="background_image" accept="image/*" onchange="markFormChanged('citation2')" style="width: 100%; margin-top: 10px;">
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- 4. Rendez-vous Section -->
+                    <div class="block-card">
+                        <div class="status-indicator"></div>
+                        <div class="block-header" onclick="toggleSection('rendez_vous')">
+                            <div class="block-icon">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <div class="block-title">
+                                <h3>4. Section Rendez-vous</h3>
+                                <div class="block-count"><?= $rendez_vous_count ?> événements</div>
+                            </div>
+                            <div class="expand-icon">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="block-content" id="rendez_vous-content">
+                            <!-- Formulaire de modification des titres -->
+                            <div class="block-edit-form">
+                                <form method="POST" action="" id="rendez_vous-form-element">
+                                    <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
+                                    <input type="hidden" name="action" value="update_rendez_vous_section">
+                                    
+                                    <div class="form-group">
+                                        <label for="rendez_vous_h2">Titre de section (H2) *</label>
+                                        <input type="text" id="rendez_vous_h2" name="h2" value="<?= htmlspecialchars($content['rendez_vous']['h2'] ?? 'Nos Rendez-vous') ?>" required onchange="markFormChanged('rendez_vous')">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="rendez_vous_h3">Sous-titre (H3)</label>
+                                        <input type="text" id="rendez_vous_h3" name="h3" value="<?= htmlspecialchars($content['rendez_vous']['h3'] ?? 'Osons échanger') ?>" onchange="markFormChanged('rendez_vous')">
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                            
+                            <!-- Composants des rendez-vous -->
+                            <div class="components-grid" id="rendez_vous-grid">
+                                <?php foreach($content['rendez_vous']['events'] ?? [] as $event): ?>
+                                    <div class="component-card" draggable="true" data-id="<?= $event['id'] ?>">
+                                        <div class="drag-handle">
+                                            <i class="fas fa-grip-vertical"></i>
+                                        </div>
+                                        <div class="event-date">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            <?= htmlspecialchars($event['date'] ?? 'Date à définir') ?>
+                                        </div>
+                                        <div class="component-title"><?= htmlspecialchars($event['title']) ?></div>
+                                        <div class="component-description">
+                                            <?= htmlspecialchars($event['description'] ?? '') ?><br>
+                                            <small>
+                                                <i class="fas fa-map-marker-alt"></i>
+                                                <?= htmlspecialchars($event['location'] ?? 'Lieu à définir') ?>
+                                            </small>
+                                        </div>
+                                        <div class="component-actions">
+                                            <button class="btn-component edit" onclick="editEvent(<?= $event['id'] ?>)">
+                                                <i class="fas fa-edit"></i> Modifier
+                                            </button>
+                                            <button class="btn-component delete" onclick="deleteEvent(<?= $event['id'] ?>)">
+                                                <i class="fas fa-trash"></i> Supprimer
+                                            </button>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                                
+                                <!-- Carte d'ajout d'événement -->
+                                <div class="component-card add-card" onclick="openAddEventModal()">
+                                    <div class="add-icon">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                    <div class="component-title">Ajouter un événement</div>
+                                    <div class="component-description">
+                                        Cliquez pour créer un nouveau rendez-vous
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Citation 3: Rendez-vous → Charte -->
+                    <div class="block-card block-quote">
+                        <div class="status-indicator"></div>
+                        <div class="block-header" onclick="toggleSection('citation3')">
+                            <div class="block-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <div class="block-title">
+                                <h3>Citation 3</h3>
+                                <div class="block-count">Rendez-vous → Charte</div>
+                            </div>
+                            <div class="expand-icon">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="block-content" id="citation3-content">
+                            <div class="block-edit-form">
+                                <form method="POST" action="" id="citation3-form-element" enctype="multipart/form-data">
+                                    <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
+                                    <input type="hidden" name="action" value="update_citation3">
+                                    
+                                    <div class="form-group">
+                                        <label for="citation3_text">Texte de la citation *</label>
+                                        <textarea id="citation3_text" name="text" rows="3" required onchange="markFormChanged('citation3')"><?= htmlspecialchars($content['citations']['citation3']['text'] ?? 'Ensemble, nous sommes plus forts') ?></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="citation3_author">Auteur</label>
+                                        <input type="text" id="citation3_author" name="author" value="<?= htmlspecialchars($content['citations']['citation3']['author'] ?? '') ?>" onchange="markFormChanged('citation3')">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="citation3_background_image">Image de fond</label>
+                                        <?php 
+                                        $citation3_image = $content['citations']['citation3']['background_image'] ?? 'Images/hero_test.png';
+                                        if (file_exists(__DIR__ . '/../../' . $citation3_image)): ?>
+                                        <div class="current-image-preview">
+                                            <img src="../<?= htmlspecialchars($citation3_image) ?>" alt="Image actuelle" class="image-thumbnail">
+                                            <small class="form-help">Image actuelle : <?= htmlspecialchars(basename($citation3_image)) ?></small>
+                                        </div>
+                                        <?php else: ?>
+                                        <div class="current-image-preview">
+                                            <div class="image-placeholder">
+                                                <i class="fas fa-image"></i>
+                                                <span>Aucune image</span>
+                                            </div>
+                                            <small class="form-help">Aucune image trouvée</small>
+                                        </div>
+                                        <?php endif; ?>
+                                        <input type="file" id="citation3_background_image" name="background_image" accept="image/*" onchange="markFormChanged('citation3')" style="width: 100%; margin-top: 10px;">
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Charte Section -->
+                    <div class="block-card">
+                        <div class="status-indicator"></div>
+                        <div class="block-header" onclick="toggleSection('charte')">
+                            <div class="block-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="block-title">
+                                <h3>5. Section Charte</h3>
+                                <div class="block-count"><?= $charte_count ?> principes</div>
+                            </div>
+                            <div class="expand-icon">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="block-content" id="charte-content">
+                            <!-- Formulaire de modification des titres -->
+                            <div class="block-edit-form">
+                                <form method="POST" action="" id="charte-form-element">
+                                    <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
+                                    <input type="hidden" name="action" value="update_charte_section">
+                                    
+                                    <div class="form-group">
+                                        <label for="charte_h2">Titre de section (H2) *</label>
+                                        <input type="text" id="charte_h2" name="h2" value="<?= htmlspecialchars($content['charte']['h2'] ?? 'Notre Charte') ?>" required onchange="markFormChanged('charte')">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="charte_h3">Sous-titre (H3)</label>
+                                        <input type="text" id="charte_h3" name="h3" value="<?= htmlspecialchars($content['charte']['h3'] ?? 'Nos valeurs communes') ?>" onchange="markFormChanged('charte')">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="charte_intro_text">Texte d'introduction</label>
+                                        <textarea id="charte_intro_text" name="intro_text" rows="3" onchange="markFormChanged('charte')"><?= htmlspecialchars($content['charte']['intro_text'] ?? 'S\'engager en tant qu\'élu sur une liste municipale, c\'est choisir de mettre ses compétences, son énergie et son temps au service de l\'intérêt général sur plusieurs années, avec une participation active aux réunions, commissions et projets municipaux.') ?></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="charte_intro_highlight">Texte en gras (surligné)</label>
+                                        <input type="text" id="charte_intro_highlight" name="intro_highlight" value="<?= htmlspecialchars($content['charte']['intro_highlight'] ?? 'Voici les principes sur lesquels nous nous engageons et qui fonderont nos actions :') ?>" onchange="markFormChanged('charte')">
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                            
+                            <!-- Composants de la charte -->
+                            <div class="components-grid" id="charte-grid">
+                                <?php foreach($content['charte']['principles'] ?? [] as $principle): ?>
+                                    <div class="component-card" draggable="true" data-id="<?= $principle['id'] ?>">
+                                        <div class="drag-handle">
+                                            <i class="fas fa-grip-vertical"></i>
+                                        </div>
+                                        <div class="component-title"><?= htmlspecialchars($principle['title']) ?></div>
+                                        <div class="component-description">
+                                            <?= htmlspecialchars($principle['description'] ?? '') ?>
+                                        </div>
+                                        <div class="component-actions">
+                                            <button class="btn-component edit" onclick="editPrinciple(<?= $principle['id'] ?>)">
+                                                <i class="fas fa-edit"></i> Modifier
+                                            </button>
+                                            <button class="btn-component delete" onclick="deletePrinciple(<?= $principle['id'] ?>)">
+                                                <i class="fas fa-trash"></i> Supprimer
+                                            </button>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                                
+                                <!-- Carte d'ajout de principe -->
+                                <div class="component-card add-card" onclick="openAddPrincipleModal()">
+                                    <div class="add-icon">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                    <div class="component-title">Ajouter un principe</div>
+                                    <div class="component-description">
+                                        Cliquez pour créer un nouveau principe
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Citation 4: Charte → Idées -->
+                    <div class="block-card block-quote">
+                        <div class="status-indicator"></div>
+                        <div class="block-header" onclick="toggleSection('citation4')">
+                            <div class="block-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <div class="block-title">
+                                <h3>Citation 4</h3>
+                                <div class="block-count">Charte → Idées</div>
+                            </div>
+                            <div class="expand-icon">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="block-content" id="citation4-content">
+                            <div class="block-edit-form">
+                                <form method="POST" action="" id="citation4-form-element">
+                                    <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
+                                    <input type="hidden" name="action" value="update_citation4">
+                                    
+                                    <div class="form-group">
+                                        <label for="citation4_text">Texte de la citation *</label>
+                                        <textarea id="citation4_text" name="text" rows="3" required onchange="markFormChanged('citation4')"><?= htmlspecialchars($content['citations']['citation4']['text'] ?? 'L\'innovation sociale naît de la collaboration entre citoyens et institutions') ?></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="citation4_author">Auteur</label>
+                                        <input type="text" id="citation4_author" name="author" value="<?= htmlspecialchars($content['citations']['citation4']['author'] ?? '') ?>" onchange="markFormChanged('citation4')">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="citation4_background_image">Image de fond</label>
+                                        <?php 
+                                        $citation4_image = $content['citations']['citation4']['background_image'] ?? 'Images/hero_test.png';
+                                        if (file_exists(__DIR__ . '/../../' . $citation4_image)): ?>
+                                        <div class="current-image-preview">
+                                            <img src="../<?= htmlspecialchars($citation4_image) ?>" alt="Image actuelle" class="image-thumbnail">
+                                            <small class="form-help">Image actuelle : <?= htmlspecialchars(basename($citation4_image)) ?></small>
+                                        </div>
+                                        <?php else: ?>
+                                        <div class="current-image-preview">
+                                            <div class="image-placeholder">
+                                                <i class="fas fa-image"></i>
+                                                <span>Aucune image</span>
+                                            </div>
+                                            <small class="form-help">Aucune image trouvée</small>
+                                        </div>
+                                        <?php endif; ?>
+                                        <input type="file" id="citation4_background_image" name="background_image" accept="image/*" onchange="markFormChanged('citation4')" style="width: 100%; margin-top: 10px;">
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Idées Section -->
+                    <div class="block-card">
+                        <div class="status-indicator"></div>
+                        <div class="block-header" onclick="toggleSection('idees')">
+                            <div class="block-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="block-title">
+                                <h3>6. Section Idées</h3>
+                                <div class="block-count">Propositions citoyennes</div>
+                            </div>
+                            <div class="expand-icon">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="block-content" id="idees-content">
+                            <div class="block-edit-form">
+                                <form method="POST" action="" id="idees-form-element">
+                                    <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
+                                    <input type="hidden" name="action" value="update_idees_section">
+                                    
+                                    <div class="form-group">
+                                        <label for="idees_title">Titre principal (H2) *</label>
+                                        <input type="text" id="idees_title" name="title" value="<?= htmlspecialchars($content['idees']['title'] ?? 'Vos idées comptent') ?>" required onchange="markFormChanged('idees')">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="idees_subtitle">Sous-titre (H3)</label>
+                                        <input type="text" id="idees_subtitle" name="subtitle" value="<?= htmlspecialchars($content['idees']['subtitle'] ?? 'Osez proposer') ?>" onchange="markFormChanged('idees')">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="idees_description">Description</label>
+                                        <textarea id="idees_description" name="description" rows="3" onchange="markFormChanged('idees')"><?= htmlspecialchars($content['idees']['description'] ?? 'Partagez vos idées et propositions pour enrichir notre programme') ?></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="idees_contact_email">Email de contact</label>
+                                        <input type="email" id="idees_contact_email" name="contact_email" value="<?= htmlspecialchars($content['idees']['contact_email'] ?? '') ?>" onchange="markFormChanged('idees')">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="idees_contact_phone">Téléphone de contact</label>
+                                        <input type="tel" id="idees_contact_phone" name="contact_phone" value="<?= htmlspecialchars($content['idees']['contact_phone'] ?? '') ?>" onchange="markFormChanged('idees')">
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7. Médiathèque Section -->
+                    <div class="block-card">
+                        <div class="status-indicator"></div>
+                        <div class="block-header" onclick="toggleSection('mediatheque')">
+                            <div class="block-icon">
+                                <i class="fas fa-folder"></i>
+                            </div>
+                            <div class="block-title">
+                                <h3>7. Section Médiathèque</h3>
+                                <div class="block-count">Documents et ressources</div>
+                            </div>
+                            <div class="expand-icon">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="block-content" id="mediatheque-content">
+                            <div class="block-edit-form">
+                                <form method="POST" action="" id="mediatheque-form-element">
+                                    <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
+                                    <input type="hidden" name="action" value="update_mediatheque_section">
+                                    
+                                    <div class="form-group">
+                                        <label for="mediatheque_title">Titre principal (H2) *</label>
+                                        <input type="text" id="mediatheque_title" name="title" value="<?= htmlspecialchars($content['mediatheque']['title'] ?? 'Médiathèque') ?>" required onchange="markFormChanged('mediatheque')">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="mediatheque_subtitle">Sous-titre (H3)</label>
+                                        <input type="text" id="mediatheque_subtitle" name="subtitle" value="<?= htmlspecialchars($content['mediatheque']['subtitle'] ?? 'Osons partager') ?>" onchange="markFormChanged('mediatheque')">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="mediatheque_description">Description</label>
+                                        <textarea id="mediatheque_description" name="description" rows="3" onchange="markFormChanged('mediatheque')"><?= htmlspecialchars($content['mediatheque']['description'] ?? 'Retrouvez tous nos documents, photos, vidéos et actualités dans notre espace de partage.') ?></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="mediatheque_drive_url">URL Google Drive</label>
+                                        <input type="url" id="mediatheque_drive_url" name="drive_url" value="<?= htmlspecialchars($content['mediatheque']['drive_url'] ?? '') ?>" onchange="markFormChanged('mediatheque')">
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2761,30 +3369,32 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
         // Workspace unique: logique d'affichage d'une seule section
         function selectSection(sectionName) {
             try {
-                // Masquer toutes les sections existantes se terminant par -content
-                const sections = document.querySelectorAll('[id$="-content"]');
-                sections.forEach(sec => sec.style.display = 'none');
+                const workspace = document.getElementById('adminWorkspace');
+                if (!workspace) return;
 
-                // Afficher la section demandée si elle existe
-                const target = document.getElementById(`${sectionName}-content`);
-                if (!target) {
+                // Récupère le contenu de la section existante
+                const contentEl = document.getElementById(`${sectionName}-content`);
+                if (!contentEl) {
                     console.warn('Section introuvable:', sectionName);
                     return;
                 }
-                target.style.display = 'block';
 
-                // Focus premier champ si présent
-                const firstInput = target.querySelector('input, textarea, select, button');
+                // Injecte uniquement le contenu HTML (évite de dupliquer l'ID conteneur)
+                workspace.innerHTML = contentEl.innerHTML;
+
+                // S'assurer que la zone est visible et au focus
+                workspace.style.display = 'block';
+                const firstInput = workspace.querySelector('input, textarea, select, button');
                 if (firstInput) firstInput.focus();
 
-                // Mettre à jour le hash (sans scroll automatique intempestif)
+                // Met à jour l'URL (hash) sans scroll
                 history.replaceState(null, '', `#${sectionName}-content`);
-
-                // Mémoriser la dernière section
+                
+                // Mémorise la dernière section ouverte pour restauration après reload
                 try { localStorage.setItem('adminLastSection', sectionName); } catch(_) {}
-
-                // Scroll visible
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Fait apparaître la zone d'édition
+                workspace.scrollIntoView({ behavior: 'smooth', block: 'start' });
             } catch (e) {
                 console.error('selectSection error', e);
             }
@@ -2794,15 +3404,14 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
         function scrollToSection() { /* désactivé par workspace unique */ }
         function toggleSection() { /* désactivé par workspace unique */ }
 
-        // Restaurer automatiquement la dernière section ouverte, par défaut "programme"
+        // Restaurer automatiquement la dernière section ouverte
         document.addEventListener('DOMContentLoaded', function() {
             try {
-                const last = localStorage.getItem('adminLastSection') || 'programme';
-                // Masquer toutes les sections au départ
-                const sections = document.querySelectorAll('[id$="-content"]');
-                sections.forEach(sec => sec.style.display = 'none');
-                // Afficher la section mémorisée
-                setTimeout(() => selectSection(last), 50);
+                const last = localStorage.getItem('adminLastSection');
+                if (last) {
+                    // Laisse un petit délai pour que le DOM soit prêt
+                    setTimeout(() => selectSection(last), 50);
+                }
             } catch(_) {}
         });
 
@@ -2924,7 +3533,9 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
         
         function openEditProgrammeProposalModal(proposalId) {
             // Trouver la proposition dans les données
-            const proposal = proposalsData.find(p => p.id == proposalId);
+            // proposalsData est un objet, pas un tableau, donc on utilise Object.values()
+            const proposalsArray = Object.values(proposalsData);
+            const proposal = proposalsArray.find(p => p.id == proposalId);
             
             if (proposal) {
                 // Remplir le formulaire avec les données existantes
@@ -2950,6 +3561,8 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
                 // Remplir les points clés
                 const items = proposal.items || [];
                 document.getElementById('edit_proposal_items').value = items.join('\n');
+            } else {
+                console.error('Proposition non trouvée pour ID:', proposalId);
             }
             
             openModal('editProposalModal');
@@ -3523,12 +4136,6 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
         }
         
         // Fonction pour fermer le modal
-        function closeModal() {
-            const modals = document.querySelectorAll('.modal-overlay');
-            if (modals.length > 0) {
-                modals[modals.length - 1].remove();
-            }
-        }
         
         // Fonction pour sauvegarder la proposition modifiée
         function saveEditedProposal() {
@@ -4998,41 +5605,6 @@ $mediatheque_count = count($content['mediatheque']['items'] ?? []);
             });
         });
         observer.observe(document.body, { childList: true, subtree: true });
-    </script>
-
-    <script>
-    // ... existing code ...
-
-    // Ouvrir automatiquement l'onglet et le modal selon le hash
-    document.addEventListener('DOMContentLoaded', function() {
-        const hash = window.location.hash || '';
-        if (!hash) return;
-
-        // Exemple: #citizen-proposals&edit=prop_123
-        const [anchor, params] = hash.replace('#', '').split('&');
-        if (anchor === 'citizen-proposals') {
-            try { switchTab('citizen-proposals'); } catch (e) {}
-            const map = new URLSearchParams(params);
-            const editId = map.get('edit');
-            const approveId = map.get('approve');
-            if (approveId) {
-                // Approve puis ouvrir le modal citoyen
-                try { approveAndEditProposal(approveId); } catch (e) {}
-            } else if (editId) {
-                // Ouvrir le modal d'édition citoyenne directement
-                try { openEditProposalModal(editId); } catch (e) {}
-            }
-        } else if (anchor === 'programme-proposals') {
-            try { switchTab('programme-proposals'); } catch (e) {}
-            const map = new URLSearchParams(params);
-            const editProgId = map.get('edit');
-            if (editProgId) {
-                try { openEditProgrammeProposalModal(editProgId); } catch (e) {}
-            }
-        }
-    });
-
-    // ... existing code ...
     </script>
 
 </body>
