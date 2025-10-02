@@ -96,21 +96,6 @@
                     "Accompagnement des familles"
                 ]
             },
-            "6": {
-                "id": 7,
-                "title": "test Pierre11h31",
-                "description": "frz;jnzkrn gzklnzrg lze",
-                "icon": "default",
-                "color": "#4e9eb0",
-                "pillar": "dessiner",
-                "citizen_proposal": false,
-                "items": [
-                    "eeedd",
-                    "ddddf",
-                    "ccccc",
-                    "fff"
-                ]
-            },
             "7": {
                 "id": 8,
                 "title": "Test proposition - Créer un jardin partagé",
@@ -130,25 +115,6 @@
                 },
                 "date_added": "2025-09-28 07:22:52"
             },
-            "8": {
-                "id": 9,
-                "title": "Test prop citoyenne",
-                "description": "fff\r\nfff\r\nff",
-                "pillar": "tisser",
-                "color": "#fcc549",
-                "items": [
-                    "fff\r\nfff\r\nff"
-                ],
-                "source": "citoyenne",
-                "citizen_proposal_id": "prop_68d8de68e3b646.35801853",
-                "citizen_contact": {
-                    "nom": "Pierre",
-                    "email": "pierre.vincenot@gmail.com",
-                    "telephone": "",
-                    "commune": ""
-                },
-                "date_added": "2025-09-28 07:32:50"
-            },
             "9": {
                 "id": 10,
                 "title": "Test proposition - Créer un jardin partagé bis",
@@ -166,61 +132,6 @@
                 },
                 "date_added": "2025-09-28 07:53:19",
                 "citizen_proposal": false
-            },
-            "10": {
-                "id": 11,
-                "title": "eefzfzgg",
-                "description": "gzrgzg",
-                "icon": "default",
-                "color": "#fcc549",
-                "pillar": "tisser",
-                "citizen_proposal": false,
-                "items": [
-                    "ggg",
-                    "fgrzg"
-                ]
-            },
-            "11": {
-                "id": 12,
-                "title": "test ajout 12h11",
-                "description": "test flzjkgr lkrjgv er",
-                "icon": "default",
-                "color": "#fcc549",
-                "pillar": "tisser",
-                "citizen_proposal": false,
-                "items": [
-                    "zfff",
-                    "vvv",
-                    "ghtrjhy"
-                ]
-            },
-            "12": {
-                "id": 13,
-                "title": "14h12",
-                "description": "14h12 test",
-                "icon": "default",
-                "color": "#65ae99",
-                "pillar": "proteger",
-                "citizen_proposal": false,
-                "items": [
-                    "aaa",
-                    "ddd",
-                    "ccvv"
-                ]
-            },
-            "14": {
-                "id": 15,
-                "title": "ajout 16h01",
-                "description": "fzfrrggrz",
-                "icon": "default",
-                "color": "#004a6d",
-                "pillar": "ouvrir",
-                "citizen_proposal": false,
-                "items": [
-                    "fff",
-                    "zzz",
-                    "ddd"
-                ]
             }
         }
     },
