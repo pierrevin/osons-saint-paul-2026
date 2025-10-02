@@ -37,20 +37,11 @@ if (isset($_GET['timeout'])) {
                     $_SESSION['2fa_required'] = true;
                     $_SESSION['temp_user'] = $user;
                     
-                    // Générer et envoyer le code 2FA selon le rôle
-                    if ($user['role'] === 'admin') {
-                        // Pour l'admin : Google Authenticator
-                        // Toujours régénérer un nouveau secret pour éviter les problèmes
-                        $secret = $user_manager->generateGoogleAuthSecret($user['id']);
-                        $_SESSION['google_auth_secret'] = $secret;
-                        $_SESSION['setup_google_auth'] = true;
-                    } else {
-                        // Pour l'éditeur : Email
-                        $code = $user_manager->generate2FACode($user['id']);
-                        // Ici, vous devriez envoyer l'email avec le code
-                        // Pour l'instant, on l'affiche (à remplacer par un vrai envoi d'email)
-                        $_SESSION['2fa_code_sent'] = $code;
-                    }
+                    // Générer et envoyer le code 2FA par email pour tous
+                    $code = $user_manager->generate2FACode($user['id']);
+                    // Ici, vous devriez envoyer l'email avec le code
+                    // Pour l'instant, on l'affiche (à remplacer par un vrai envoi d'email)
+                    $_SESSION['2fa_code_sent'] = $code;
                     
                     $error_message = ''; // Pas d'erreur, on passe à l'étape 2FA
                 } else {
@@ -59,13 +50,8 @@ if (isset($_GET['timeout'])) {
                         $error_message = 'Veuillez saisir le code de vérification.';
                     } else {
                         $user = $_SESSION['temp_user'];
-                        $twofa_result = false;
-                        
-                        if ($user['role'] === 'admin') {
-                            $twofa_result = $user_manager->verifyGoogleAuthCode($user['id'], $twofa_code);
-                        } else {
-                            $twofa_result = $user_manager->verify2FACode($user['id'], $twofa_code);
-                        }
+                        // Vérification 2FA par email pour tous
+                        $twofa_result = $user_manager->verify2FACode($user['id'], $twofa_code);
                         
                         if ($twofa_result['success']) {
                             // 2FA réussi, finaliser la connexion
@@ -78,8 +64,6 @@ if (isset($_GET['timeout'])) {
                             // Nettoyer les variables temporaires
                             unset($_SESSION['2fa_required']);
                             unset($_SESSION['temp_user']);
-                            unset($_SESSION['google_auth_secret']);
-                            unset($_SESSION['setup_google_auth']);
                             unset($_SESSION['2fa_code_sent']);
                             
                             // Rediriger vers l'admin
@@ -258,41 +242,18 @@ if (isset($_GET['timeout'])) {
                         <h3>Vérification en deux étapes</h3>
                         <p>Bonjour <strong><?= htmlspecialchars($user['username'] ?? '') ?></strong></p>
                         
-                        <?php if ($is_admin): ?>
-                            <!-- Configuration Google Authenticator -->
-                            <div class="google-auth-setup">
-                                <h4>Google Authenticator</h4>
-                                <?php if (isset($_SESSION['setup_google_auth']) && $_SESSION['setup_google_auth']): ?>
-                                    <p><strong>Première configuration :</strong> Scannez ce QR code avec Google Authenticator :</p>
-                                <?php else: ?>
-                                    <p>Utilisez Google Authenticator pour obtenir votre code de vérification :</p>
-                                <?php endif; ?>
-                                
-                                <div class="qr-code">
-                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=otpauth://totp/Osons%20Saint-Paul%20Admin?secret=<?= $_SESSION['google_auth_secret'] ?>&issuer=Osons%20Saint-Paul" alt="QR Code">
-                                </div>
-                                <p><strong>Code secret :</strong> <?= $_SESSION['google_auth_secret'] ?></p>
-                                <p>Ou saisissez manuellement le code secret dans Google Authenticator.</p>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="twofa_code">Code Google Authenticator</label>
-                                <input type="text" id="twofa_code" name="twofa_code" placeholder="123456" maxlength="6" required autofocus>
-                            </div>
-                        <?php else: ?>
-                            <!-- Code Email pour éditeur -->
-                            <div class="email-code">
-                                <p>Un code de vérification a été envoyé à votre adresse email.</p>
-                                <?php if (isset($_SESSION['2fa_code_sent'])): ?>
-                                    <p class="debug-code">Code de test : <strong><?= $_SESSION['2fa_code_sent'] ?></strong></p>
-                                <?php endif; ?>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="twofa_code">Code de vérification</label>
-                                <input type="text" id="twofa_code" name="twofa_code" placeholder="123456" maxlength="6" required autofocus>
-                            </div>
-                        <?php endif; ?>
+                        <!-- Code Email pour tous -->
+                        <div class="email-code">
+                            <p>Un code de vérification a été envoyé à votre adresse email.</p>
+                            <?php if (isset($_SESSION['2fa_code_sent'])): ?>
+                                <p class="debug-code">Code de test : <strong><?= $_SESSION['2fa_code_sent'] ?></strong></p>
+                            <?php endif; ?>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="twofa_code">Code de vérification</label>
+                            <input type="text" id="twofa_code" name="twofa_code" placeholder="123456" maxlength="6" required autofocus>
+                        </div>
                         
                         <button type="submit" class="btn-login">Vérifier</button>
                         <a href="login.php" class="btn-secondary">Retour</a>
