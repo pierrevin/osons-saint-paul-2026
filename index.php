@@ -454,9 +454,23 @@ $content = get_json_data('site_content.json');
                 <div class="idees-text">
                     <p class="idees-description">Partagez vos idées, vos préoccupations, vos suggestions. Votre voix compte dans notre projet municipal.</p>
                     
+                    <?php if (isset($_GET['success']) && $_GET['success'] == '1'): ?>
+                        <div class="alert alert-success">
+                            <strong>✅ Message envoyé !</strong><br>
+                            Merci pour votre message. Nous vous répondrons dans les plus brefs délais.
+                        </div>
+                    <?php endif; ?>
+                    
+                    <?php if (isset($_GET['error'])): ?>
+                        <div class="alert alert-error">
+                            <strong>❌ Erreur :</strong><br>
+                            <?= htmlspecialchars($_GET['error']) ?>
+                        </div>
+                    <?php endif; ?>
+                    
                     <!-- Formulaire de contact -->
                     <div class="contact-form">
-                        <form>
+                        <form method="POST" action="forms/contact.php">
                             <div class="form-group">
                                 <label for="nom">Nom et Prénom *</label>
                                 <input type="text" id="nom" name="nom" required placeholder="Votre nom complet">
@@ -465,6 +479,11 @@ $content = get_json_data('site_content.json');
                             <div class="form-group">
                                 <label for="email">Email *</label>
                                 <input type="email" id="email" name="email" required placeholder="votre@email.fr">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="objet">Objet *</label>
+                                <input type="text" id="objet" name="objet" required placeholder="Sujet de votre message">
                             </div>
                             
                             <div class="form-group">

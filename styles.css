@@ -1500,6 +1500,27 @@ section.visible::after {
     margin-bottom: 2rem;
 }
 
+/* Alertes pour le formulaire de contact */
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-sans);
+    line-height: 1.5;
+}
+
+.alert-success {
+    background: rgba(47, 110, 79, 0.1);
+    border: 1px solid rgba(47, 110, 79, 0.3);
+    color: var(--deep-green);
+}
+
+.alert-error {
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    color: #dc3545;
+}
+
 .form-group {
     margin-bottom: 1.5rem;
 }

@@ -256,6 +256,57 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// ===== FORMULAIRE DE CONTACT =====
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.querySelector('.contact-form form');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nom = document.getElementById('nom').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const objet = document.getElementById('objet').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            // Validation côté client
+            let errors = [];
+            
+            if (!nom) {
+                errors.push('Le nom est requis');
+            }
+            
+            if (!email || !validateEmail(email)) {
+                errors.push('Une adresse email valide est requise');
+            }
+            
+            if (!objet) {
+                errors.push('L\'objet est requis');
+            }
+            
+            if (!message) {
+                errors.push('Le message est requis');
+            }
+            
+            if (message.length > 2000) {
+                errors.push('Le message ne peut pas dépasser 2000 caractères');
+            }
+            
+            if (objet.length > 200) {
+                errors.push('L\'objet ne peut pas dépasser 200 caractères');
+            }
+            
+            if (errors.length > 0) {
+                alert('Erreurs :\n' + errors.join('\n'));
+                return;
+            }
+            
+            // Si validation OK, soumettre le formulaire
+            this.submit();
+        });
+    }
+});
+
 function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
