@@ -1,0 +1,590 @@
+{
+    "hero": {
+        "title": "Construisons ensemble le village vivant et partagécuh ",
+        "button_primary": "Découvrir le programme",
+        "button_secondary": "Faire une proposition",
+        "background_image": "uploads\/hero-bg_1759322879_68dd22ff53f5e.webp"
+    },
+    "programme": {
+        "h2": "Notre Programme",
+        "h3": "Osons intégrer vos idées",
+        "title": "Notre Programme",
+        "subtitle": "Osons intégrer vos idées",
+        "description": "Un programme co-construit avec les habitants",
+        "proposals": [
+            {
+                "id": 1,
+                "title": "Préserver 11h15",
+                "description": "Protéger et valoriser notre patrimoine naturel pour les générations futures.",
+                "icon": "default",
+                "color": "#65ae99",
+                "pillar": "proteger",
+                "citizen_proposal": false,
+                "items": [
+                    "Protection des espaces verts",
+                    "Développement de la biodiversité",
+                    "Gestion durable des ressources"
+                ]
+            },
+            {
+                "id": 2,
+                "title": "Renforcer les liens sociaux",
+                "description": "Créer des espaces de rencontre et de solidarité pour tous les habitants.",
+                "icon": "default",
+                "color": "#fcc549",
+                "pillar": "tisser",
+                "citizen_proposal": false,
+                "items": [
+                    "Amélioration des équipements publics",
+                    "Soutien aux associations",
+                    "Événements communautaires"
+                ]
+            },
+            {
+                "id": 3,
+                "title": "Aménager le centre-ville",
+                "description": "Rénover et moderniser le cœur du village pour le rendre plus attractif.",
+                "icon": "default",
+                "color": "#4e9eb0",
+                "pillar": "dessiner",
+                "citizen_proposal": true,
+                "items": [
+                    "Rénovation de la place centrale",
+                    "Amélioration de l'accessibilité",
+                    "Création d'espaces publics"
+                ]
+            },
+            {
+                "id": 4,
+                "title": "Gouvernance transparente",
+                "description": "Assurer une gestion transparente et participative de la commune.",
+                "icon": "default",
+                "color": "#004a6d",
+                "pillar": "ouvrir",
+                "citizen_proposal": false,
+                "items": [
+                    "Transparence des décisions",
+                    "Participation citoyenne",
+                    "Communication régulière"
+                ]
+            },
+            {
+                "id": 5,
+                "title": "Transition écologique",
+                "description": "Accompagner la commune vers un modèle plus durable et respectueux de l'environnement.",
+                "icon": "default",
+                "color": "#65ae99",
+                "pillar": "proteger",
+                "citizen_proposal": false,
+                "items": [
+                    "Énergies renouvelables",
+                    "Mobilité douce",
+                    "Réduction des déchets"
+                ]
+            },
+            {
+                "id": 6,
+                "title": "Éducation et jeunesse",
+                "description": "Investir dans l'avenir en soutenant l'éducation et les activités pour les jeunes.",
+                "icon": "default",
+                "color": "#fcc549",
+                "pillar": "tisser",
+                "citizen_proposal": false,
+                "items": [
+                    "Soutien aux écoles",
+                    "Activités périscolaires",
+                    "Accompagnement des familles"
+                ]
+            },
+            {
+                "id": 7,
+                "title": "test Pierre11h31",
+                "description": "frz;jnzkrn gzklnzrg lze",
+                "icon": "default",
+                "color": "#4e9eb0",
+                "pillar": "dessiner",
+                "citizen_proposal": false,
+                "items": [
+                    "eeedd",
+                    "ddddf",
+                    "ccccc",
+                    "fff"
+                ]
+            },
+            {
+                "id": 8,
+                "title": "Test proposition - Créer un jardin partagé",
+                "description": "Cette proposition vise à créer un jardin partagé au centre-ville pour favoriser les rencontres entre habitants et promouvoir une alimentation saine.",
+                "pillar": "tisser",
+                "color": "#fcc549",
+                "items": [
+                    "Cette proposition vise à créer un jardin partagé au centre-ville pour favoriser les rencontres entre habitants et promouvoir une alimentation saine"
+                ],
+                "source": "citoyenne",
+                "citizen_proposal_id": "prop_68d8dd2b96c1c6.55384187",
+                "citizen_contact": {
+                    "nom": "",
+                    "email": "test@example.com",
+                    "telephone": "",
+                    "commune": ""
+                },
+                "date_added": "2025-09-28 07:22:52"
+            },
+            {
+                "id": 9,
+                "title": "Test prop citoyenne",
+                "description": "fff\r\nfff\r\nff",
+                "pillar": "tisser",
+                "color": "#fcc549",
+                "items": [
+                    "fff\r\nfff\r\nff"
+                ],
+                "source": "citoyenne",
+                "citizen_proposal_id": "prop_68d8de68e3b646.35801853",
+                "citizen_contact": {
+                    "nom": "Pierre",
+                    "email": "pierre.vincenot@gmail.com",
+                    "telephone": "",
+                    "commune": ""
+                },
+                "date_added": "2025-09-28 07:32:50"
+            },
+            {
+                "id": 10,
+                "title": "Test proposition - Créer un jardin partagé bis",
+                "description": "Cette proposition vise à créer un jardin partagé au centre-ville pour favoriser les rencontres entre habitants et promouvoir une alimentation saine.",
+                "pillar": "tisser",
+                "color": "#fcc549",
+                "items": [],
+                "source": "citoyenne",
+                "citizen_proposal_id": "prop_68d8dd55181de2.05864833",
+                "citizen_contact": {
+                    "nom": "",
+                    "email": "test@example.com",
+                    "telephone": "",
+                    "commune": ""
+                },
+                "date_added": "2025-09-28 07:53:19",
+                "citizen_proposal": false
+            },
+            {
+                "id": 11,
+                "title": "eefzfzgg",
+                "description": "gzrgzg",
+                "icon": "default",
+                "color": "#fcc549",
+                "pillar": "tisser",
+                "citizen_proposal": false,
+                "items": [
+                    "ggg",
+                    "fgrzg"
+                ]
+            },
+            {
+                "id": 12,
+                "title": "test ajout 12h11",
+                "description": "test flzjkgr lkrjgv er",
+                "icon": "default",
+                "color": "#fcc549",
+                "pillar": "tisser",
+                "citizen_proposal": false,
+                "items": [
+                    "zfff",
+                    "vvv",
+                    "ghtrjhy"
+                ]
+            },
+            {
+                "id": 13,
+                "title": "14h12",
+                "description": "14h12 test",
+                "icon": "default",
+                "color": "#65ae99",
+                "pillar": "proteger",
+                "citizen_proposal": false,
+                "items": [
+                    "aaa",
+                    "ddd",
+                    "ccvv"
+                ]
+            },
+            {
+                "id": 14,
+                "title": "15h16",
+                "description": "frfzg",
+                "icon": "default",
+                "color": "#004a6d",
+                "pillar": "ouvrir",
+                "citizen_proposal": false,
+                "items": [
+                    "zgrgzrg",
+                    "grzg",
+                    "grzzg"
+                ]
+            },
+            {
+                "id": 15,
+                "title": "ajout 16h01",
+                "description": "fzfrrggrz",
+                "icon": "default",
+                "color": "#004a6d",
+                "pillar": "ouvrir",
+                "citizen_proposal": false,
+                "items": [
+                    "fff",
+                    "zzz",
+                    "ddd"
+                ]
+            }
+        ]
+    },
+    "equipe": {
+        "h2": "Notre Équipe",
+        "h3": "Osez nous aborder",
+        "title": "Notre Équipe",
+        "subtitle": "Osez nous aborder",
+        "description": "Une équipe de citoyens engagés pour Saint-Paul",
+        "members": [
+            {
+                "id": 2,
+                "name": "Sophief kfnr lkzr",
+                "role": "Conseillère Éducation",
+                "description": "\"L'éducation de nos enfants est notre priorité. Je veux des écoles modernes et des activités enrichissantes.\"",
+                "photo": "https:\/\/images.unsplash.com\/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face&auto=format&q=80",
+                "image": ""
+            },
+            {
+                "id": 3,
+                "name": "Pierre Leroy",
+                "role": "Conseiller Environnement",
+                "description": "\"Protéger notre patrimoine naturel tout en développant le village, c'est possible et nécessaire.\"",
+                "photo": "https:\/\/images.unsplash.com\/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face&auto=format&q=80"
+            },
+            {
+                "id": 4,
+                "name": "Claire Rousseau",
+                "role": "Conseillère Social",
+                "description": "\"La solidarité fait la force de notre village. Ensemble, nous pouvons aider ceux qui en ont besoin.\"",
+                "photo": "https:\/\/images.unsplash.com\/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face&auto=format&q=80"
+            },
+            {
+                "id": 5,
+                "name": "Thomas Bernard",
+                "role": "Conseiller Développement",
+                "description": "\"Un développement maîtrisé pour préserver l'âme de notre village tout en créant de l'emploi.\"",
+                "photo": "https:\/\/images.unsplash.com\/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face&auto=format&q=80"
+            },
+            {
+                "id": 6,
+                "name": "Isabelle Moreau",
+                "role": "Conseillère Culture",
+                "description": "\"La culture rassemble. Je veux développer les événements culturels pour tous les âges.\"",
+                "photo": "https:\/\/images.unsplash.com\/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face&auto=format&q=80"
+            },
+            {
+                "id": 7,
+                "name": "Jean Dupont",
+                "role": "Conseiller Finances",
+                "description": "\"Une gestion rigoureuse et transparente des finances communales pour optimiser chaque euro.\"",
+                "photo": "https:\/\/images.unsplash.com\/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&crop=face&auto=format&q=80"
+            },
+            {
+                "id": 8,
+                "name": "Nathalie Petit",
+                "role": "Conseillère Communication",
+                "description": "\"Informer, écouter, échanger. Une communication transparente avec tous les habitants.\"",
+                "photo": "https:\/\/images.unsplash.com\/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face&auto=format&q=80"
+            },
+            {
+                "id": 9,
+                "name": "Marc Rousseau",
+                "role": "Conseiller Urbanisme",
+                "description": "\"Un urbanisme réfléchi qui respecte notre patrimoine tout en préparant l'avenir.\"",
+                "photo": "https:\/\/images.unsplash.com\/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face&auto=format&q=80"
+            },
+            {
+                "id": 10,
+                "name": "Caroline Blanc",
+                "role": "Conseillère Sports",
+                "description": "\"Le sport unit les générations. Je veux développer les infrastructures sportives.\"",
+                "photo": "https:\/\/images.unsplash.com\/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face&auto=format&q=80"
+            },
+            {
+                "id": 11,
+                "name": "Philippe Martin",
+                "role": "Conseiller Sécurité",
+                "description": "\"La sécurité de tous est ma priorité. Je veux renforcer la prévention et l'action.\"",
+                "photo": "https:\/\/images.unsplash.com\/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face&auto=format&q=80"
+            },
+            {
+                "id": 12,
+                "name": "Valérie Dubois",
+                "role": "Conseillère Handicap",
+                "description": "\"L'accessibilité pour tous, c'est un droit. Je veux rendre notre village plus inclusif.\"",
+                "photo": "https:\/\/images.unsplash.com\/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face&auto=format&q=80"
+            },
+            {
+                "id": 13,
+                "name": "Alain Moreau",
+                "role": "Conseiller Économie",
+                "description": "\"Développer l'économie locale tout en préservant notre qualité de vie.\"",
+                "photo": "https:\/\/images.unsplash.com\/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face&auto=format&q=80"
+            },
+            {
+                "id": 14,
+                "name": "Sylvie Leroy",
+                "role": "Conseillère Santé",
+                "description": "\"La santé de nos aînés et de nos enfants est précieuse. Je veux améliorer les services.\"",
+                "photo": "https:\/\/images.unsplash.com\/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face&auto=format&q=80"
+            },
+            {
+                "id": 15,
+                "name": "Robert Bernard",
+                "role": "Conseiller Agriculture",
+                "description": "\"Soutenir nos agriculteurs locaux et développer une agriculture durable.\"",
+                "photo": "https:\/\/images.unsplash.com\/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face&auto=format&q=80"
+            },
+            {
+                "id": 16,
+                "name": "Émilie Rousseau",
+                "role": "Conseillère Jeunesse",
+                "description": "\"Donnons la parole aux jeunes et créons des espaces pour qu'ils s'expriment.\"",
+                "photo": "https:\/\/images.unsplash.com\/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face&auto=format&q=80"
+            },
+            {
+                "id": 17,
+                "name": "Michel Petit",
+                "role": "Conseiller Patrimoine",
+                "description": "\"Préserver notre patrimoine historique tout en le rendant accessible à tous.\"",
+                "photo": "https:\/\/images.unsplash.com\/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face&auto=format&q=80"
+            },
+            {
+                "id": 18,
+                "name": "Sandrine Blanc",
+                "role": "Conseillère Solidarité",
+                "description": "\"La solidarité fait la force de notre village, cultivons-la ensemble.\"",
+                "photo": "https:\/\/images.unsplash.com\/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face&auto=format&q=80"
+            },
+            {
+                "id": 19,
+                "name": "François Martin",
+                "role": "Conseiller Développement",
+                "description": "\"Un développement maîtrisé pour préserver l'âme de notre village.\"",
+                "photo": "https:\/\/images.unsplash.com\/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face&auto=format&q=80"
+            },
+            {
+                "id": 20,
+                "name": "",
+                "role": "",
+                "description": "",
+                "image": ""
+            },
+            {
+                "id": 21,
+                "name": "Pierre Vincenot",
+                "role": "Com",
+                "description": "ddd",
+                "image": ""
+            },
+            {
+                "id": 22,
+                "name": "Test Membre",
+                "role": "Test Role",
+                "description": "Test Description",
+                "image": ""
+            },
+            {
+                "id": 23,
+                "name": "Test Membre bis",
+                "role": "Test Role 2",
+                "description": "Test Description 2",
+                "image": ""
+            },
+            {
+                "id": 24,
+                "name": "nouveau membre 10h38",
+                "role": "test",
+                "description": "nnefzkl",
+                "image": "uploads\/member_24_1759221524.jpeg"
+            }
+        ]
+    },
+    "rendez_vous": {
+        "h2": "Nos rendez-vous",
+        "h3": "Osons échanger",
+        "title": "Nos rendez-vous",
+        "subtitle": "Osons échanger",
+        "description": "Rejoignez-nous lors de nos rencontres pour échanger et construire ensemble",
+        "events": [
+            {
+                "id": 1,
+                "title": "Apéro-projet ",
+                "description": "Venez échanger autour d'un verre sur nos propositions pour Saint-Paul. Discussion libre et conviviale.",
+                "date": "2025-10-01T10:47",
+                "month": "OCT",
+                "time": "18h30",
+                "location": "place"
+            },
+            {
+                "id": 2,
+                "title": "Assemblée citoyenne",
+                "description": "Présentation détaillée de notre programme et échanges avec les habitants.",
+                "date": "22",
+                "month": "OCT",
+                "time": "19h00",
+                "location": "Salle des fêtes"
+            },
+            {
+                "id": 3,
+                "title": "Atelier participatif",
+                "description": "Travail en petits groupes sur des propositions concrètes pour le village.",
+                "date": "29",
+                "month": "OCT",
+                "time": "14h00",
+                "location": "Mairie"
+            },
+            {
+                "id": 4,
+                "title": "Réunion de quartier",
+                "description": "Écoute des préoccupations spécifiques de votre quartier et propositions d'actions.",
+                "date": "05",
+                "month": "NOV",
+                "time": "18h00",
+                "location": "École primaire"
+            },
+            {
+                "id": 7,
+                "title": "test 16H38",
+                "description": "hfhfhf",
+                "date": "2025-12-30T16:38",
+                "location": "salle"
+            },
+            {
+                "id": 14,
+                "title": "10h41 bis",
+                "description": "lkn,fe",
+                "date": "2025-10-25T10:41",
+                "location": ""
+            }
+        ]
+    },
+    "charte": {
+        "h2": "Notre charte",
+        "h3": "Osons nous engager",
+        "title": "Notre charte",
+        "subtitle": "Nos engagements",
+        "description": "Les valeurs qui nous guident et les principes qui structurent notre action",
+        "intro_text": "Cette charte définit nos engagements et nos valeurs. Elle guide notre action et garantit notre cohérence. <b>Ensemble, nous construisons l'avenir de Saint-Paul<\/b>",
+        "intro_highlight": "",
+        "principles": [
+            {
+                "id": 1,
+                "title": "Transparence",
+                "description": "Toutes nos décisions seront prises en toute transparence, avec communication régulière aux habitants.",
+                "source": "Engagement éthique",
+                "thematique": "Engagement éthique"
+            },
+            {
+                "id": 2,
+                "title": "Participation",
+                "description": "Chaque habitant peut contribuer aux décisions qui concernent sa vie quotidienne.",
+                "source": "Démocratie participative",
+                "thematique": "Démocratie participative"
+            },
+            {
+                "id": 3,
+                "title": "Écologie",
+                "description": "Protéger notre environnement et préparer la transition écologique de notre commune.",
+                "source": "Urgence climatique",
+                "thematique": "Urgence climatique"
+            },
+            {
+                "id": 4,
+                "title": "Solidarité",
+                "description": "Soutenir les plus fragiles et créer des liens entre tous les habitants.",
+                "source": "Valeurs républicaines",
+                "thematique": "Valeurs républicaines"
+            },
+            {
+                "id": 5,
+                "title": "Innovation",
+                "description": "Utiliser les nouvelles technologies pour améliorer les services publics.",
+                "source": "Modernisation",
+                "thematique": "Modernisation"
+            },
+            {
+                "id": 6,
+                "title": "Patrimoine",
+                "description": "Préserver notre héritage historique tout en préparant l'avenir.",
+                "source": "Identité locale",
+                "thematique": "Identité locale"
+            },
+            {
+                "id": 7,
+                "title": "Économie locale",
+                "description": "Soutenir les commerces et artisans locaux pour un développement durable.",
+                "source": "Développement territorial",
+                "thematique": "Développement territorial"
+            },
+            {
+                "id": 8,
+                "title": "Éducation",
+                "description": "Investir dans l'éducation et la formation de nos enfants et jeunes adultes.",
+                "source": "Avenir de la commune",
+                "thematique": "Avenir de la commune"
+            },
+            {
+                "id": 9,
+                "title": "Culture",
+                "description": "Développer la vie culturelle et artistique pour tous les âges.",
+                "source": "Épanouissement personnel",
+                "thematique": "Épanouissement personnel"
+            },
+            {
+                "id": 10,
+                "title": "Proximité",
+                "description": "Maintenir une relation de proximité avec les habitants et leurs préoccupations.",
+                "source": "",
+                "thematique": "test"
+            }
+        ]
+    },
+    "citations": {
+        "citation1": {
+            "text": "Considérer l'être humain et la préservation de la nature comme composante centrale de l'action publique",
+            "author": "Notre vision",
+            "background_image": "uploads\/citation1-bg_1758957683_68d79073e32dc.webp"
+        },
+        "citation2": {
+            "text": "Favoriser, au sein du conseil municipal, le débat d'idées dans le respect des points de vue",
+            "author": "Notre méthode de travail",
+            "background_image": "uploads\/citation2-bg_1758958519_68d793b7c8e08.webp"
+        },
+        "citation3": {
+            "text": "Porter une politique en faveur des plus fragiles par des actions favorisant l'inclusion et l'autonomie",
+            "author": "Notre engagement social",
+            "background_image": "Images\/hero_test.png"
+        },
+        "citation4": {
+            "text": "S'engager à être cohérent.es entre nos intentions et nos actes",
+            "author": "Notre cohérence",
+            "background_image": "Images\/hero_test.png"
+        }
+    },
+    "idees": {
+        "title": "Vos idées comptent",
+        "subtitle": "Osez nous contacter",
+        "description": "Partagez vos idées et propositions pour enrichir notre programme",
+        "contact_email": "bonjour@osonssaintpaul.fr",
+        "contact_phone": "05 61 XX XX XX"
+    },
+    "mediatheque": {
+        "title": "Médiathèque",
+        "subtitle": "Osons partager",
+        "description": "Retrouvez tous nos documents, photos, vidéos et actualités dans notre espace de partage.",
+        "drive_url": "https:\/\/drive.google.com\/drive\/folders\/..."
+    },
+    "rencontres": {
+        "events": []
+    }
+}

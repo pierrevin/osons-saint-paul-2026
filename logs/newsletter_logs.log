@@ -1,6 +1,1 @@
-[2025-10-01 08:00:45] Email: pierre.vincenot@gmail.com | Prénom: Pierre | Success: NO | IP: ::1 | Error: Erreur Brevo: {"message":"Key not found","code":"unauthorized"}
 
-[2025-10-01 08:01:00] Email: pierre.vincenot@gmail.com | Prénom: Pierre | Success: NO | IP: ::1 | Error: Erreur Brevo: {"message":"Key not found","code":"unauthorized"}
-
-[2025-10-01 08:02:46] Email: pierre.vincenot@gmail.com | Prénom: pierre | Success: YES | IP: ::1 | Error: none
-[2025-10-01 08:14:45] Email: pierrevincenot@gmail.com | Prénom: pierre bis | Success: YES | IP: ::1 | Error: none

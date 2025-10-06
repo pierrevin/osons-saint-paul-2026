@@ -1,0 +1,114 @@
+{
+    "propositions": [
+        {
+            "id": "prop_68d8dd2b96c1c6.55384187",
+            "date": "2025-09-28 07:00:59",
+            "status": "rejected",
+            "data": {
+                "nom": "",
+                "email": "test@example.com",
+                "commune": "",
+                "titre": "Test proposition - Créer un jardin partagé",
+                "description": "Cette proposition vise à créer un jardin partagé au centre-ville pour favoriser les rencontres entre habitants et promouvoir une alimentation saine.",
+                "categories": [
+                    "Urbanisme &amp; Logement",
+                    "Environnement &amp; Nature"
+                ],
+                "beneficiaires": "Tous les habitants du centre-ville, les familles avec enfants, les personnes âgées",
+                "cout": "Modéré (10k€ - 50k€)",
+                "engagement": "oui",
+                "engagement_details": "Je souhaite participer à l&#039;organisation et apporter mes compétences en jardinage",
+                "acceptation_publication": true,
+                "acceptation_rgpd": true
+            },
+            "updated_at": "2025-10-02 20:30:12",
+            "integrated": false,
+            "integrated_at": null,
+            "programme_id": null
+        },
+        {
+            "id": "prop_68d8dd55181de2.05864833",
+            "date": "2025-09-28 07:01:41",
+            "status": "approved",
+            "data": {
+                "nom": "",
+                "email": "test@example.com",
+                "commune": "",
+                "titre": "Test proposition - Créer un jardin partagé",
+                "description": "Cette proposition vise à créer un jardin partagé au centre-ville pour favoriser les rencontres entre habitants et promouvoir une alimentation saine.",
+                "categories": [
+                    "Urbanisme &amp; Logement",
+                    "Environnement &amp; Nature"
+                ],
+                "beneficiaires": "Tous les habitants du centre-ville, les familles avec enfants, les personnes âgées",
+                "cout": "Modéré (10k€ - 50k€)",
+                "engagement": "oui",
+                "engagement_details": "Je souhaite participer à l&#039;organisation et apporter mes compétences en jardinage",
+                "acceptation_publication": true,
+                "acceptation_rgpd": true
+            },
+            "updated_at": "2025-09-28 07:52:59",
+            "integrated": true,
+            "integrated_at": "2025-09-28 07:53:19",
+            "programme_id": 10
+        },
+        {
+            "id": "prop_68d8de68e3b646.35801853",
+            "date": "2025-09-28 07:06:16",
+            "status": "approved",
+            "data": {
+                "nom": "Pierre",
+                "email": "pierre.vincenot@gmail.com",
+                "commune": "",
+                "titre": "Test prop citoyenne",
+                "description": "fff\r\nfff\r\nff",
+                "categories": [
+                    "Urbanisme &amp; Logement"
+                ],
+                "beneficiaires": "ffff",
+                "cout": "Élevé (&gt; 50k€)",
+                "engagement": "oui",
+                "engagement_details": "ffff",
+                "acceptation_publication": true,
+                "acceptation_rgpd": true
+            },
+            "updated_at": "2025-10-02 20:28:22",
+            "integrated": true,
+            "integrated_at": "2025-10-02 20:46:53",
+            "programme_id": 11
+        },
+        {
+            "id": "prop_68d8ec76832931.55818788",
+            "date": "2025-09-28 08:06:14",
+            "status": "pending",
+            "data": {
+                "nom": "Pierre Vincenot",
+                "email": "pierre.vincenot@gmail.com",
+                "commune": "",
+                "telephone": "",
+                "titre": "Test email auto",
+                "description": "un email fonctionnel pour les notifications",
+                "categories": [
+                    "Environnement &amp; Nature"
+                ],
+                "beneficiaires": "moi",
+                "cout": "Difficile à estimer",
+                "engagement": "oui",
+                "engagement_details": "ddd",
+                "acceptation_publication": true,
+                "acceptation_rgpd": true
+            },
+            "integrated": false,
+            "integrated_at": null,
+            "programme_id": null,
+            "updated_at": "2025-10-02 20:35:11"
+        }
+    ],
+    "statistics": {
+        "total": 3,
+        "pending": 0,
+        "approved": 3,
+        "rejected": 0
+    },
+    "last_updated": "2025-10-02T20:35:11+00:00"
+}

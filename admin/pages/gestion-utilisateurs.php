@@ -13,7 +13,7 @@ check_auth();
 // Vérifier les permissions (admin seulement)
 $user_manager = new UserManager();
 if (!$user_manager->canAccess('gestion_utilisateurs')) {
-    header('Location: schema_admin.php?error=permission_denied');
+    header('Location: schema_admin_new.php?error=permission_denied');
     exit;
 }
 
@@ -84,7 +84,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
 // Récupérer la liste des utilisateurs
 $users_result = $user_manager->getAllUsers();
-$users = $users_result['success'] ? $users_result['users'] : [];
+$users = ($users_result['success'] && isset($users_result['users'])) ? $users_result['users'] : [];
+
+// Gérer les erreurs de chargement
+if (!$users_result['success']) {
+    $error = "Erreur lors du chargement des utilisateurs : " . $users_result['message'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -113,7 +118,7 @@ $users = $users_result['success'] ? $users_result['users'] : [];
             
             <nav class="sidebar-nav">
                 <ul>
-                    <li><a href="schema_admin.php"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li><a href="schema_admin_new.php"><i class="fas fa-home"></i> Accueil</a></li>
                     <?php foreach ($user_manager->getMenuItems() as $item): ?>
                         <li>
                             <a href="<?= $item['id'] ?>.php" class="<?= basename($_SERVER['PHP_SELF'], '.php') === $item['id'] ? 'active' : '' ?>">

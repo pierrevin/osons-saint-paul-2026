@@ -24,8 +24,14 @@ $integrated = count(array_filter($propositions, fn($p) => $p['integrated'] ?? fa
 // Statistiques par catégorie
 $categories_stats = [];
 foreach ($propositions as $proposition) {
-    foreach ($proposition['data']['categories'] ?? [] as $category) {
-        // Décoder les entités HTML dans les catégories
+    $rawCategories = $proposition['data']['categories'] ?? [];
+    // Normaliser: accepter string séparée par virgules ou array
+    if (is_string($rawCategories)) {
+        $rawCategories = array_filter(array_map('trim', explode(',', $rawCategories)));
+    } elseif (!is_array($rawCategories)) {
+        $rawCategories = [];
+    }
+    foreach ($rawCategories as $category) {
         $clean_category = html_entity_decode($category, ENT_QUOTES, 'UTF-8');
         $categories_stats[$clean_category] = ($categories_stats[$clean_category] ?? 0) + 1;
     }
@@ -41,7 +47,7 @@ foreach ($propositions as $proposition) {
 // Statistiques par commune
 $commune_stats = [];
 foreach ($propositions as $proposition) {
-    $commune = $proposition['data']['commune'] ?: 'Non renseignée';
+    $commune = $proposition['data']['commune'] ?? 'Non renseignée';
     $commune_stats[$commune] = ($commune_stats[$commune] ?? 0) + 1;
 }
 ?>
@@ -280,7 +286,7 @@ foreach ($propositions as $proposition) {
         <div class="analytics-header">
             <h1>📊 Analyse des Propositions Citoyennes</h1>
             <p>Tableau de bord complet pour analyser toutes les propositions soumises</p>
-            <a href="schema_admin.php" class="btn-export">← Retour à l'admin</a>
+            <a href="schema_admin_new.php" class="btn-export">← Retour à l'admin</a>
         </div>
 
         <!-- Statistiques principales -->
@@ -390,8 +396,13 @@ foreach ($propositions as $proposition) {
                     <tbody>
                         <?php foreach ($propositions as $proposition): ?>
                             <tr data-status="<?= $proposition['status'] ?>" 
-                                data-categories="<?= htmlspecialchars(implode(',', array_map(function($cat) { return html_entity_decode($cat, ENT_QUOTES, 'UTF-8'); }, $proposition['data']['categories'] ?? []))) ?>"
-                                data-commune="<?= htmlspecialchars($proposition['data']['commune'] ?: 'Non renseignée') ?>"
+                                data-categories="<?php
+                                    $rawCategories = $proposition['data']['categories'] ?? [];
+                                    if (is_string($rawCategories)) { $rawCategories = array_filter(array_map('trim', explode(',', $rawCategories))); }
+                                    elseif (!is_array($rawCategories)) { $rawCategories = []; }
+                                    echo htmlspecialchars(implode(',', array_map(function($cat){ return html_entity_decode($cat, ENT_QUOTES, 'UTF-8'); }, $rawCategories)));
+                                ?>"
+                                data-commune="<?= htmlspecialchars($proposition['data']['commune'] ?? 'Non renseignée') ?>"
                                 data-search="<?= htmlspecialchars(strtolower($proposition['data']['titre'] . ' ' . $proposition['data']['description'])) ?>">
                                 <td><?= date('d/m/Y H:i', strtotime($proposition['date'])) ?></td>
                                 <td>
@@ -403,8 +414,13 @@ foreach ($propositions as $proposition) {
                                 <td class="title"><strong><?= htmlspecialchars(html_entity_decode($proposition['data']['titre'], ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8') ?></strong></td>
                                 <td class="description"><?= htmlspecialchars(html_entity_decode(substr($proposition['data']['description'], 0, 150), ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8') ?>...</td>
                                 <td>
-                                    <?php foreach ($proposition['data']['categories'] ?? [] as $category): ?>
-                                        <?php $clean_category = html_entity_decode($category, ENT_QUOTES, 'UTF-8'); ?>
+                                    <?php
+                                        $rawCategories = $proposition['data']['categories'] ?? [];
+                                        if (is_string($rawCategories)) { $rawCategories = array_filter(array_map('trim', explode(',', $rawCategories))); }
+                                        elseif (!is_array($rawCategories)) { $rawCategories = []; }
+                                        foreach ($rawCategories as $category):
+                                            $clean_category = html_entity_decode($category, ENT_QUOTES, 'UTF-8');
+                                    ?>
                                         <span class="category-tag"><?= htmlspecialchars($clean_category, ENT_QUOTES, 'UTF-8') ?></span>
                                     <?php endforeach; ?>
                                 </td>
@@ -508,7 +524,6 @@ foreach ($propositions as $proposition) {
             }
         });
 
-
         // Graphique statuts
         const statusCtx = document.getElementById('statusChart').getContext('2d');
         new Chart(statusCtx, {
@@ -591,7 +606,7 @@ foreach ($propositions as $proposition) {
 
         // Actions sur les propositions
         function goToAdminEdit(proposalId) {
-            window.location.href = 'schema_admin.php#citizen-proposals&edit=' + proposalId;
+            window.location.href = 'schema_admin_new.php#citizen-proposals&edit=' + proposalId;
         }
         
         function updateCitizenProposalStatus(proposalId, status) {
@@ -619,9 +634,7 @@ foreach ($propositions as $proposition) {
                     alert('Erreur: ' + (data.message || 'Impossible de mettre à jour le statut'));
                 }
             })
-            .catch(error => {
-                console.error('Erreur:', error);
-                alert('Erreur lors de la mise à jour du statut');
+            .catch(error => {alert('Erreur lors de la mise à jour du statut');
             });
         }
     </script>

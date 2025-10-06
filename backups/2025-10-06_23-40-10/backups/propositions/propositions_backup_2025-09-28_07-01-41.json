@@ -1,0 +1,33 @@
+{
+    "propositions": [
+        {
+            "id": "prop_68d8dd2b96c1c6.55384187",
+            "date": "2025-09-28 07:00:59",
+            "status": "pending",
+            "data": {
+                "nom": "",
+                "email": "test@example.com",
+                "commune": "",
+                "titre": "Test proposition - Créer un jardin partagé",
+                "description": "Cette proposition vise à créer un jardin partagé au centre-ville pour favoriser les rencontres entre habitants et promouvoir une alimentation saine.",
+                "categories": [
+                    "Urbanisme &amp; Logement",
+                    "Environnement &amp; Nature"
+                ],
+                "beneficiaires": "Tous les habitants du centre-ville, les familles avec enfants, les personnes âgées",
+                "cout": "Modéré (10k€ - 50k€)",
+                "engagement": "oui",
+                "engagement_details": "Je souhaite participer à l&#039;organisation et apporter mes compétences en jardinage",
+                "acceptation_publication": true,
+                "acceptation_rgpd": true
+            }
+        }
+    ],
+    "statistics": {
+        "total": 0,
+        "pending": 0,
+        "approved": 0,
+        "rejected": 0
+    },
+    "last_updated": "2025-01-27T10:00:00Z"
+}

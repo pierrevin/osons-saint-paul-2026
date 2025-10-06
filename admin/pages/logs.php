@@ -13,7 +13,7 @@ check_auth();
 // Vérifier les permissions (admin seulement)
 $user_manager = new UserManager();
 if (!$user_manager->canAccess('logs')) {
-    header('Location: schema_admin.php?error=permission_denied');
+    header('Location: schema_admin_new.php?error=permission_denied');
     exit;
 }
 
@@ -81,7 +81,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
             
             <nav class="sidebar-nav">
                 <ul>
-                    <li><a href="schema_admin.php"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li><a href="schema_admin_new.php"><i class="fas fa-home"></i> Accueil</a></li>
                     <?php foreach ($user_manager->getMenuItems() as $item): ?>
                         <li>
                             <a href="<?= $item['id'] ?>.php" class="<?= basename($_SERVER['PHP_SELF'], '.php') === $item['id'] ? 'active' : '' ?>">

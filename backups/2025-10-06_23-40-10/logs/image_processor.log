@@ -1,0 +1,1051 @@
+[2025-10-01 12:22:36] [INFO] Limite mémoire PHP: 128M
+[2025-10-01 12:34:45] [INFO] Limite mémoire PHP: 128M
+[2025-10-01 12:34:45] [INFO] Début traitement: groupe.png
+[2025-10-01 12:34:45] [INFO] Chargement de l'image (type: png)
+[2025-10-01 12:34:45] [INFO] Dimensions originales: 1536x1024
+[2025-10-01 12:34:45] [INFO] Sauvegarde en WebP
+[2025-10-01 12:34:45] [ERROR] Erreur lors du traitement: Le fichier créé est vide ou invalide
+[2025-10-01 12:34:45] [INFO] Fichier corrompu supprimé: /Users/pierre/Desktop/Osons - Saint Paul Site/admin/pages/../../uploads//hero-bg_1759322085_68dd1fe5859ae.webp
+[2025-10-01 12:39:24] [INFO] Limite mémoire PHP: 128M
+[2025-10-01 12:39:24] [INFO] Début traitement: groupe 2.png
+[2025-10-01 12:39:24] [INFO] Chargement de l'image (type: png)
+[2025-10-01 12:39:24] [INFO] Dimensions originales: 1536x1024
+[2025-10-01 12:39:24] [INFO] Sauvegarde en WebP
+[2025-10-01 12:39:24] [ERROR] Fichier créé mais vide (0 octets)
+[2025-10-01 12:39:24] [ERROR] Erreur lors du traitement: Le fichier créé est vide ou invalide
+[2025-10-01 12:47:59] [INFO] Limite mémoire PHP: 128M
+[2025-10-01 12:47:59] [INFO] Début traitement: groupe 2.png
+[2025-10-01 12:47:59] [INFO] Chargement de l'image (type: png)
+[2025-10-01 12:47:59] [INFO] Dimensions originales: 1536x1024
+[2025-10-01 12:47:59] [INFO] Sauvegarde en WebP
+[2025-10-01 12:47:59] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-01 12:47:59] [INFO] Fichier sauvegardé avec succès: 250.78 KB
+[2025-10-01 12:47:59] [SUCCESS] Image traitée avec succès: hero-bg_1759322879_68dd22ff53f5e.webp | Taille: 250.78 KB | Compression: 72% | Temps: 586.25ms
+[2025-10-01 12:48:00] [ERROR] Dossier non accessible en écriture: /Users/pierre/Desktop/Osons - Saint Paul Site/admin/pages/../../uploads//thumbs
+[2025-10-01 12:59:59] [INFO] Limite mémoire PHP: 128M
+[2025-10-01 12:59:59] [INFO] Début traitement: cropped_1759323593075.jpg
+[2025-10-01 12:59:59] [INFO] Chargement de l'image (type: jpg)
+[2025-10-01 12:59:59] [INFO] Dimensions originales: 1435x807
+[2025-10-01 12:59:59] [INFO] Sauvegarde en WebP
+[2025-10-01 12:59:59] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-01 12:59:59] [INFO] Fichier sauvegardé avec succès: 193.6 KB
+[2025-10-01 12:59:59] [SUCCESS] Image traitée avec succès: hero-bg_1759323599_68dd25cf74685.webp | Taille: 193.6 KB | Compression: 57.2% | Temps: 296.96ms
+[2025-10-01 12:59:59] [ERROR] Dossier non accessible en écriture: /Users/pierre/Desktop/Osons - Saint Paul Site/admin/pages/../../uploads//thumbs
+[2025-10-01 13:11:37] [INFO] Limite mémoire PHP: 128M
+[2025-10-01 13:11:37] [INFO] Début traitement: cropped_1759324293121.jpg
+[2025-10-01 13:11:37] [INFO] Chargement de l'image (type: jpg)
+[2025-10-01 13:11:37] [INFO] Dimensions originales: 1080x405
+[2025-10-01 13:11:37] [INFO] Sauvegarde en WebP
+[2025-10-01 13:11:37] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-01 13:11:37] [INFO] Fichier sauvegardé avec succès: 70.08 KB
+[2025-10-01 13:11:37] [SUCCESS] Image traitée avec succès: hero-bg_1759324297_68dd28890e331.webp | Taille: 70.08 KB | Compression: 56.7% | Temps: 743.36ms
+[2025-10-01 13:11:37] [ERROR] Dossier non accessible en écriture: /Users/pierre/Desktop/Osons - Saint Paul Site/admin/pages/../../uploads//thumbs
+[2025-10-01 13:23:18] [INFO] Limite mémoire PHP: 128M
+[2025-10-01 13:23:18] [INFO] Début traitement: cropped_1759324995297.jpg
+[2025-10-01 13:23:18] [INFO] Chargement de l'image (type: jpg)
+[2025-10-01 13:23:18] [INFO] Dimensions originales: 1080x405
+[2025-10-01 13:23:18] [INFO] Sauvegarde en WebP
+[2025-10-01 13:23:18] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-01 13:23:18] [INFO] Fichier sauvegardé avec succès: 69.06 KB
+[2025-10-01 13:23:18] [SUCCESS] Image traitée avec succès: hero-bg_1759324998_68dd2b46316f2.webp | Taille: 69.06 KB | Compression: 57.3% | Temps: 195.34ms
+[2025-10-01 13:23:18] [ERROR] Dossier non accessible en écriture: /Users/pierre/Desktop/Osons - Saint Paul Site/admin/pages/../../uploads//thumbs
+[2025-10-01 13:29:30] [INFO] Limite mémoire PHP: 128M
+[2025-10-01 13:29:30] [INFO] Début traitement: cropped_1759325367309.jpg
+[2025-10-01 13:29:30] [INFO] Chargement de l'image (type: jpg)
+[2025-10-01 13:29:30] [INFO] Dimensions originales: 1080x337
+[2025-10-01 13:29:30] [INFO] Sauvegarde en WebP
+[2025-10-01 13:29:30] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-01 13:29:30] [INFO] Fichier sauvegardé avec succès: 50.52 KB
+[2025-10-01 13:29:30] [SUCCESS] Image traitée avec succès: citation1-bg_1759325370_68dd2cba14720.webp | Taille: 50.52 KB | Compression: 60.5% | Temps: 117.62ms
+[2025-10-01 13:29:30] [ERROR] Dossier non accessible en écriture: /Users/pierre/Desktop/Osons - Saint Paul Site/admin/pages/../../uploads//thumbs
+[2025-10-01 13:31:13] [INFO] Limite mémoire PHP: 128M
+[2025-10-01 13:31:13] [INFO] Début traitement: cropped_1759325470854.jpg
+[2025-10-01 13:31:13] [INFO] Chargement de l'image (type: jpg)
+[2025-10-01 13:31:13] [INFO] Dimensions originales: 1280x960
+[2025-10-01 13:31:13] [INFO] Sauvegarde en WebP
+[2025-10-01 13:31:13] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-01 13:31:13] [INFO] Fichier sauvegardé avec succès: 110.09 KB
+[2025-10-01 13:31:13] [SUCCESS] Image traitée avec succès: citation1-bg_1759325473_68dd2d21ae938.webp | Taille: 110.09 KB | Compression: 68.2% | Temps: 238.83ms
+[2025-10-01 13:31:14] [ERROR] Dossier non accessible en écriture: /Users/pierre/Desktop/Osons - Saint Paul Site/admin/pages/../../uploads//thumbs
+[2025-10-06 09:03:11] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 09:03:11] [INFO] Utilisation du preset: citation - Image de transition (4:3) - lisibilité renforcée
+[2025-10-06 09:03:11] [INFO] Début traitement: crop.jpg
+[2025-10-06 09:03:11] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 09:03:11] [INFO] Dimensions originales: 1920x1440
+[2025-10-06 09:03:11] [INFO] Sauvegarde en WebP
+[2025-10-06 09:03:11] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 09:03:11] [INFO] Fichier sauvegardé avec succès: 618.74 KB
+[2025-10-06 09:03:11] [SUCCESS] Image traitée avec succès: citation_1759741391_68e385cf18426.webp | Taille: 618.74 KB | Compression: 41.6% | Temps: 517.6ms
+[2025-10-06 09:03:39] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 09:03:39] [INFO] Utilisation du preset: citation - Image de transition (4:3) - lisibilité renforcée
+[2025-10-06 09:03:39] [INFO] Début traitement: crop.jpg
+[2025-10-06 09:03:39] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 09:03:39] [INFO] Dimensions originales: 1920x1440
+[2025-10-06 09:03:39] [INFO] Sauvegarde en WebP
+[2025-10-06 09:03:39] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 09:03:39] [INFO] Fichier sauvegardé avec succès: 618.74 KB
+[2025-10-06 09:03:39] [SUCCESS] Image traitée avec succès: citation_1759741419_68e385eb7202b.webp | Taille: 618.74 KB | Compression: 41.6% | Temps: 454.72ms
+[2025-10-06 09:05:32] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 09:05:32] [INFO] Utilisation du preset: citation - Image de transition (4:3) - lisibilité renforcée
+[2025-10-06 09:05:32] [INFO] Début traitement: crop.jpg
+[2025-10-06 09:05:32] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 09:05:32] [INFO] Dimensions originales: 1920x1440
+[2025-10-06 09:05:32] [INFO] Sauvegarde en WebP
+[2025-10-06 09:05:32] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 09:05:32] [INFO] Fichier sauvegardé avec succès: 618.74 KB
+[2025-10-06 09:05:32] [SUCCESS] Image traitée avec succès: citation_1759741532_68e3865c2deb6.webp | Taille: 618.74 KB | Compression: 41.6% | Temps: 486.9ms
+[2025-10-06 09:06:05] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 09:06:05] [INFO] Utilisation du preset: citation - Image de transition (4:3) - lisibilité renforcée
+[2025-10-06 09:06:05] [INFO] Début traitement: crop.jpg
+[2025-10-06 09:06:05] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 09:06:05] [INFO] Dimensions originales: 1920x1440
+[2025-10-06 09:06:05] [INFO] Sauvegarde en WebP
+[2025-10-06 09:06:05] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 09:06:05] [INFO] Fichier sauvegardé avec succès: 618.74 KB
+[2025-10-06 09:06:05] [SUCCESS] Image traitée avec succès: citation_1759741565_68e3867d2ef76.webp | Taille: 618.74 KB | Compression: 41.6% | Temps: 451.21ms
+[2025-10-06 09:07:31] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 09:07:31] [INFO] Utilisation du preset: hero - Image hero - haute qualité - Panoramique (16:6)
+[2025-10-06 09:07:31] [INFO] Début traitement: crop.jpg
+[2025-10-06 09:07:31] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 09:07:31] [INFO] Dimensions originales: 2560x960
+[2025-10-06 09:07:31] [INFO] Sauvegarde en WebP
+[2025-10-06 09:07:31] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 09:07:31] [INFO] Fichier sauvegardé avec succès: 514.83 KB
+[2025-10-06 09:07:31] [SUCCESS] Image traitée avec succès: hero_1759741651_68e386d3447cf.webp | Taille: 514.83 KB | Compression: 42.4% | Temps: 411.02ms
+[2025-10-06 09:08:00] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 09:08:00] [INFO] Utilisation du preset: citation - Image de transition (4:3) - lisibilité renforcée
+[2025-10-06 09:08:00] [INFO] Début traitement: crop.jpg
+[2025-10-06 09:08:00] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 09:08:00] [INFO] Dimensions originales: 1920x1440
+[2025-10-06 09:08:00] [INFO] Sauvegarde en WebP
+[2025-10-06 09:08:00] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 09:08:00] [INFO] Fichier sauvegardé avec succès: 618.74 KB
+[2025-10-06 09:08:00] [SUCCESS] Image traitée avec succès: citation_1759741680_68e386f08618b.webp | Taille: 618.74 KB | Compression: 41.6% | Temps: 450.23ms
+[2025-10-06 09:08:25] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 09:08:25] [INFO] Utilisation du preset: citation - Image de transition (4:3) - lisibilité renforcée
+[2025-10-06 09:08:25] [INFO] Début traitement: crop.jpg
+[2025-10-06 09:08:25] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 09:08:25] [INFO] Dimensions originales: 1920x1440
+[2025-10-06 09:08:25] [INFO] Sauvegarde en WebP
+[2025-10-06 09:08:25] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 09:08:26] [INFO] Fichier sauvegardé avec succès: 618.74 KB
+[2025-10-06 09:08:26] [SUCCESS] Image traitée avec succès: citation_1759741705_68e38709ab205.webp | Taille: 618.74 KB | Compression: 41.6% | Temps: 455.95ms
+[2025-10-06 09:10:35] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 09:10:35] [INFO] Utilisation du preset: citation - Image de transition (4:3) - lisibilité renforcée
+[2025-10-06 09:10:35] [INFO] Début traitement: crop.jpg
+[2025-10-06 09:10:35] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 09:10:35] [INFO] Dimensions originales: 1920x1440
+[2025-10-06 09:10:35] [INFO] Sauvegarde en WebP
+[2025-10-06 09:10:35] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 09:10:36] [INFO] Fichier sauvegardé avec succès: 618.74 KB
+[2025-10-06 09:10:36] [SUCCESS] Image traitée avec succès: citation_1759741835_68e3878bac2ac.webp | Taille: 618.74 KB | Compression: 41.6% | Temps: 461.89ms
+[2025-10-06 09:11:38] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 09:11:38] [INFO] Utilisation du preset: citation - Image de transition (4:3) - lisibilité renforcée
+[2025-10-06 09:11:38] [INFO] Début traitement: crop.jpg
+[2025-10-06 09:11:38] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 09:11:38] [INFO] Dimensions originales: 1920x1440
+[2025-10-06 09:11:38] [INFO] Sauvegarde en WebP
+[2025-10-06 09:11:38] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 09:11:38] [INFO] Fichier sauvegardé avec succès: 618.74 KB
+[2025-10-06 09:11:38] [SUCCESS] Image traitée avec succès: citation_1759741898_68e387ca7ec1f.webp | Taille: 618.74 KB | Compression: 41.6% | Temps: 472.79ms
+[2025-10-06 09:13:49] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 09:13:49] [INFO] Utilisation du preset: citation - Image de transition (4:3) - lisibilité renforcée
+[2025-10-06 09:13:49] [INFO] Début traitement: crop.jpg
+[2025-10-06 09:13:49] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 09:13:49] [INFO] Dimensions originales: 1920x1440
+[2025-10-06 09:13:49] [INFO] Sauvegarde en WebP
+[2025-10-06 09:13:49] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 09:13:50] [INFO] Fichier sauvegardé avec succès: 618.74 KB
+[2025-10-06 09:13:50] [SUCCESS] Image traitée avec succès: citation_1759742029_68e3884dea504.webp | Taille: 618.74 KB | Compression: 41.6% | Temps: 543.46ms
+[2025-10-06 09:14:45] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 09:14:45] [INFO] Utilisation du preset: hero - Image hero - haute qualité - Panoramique (16:6)
+[2025-10-06 09:14:45] [INFO] Début traitement: crop.jpg
+[2025-10-06 09:14:45] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 09:14:45] [INFO] Dimensions originales: 2560x960
+[2025-10-06 09:14:45] [INFO] Sauvegarde en WebP
+[2025-10-06 09:14:45] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 09:14:45] [INFO] Fichier sauvegardé avec succès: 771.34 KB
+[2025-10-06 09:14:45] [SUCCESS] Image traitée avec succès: hero_1759742085_68e388855c313.webp | Taille: 771.34 KB | Compression: 33.1% | Temps: 440.41ms
+[2025-10-06 09:22:41] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 09:22:41] [INFO] Utilisation du preset: hero - Image hero - haute qualité - Panoramique (16:6)
+[2025-10-06 09:22:41] [INFO] Début traitement: crop.jpg
+[2025-10-06 09:22:41] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 09:22:41] [INFO] Dimensions originales: 1920x1440
+[2025-10-06 09:22:41] [INFO] Image redimensionnée: 1280x960
+[2025-10-06 09:22:41] [INFO] Sauvegarde en WebP
+[2025-10-06 09:22:41] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 09:22:41] [INFO] Fichier sauvegardé avec succès: 365 KB
+[2025-10-06 09:22:41] [SUCCESS] Image traitée avec succès: hero_1759742561_68e38a610e475.webp | Taille: 365 KB | Compression: 71.1% | Temps: 423.36ms
+[2025-10-06 09:27:50] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 09:27:50] [INFO] Utilisation du preset: hero - Image hero - haute qualité - Panoramique (16:6)
+[2025-10-06 09:27:50] [INFO] Début traitement: crop.jpg
+[2025-10-06 09:27:50] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 09:27:50] [INFO] Dimensions originales: 1920x1440
+[2025-10-06 09:27:50] [INFO] Image redimensionnée: 1280x960
+[2025-10-06 09:27:50] [INFO] Sauvegarde en WebP
+[2025-10-06 09:27:50] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 09:27:50] [INFO] Fichier sauvegardé avec succès: 365.38 KB
+[2025-10-06 09:27:50] [SUCCESS] Image traitée avec succès: hero_1759742870_68e38b9635b60.webp | Taille: 365.38 KB | Compression: 71.1% | Temps: 348.46ms
+[2025-10-06 10:09:53] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 10:09:53] [INFO] Utilisation du preset: hero - Image hero - haute qualité - Panoramique (16:6)
+[2025-10-06 10:09:53] [INFO] Début traitement: crop.jpg
+[2025-10-06 10:09:53] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 10:09:53] [INFO] Dimensions originales: 1920x1080
+[2025-10-06 10:09:53] [INFO] Image redimensionnée: 1706x960
+[2025-10-06 10:09:53] [INFO] Sauvegarde en WebP
+[2025-10-06 10:09:53] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 10:09:54] [INFO] Fichier sauvegardé avec succès: 315.16 KB
+[2025-10-06 10:09:54] [SUCCESS] Image traitée avec succès: hero_1759745393_68e39571add17.webp | Taille: 315.16 KB | Compression: 60.1% | Temps: 475.16ms
+[2025-10-06 10:56:58] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 10:56:58] [INFO] Utilisation du preset: hero - Image hero - haute qualité - Panoramique (16:6)
+[2025-10-06 10:56:58] [INFO] Début traitement: crop.jpg
+[2025-10-06 10:56:58] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 10:56:58] [INFO] Dimensions originales: 1920x1080
+[2025-10-06 10:56:58] [INFO] Image redimensionnée: 1706x960
+[2025-10-06 10:56:58] [INFO] Sauvegarde en WebP
+[2025-10-06 10:56:58] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 10:56:58] [INFO] Fichier sauvegardé avec succès: 355.4 KB
+[2025-10-06 10:56:58] [SUCCESS] Image traitée avec succès: hero_1759748218_68e3a07a5f0dd.webp | Taille: 355.4 KB | Compression: 58.3% | Temps: 652.98ms
+[2025-10-06 11:01:34] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 11:01:34] [INFO] Utilisation du preset: hero - Image hero - haute qualité - Panoramique (16:6)
+[2025-10-06 11:01:34] [INFO] Début traitement: crop.jpg
+[2025-10-06 11:01:34] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 11:01:35] [INFO] Dimensions originales: 2880x1620
+[2025-10-06 11:01:35] [INFO] Image redimensionnée: 1706x960
+[2025-10-06 11:01:35] [INFO] Sauvegarde en WebP
+[2025-10-06 11:01:35] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 11:01:35] [INFO] Fichier sauvegardé avec succès: 442.82 KB
+[2025-10-06 11:01:35] [SUCCESS] Image traitée avec succès: hero_1759748494_68e3a18ee0479.webp | Taille: 442.82 KB | Compression: 76.5% | Temps: 588.24ms
+[2025-10-06 11:02:12] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 11:02:12] [INFO] Utilisation du preset: citation - Image de transition (4:3) - lisibilité renforcée
+[2025-10-06 11:02:12] [INFO] Début traitement: crop.jpg
+[2025-10-06 11:02:12] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 11:02:12] [INFO] Dimensions originales: 1920x1440
+[2025-10-06 11:02:12] [INFO] Sauvegarde en WebP
+[2025-10-06 11:02:12] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 11:02:13] [INFO] Fichier sauvegardé avec succès: 775.92 KB
+[2025-10-06 11:02:13] [SUCCESS] Image traitée avec succès: citation_1759748532_68e3a1b4b08a2.webp | Taille: 775.92 KB | Compression: 36.1% | Temps: 482.25ms
+[2025-10-06 11:02:58] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 11:02:58] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 11:02:58] [INFO] Début traitement: crop.jpg
+[2025-10-06 11:02:58] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 11:02:58] [INFO] Dimensions originales: 600x800
+[2025-10-06 11:02:58] [INFO] Sauvegarde en WebP
+[2025-10-06 11:02:58] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 11:02:59] [INFO] Fichier sauvegardé avec succès: 48.24 KB
+[2025-10-06 11:02:59] [SUCCESS] Image traitée avec succès: member_1759748578_68e3a1e2e7e71.webp | Taille: 48.24 KB | Compression: 55.2% | Temps: 77.71ms
+[2025-10-06 14:24:08] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 14:24:08] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 14:24:08] [INFO] Début traitement: crop.jpg
+[2025-10-06 14:24:08] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 14:24:08] [INFO] Dimensions originales: 600x800
+[2025-10-06 14:24:08] [INFO] Sauvegarde en WebP
+[2025-10-06 14:24:08] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 14:24:09] [INFO] Fichier sauvegardé avec succès: 109.1 KB
+[2025-10-06 14:24:09] [SUCCESS] Image traitée avec succès: member_1759760648_68e3d108d740f.webp | Taille: 109.1 KB | Compression: 39.5% | Temps: 215.82ms
+[2025-10-06 14:31:32] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 14:31:32] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 14:31:32] [INFO] Début traitement: crop.jpg
+[2025-10-06 14:31:32] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 14:31:32] [INFO] Dimensions originales: 600x800
+[2025-10-06 14:31:32] [INFO] Sauvegarde en WebP
+[2025-10-06 14:31:32] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 14:31:32] [INFO] Fichier sauvegardé avec succès: 51.74 KB
+[2025-10-06 14:31:32] [SUCCESS] Image traitée avec succès: member_1759761092_68e3d2c44d4dd.webp | Taille: 51.74 KB | Compression: 54.4% | Temps: 160.99ms
+[2025-10-06 14:32:44] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 14:32:44] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 14:32:44] [INFO] Début traitement: crop.jpg
+[2025-10-06 14:32:44] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 14:32:44] [INFO] Dimensions originales: 600x800
+[2025-10-06 14:32:44] [INFO] Sauvegarde en WebP
+[2025-10-06 14:32:44] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 14:32:45] [INFO] Fichier sauvegardé avec succès: 123.8 KB
+[2025-10-06 14:32:45] [SUCCESS] Image traitée avec succès: member_1759761164_68e3d30cd80ca.webp | Taille: 123.8 KB | Compression: 38.6% | Temps: 143.86ms
+[2025-10-06 14:39:38] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 14:39:38] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 14:39:38] [INFO] Début traitement: crop.jpg
+[2025-10-06 14:39:38] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 14:39:38] [INFO] Dimensions originales: 600x800
+[2025-10-06 14:39:38] [INFO] Sauvegarde en WebP
+[2025-10-06 14:39:38] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 14:39:38] [INFO] Fichier sauvegardé avec succès: 53.98 KB
+[2025-10-06 14:39:38] [SUCCESS] Image traitée avec succès: member_1759761578_68e3d4aa79fe4.webp | Taille: 53.98 KB | Compression: 53.1% | Temps: 237.84ms
+[2025-10-06 14:40:41] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 14:40:41] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 14:40:41] [INFO] Début traitement: crop.jpg
+[2025-10-06 14:40:41] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 14:40:41] [INFO] Dimensions originales: 600x800
+[2025-10-06 14:40:41] [INFO] Sauvegarde en WebP
+[2025-10-06 14:40:41] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 14:40:41] [INFO] Fichier sauvegardé avec succès: 53.63 KB
+[2025-10-06 14:40:41] [SUCCESS] Image traitée avec succès: member_1759761641_68e3d4e911c7b.webp | Taille: 53.63 KB | Compression: 53.4% | Temps: 210.77ms
+[2025-10-06 14:45:16] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 14:45:16] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 14:45:16] [INFO] Début traitement: crop.jpg
+[2025-10-06 14:45:16] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 14:45:16] [INFO] Dimensions originales: 600x800
+[2025-10-06 14:45:16] [INFO] Sauvegarde en WebP
+[2025-10-06 14:45:16] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 14:45:16] [INFO] Fichier sauvegardé avec succès: 52.47 KB
+[2025-10-06 14:45:16] [SUCCESS] Image traitée avec succès: member_1759761916_68e3d5fc8e51d.webp | Taille: 52.47 KB | Compression: 54% | Temps: 206.66ms
+[2025-10-06 14:46:52] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 14:46:52] [INFO] Utilisation du preset: citation - Image de transition (4:3) - lisibilité renforcée
+[2025-10-06 14:46:52] [INFO] Début traitement: crop.jpg
+[2025-10-06 14:46:52] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 14:46:52] [INFO] Dimensions originales: 1920x1440
+[2025-10-06 14:46:52] [INFO] Sauvegarde en WebP
+[2025-10-06 14:46:52] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 14:46:53] [INFO] Fichier sauvegardé avec succès: 775.92 KB
+[2025-10-06 14:46:53] [SUCCESS] Image traitée avec succès: citation_1759762012_68e3d65cd9dc8.webp | Taille: 775.92 KB | Compression: 36.1% | Temps: 554.33ms
+[2025-10-06 14:47:53] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 14:47:53] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 14:47:53] [INFO] Début traitement: crop.jpg
+[2025-10-06 14:47:53] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 14:47:53] [INFO] Dimensions originales: 600x800
+[2025-10-06 14:47:53] [INFO] Sauvegarde en WebP
+[2025-10-06 14:47:53] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 14:47:53] [INFO] Fichier sauvegardé avec succès: 54.05 KB
+[2025-10-06 14:47:53] [SUCCESS] Image traitée avec succès: member_1759762073_68e3d69978de3.webp | Taille: 54.05 KB | Compression: 53.1% | Temps: 134.93ms
+[2025-10-06 14:48:30] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 14:48:30] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 14:48:30] [INFO] Début traitement: crop.jpg
+[2025-10-06 14:48:30] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 14:48:30] [INFO] Dimensions originales: 600x800
+[2025-10-06 14:48:30] [INFO] Sauvegarde en WebP
+[2025-10-06 14:48:30] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 14:48:30] [INFO] Fichier sauvegardé avec succès: 114.11 KB
+[2025-10-06 14:48:30] [SUCCESS] Image traitée avec succès: member_1759762110_68e3d6be355d5.webp | Taille: 114.11 KB | Compression: 38.5% | Temps: 124.01ms
+[2025-10-06 14:50:10] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 14:50:10] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 14:50:10] [INFO] Début traitement: crop.jpg
+[2025-10-06 14:50:10] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 14:50:10] [INFO] Dimensions originales: 600x800
+[2025-10-06 14:50:10] [INFO] Sauvegarde en WebP
+[2025-10-06 14:50:10] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 14:50:10] [INFO] Fichier sauvegardé avec succès: 51.25 KB
+[2025-10-06 14:50:10] [SUCCESS] Image traitée avec succès: member_1759762210_68e3d7224c224.webp | Taille: 51.25 KB | Compression: 54.5% | Temps: 88.9ms
+[2025-10-06 14:50:56] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 14:50:56] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 14:50:56] [INFO] Début traitement: crop.jpg
+[2025-10-06 14:50:56] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 14:50:56] [INFO] Dimensions originales: 600x800
+[2025-10-06 14:50:56] [INFO] Sauvegarde en WebP
+[2025-10-06 14:50:56] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 14:50:57] [INFO] Fichier sauvegardé avec succès: 113.84 KB
+[2025-10-06 14:50:57] [SUCCESS] Image traitée avec succès: member_1759762256_68e3d750dad09.webp | Taille: 113.84 KB | Compression: 39.2% | Temps: 109.31ms
+[2025-10-06 14:54:33] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 14:54:33] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 14:54:33] [INFO] Début traitement: crop.jpg
+[2025-10-06 14:54:33] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 14:54:33] [INFO] Dimensions originales: 600x800
+[2025-10-06 14:54:33] [INFO] Sauvegarde en WebP
+[2025-10-06 14:54:33] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 14:54:33] [INFO] Fichier sauvegardé avec succès: 106.92 KB
+[2025-10-06 14:54:33] [SUCCESS] Image traitée avec succès: member_1759762473_68e3d829c41f3.webp | Taille: 106.92 KB | Compression: 39.9% | Temps: 140.31ms
+[2025-10-06 14:58:32] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 14:58:32] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 14:58:32] [INFO] Début traitement: crop.jpg
+[2025-10-06 14:58:32] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 14:58:32] [INFO] Dimensions originales: 600x800
+[2025-10-06 14:58:32] [INFO] Sauvegarde en WebP
+[2025-10-06 14:58:32] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 14:58:32] [INFO] Fichier sauvegardé avec succès: 108.8 KB
+[2025-10-06 14:58:32] [SUCCESS] Image traitée avec succès: member_1759762712_68e3d91880d82.webp | Taille: 108.8 KB | Compression: 38.9% | Temps: 207.23ms
+[2025-10-06 14:58:32] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 14:58:32] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 14:58:32] [INFO] Début traitement: Photo Frederic Maligne-090.jpg
+[2025-10-06 14:58:32] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 14:58:33] [INFO] Dimensions originales: 4041x6062
+[2025-10-06 14:58:34] [INFO] Image redimensionnée: 533x800
+[2025-10-06 14:58:34] [INFO] Sauvegarde en WebP
+[2025-10-06 14:58:34] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 14:58:34] [INFO] Fichier sauvegardé avec succès: 88.08 KB
+[2025-10-06 14:58:34] [SUCCESS] Image traitée avec succès: member_1759762712_68e3d918d89a7.webp | Taille: 88.08 KB | Compression: 95.5% | Temps: 1389.44ms
+[2025-10-06 14:59:13] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 14:59:13] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 14:59:13] [INFO] Début traitement: crop.jpg
+[2025-10-06 14:59:13] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 14:59:13] [INFO] Dimensions originales: 600x800
+[2025-10-06 14:59:13] [INFO] Sauvegarde en WebP
+[2025-10-06 14:59:13] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 14:59:13] [INFO] Fichier sauvegardé avec succès: 52.14 KB
+[2025-10-06 14:59:13] [SUCCESS] Image traitée avec succès: member_1759762753_68e3d941a8664.webp | Taille: 52.14 KB | Compression: 54.1% | Temps: 89.18ms
+[2025-10-06 14:59:13] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 14:59:13] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 14:59:13] [INFO] Début traitement: Photo Frederic Maligne-085.jpg
+[2025-10-06 14:59:13] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 14:59:14] [INFO] Dimensions originales: 3891x5836
+[2025-10-06 14:59:14] [INFO] Image redimensionnée: 533x799
+[2025-10-06 14:59:14] [INFO] Sauvegarde en WebP
+[2025-10-06 14:59:14] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 14:59:14] [INFO] Fichier sauvegardé avec succès: 45.2 KB
+[2025-10-06 14:59:14] [SUCCESS] Image traitée avec succès: member_1759762753_68e3d941ee40f.webp | Taille: 45.2 KB | Compression: 96.3% | Temps: 796.24ms
+[2025-10-06 15:00:51] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 15:00:51] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 15:00:51] [INFO] Début traitement: crop.jpg
+[2025-10-06 15:00:51] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 15:00:51] [INFO] Dimensions originales: 600x800
+[2025-10-06 15:00:51] [INFO] Sauvegarde en WebP
+[2025-10-06 15:00:51] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 15:00:52] [INFO] Fichier sauvegardé avec succès: 81.77 KB
+[2025-10-06 15:00:52] [SUCCESS] Image traitée avec succès: member_1759762851_68e3d9a3e69eb.webp | Taille: 81.77 KB | Compression: 42.2% | Temps: 132.21ms
+[2025-10-06 15:00:52] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 15:00:52] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 15:00:52] [INFO] Début traitement: Photo Frederic Maligne-081.jpg
+[2025-10-06 15:00:52] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 15:00:52] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 15:00:53] [INFO] Image redimensionnée: 533x800
+[2025-10-06 15:00:53] [INFO] Sauvegarde en WebP
+[2025-10-06 15:00:53] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 15:00:53] [INFO] Fichier sauvegardé avec succès: 75.03 KB
+[2025-10-06 15:00:53] [SUCCESS] Image traitée avec succès: member_1759762852_68e3d9a429c62.webp | Taille: 75.03 KB | Compression: 94.7% | Temps: 977.29ms
+[2025-10-06 15:04:39] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 15:04:39] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 15:04:39] [INFO] Début traitement: crop.jpg
+[2025-10-06 15:04:39] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 15:04:39] [INFO] Dimensions originales: 600x800
+[2025-10-06 15:04:39] [INFO] Sauvegarde en WebP
+[2025-10-06 15:04:39] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 15:04:40] [INFO] Fichier sauvegardé avec succès: 52.36 KB
+[2025-10-06 15:04:40] [SUCCESS] Image traitée avec succès: member_1759763079_68e3da87e56ed.webp | Taille: 52.36 KB | Compression: 53.9% | Temps: 178.91ms
+[2025-10-06 15:04:40] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 15:04:40] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 15:04:40] [INFO] Début traitement: Photo Frederic Maligne-085.jpg
+[2025-10-06 15:04:40] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 15:04:40] [INFO] Dimensions originales: 3891x5836
+[2025-10-06 15:04:41] [INFO] Image redimensionnée: 533x799
+[2025-10-06 15:04:41] [INFO] Sauvegarde en WebP
+[2025-10-06 15:04:41] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 15:04:41] [INFO] Fichier sauvegardé avec succès: 45.2 KB
+[2025-10-06 15:04:41] [SUCCESS] Image traitée avec succès: member_1759763080_68e3da8835200.webp | Taille: 45.2 KB | Compression: 96.3% | Temps: 887.02ms
+[2025-10-06 15:06:25] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 15:06:25] [INFO] Utilisation du preset: citation - Image de transition (4:3) - lisibilité renforcée
+[2025-10-06 15:06:25] [INFO] Début traitement: crop.jpg
+[2025-10-06 15:06:25] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 15:06:25] [INFO] Dimensions originales: 1920x1440
+[2025-10-06 15:06:25] [INFO] Sauvegarde en WebP
+[2025-10-06 15:06:25] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 15:06:26] [INFO] Fichier sauvegardé avec succès: 616.83 KB
+[2025-10-06 15:06:26] [SUCCESS] Image traitée avec succès: citation_1759763185_68e3daf19ddfa.webp | Taille: 616.83 KB | Compression: 40.6% | Temps: 536.41ms
+[2025-10-06 16:29:07] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 16:29:07] [INFO] Utilisation du preset: citation - Image de transition (4:3) - lisibilité renforcée
+[2025-10-06 16:29:07] [INFO] Début traitement: crop.jpg
+[2025-10-06 16:29:07] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 16:29:07] [INFO] Dimensions originales: 1920x1440
+[2025-10-06 16:29:07] [INFO] Sauvegarde en WebP
+[2025-10-06 16:29:07] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 16:29:08] [INFO] Fichier sauvegardé avec succès: 616.83 KB
+[2025-10-06 16:29:08] [SUCCESS] Image traitée avec succès: citation_1759768147_68e3ee53765ab.webp | Taille: 616.83 KB | Compression: 40.6% | Temps: 1448.22ms
+[2025-10-06 16:29:42] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 16:29:42] [INFO] Utilisation du preset: citation - Image de transition (4:3) - lisibilité renforcée
+[2025-10-06 16:29:42] [INFO] Début traitement: crop.jpg
+[2025-10-06 16:29:42] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 16:29:42] [INFO] Dimensions originales: 1920x1440
+[2025-10-06 16:29:42] [INFO] Sauvegarde en WebP
+[2025-10-06 16:29:42] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 16:29:43] [INFO] Fichier sauvegardé avec succès: 825.45 KB
+[2025-10-06 16:29:43] [SUCCESS] Image traitée avec succès: citation_1759768182_68e3ee767f389.webp | Taille: 825.45 KB | Compression: 34.7% | Temps: 696.55ms
+[2025-10-06 16:44:43] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 16:44:43] [INFO] Utilisation du preset: citation - Image de transition (4:3) - lisibilité renforcée
+[2025-10-06 16:44:43] [INFO] Début traitement: crop.jpg
+[2025-10-06 16:44:43] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 16:44:43] [INFO] Dimensions originales: 1920x1440
+[2025-10-06 16:44:43] [INFO] Sauvegarde en WebP
+[2025-10-06 16:44:43] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 16:44:43] [INFO] Fichier sauvegardé avec succès: 658.55 KB
+[2025-10-06 16:44:43] [SUCCESS] Image traitée avec succès: citation_1759769083_68e3f1fb370c2.webp | Taille: 658.55 KB | Compression: 37.4% | Temps: 667.2ms
+[2025-10-06 20:22:07] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 20:22:07] [INFO] Utilisation du preset: citation - Image de transition (4:3) - lisibilité renforcée
+[2025-10-06 20:22:07] [INFO] Début traitement: crop.jpg
+[2025-10-06 20:22:07] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 20:22:07] [INFO] Dimensions originales: 1920x1440
+[2025-10-06 20:22:07] [INFO] Sauvegarde en WebP
+[2025-10-06 20:22:07] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 20:22:07] [INFO] Fichier sauvegardé avec succès: 511.18 KB
+[2025-10-06 20:22:07] [SUCCESS] Image traitée avec succès: citation_1759782127_68e424ef1aa4a.webp | Taille: 511.18 KB | Compression: 43.9% | Temps: 543.37ms
+[2025-10-06 21:00:11] [INFO] Limite mémoire PHP: 128M
+[2025-10-06 21:00:11] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:11] [INFO] Début traitement: Photo Frederic Maligne-022.jpg
+[2025-10-06 21:00:11] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:12] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:13] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:13] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:13] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:13] [INFO] Fichier sauvegardé avec succès: 55.53 KB
+[2025-10-06 21:00:13] [SUCCESS] Image traitée avec succès: gallery_1759784411_68e42ddb3d608.webp | Taille: 55.53 KB | Compression: 96.7% | Temps: 2077.06ms
+[2025-10-06 21:00:13] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:13] [INFO] Début traitement: Photo Frederic Maligne-023.jpg
+[2025-10-06 21:00:13] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:13] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:14] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:14] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:14] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:14] [INFO] Fichier sauvegardé avec succès: 55.97 KB
+[2025-10-06 21:00:14] [SUCCESS] Image traitée avec succès: gallery_1759784413_68e42ddd5765b.webp | Taille: 55.97 KB | Compression: 97% | Temps: 806.31ms
+[2025-10-06 21:00:14] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:14] [INFO] Début traitement: Photo Frederic Maligne-024.jpg
+[2025-10-06 21:00:14] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:14] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:14] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:14] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:14] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:14] [INFO] Fichier sauvegardé avec succès: 35.72 KB
+[2025-10-06 21:00:14] [SUCCESS] Image traitée avec succès: gallery_1759784414_68e42dde28ede.webp | Taille: 35.72 KB | Compression: 96.7% | Temps: 709.66ms
+[2025-10-06 21:00:14] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:14] [INFO] Début traitement: Photo Frederic Maligne-025.jpg
+[2025-10-06 21:00:14] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:15] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:15] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:15] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:15] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:15] [INFO] Fichier sauvegardé avec succès: 35.16 KB
+[2025-10-06 21:00:15] [SUCCESS] Image traitée avec succès: gallery_1759784414_68e42ddedbf50.webp | Taille: 35.16 KB | Compression: 96.8% | Temps: 708.73ms
+[2025-10-06 21:00:15] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:15] [INFO] Début traitement: Photo Frederic Maligne-026.jpg
+[2025-10-06 21:00:15] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:15] [INFO] Dimensions originales: 3871x5807
+[2025-10-06 21:00:16] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:16] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:16] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:16] [INFO] Fichier sauvegardé avec succès: 52.14 KB
+[2025-10-06 21:00:16] [SUCCESS] Image traitée avec succès: gallery_1759784415_68e42ddf9ac52.webp | Taille: 52.14 KB | Compression: 95.3% | Temps: 581.83ms
+[2025-10-06 21:00:16] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:16] [INFO] Début traitement: Photo Frederic Maligne-027.jpg
+[2025-10-06 21:00:16] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:16] [INFO] Dimensions originales: 4110x6165
+[2025-10-06 21:00:16] [INFO] Image redimensionnée: 533x799
+[2025-10-06 21:00:16] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:16] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:16] [INFO] Fichier sauvegardé avec succès: 50.32 KB
+[2025-10-06 21:00:16] [SUCCESS] Image traitée avec succès: gallery_1759784416_68e42de03750a.webp | Taille: 50.32 KB | Compression: 95.8% | Temps: 645.57ms
+[2025-10-06 21:00:16] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:16] [INFO] Début traitement: Photo Frederic Maligne-028.jpg
+[2025-10-06 21:00:16] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:17] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:17] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:17] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:17] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:17] [INFO] Fichier sauvegardé avec succès: 51.36 KB
+[2025-10-06 21:00:17] [SUCCESS] Image traitée avec succès: gallery_1759784416_68e42de0d9373.webp | Taille: 51.36 KB | Compression: 96.5% | Temps: 813.14ms
+[2025-10-06 21:00:17] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:17] [INFO] Début traitement: Photo Frederic Maligne-029.jpg
+[2025-10-06 21:00:17] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:18] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:18] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:18] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:18] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:18] [INFO] Fichier sauvegardé avec succès: 41.62 KB
+[2025-10-06 21:00:18] [SUCCESS] Image traitée avec succès: gallery_1759784417_68e42de1b037f.webp | Taille: 41.62 KB | Compression: 96.9% | Temps: 713.59ms
+[2025-10-06 21:00:18] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:18] [INFO] Début traitement: Photo Frederic Maligne-030.jpg
+[2025-10-06 21:00:18] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:18] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:19] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:19] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:19] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:19] [INFO] Fichier sauvegardé avec succès: 42.86 KB
+[2025-10-06 21:00:19] [SUCCESS] Image traitée avec succès: gallery_1759784418_68e42de27026a.webp | Taille: 42.86 KB | Compression: 96.9% | Temps: 740.24ms
+[2025-10-06 21:00:19] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:19] [INFO] Début traitement: Photo Frederic Maligne-031.jpg
+[2025-10-06 21:00:19] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:19] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:19] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:19] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:19] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:19] [INFO] Fichier sauvegardé avec succès: 44.9 KB
+[2025-10-06 21:00:19] [SUCCESS] Image traitée avec succès: gallery_1759784419_68e42de334fc9.webp | Taille: 44.9 KB | Compression: 97% | Temps: 742.06ms
+[2025-10-06 21:00:19] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:19] [INFO] Début traitement: Photo Frederic Maligne-032.jpg
+[2025-10-06 21:00:19] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:20] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:20] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:20] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:20] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:21] [INFO] Fichier sauvegardé avec succès: 49.58 KB
+[2025-10-06 21:00:21] [SUCCESS] Image traitée avec succès: gallery_1759784419_68e42de3efa09.webp | Taille: 49.58 KB | Compression: 97.1% | Temps: 1088.55ms
+[2025-10-06 21:00:21] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:21] [INFO] Début traitement: Photo Frederic Maligne-033.jpg
+[2025-10-06 21:00:21] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:21] [INFO] Dimensions originales: 4056x6084
+[2025-10-06 21:00:22] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:22] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:22] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:22] [INFO] Fichier sauvegardé avec succès: 57.33 KB
+[2025-10-06 21:00:22] [SUCCESS] Image traitée avec succès: gallery_1759784421_68e42de525705.webp | Taille: 57.33 KB | Compression: 96.6% | Temps: 1103.25ms
+[2025-10-06 21:00:22] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:22] [INFO] Début traitement: Photo Frederic Maligne-034.jpg
+[2025-10-06 21:00:22] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:22] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:22] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:22] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:22] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:23] [INFO] Fichier sauvegardé avec succès: 47.82 KB
+[2025-10-06 21:00:23] [SUCCESS] Image traitée avec succès: gallery_1759784422_68e42de63199f.webp | Taille: 47.82 KB | Compression: 97% | Temps: 859.32ms
+[2025-10-06 21:00:23] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:23] [INFO] Début traitement: Photo Frederic Maligne-035.jpg
+[2025-10-06 21:00:23] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:23] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:23] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:23] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:23] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:23] [INFO] Fichier sauvegardé avec succès: 44.36 KB
+[2025-10-06 21:00:23] [SUCCESS] Image traitée avec succès: gallery_1759784423_68e42de714337.webp | Taille: 44.36 KB | Compression: 97% | Temps: 785.88ms
+[2025-10-06 21:00:23] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:23] [INFO] Début traitement: Photo Frederic Maligne-036.jpg
+[2025-10-06 21:00:23] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:24] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:24] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:24] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:24] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:24] [INFO] Fichier sauvegardé avec succès: 46.18 KB
+[2025-10-06 21:00:24] [SUCCESS] Image traitée avec succès: gallery_1759784423_68e42de7da6ff.webp | Taille: 46.18 KB | Compression: 97.1% | Temps: 740.43ms
+[2025-10-06 21:00:24] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:24] [INFO] Début traitement: Photo Frederic Maligne-037.jpg
+[2025-10-06 21:00:24] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:24] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:25] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:25] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:25] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:25] [INFO] Fichier sauvegardé avec succès: 66.1 KB
+[2025-10-06 21:00:25] [SUCCESS] Image traitée avec succès: gallery_1759784424_68e42de89f283.webp | Taille: 66.1 KB | Compression: 96.9% | Temps: 756.29ms
+[2025-10-06 21:00:25] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:25] [INFO] Début traitement: Photo Frederic Maligne-038.jpg
+[2025-10-06 21:00:25] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:25] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:26] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:26] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:26] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:26] [INFO] Fichier sauvegardé avec succès: 66.56 KB
+[2025-10-06 21:00:26] [SUCCESS] Image traitée avec succès: gallery_1759784425_68e42de969090.webp | Taille: 66.56 KB | Compression: 96.9% | Temps: 725.78ms
+[2025-10-06 21:00:26] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:26] [INFO] Début traitement: Photo Frederic Maligne-039.jpg
+[2025-10-06 21:00:26] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:26] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:26] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:26] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:26] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:26] [INFO] Fichier sauvegardé avec succès: 66.15 KB
+[2025-10-06 21:00:26] [SUCCESS] Image traitée avec succès: gallery_1759784426_68e42dea2911e.webp | Taille: 66.15 KB | Compression: 96.9% | Temps: 705.89ms
+[2025-10-06 21:00:26] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:26] [INFO] Début traitement: Photo Frederic Maligne-040.jpg
+[2025-10-06 21:00:26] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:27] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:27] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:27] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:27] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:27] [INFO] Fichier sauvegardé avec succès: 61.42 KB
+[2025-10-06 21:00:27] [SUCCESS] Image traitée avec succès: gallery_1759784426_68e42deadebf8.webp | Taille: 61.42 KB | Compression: 96.6% | Temps: 776.84ms
+[2025-10-06 21:00:27] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:27] [INFO] Début traitement: Photo Frederic Maligne-041.jpg
+[2025-10-06 21:00:27] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:28] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:28] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:28] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:28] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:28] [INFO] Fichier sauvegardé avec succès: 71.3 KB
+[2025-10-06 21:00:28] [SUCCESS] Image traitée avec succès: gallery_1759784427_68e42debaf286.webp | Taille: 71.3 KB | Compression: 96.6% | Temps: 1039.21ms
+[2025-10-06 21:00:28] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:28] [INFO] Début traitement: Photo Frederic Maligne-042.jpg
+[2025-10-06 21:00:28] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:29] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:29] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:29] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:29] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:29] [INFO] Fichier sauvegardé avec succès: 65.71 KB
+[2025-10-06 21:00:29] [SUCCESS] Image traitée avec succès: gallery_1759784428_68e42decc201f.webp | Taille: 65.71 KB | Compression: 96.2% | Temps: 779.16ms
+[2025-10-06 21:00:29] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:29] [INFO] Début traitement: Photo Frederic Maligne-043.jpg
+[2025-10-06 21:00:29] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:29] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:30] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:30] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:30] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:30] [INFO] Fichier sauvegardé avec succès: 71.08 KB
+[2025-10-06 21:00:30] [SUCCESS] Image traitée avec succès: gallery_1759784429_68e42ded8d2fc.webp | Taille: 71.08 KB | Compression: 96.6% | Temps: 803.18ms
+[2025-10-06 21:00:30] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:30] [INFO] Début traitement: Photo Frederic Maligne-044.jpg
+[2025-10-06 21:00:30] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:30] [INFO] Dimensions originales: 3898x5847
+[2025-10-06 21:00:30] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:30] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:30] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:30] [INFO] Fichier sauvegardé avec succès: 63.24 KB
+[2025-10-06 21:00:30] [SUCCESS] Image traitée avec succès: gallery_1759784430_68e42dee5f6d5.webp | Taille: 63.24 KB | Compression: 94.7% | Temps: 581.02ms
+[2025-10-06 21:00:30] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:30] [INFO] Début traitement: Photo Frederic Maligne-045.jpg
+[2025-10-06 21:00:30] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:31] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:31] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:31] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:31] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:31] [INFO] Fichier sauvegardé avec succès: 61.81 KB
+[2025-10-06 21:00:31] [SUCCESS] Image traitée avec succès: gallery_1759784430_68e42deeefc4a.webp | Taille: 61.81 KB | Compression: 95.7% | Temps: 702.88ms
+[2025-10-06 21:00:31] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:31] [INFO] Début traitement: Photo Frederic Maligne-046.jpg
+[2025-10-06 21:00:31] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:31] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:32] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:32] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:32] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:32] [INFO] Fichier sauvegardé avec succès: 60.05 KB
+[2025-10-06 21:00:32] [SUCCESS] Image traitée avec succès: gallery_1759784431_68e42defab1c7.webp | Taille: 60.05 KB | Compression: 95.7% | Temps: 758.19ms
+[2025-10-06 21:00:32] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:32] [INFO] Début traitement: Photo Frederic Maligne-047.jpg
+[2025-10-06 21:00:32] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:32] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:33] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:33] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:33] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:33] [INFO] Fichier sauvegardé avec succès: 62.55 KB
+[2025-10-06 21:00:33] [SUCCESS] Image traitée avec succès: gallery_1759784432_68e42df074328.webp | Taille: 62.55 KB | Compression: 95.7% | Temps: 816.08ms
+[2025-10-06 21:00:33] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:33] [INFO] Début traitement: Photo Frederic Maligne-048.jpg
+[2025-10-06 21:00:33] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:33] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:34] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:34] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:34] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:34] [INFO] Fichier sauvegardé avec succès: 58.61 KB
+[2025-10-06 21:00:34] [SUCCESS] Image traitée avec succès: gallery_1759784433_68e42df14e733.webp | Taille: 58.61 KB | Compression: 95.8% | Temps: 1421.69ms
+[2025-10-06 21:00:34] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:34] [INFO] Début traitement: Photo Frederic Maligne-049.jpg
+[2025-10-06 21:00:34] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:35] [INFO] Dimensions originales: 4031x6047
+[2025-10-06 21:00:35] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:35] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:35] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:35] [INFO] Fichier sauvegardé avec succès: 61.2 KB
+[2025-10-06 21:00:35] [SUCCESS] Image traitée avec succès: gallery_1759784434_68e42df2b8fa4.webp | Taille: 61.2 KB | Compression: 96.2% | Temps: 968.5ms
+[2025-10-06 21:00:35] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:35] [INFO] Début traitement: Photo Frederic Maligne-050.jpg
+[2025-10-06 21:00:35] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:36] [INFO] Dimensions originales: 4189x6283
+[2025-10-06 21:00:36] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:36] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:36] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:36] [INFO] Fichier sauvegardé avec succès: 59.6 KB
+[2025-10-06 21:00:36] [SUCCESS] Image traitée avec succès: gallery_1759784435_68e42df3b374b.webp | Taille: 59.6 KB | Compression: 96.3% | Temps: 1091.27ms
+[2025-10-06 21:00:36] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:36] [INFO] Début traitement: Photo Frederic Maligne-051.jpg
+[2025-10-06 21:00:36] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:37] [INFO] Dimensions originales: 4129x6193
+[2025-10-06 21:00:37] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:37] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:37] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:37] [INFO] Fichier sauvegardé avec succès: 59.63 KB
+[2025-10-06 21:00:37] [SUCCESS] Image traitée avec succès: gallery_1759784436_68e42df4cd0a3.webp | Taille: 59.63 KB | Compression: 96.1% | Temps: 1072.32ms
+[2025-10-06 21:00:37] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:37] [INFO] Début traitement: Photo Frederic Maligne-052.jpg
+[2025-10-06 21:00:37] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:38] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:39] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:39] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:39] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:39] [INFO] Fichier sauvegardé avec succès: 52.86 KB
+[2025-10-06 21:00:39] [SUCCESS] Image traitée avec succès: gallery_1759784437_68e42df5e3129.webp | Taille: 52.86 KB | Compression: 96.2% | Temps: 1220.88ms
+[2025-10-06 21:00:39] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:39] [INFO] Début traitement: Photo Frederic Maligne-053.jpg
+[2025-10-06 21:00:39] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:40] [INFO] Dimensions originales: 4105x6157
+[2025-10-06 21:00:40] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:40] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:40] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:41] [INFO] Fichier sauvegardé avec succès: 52.17 KB
+[2025-10-06 21:00:41] [SUCCESS] Image traitée avec succès: gallery_1759784439_68e42df72acae.webp | Taille: 52.17 KB | Compression: 96% | Temps: 1872.73ms
+[2025-10-06 21:00:41] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:41] [INFO] Début traitement: Photo Frederic Maligne-054.jpg
+[2025-10-06 21:00:41] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:41] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:43] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:43] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:43] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:43] [INFO] Fichier sauvegardé avec succès: 45.69 KB
+[2025-10-06 21:00:43] [SUCCESS] Image traitée avec succès: gallery_1759784441_68e42df91123b.webp | Taille: 45.69 KB | Compression: 96.7% | Temps: 2351.14ms
+[2025-10-06 21:00:43] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:43] [INFO] Début traitement: Photo Frederic Maligne-055.jpg
+[2025-10-06 21:00:43] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:44] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:46] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:46] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:46] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:46] [INFO] Fichier sauvegardé avec succès: 45.9 KB
+[2025-10-06 21:00:46] [SUCCESS] Image traitée avec succès: gallery_1759784443_68e42dfb6c5fd.webp | Taille: 45.9 KB | Compression: 96.9% | Temps: 3142.86ms
+[2025-10-06 21:00:46] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:46] [INFO] Début traitement: Photo Frederic Maligne-056.jpg
+[2025-10-06 21:00:46] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:47] [INFO] Dimensions originales: 4013x6020
+[2025-10-06 21:00:48] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:48] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:48] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:48] [INFO] Fichier sauvegardé avec succès: 52.79 KB
+[2025-10-06 21:00:48] [SUCCESS] Image traitée avec succès: gallery_1759784446_68e42dfe951d5.webp | Taille: 52.79 KB | Compression: 95.8% | Temps: 1530.65ms
+[2025-10-06 21:00:48] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:48] [INFO] Début traitement: Photo Frederic Maligne-057.jpg
+[2025-10-06 21:00:48] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:48] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:50] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:50] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:50] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:50] [INFO] Fichier sauvegardé avec succès: 62.4 KB
+[2025-10-06 21:00:50] [SUCCESS] Image traitée avec succès: gallery_1759784448_68e42e002700b.webp | Taille: 62.4 KB | Compression: 96.9% | Temps: 2209.58ms
+[2025-10-06 21:00:50] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:50] [INFO] Début traitement: Photo Frederic Maligne-058.jpg
+[2025-10-06 21:00:50] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:51] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:51] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:51] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:51] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:52] [INFO] Fichier sauvegardé avec succès: 67.58 KB
+[2025-10-06 21:00:52] [SUCCESS] Image traitée avec succès: gallery_1759784450_68e42e026b498.webp | Taille: 67.58 KB | Compression: 96.8% | Temps: 1687.33ms
+[2025-10-06 21:00:52] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:52] [INFO] Début traitement: Photo Frederic Maligne-059.jpg
+[2025-10-06 21:00:52] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:52] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:53] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:53] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:53] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:53] [INFO] Fichier sauvegardé avec succès: 65.06 KB
+[2025-10-06 21:00:53] [SUCCESS] Image traitée avec succès: gallery_1759784452_68e42e0420bf6.webp | Taille: 65.06 KB | Compression: 96.7% | Temps: 1676.83ms
+[2025-10-06 21:00:53] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:53] [INFO] Début traitement: Photo Frederic Maligne-060.jpg
+[2025-10-06 21:00:53] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:54] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:54] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:54] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:54] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:54] [INFO] Fichier sauvegardé avec succès: 66.4 KB
+[2025-10-06 21:00:54] [SUCCESS] Image traitée avec succès: gallery_1759784453_68e42e05c8bc0.webp | Taille: 66.4 KB | Compression: 96.7% | Temps: 1002.9ms
+[2025-10-06 21:00:54] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:54] [INFO] Début traitement: Photo Frederic Maligne-061.jpg
+[2025-10-06 21:00:54] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:55] [INFO] Dimensions originales: 4056x6084
+[2025-10-06 21:00:55] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:55] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:55] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:55] [INFO] Fichier sauvegardé avec succès: 71.2 KB
+[2025-10-06 21:00:55] [SUCCESS] Image traitée avec succès: gallery_1759784454_68e42e06cbb21.webp | Taille: 71.2 KB | Compression: 95.8% | Temps: 730.66ms
+[2025-10-06 21:00:55] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:55] [INFO] Début traitement: Photo Frederic Maligne-062.jpg
+[2025-10-06 21:00:55] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:55] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:56] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:56] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:56] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:56] [INFO] Fichier sauvegardé avec succès: 64.25 KB
+[2025-10-06 21:00:56] [SUCCESS] Image traitée avec succès: gallery_1759784455_68e42e078dacb.webp | Taille: 64.25 KB | Compression: 96.5% | Temps: 834.51ms
+[2025-10-06 21:00:56] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:56] [INFO] Début traitement: Photo Frederic Maligne-063.jpg
+[2025-10-06 21:00:56] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:56] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:57] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:57] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:57] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:57] [INFO] Fichier sauvegardé avec succès: 45.78 KB
+[2025-10-06 21:00:57] [SUCCESS] Image traitée avec succès: gallery_1759784456_68e42e0867c7b.webp | Taille: 45.78 KB | Compression: 96.7% | Temps: 742.28ms
+[2025-10-06 21:00:57] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:57] [INFO] Début traitement: Photo Frederic Maligne-064.jpg
+[2025-10-06 21:00:57] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:57] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:57] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:57] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:57] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:57] [INFO] Fichier sauvegardé avec succès: 41.93 KB
+[2025-10-06 21:00:57] [SUCCESS] Image traitée avec succès: gallery_1759784457_68e42e092e879.webp | Taille: 41.93 KB | Compression: 96.8% | Temps: 730.51ms
+[2025-10-06 21:00:57] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:57] [INFO] Début traitement: Photo Frederic Maligne-065.jpg
+[2025-10-06 21:00:57] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:58] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:00:58] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:58] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:58] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:58] [INFO] Fichier sauvegardé avec succès: 43.04 KB
+[2025-10-06 21:00:58] [SUCCESS] Image traitée avec succès: gallery_1759784457_68e42e09e2a0f.webp | Taille: 43.04 KB | Compression: 96.8% | Temps: 678.04ms
+[2025-10-06 21:00:58] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:58] [INFO] Début traitement: Photo Frederic Maligne-066.jpg
+[2025-10-06 21:00:58] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:58] [INFO] Dimensions originales: 3974x5961
+[2025-10-06 21:00:59] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:59] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:59] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:59] [INFO] Fichier sauvegardé avec succès: 39.74 KB
+[2025-10-06 21:00:59] [SUCCESS] Image traitée avec succès: gallery_1759784458_68e42e0a97ec4.webp | Taille: 39.74 KB | Compression: 95.9% | Temps: 584.43ms
+[2025-10-06 21:00:59] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:59] [INFO] Début traitement: Photo Frederic Maligne-067.jpg
+[2025-10-06 21:00:59] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:00:59] [INFO] Dimensions originales: 3872x5808
+[2025-10-06 21:00:59] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:00:59] [INFO] Sauvegarde en WebP
+[2025-10-06 21:00:59] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:00:59] [INFO] Fichier sauvegardé avec succès: 42.05 KB
+[2025-10-06 21:00:59] [SUCCESS] Image traitée avec succès: gallery_1759784459_68e42e0b37f90.webp | Taille: 42.05 KB | Compression: 96.3% | Temps: 598.62ms
+[2025-10-06 21:00:59] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:00:59] [INFO] Début traitement: Photo Frederic Maligne-068.jpg
+[2025-10-06 21:00:59] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:00] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:01:00] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:01:00] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:00] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:00] [INFO] Fichier sauvegardé avec succès: 35.22 KB
+[2025-10-06 21:01:00] [SUCCESS] Image traitée avec succès: gallery_1759784459_68e42e0bcb93b.webp | Taille: 35.22 KB | Compression: 97% | Temps: 815.38ms
+[2025-10-06 21:01:00] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:01:00] [INFO] Début traitement: Photo Frederic Maligne-069.jpg
+[2025-10-06 21:01:00] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:00] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:01:01] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:01:01] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:01] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:01] [INFO] Fichier sauvegardé avec succès: 73.64 KB
+[2025-10-06 21:01:01] [SUCCESS] Image traitée avec succès: gallery_1759784460_68e42e0ca59f3.webp | Taille: 73.64 KB | Compression: 95.6% | Temps: 809.44ms
+[2025-10-06 21:01:01] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:01:01] [INFO] Début traitement: Photo Frederic Maligne-070.jpg
+[2025-10-06 21:01:01] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:01] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:01:02] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:01:02] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:02] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:02] [INFO] Fichier sauvegardé avec succès: 75.49 KB
+[2025-10-06 21:01:02] [SUCCESS] Image traitée avec succès: gallery_1759784461_68e42e0d79979.webp | Taille: 75.49 KB | Compression: 95.9% | Temps: 864.27ms
+[2025-10-06 21:01:02] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:01:02] [INFO] Début traitement: Photo Frederic Maligne-071.jpg
+[2025-10-06 21:01:02] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:02] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:01:03] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:01:03] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:03] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:03] [INFO] Fichier sauvegardé avec succès: 70.7 KB
+[2025-10-06 21:01:03] [SUCCESS] Image traitée avec succès: gallery_1759784462_68e42e0e5d27b.webp | Taille: 70.7 KB | Compression: 96.1% | Temps: 860.38ms
+[2025-10-06 21:01:03] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:01:03] [INFO] Début traitement: Photo Frederic Maligne-072.jpg
+[2025-10-06 21:01:03] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:03] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:01:03] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:01:03] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:03] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:04] [INFO] Fichier sauvegardé avec succès: 71.86 KB
+[2025-10-06 21:01:04] [SUCCESS] Image traitée avec succès: gallery_1759784463_68e42e0f41888.webp | Taille: 71.86 KB | Compression: 96.1% | Temps: 810.55ms
+[2025-10-06 21:01:04] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:01:04] [INFO] Début traitement: Photo Frederic Maligne-073.jpg
+[2025-10-06 21:01:04] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:04] [INFO] Dimensions originales: 4075x6113
+[2025-10-06 21:01:04] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:01:04] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:04] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:04] [INFO] Fichier sauvegardé avec succès: 51.33 KB
+[2025-10-06 21:01:04] [SUCCESS] Image traitée avec succès: gallery_1759784464_68e42e1018883.webp | Taille: 51.33 KB | Compression: 96.6% | Temps: 802.03ms
+[2025-10-06 21:01:04] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:01:04] [INFO] Début traitement: Photo Frederic Maligne-074.jpg
+[2025-10-06 21:01:04] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:05] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:01:06] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:01:06] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:06] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:07] [INFO] Fichier sauvegardé avec succès: 48.35 KB
+[2025-10-06 21:01:07] [SUCCESS] Image traitée avec succès: gallery_1759784464_68e42e10e04cc.webp | Taille: 48.35 KB | Compression: 97.2% | Temps: 2191.96ms
+[2025-10-06 21:01:07] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:01:07] [INFO] Début traitement: Photo Frederic Maligne-075.jpg
+[2025-10-06 21:01:07] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:07] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:01:08] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:01:08] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:08] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:08] [INFO] Fichier sauvegardé avec succès: 47.83 KB
+[2025-10-06 21:01:08] [SUCCESS] Image traitée avec succès: gallery_1759784467_68e42e13236d4.webp | Taille: 47.83 KB | Compression: 97.3% | Temps: 1545.36ms
+[2025-10-06 21:01:08] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:01:08] [INFO] Début traitement: Photo Frederic Maligne-076.jpg
+[2025-10-06 21:01:08] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:09] [INFO] Dimensions originales: 3705x5558
+[2025-10-06 21:01:10] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:01:10] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:10] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:10] [INFO] Fichier sauvegardé avec succès: 99.92 KB
+[2025-10-06 21:01:10] [SUCCESS] Image traitée avec succès: gallery_1759784468_68e42e14a8511.webp | Taille: 99.92 KB | Compression: 92.8% | Temps: 1869.44ms
+[2025-10-06 21:01:10] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:01:10] [INFO] Début traitement: Photo Frederic Maligne-077.jpg
+[2025-10-06 21:01:10] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:11] [INFO] Dimensions originales: 4048x6072
+[2025-10-06 21:01:12] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:01:12] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:12] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:12] [INFO] Fichier sauvegardé avec succès: 113.63 KB
+[2025-10-06 21:01:12] [SUCCESS] Image traitée avec succès: gallery_1759784470_68e42e168e48a.webp | Taille: 113.63 KB | Compression: 94.3% | Temps: 2111.28ms
+[2025-10-06 21:01:12] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:01:12] [INFO] Début traitement: Photo Frederic Maligne-078.jpg
+[2025-10-06 21:01:12] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:13] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:01:13] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:01:13] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:13] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:14] [INFO] Fichier sauvegardé avec succès: 111.48 KB
+[2025-10-06 21:01:14] [SUCCESS] Image traitée avec succès: gallery_1759784472_68e42e18adef0.webp | Taille: 111.48 KB | Compression: 95.1% | Temps: 1336.89ms
+[2025-10-06 21:01:14] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:01:14] [INFO] Début traitement: Photo Frederic Maligne-079.jpg
+[2025-10-06 21:01:14] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:14] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:01:15] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:01:15] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:15] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:15] [INFO] Fichier sauvegardé avec succès: 76.47 KB
+[2025-10-06 21:01:15] [SUCCESS] Image traitée avec succès: gallery_1759784474_68e42e1a11f0a.webp | Taille: 76.47 KB | Compression: 95.1% | Temps: 1556.21ms
+[2025-10-06 21:01:15] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:01:15] [INFO] Début traitement: Photo Frederic Maligne-080.jpg
+[2025-10-06 21:01:15] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:16] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:01:16] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:01:16] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:16] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:17] [INFO] Fichier sauvegardé avec succès: 78.35 KB
+[2025-10-06 21:01:17] [SUCCESS] Image traitée avec succès: gallery_1759784475_68e42e1b9cc38.webp | Taille: 78.35 KB | Compression: 94.6% | Temps: 1512.87ms
+[2025-10-06 21:01:17] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:01:17] [INFO] Début traitement: Photo Frederic Maligne-081.jpg
+[2025-10-06 21:01:17] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:17] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:01:18] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:01:18] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:18] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:18] [INFO] Fichier sauvegardé avec succès: 75.03 KB
+[2025-10-06 21:01:18] [SUCCESS] Image traitée avec succès: gallery_1759784477_68e42e1d2bb04.webp | Taille: 75.03 KB | Compression: 94.7% | Temps: 1424.26ms
+[2025-10-06 21:01:18] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:01:18] [INFO] Début traitement: Photo Frederic Maligne-082.jpg
+[2025-10-06 21:01:18] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:19] [INFO] Dimensions originales: 4480x6720
+[2025-10-06 21:01:20] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:01:20] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:20] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:20] [INFO] Fichier sauvegardé avec succès: 81.52 KB
+[2025-10-06 21:01:20] [SUCCESS] Image traitée avec succès: gallery_1759784478_68e42e1e9800d.webp | Taille: 81.52 KB | Compression: 94.6% | Temps: 2015.9ms
+[2025-10-06 21:01:20] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:01:20] [INFO] Début traitement: Photo Frederic Maligne-083.jpg
+[2025-10-06 21:01:20] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:21] [INFO] Dimensions originales: 3819x5728
+[2025-10-06 21:01:21] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:01:21] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:21] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:21] [INFO] Fichier sauvegardé avec succès: 46.72 KB
+[2025-10-06 21:01:21] [SUCCESS] Image traitée avec succès: gallery_1759784480_68e42e20a13b6.webp | Taille: 46.72 KB | Compression: 96.2% | Temps: 1021.16ms
+[2025-10-06 21:01:21] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:01:21] [INFO] Début traitement: Photo Frederic Maligne-084.jpg
+[2025-10-06 21:01:21] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:22] [INFO] Dimensions originales: 3753x5630
+[2025-10-06 21:01:22] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:01:22] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:22] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:22] [INFO] Fichier sauvegardé avec succès: 47.05 KB
+[2025-10-06 21:01:22] [SUCCESS] Image traitée avec succès: gallery_1759784481_68e42e21ab54b.webp | Taille: 47.05 KB | Compression: 96% | Temps: 881.93ms
+[2025-10-06 21:01:22] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:01:22] [INFO] Début traitement: Photo Frederic Maligne-085.jpg
+[2025-10-06 21:01:22] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:22] [INFO] Dimensions originales: 3891x5836
+[2025-10-06 21:01:23] [INFO] Image redimensionnée: 533x799
+[2025-10-06 21:01:23] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:23] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:23] [INFO] Fichier sauvegardé avec succès: 45.2 KB
+[2025-10-06 21:01:23] [SUCCESS] Image traitée avec succès: gallery_1759784482_68e42e2291b2f.webp | Taille: 45.2 KB | Compression: 96.3% | Temps: 654.85ms
+[2025-10-06 21:01:23] [INFO] Utilisation du preset: member - Photo membre - qualité max - Format 3:4 portrait
+[2025-10-06 21:01:23] [INFO] Début traitement: Photo Frederic Maligne-086.jpg
+[2025-10-06 21:01:23] [INFO] Chargement de l'image (type: jpg)
+[2025-10-06 21:01:23] [INFO] Dimensions originales: 4235x6353
+[2025-10-06 21:01:23] [INFO] Image redimensionnée: 533x800
+[2025-10-06 21:01:23] [INFO] Sauvegarde en WebP
+[2025-10-06 21:01:23] [INFO] Préparation pour WebP (suppression transparence PNG si présente)
+[2025-10-06 21:01:24] [INFO] Fichier sauvegardé avec succès: 43.19 KB
+[2025-10-06 21:01:24] [SUCCESS] Image traitée avec succès: gallery_1759784483_68e42e234276d.webp | Taille: 43.19 KB | Compression: 96.7% | Temps: 790.98ms
