@@ -140,6 +140,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die('Erreur de sécurité. Veuillez réessayer.');
     }
     
+    // Vérification reCAPTCHA v3
+    if (isset($_POST['recaptcha_token'])) {
+        $recaptcha_secret = '6LeOrNorAAAAAAyrKUig543vV-h1OJlb9xefHYhA';
+        $recaptcha_token = $_POST['recaptcha_token'];
+        
+        $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+        $recaptcha_data = [
+            'secret' => $recaptcha_secret,
+            'response' => $recaptcha_token,
+            'remoteip' => $_SERVER['REMOTE_ADDR']
+        ];
+        
+        $options = [
+            'http' => [
+                'method' => 'POST',
+                'header' => 'Content-Type: application/x-www-form-urlencoded',
+                'content' => http_build_query($recaptcha_data)
+            ]
+        ];
+        
+        $context = stream_context_create($options);
+        $recaptcha_response = file_get_contents($recaptcha_url, false, $context);
+        $recaptcha_result = json_decode($recaptcha_response, true);
+        
+        // Vérifier le score (0.0 = bot, 1.0 = humain)
+        if (!$recaptcha_result['success'] || $recaptcha_result['score'] < 0.5) {
+            error_log('reCAPTCHA échec - Score: ' . ($recaptcha_result['score'] ?? 'N/A'));
+            $_SESSION['error'] = 'Erreur de validation reCAPTCHA. Veuillez réessayer.';
+            header('Location: proposition-citoyenne.php');
+            exit;
+        }
+    } else {
+        // Pas de token = tentative de bypass
+        error_log('reCAPTCHA - Token manquant');
+        $_SESSION['error'] = 'Erreur de validation. Veuillez réessayer.';
+        header('Location: proposition-citoyenne.php');
+        exit;
+    }
+    
     // Validation des champs obligatoires
     $required_fields = ['email', 'titre', 'description', 'beneficiaires', 'acceptation_publication', 'acceptation_rgpd'];
     foreach ($required_fields as $field) {

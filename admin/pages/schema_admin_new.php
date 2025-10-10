@@ -264,6 +264,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $result = ['success' => true, 'message' => 'Membre supprimé'];
                 if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
                 break; }
+
+            case 'reorder_members': {
+                $data = $loadSite();
+                $members = $data['equipe']['members'] ?? [];
+                $ids = $_POST['ids'] ?? [];
+                if (is_string($ids)) {
+                    $decoded = json_decode($ids, true);
+                    if (is_array($decoded)) { $ids = $decoded; }
+                    else { $ids = array_filter(array_map('trim', explode(',', $ids))); }
+                }
+                if (!is_array($ids) || empty($ids)) {
+                    throw new Exception('Liste des IDs invalide');
+                }
+                $byId = [];
+                foreach ($members as $m) { $byId[$m['id'] ?? ''] = $m; }
+                $reordered = [];
+                foreach ($ids as $mid) {
+                    if (isset($byId[$mid])) { $reordered[] = $byId[$mid]; unset($byId[$mid]); }
+                }
+                if (!empty($byId)) { foreach ($byId as $remaining) { $reordered[] = $remaining; } }
+                $data['equipe']['members'] = $reordered;
+                $saveSite($data);
+                $result = ['success' => true, 'message' => 'Ordre des membres mis à jour'];
+                if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
+                break; }
                 
             case 'update_programme_section':
                 $programmeSection = new ProgrammeSection($content);
@@ -730,6 +755,14 @@ $sections = [
                                 <option value="ouvrir">🌍 Ouvrir</option>
                             </select>
                         </div>
+                        
+                        <div class="form-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="display-citizen-badge" name="display_citizen_badge" value="1">
+                                <label for="display-citizen-badge">🏛️ Afficher le badge "Proposition citoyenne" sur le site</label>
+                            </div>
+                            <small class="form-help">Cochez cette case pour identifier cette proposition comme venant d'un citoyen sur le site public</small>
+                        </div>
                     </div>
                     
                     <!-- VERSO - Points clés -->
@@ -1155,6 +1188,7 @@ $sections = [
     <script src="../assets/js/admin-core.js"></script>
     <script src="../assets/js/admin-modals.js"></script>
     <script src="../assets/js/admin-actions.js"></script>
+    <script src="../assets/js/admin-proposals.js"></script>
     <script src="../assets/js/admin-tabs.js"></script>
     
     <!-- Cropper.js CDN -->

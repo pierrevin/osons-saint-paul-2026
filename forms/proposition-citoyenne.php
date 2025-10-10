@@ -24,6 +24,8 @@ $content = file_exists($data_path) ? json_decode(file_get_contents($data_path), 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Lato:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Google reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeOrNorAAAAAGfkiHS2IqTbd5QbQHvinxR_4oek"></script>
     <style>
         /* Styles spécifiques au formulaire */
         .form-container {
@@ -118,15 +120,28 @@ $content = file_exists($data_path) ? json_decode(file_get_contents($data_path), 
             gap: 0.8rem;
         }
 
-        .checkbox-item input[type="checkbox"] {
+        .checkbox-item input[type="checkbox"],
+        .checkbox-item input[type="radio"] {
             width: auto;
             margin-top: 0.2rem;
+            cursor: pointer;
         }
 
         .checkbox-item label {
             margin-bottom: 0;
             font-weight: normal;
             cursor: pointer;
+            flex: 1;
+        }
+        
+        .privacy-link {
+            color: var(--coral);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        
+        .privacy-link:hover {
+            color: var(--deep-green);
         }
 
         .categories-grid {
@@ -208,21 +223,69 @@ $content = file_exists($data_path) ? json_decode(file_get_contents($data_path), 
             color: var(--coral);
         }
 
-        .back-link {
+        .form-site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding: 1.5rem 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-site-header .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .form-logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .form-site-header h2 {
+            font-family: var(--font-script);
+            font-size: 1.8rem;
+            color: var(--coral);
+            margin: 0;
+        }
+
+        .btn-site {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            color: var(--coral);
+            padding: 0.8rem 1.5rem;
+            background: var(--coral);
+            color: white;
             text-decoration: none;
-            margin-bottom: 2rem;
+            border-radius: 50px;
             font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(236, 101, 79, 0.3);
         }
 
-        .back-link:hover {
-            color: var(--deep-green);
+        .btn-site:hover {
+            background: var(--deep-green);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(236, 101, 79, 0.4);
         }
 
         @media (max-width: 768px) {
+            .form-site-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .form-site-header .logo-title {
+                flex-direction: column;
+            }
+            
+            .form-logo {
+                height: 50px;
+            }
             .form-container {
                 margin: 1rem;
                 padding: 1.5rem;
@@ -236,9 +299,15 @@ $content = file_exists($data_path) ? json_decode(file_get_contents($data_path), 
 </head>
 <body>
     <div class="container">
-        <a href="../index.php" class="back-link">
-            ← Retour au site
-        </a>
+        <header class="form-site-header">
+            <div class="logo-title">
+                <img src="../uploads/Osons1.webp" alt="Osons Saint-Paul 2026" class="form-logo">
+                <h2>Osons Saint-Paul 2026</h2>
+            </div>
+            <a href="../index.php" class="btn-site">
+                ← Voir le site
+            </a>
+        </header>
 
         <div class="form-container">
             <div class="form-header">
@@ -345,17 +414,6 @@ $content = file_exists($data_path) ? json_decode(file_get_contents($data_path), 
                         <label for="beneficiaires">Qui bénéficierait de cette proposition ? <span class="required">*</span></label>
                         <textarea id="beneficiaires" name="beneficiaires" required placeholder="Ex: Tous les habitants du centre-ville, les familles avec enfants..."></textarea>
                     </div>
-
-                    <div class="form-group">
-                        <label for="cout">Estimation du coût</label>
-                        <select id="cout" name="cout">
-                            <option value="">Sélectionner...</option>
-                            <option value="Faible (< 10k€)">💰 Faible (< 10k€)</option>
-                            <option value="Modéré (10k€ - 50k€)">💰💰 Modéré (10k€ - 50k€)</option>
-                            <option value="Élevé (> 50k€)">💰💰💰 Élevé (> 50k€)</option>
-                            <option value="Difficile à estimer">🤷 Difficile à estimer</option>
-                        </select>
-                    </div>
                 </div>
 
                 <!-- Section 4: Engagement citoyen -->
@@ -393,7 +451,7 @@ $content = file_exists($data_path) ? json_decode(file_get_contents($data_path), 
                         </div>
                         <div class="checkbox-item">
                             <input type="checkbox" id="acceptation_rgpd" name="acceptation_rgpd" required>
-                            <label for="acceptation_rgpd">J'accepte le traitement de mes données personnelles conformément à la politique de confidentialité <span class="required">*</span></label>
+                            <label for="acceptation_rgpd">J'accepte le traitement de mes données personnelles conformément à la <a href="politique-confidentialite.php" target="_blank" class="privacy-link">politique de confidentialité</a> <span class="required">*</span></label>
                         </div>
                     </div>
                 </div>
@@ -423,23 +481,49 @@ $content = file_exists($data_path) ? json_decode(file_get_contents($data_path), 
             }
         });
 
-        // Validation du formulaire
+        // Validation du formulaire avec reCAPTCHA v3
         document.getElementById('propositionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
             const categories = document.querySelectorAll('input[name="categories[]"]:checked');
             const acceptationPublication = document.getElementById('acceptation_publication').checked;
             const acceptationRgpd = document.getElementById('acceptation_rgpd').checked;
             
             if (categories.length === 0) {
-                e.preventDefault();
                 alert('Veuillez sélectionner au moins une catégorie.');
                 return;
             }
             
             if (!acceptationPublication || !acceptationRgpd) {
-                e.preventDefault();
                 alert('Veuillez accepter les conditions pour pouvoir envoyer votre proposition.');
                 return;
             }
+            
+            // Désactiver le bouton submit pendant le traitement
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = '⏳ Vérification en cours...';
+            
+            // Exécuter reCAPTCHA v3
+            grecaptcha.ready(() => {
+                grecaptcha.execute('6LeOrNorAAAAAGfkiHS2IqTbd5QbQHvinxR_4oek', {action: 'submit_proposition'}).then((token) => {
+                    // Ajouter le token au formulaire
+                    const recaptchaInput = document.createElement('input');
+                    recaptchaInput.type = 'hidden';
+                    recaptchaInput.name = 'recaptcha_token';
+                    recaptchaInput.value = token;
+                    document.getElementById('propositionForm').appendChild(recaptchaInput);
+                    
+                    // Soumettre le formulaire
+                    document.getElementById('propositionForm').submit();
+                }).catch((error) => {
+                    console.error('Erreur reCAPTCHA:', error);
+                    alert('Erreur de vérification. Veuillez réessayer.');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                });
+            });
         });
 
         // Animation des catégories

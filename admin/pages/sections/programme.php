@@ -172,7 +172,8 @@ class ProgrammeSection extends AdminSection {
         $html .= '</div>';
         
         $html .= '<div class="proposal-actions">';
-        $html .= '<button class="btn btn-sm btn-success" onclick="openProposalModal(\'approve\', ' . htmlspecialchars(json_encode($proposal), ENT_QUOTES, 'UTF-8') . ')">';
+        $proposalJson = htmlspecialchars(json_encode($proposal, JSON_HEX_QUOT | JSON_HEX_APOS), ENT_NOQUOTES, 'UTF-8');
+        $html .= '<button class="btn btn-sm btn-success" data-proposal=\'' . $proposalJson . '\' onclick="openProposalModal(\'approve\', JSON.parse(this.dataset.proposal))">';
         $html .= '<i class="fas fa-check"></i> Modifier & Approuver';
         $html .= '</button>';
         $html .= '<button class="btn btn-sm btn-danger" onclick="rejectProposal(\'' . htmlspecialchars($proposal['id'], ENT_QUOTES, 'UTF-8') . '\')">';
@@ -219,7 +220,8 @@ class ProgrammeSection extends AdminSection {
         if ($isCitizen) {
             $proposalForJs['citizen_proposal'] = true;
         }
-        $html .= '<button class="btn btn-sm btn-secondary" onclick="openProposalModal(\'edit\', ' . htmlspecialchars(json_encode($proposalForJs), ENT_QUOTES, 'UTF-8') . ')">';
+        $proposalForJsJson = htmlspecialchars(json_encode($proposalForJs, JSON_HEX_QUOT | JSON_HEX_APOS), ENT_NOQUOTES, 'UTF-8');
+        $html .= '<button class="btn btn-sm btn-secondary" data-proposal=\'' . $proposalForJsJson . '\' onclick="openProposalModal(\'edit\', JSON.parse(this.dataset.proposal))">';
         $html .= '<i class="fas fa-edit"></i> Modifier';
         $html .= '</button>';
         
@@ -878,4 +880,6 @@ class ProgrammeSection extends AdminSection {
             default: return '#65ae99';
         }
     }
+    
+    // Les modals sont maintenant gérés par le modal unifié dans schema_admin_new.php
 }

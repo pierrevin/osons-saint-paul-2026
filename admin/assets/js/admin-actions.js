@@ -33,6 +33,16 @@ class AdminActions {
                 this.handleAction(action, e.target.closest('[data-action]'));
             }
         });
+
+        // Initialiser le DnD quand la section équipe est injectée dans le workspace
+        document.addEventListener('DOMContentLoaded', () => {
+            this.tryInitEquipeDnD();
+        });
+        document.addEventListener('section-loaded', (e) => {
+            if (e.detail && e.detail.sectionId === 'equipe') {
+                this.tryInitEquipeDnD();
+            }
+        });
     }
     
     markFormChanged(form) {
@@ -240,6 +250,83 @@ class AdminActions {
                 this.addProposal();
                 break;
             default:}
+    }
+
+    /**
+     * Activer le glisser-déposer pour réordonner les membres de l'équipe.
+     */
+    tryInitEquipeDnD() {
+        const grid = document.querySelector('.members-grid');
+        if (!grid || grid.dataset.dndInitialized === '1') return;
+        const cards = grid.querySelectorAll('.member-card');
+        if (!cards.length) return;
+
+        grid.dataset.dndInitialized = '1';
+
+        let dragSrcEl = null;
+        let placeholder = document.createElement('div');
+        placeholder.className = 'member-card placeholder';
+
+        const handleDragStart = function(e) {
+            dragSrcEl = this;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', this.dataset.id || '');
+            this.classList.add('dragging');
+        };
+
+        const handleDragOver = function(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            const target = e.currentTarget;
+            if (!dragSrcEl || target === dragSrcEl) return;
+            const bounding = target.getBoundingClientRect();
+            const offset = e.clientY - bounding.top;
+            const shouldInsertBefore = offset < bounding.height / 2;
+            if (shouldInsertBefore) {
+                grid.insertBefore(dragSrcEl, target);
+            } else {
+                grid.insertBefore(dragSrcEl, target.nextSibling);
+            }
+        };
+
+        const handleDrop = (e) => {
+            e.preventDefault();
+        };
+
+        const handleDragEnd = () => {
+            if (dragSrcEl) dragSrcEl.classList.remove('dragging');
+            dragSrcEl = null;
+            this.persistEquipeOrder(grid);
+        };
+
+        cards.forEach(card => {
+            card.setAttribute('draggable', 'true');
+            card.addEventListener('dragstart', handleDragStart);
+            card.addEventListener('dragover', handleDragOver);
+            card.addEventListener('drop', handleDrop);
+            card.addEventListener('dragend', handleDragEnd);
+        });
+    }
+
+    /**
+     * Envoyer l'ordre des membres au backend.
+     */
+    persistEquipeOrder(grid) {
+        if (!grid) return;
+        const ids = Array.from(grid.querySelectorAll('.member-card')).map(el => el.dataset.id).filter(Boolean);
+        if (!ids.length) return;
+        const url = window.location.href.split('#')[0];
+        const fd = new FormData();
+        fd.append('action', 'reorder_members');
+        fd.append('ids', JSON.stringify(ids));
+        fd.append('redirect_section', 'equipe');
+        fetch(url, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd })
+            .then(r => r.json())
+            .then(json => {
+                if (!json.success) throw new Error(json.message || 'Échec de la mise à jour de l\'ordre');
+                this.showSuccess('Ordre des membres sauvegardé');
+            })
+            .catch(err => this.showError(err.message));
     }
     
     deleteMember(id) {

@@ -8,13 +8,83 @@ class AdminCore {
         this.init();
     }
     
-    init() {this.bindEvents();
-        this.restoreLastSection();// Test de débogage
-        setTimeout(() => {const firstMenuItem = document.querySelector('.menu-item a');
-            if (firstMenuItem) {} else {}
+    init() {
+        this.bindEvents();
+        this.initMobileMenu();
+        this.restoreLastSection();
+        // Test de débogage
+        setTimeout(() => {
+            const firstMenuItem = document.querySelector('.menu-item a');
+            if (firstMenuItem) {
+            } else {
+            }
         }, 1000);
     }
     
+    initMobileMenu() {
+        // Créer le bouton hamburger mobile
+        const mobileToggle = document.createElement('button');
+        mobileToggle.className = 'mobile-menu-toggle';
+        mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        mobileToggle.setAttribute('aria-label', 'Ouvrir le menu');
+        document.body.appendChild(mobileToggle);
+
+        // Gestion du clic sur le bouton hamburger
+        mobileToggle.addEventListener('click', () => {
+            const sidebar = document.querySelector('.admin-sidebar');
+            const isOpen = sidebar.classList.contains('mobile-open');
+            
+            if (isOpen) {
+                sidebar.classList.remove('mobile-open');
+                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                mobileToggle.setAttribute('aria-label', 'Ouvrir le menu');
+            } else {
+                sidebar.classList.add('mobile-open');
+                mobileToggle.innerHTML = '<i class="fas fa-times"></i>';
+                mobileToggle.setAttribute('aria-label', 'Fermer le menu');
+            }
+        });
+
+        // Fermer le menu en cliquant sur un lien
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.admin-sidebar a')) {
+                const sidebar = document.querySelector('.admin-sidebar');
+                const mobileToggle = document.querySelector('.mobile-menu-toggle');
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-open');
+                    mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    mobileToggle.setAttribute('aria-label', 'Ouvrir le menu');
+                }
+            }
+        });
+
+        // Fermer le menu en cliquant à l'extérieur
+        document.addEventListener('click', (e) => {
+            const sidebar = document.querySelector('.admin-sidebar');
+            const mobileToggle = document.querySelector('.mobile-menu-toggle');
+            
+            if (!sidebar.contains(e.target) && !mobileToggle.contains(e.target)) {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-open');
+                    mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    mobileToggle.setAttribute('aria-label', 'Ouvrir le menu');
+                }
+            }
+        });
+
+        // Gestion du redimensionnement de la fenêtre
+        window.addEventListener('resize', () => {
+            const sidebar = document.querySelector('.admin-sidebar');
+            const mobileToggle = document.querySelector('.mobile-menu-toggle');
+            
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('mobile-open');
+                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                mobileToggle.setAttribute('aria-label', 'Ouvrir le menu');
+            }
+        });
+    }
+
     bindEvents() {
         // Gestion du hash dans l'URL
         window.addEventListener('hashchange', () => this.handleHashChange());
@@ -91,7 +161,12 @@ class AdminCore {
             this.updateMenuState(sectionId);
             
             // Scroll vers le workspace
-            workspace.scrollIntoView({ behavior: 'smooth', block: 'start' });} catch (error) {}
+            workspace.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // Émettre un événement pour signaler que la section est chargée
+            const evt = new CustomEvent('section-loaded', { detail: { sectionId } });
+            document.dispatchEvent(evt);
+        } catch (error) {}
     }
     
     updateMenuState(activeSectionId) {
