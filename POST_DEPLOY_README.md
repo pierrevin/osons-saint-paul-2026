@@ -7,7 +7,24 @@ Après un déploiement Git sur OVH, les fichiers d'autoload Composer peuvent êt
 Class "Google\Auth\Credentials\ServiceAccountCredentials" not found
 ```
 
-## Solution automatique
+## Solution automatique (RECOMMANDÉE)
+
+### Configuration du webhook OVH :
+
+**URL du webhook** : `https://osons-saint-paul.fr/webhook-deploy.php`
+
+Le webhook s'exécute **automatiquement** après chaque déploiement Git et :
+1. ✅ Tente de régénérer l'autoloader Composer
+2. ✅ Vérifie que toutes les classes Google sont disponibles
+3. ✅ Logue le résultat dans `logs/webhook-deploy.log`
+
+### Vérifier les logs du webhook :
+
+Consultez : `logs/webhook-deploy.log` pour voir le résultat de chaque déploiement.
+
+---
+
+## Solution manuelle (si webhook échoue)
 
 ### Après chaque déploiement Git sur OVH :
 
