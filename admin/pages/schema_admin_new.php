@@ -370,6 +370,9 @@ $sections = [
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
+    <!-- Chart.js pour les graphiques -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    
     <!-- CSS modulaire -->
     <link rel="stylesheet" href="../assets/css/admin-core.css">
     <link rel="stylesheet" href="../assets/css/admin-components.css">
@@ -1198,6 +1201,7 @@ $sections = [
     <script src="../assets/js/admin-actions.js"></script>
     <script src="../assets/js/admin-proposals.js"></script>
     <script src="../assets/js/admin-tabs.js"></script>
+    <script src="../assets/js/admin-analytics-charts.js"></script>
     
     <!-- Cropper.js CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">

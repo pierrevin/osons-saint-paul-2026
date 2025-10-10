@@ -244,7 +244,7 @@ class ProgrammeSection extends AdminSection {
         $html .= '<div class="proposal-actions">';
         // Préparer les données pour le modal d'édition avec un indicateur citoyen
         $proposalForJs = $proposal;
-        if ($isCitizen) {
+        if ($isCitizenBadge) {
             $proposalForJs['citizen_proposal'] = true;
         }
         $proposalForJsJson = htmlspecialchars(json_encode($proposalForJs, JSON_HEX_QUOT | JSON_HEX_APOS), ENT_NOQUOTES, 'UTF-8');
@@ -253,7 +253,7 @@ class ProgrammeSection extends AdminSection {
         $html .= '</button>';
         
         // Boutons spécifiques aux propositions citoyennes
-        if ($isCitizen) {
+        if ($isCitizenBadge) {
             $html .= '<button class="btn btn-sm btn-warning" onclick="setCitizenProposalStatus(\'' . htmlspecialchars($proposal['id'], ENT_QUOTES, 'UTF-8') . '\', \'pending\')">';
             $html .= '<i class="fas fa-clock"></i> Mettre en attente';
             $html .= '</button>';

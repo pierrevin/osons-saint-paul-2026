@@ -1,1 +1,3 @@
 
+{"timestamp":"2025-10-10T12:03:54+00:00","event":"login_success","username":"admin","ip_address":"::1","user_agent":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/141.0.0.0 Safari\/537.36","details":"Successful login"}
+{"timestamp":"2025-10-10T13:54:50+00:00","event":"login_success","username":"admin","ip_address":"::1","user_agent":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/141.0.0.0 Safari\/537.36","details":"Successful login"}

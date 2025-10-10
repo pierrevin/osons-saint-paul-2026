@@ -58,26 +58,31 @@ class GestionUtilisateursSection extends AdminSection {
             $html .= '<tbody>';
             
             foreach ($users as $user) {
+                // Vérifier que $user est un array valide
+                if (!is_array($user)) {
+                    continue;
+                }
+                
                 $html .= '<tr>';
-                $html .= '<td><strong>' . htmlspecialchars($user['username']) . '</strong></td>';
+                $html .= '<td><strong>' . htmlspecialchars($user['username'] ?? 'N/A') . '</strong></td>';
                 $html .= '<td>' . htmlspecialchars($user['email'] ?? 'N/A') . '</td>';
                 $html .= '<td>';
-                $html .= '<span class="role-badge role-' . htmlspecialchars($user['role']) . '">';
-                $html .= ucfirst($user['role']);
+                $html .= '<span class="role-badge role-' . htmlspecialchars($user['role'] ?? 'user') . '">';
+                $html .= ucfirst($user['role'] ?? 'user');
                 $html .= '</span>';
                 $html .= '</td>';
                 $html .= '<td>';
-                $html .= $user['last_login'] ? date('d/m/Y H:i', $user['last_login']) : 'Jamais';
+                $html .= isset($user['last_login']) && $user['last_login'] ? date('d/m/Y H:i', $user['last_login']) : 'Jamais';
                 $html .= '</td>';
                 $html .= '<td>';
                 $html .= '<div class="user-actions">';
-                $html .= '<button class="btn btn-sm btn-secondary" onclick="editUser(\'' . $user['id'] . '\')">';
+                $html .= '<button class="btn btn-sm btn-secondary" onclick="editUser(\'' . ($user['id'] ?? '') . '\')">';
                 $html .= '<i class="fas fa-edit"></i>';
                 $html .= '</button>';
-                $html .= '<button class="btn btn-sm btn-warning" onclick="resetPassword(\'' . $user['id'] . '\')">';
+                $html .= '<button class="btn btn-sm btn-warning" onclick="resetPassword(\'' . ($user['id'] ?? '') . '\')">';
                 $html .= '<i class="fas fa-key"></i>';
                 $html .= '</button>';
-                if ($user['id'] !== $_SESSION['user_id']) {
+                if (isset($user['id']) && $user['id'] !== ($_SESSION['user_id'] ?? '')) {
                     $html .= '<button class="btn btn-sm btn-danger" onclick="deleteUser(\'' . $user['id'] . '\')">';
                     $html .= '<i class="fas fa-trash"></i>';
                     $html .= '</button>';

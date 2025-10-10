@@ -135,6 +135,29 @@ class GoogleAnalyticsSimple {
     }
     
     /**
+     * Récupère les données de séries temporelles pour graphiques
+     */
+    public function getTimeSeriesData($days = 30) {
+        $stats = $this->getGeneralStats($days);
+        
+        $timeSeries = [
+            'labels' => [],
+            'users' => [],
+            'pageviews' => []
+        ];
+        
+        foreach ($stats['daily_data'] as $day) {
+            // Formater la date en français
+            $date = new DateTime($day['date']);
+            $timeSeries['labels'][] = date('d M', $date->getTimestamp());
+            $timeSeries['users'][] = $day['users'];
+            $timeSeries['pageviews'][] = $day['pageviews'];
+        }
+        
+        return $timeSeries;
+    }
+    
+    /**
      * Vérifie si les vraies données GA sont disponibles
      */
     public function isRealDataAvailable() {

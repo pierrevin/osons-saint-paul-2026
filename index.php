@@ -6,9 +6,10 @@ session_start();
 $user_connected = isset($_SESSION['user_id']) || isset($_SESSION['admin_logged_in']) || isset($_SESSION['authenticated']);
 
 // Si l'utilisateur n'est pas connecté, afficher la maintenance
-if (!$user_connected) {
-    include __DIR__ . '/maintenance.php'; exit;
-}
+// DÉSACTIVÉ POUR LES TESTS LOCAUX - Réactiver en production
+// if (!$user_connected) {
+//     include __DIR__ . '/maintenance.php'; exit;
+// }
 
 // Site public dynamique basé sur index.html
 require_once __DIR__ . '/admin/config.php';
@@ -35,6 +36,16 @@ $content = get_json_data('site_content.json');
     
     <!-- Google reCAPTCHA v3 -->
     <script src="https://www.google.com/recaptcha/api.js?render=6LeOrNorAAAAAGfkiHS2IqTbd5QbQHvinxR_4oek"></script>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B544VTFXWF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-B544VTFXWF');
+    </script>
 </head>
 <body>
     <!-- Header sticky -->
@@ -601,10 +612,11 @@ $content = get_json_data('site_content.json');
 
             <div class="footer-bottom">
                 <div class="footer-legal">
-                    <a href="#" class="legal-link">Mentions légales</a>
-                    <a href="#" class="legal-link">Gestion des cookies</a>
+                    <a href="/politique-confidentialite.php" class="legal-link">Politique de confidentialité</a>
+                    <a href="/mentions-legales.php" class="legal-link">Mentions légales</a>
+                    <a href="/gestion-cookies.php" class="legal-link">Gestion des cookies</a>
                 </div>
-                <p class="footer-copyright">&copy; 2025 Osons Saint-Paul. Tous droits réservés.</p>
+                <p class="footer-copyright">&copy; 2025 Osons Saint-Paul | Pierre Vincenot</p>
             </div>
         </div>
     </footer>
@@ -749,6 +761,9 @@ $content = get_json_data('site_content.json');
             }
         });
     </script>
+    
+    <!-- Système de consentement des cookies -->
+    <script src="/assets/js/cookie-consent.js"></script>
 </body>
 </html>
 <!-- Test webhook Fri Oct 10 13:10:56 CEST 2025 -->

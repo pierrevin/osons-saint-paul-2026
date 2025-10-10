@@ -27,9 +27,9 @@ class DashboardSection extends AdminSection {
         // Statistiques générales
         $html .= '<div class="stats-overview">';
         
-        // Indicateur Propositions amélioré
-        $html .= '<div class="stat-card propositions-card" onclick="navigateToSection(\'programme\')">';
-        $html .= '<div class="stat-icon"><i class="fas fa-list"></i></div>';
+        // Carte Programme
+        $html .= '<div class="stat-card programme-card" onclick="navigateToSection(\'programme\')">';
+        $html .= '<div class="stat-icon programme-icon"><i class="fas fa-list"></i></div>';
         $html .= '<div class="stat-content">';
         $html .= '<span class="stat-number">' . $propositions['total'] . '</span>';
         $html .= '<span class="stat-label">Propositions</span>';
@@ -39,111 +39,47 @@ class DashboardSection extends AdminSection {
             $html .= '<div class="alert-badge">' . $propositions['en_attente'] . ' à valider</div>';
         }
         $html .= '</div>';
-        $html .= '</div>';
-        $html .= '</div>';
-        
-        // Widget fusionné Programme + Rendez-vous
-        $html .= '<div class="stat-card merged-card">';
-        $html .= '<div class="merged-header">';
-        $html .= '<div class="merged-tabs">';
-        $html .= '<button class="tab-btn active" data-tab="programme">';
-        $html .= '<i class="fas fa-list"></i> Programme (' . $programme_count . ')';
-        $html .= '</button>';
-        $html .= '<button class="tab-btn" data-tab="rendez-vous">';
-        $html .= '<i class="fas fa-calendar"></i> Rendez-vous (' . $rendez_vous_count . ')';
-        $html .= '</button>';
-        $html .= '</div>';
-        $html .= '</div>';
-        $html .= '<div class="merged-content">';
-        $html .= '<div class="tab-content active" id="tab-programme">';
         $html .= '<div class="quick-actions">';
-        $html .= '<button class="btn btn-sm btn-primary" onclick="openProposalModal(\'create\')">';
-        $html .= '<i class="fas fa-plus"></i> Ajouter proposition';
+        $html .= '<button class="btn btn-sm btn-primary" onclick="event.stopPropagation(); openProposalModal(\'create\')">';
+        $html .= '<i class="fas fa-plus"></i> Ajouter';
         $html .= '</button>';
-        $html .= '<button class="btn btn-sm btn-secondary" onclick="navigateToSection(\'programme\')">';
-        $html .= '<i class="fas fa-edit"></i> Gérer';
-        $html .= '</button>';
-        $html .= '</div>';
-        $html .= '</div>';
-        $html .= '<div class="tab-content" id="tab-rendez-vous">';
-        $html .= '<div class="quick-actions">';
-        $html .= '<button class="btn btn-sm btn-primary" onclick="AdminModal.open(\'addEventModal\')">';
-        $html .= '<i class="fas fa-plus"></i> Ajouter événement';
-        $html .= '</button>';
-        $html .= '<button class="btn btn-sm btn-secondary" onclick="navigateToSection(\'rendez_vous\')">';
+        $html .= '<button class="btn btn-sm btn-secondary" onclick="event.stopPropagation(); navigateToSection(\'programme\')">';
         $html .= '<i class="fas fa-edit"></i> Gérer';
         $html .= '</button>';
         $html .= '</div>';
         $html .= '</div>';
         $html .= '</div>';
-        $html .= '</div>';
         
-        $html .= '</div>';
+        // Carte Rendez-vous
+        $html .= '<div class="stat-card rendez-vous-card" onclick="navigateToSection(\'rendez_vous\')">';
+        $html .= '<div class="stat-icon rendez-vous-icon"><i class="fas fa-calendar"></i></div>';
+        $html .= '<div class="stat-content">';
+        $html .= '<span class="stat-number">' . $rendez_vous_count . '</span>';
+        $html .= '<span class="stat-label">Rendez-vous</span>';
+        $html .= '<div class="stat-details">';
         
-        // Cartes de navigation rapide (simplifiées)
-        $html .= '<div class="dashboard-cards">';
-        $html .= '<h4>Navigation Rapide</h4>';
-        $html .= '<div class="cards-grid">';
-        
-        // Carte Équipe
-        $html .= '<div class="dashboard-card" onclick="navigateToSection(\'equipe\')">';
-        $html .= '<div class="card-header">';
-        $html .= '<i class="fas fa-users"></i>';
-        $html .= '<h5>Équipe</h5>';
+        // Afficher les prochains événements
+        $events = $this->content['rendez_vous']['events'] ?? [];
+        $upcomingCount = 0;
+        foreach ($events as $event) {
+            if (isset($event['date']) && strtotime($event['date']) >= time()) {
+                $upcomingCount++;
+            }
+        }
+        $html .= '<small>À venir: ' . $upcomingCount . ' | Passés: ' . ($rendez_vous_count - $upcomingCount) . '</small>';
         $html .= '</div>';
-        $html .= '<div class="card-content">';
-        $html .= '<p>Gérer les membres de l\'équipe</p>';
-        $html .= '<div class="card-stats">' . count($this->content['equipe']['members'] ?? []) . ' membres</div>';
-        $html .= '</div>';
-        $html .= '<div class="card-actions">';
-        $html .= '<button class="btn btn-sm btn-primary" onclick="event.stopPropagation(); AdminModal.open(\'addMemberModal\')">';
+        $html .= '<div class="quick-actions">';
+        $html .= '<button class="btn btn-sm btn-primary" onclick="event.stopPropagation(); AdminModal.open(\'addEventModal\')">';
         $html .= '<i class="fas fa-plus"></i> Ajouter';
         $html .= '</button>';
-        $html .= '<button class="btn btn-sm btn-secondary" onclick="event.stopPropagation(); navigateToSection(\'equipe\')">';
-        $html .= '<i class="fas fa-edit"></i> Modifier';
+        $html .= '<button class="btn btn-sm btn-secondary" onclick="event.stopPropagation(); navigateToSection(\'rendez_vous\')">';
+        $html .= '<i class="fas fa-edit"></i> Gérer';
         $html .= '</button>';
+        $html .= '</div>';
         $html .= '</div>';
         $html .= '</div>';
         
-        // Carte Citations
-        $html .= '<div class="dashboard-card" onclick="navigateToSection(\'citations\')">';
-        $html .= '<div class="card-header">';
-        $html .= '<i class="fas fa-quote-left"></i>';
-        $html .= '<h5>Citations</h5>';
         $html .= '</div>';
-        $html .= '<div class="card-content">';
-        $html .= '<p>Gérer les citations inspirantes</p>';
-        $html .= '<div class="card-stats">' . count($this->content['citations'] ?? []) . ' citations</div>';
-        $html .= '</div>';
-        $html .= '<div class="card-actions">';
-        $html .= '<button class="btn btn-sm btn-primary" onclick="event.stopPropagation(); AdminModal.open(\'addCitationModal\')">';
-        $html .= '<i class="fas fa-plus"></i> Ajouter';
-        $html .= '</button>';
-        $html .= '<button class="btn btn-sm btn-secondary" onclick="event.stopPropagation(); navigateToSection(\'citations\')">';
-        $html .= '<i class="fas fa-edit"></i> Modifier';
-        $html .= '</button>';
-        $html .= '</div>';
-        $html .= '</div>';
-        
-        // Carte Contact
-        $html .= '<div class="dashboard-card" onclick="navigateToSection(\'contact\')">';
-        $html .= '<div class="card-header">';
-        $html .= '<i class="fas fa-envelope"></i>';
-        $html .= '<h5>Contact</h5>';
-        $html .= '</div>';
-        $html .= '<div class="card-content">';
-        $html .= '<p>Modifier les informations de contact</p>';
-        $html .= '<div class="card-stats">Informations publiques</div>';
-        $html .= '</div>';
-        $html .= '<div class="card-actions">';
-        $html .= '<button class="btn btn-sm btn-secondary" onclick="event.stopPropagation(); navigateToSection(\'contact\')">';
-        $html .= '<i class="fas fa-edit"></i> Modifier';
-        $html .= '</button>';
-        $html .= '</div>';
-        $html .= '</div>';
-        
-        $html .= '</div>'; // cards-grid
-        $html .= '</div>'; // dashboard-cards
         
         // Ajouter les statistiques Google Analytics
         $html .= $this->renderAnalyticsSection();
@@ -194,107 +130,226 @@ class DashboardSection extends AdminSection {
     }
     
     private function renderAnalyticsSection() {
-        // Essayer d'utiliser les vraies données GA, sinon utiliser les données simulées
+        // Essayer d'utiliser les vraies données GA uniquement
+        $analytics = null;
+        $errorMessage = '';
+        
         try {
-            // Vérifier si les classes Google sont disponibles et si le fichier de credentials existe
-            if (class_exists('Google\Client') && file_exists(__DIR__ . '/../../credentials/ga-service-account.json')) {
-                $analytics = new GoogleAnalyticsReal();
-                $isRealData = true;
-            } else {
-                throw new Exception('Classes Google non disponibles ou credentials manquants');
+            // Charger l'autoloader Composer uniquement pour cette section
+            $autoloadPath = __DIR__ . '/../../../vendor/autoload.php';
+            if (!file_exists($autoloadPath)) {
+                throw new Exception('Composer autoload non trouvé. Exécutez "composer install"');
             }
+            
+            // Charger l'autoloader seulement si les classes Google ne sont pas déjà disponibles
+            if (!class_exists('Google\Client')) {
+                require_once $autoloadPath;
+            }
+            
+            // Vérifier si les classes sont maintenant disponibles
+            if (!class_exists('Google\Client')) {
+                throw new Exception('Classes Google non disponibles après chargement de l\'autoloader');
+            }
+            
+            if (!file_exists(__DIR__ . '/../../../credentials/ga-service-account.json')) {
+                throw new Exception('Fichier credentials Google Analytics manquant');
+            }
+            
+            // Utiliser les vraies données
+            $analytics = new GoogleAnalyticsReal();
+            
         } catch (Exception $e) {
-            $analytics = new GoogleAnalyticsSimple();
-            $isRealData = false;
+            $errorMessage = $e->getMessage();
+            error_log("Google Analytics Error: " . $errorMessage);
         }
         
-        $stats = $analytics->getGeneralStats(30);
+        // Si erreur, afficher message et arrêter
+        if (!$analytics) {
+            $html = '<div class="analytics-dashboard">';
+            $html .= '<div class="analytics-header">';
+            $html .= '<h3><i class="fas fa-chart-line"></i> Statistiques Google Analytics</h3>';
+            $html .= '</div>';
+            $html .= '<div class="analytics-error">';
+            $html .= '<div class="error-icon"><i class="fas fa-exclamation-triangle"></i></div>';
+            $html .= '<div class="error-content">';
+            $html .= '<h4>Configuration requise</h4>';
+            $html .= '<p>' . htmlspecialchars($errorMessage) . '</p>';
+            $html .= '<a href="test-google-analytics.php" class="btn btn-primary">';
+            $html .= '<i class="fas fa-tools"></i> Diagnostic Google Analytics';
+            $html .= '</a>';
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '</div>';
+            return $html;
+        }
+        
+        // Récupérer les données réelles
+        $defaultPeriod = 30;
+        $stats = $analytics->getGeneralStats($defaultPeriod);
         $realtime = $analytics->getRealtimeData();
         $topPages = $analytics->getTopPages(5);
         $trafficSources = $analytics->getTrafficSources(5);
         
-        $html = '<div class="analytics-section">';
+        // Récupérer les données pour les différentes périodes
+        $timeSeries7 = $analytics->getTimeSeriesData(7);
+        $timeSeries30 = $analytics->getTimeSeriesData(30);
+        $timeSeries90 = $analytics->getTimeSeriesData(90);
+        
+        $html = '<div class="analytics-dashboard">';
+        
+        // En-tête avec sélecteur de période
+        $html .= '<div class="analytics-header">';
+        $html .= '<div class="analytics-title">';
         $html .= '<h3><i class="fas fa-chart-line"></i> Statistiques Google Analytics</h3>';
+        $html .= '<div class="data-indicator real-data"><i class="fas fa-check-circle"></i> Données réelles</div>';
+        $html .= '</div>';
         
-        // Indicateur de données
-        if ($isRealData) {
-            $html .= '<div class="data-indicator real-data"><i class="fas fa-check-circle"></i> Données réelles Google Analytics</div>';
-        } else {
-            $html .= '<div class="data-indicator demo-data"><i class="fas fa-info-circle"></i> Données de démonstration</div>';
-        }
-        
-        // Statistiques générales
-        $html .= '<div class="analytics-stats">';
-        $html .= '<div class="stat-card">';
-        $html .= '<div class="stat-icon"><i class="fas fa-users"></i></div>';
-        $html .= '<div class="stat-content">';
-        $html .= '<span class="stat-number">' . number_format($stats['total_users']) . '</span>';
-        $html .= '<span class="stat-label">Visiteurs (30j)</span>';
+        // Sélecteur de période
+        $html .= '<div class="analytics-period-selector">';
+        $html .= '<button class="period-btn" data-period="7" onclick="AdminAnalytics.changePeriod(7)">7 jours</button>';
+        $html .= '<button class="period-btn active" data-period="30" onclick="AdminAnalytics.changePeriod(30)">30 jours</button>';
+        $html .= '<button class="period-btn" data-period="90" onclick="AdminAnalytics.changePeriod(90)">3 mois</button>';
         $html .= '</div>';
         $html .= '</div>';
         
-        $html .= '<div class="stat-card">';
-        $html .= '<div class="stat-icon"><i class="fas fa-eye"></i></div>';
-        $html .= '<div class="stat-content">';
-        $html .= '<span class="stat-number">' . number_format($stats['total_pageviews']) . '</span>';
-        $html .= '<span class="stat-label">Pages vues</span>';
+        // Indicateurs KPI principaux
+        $html .= '<div class="analytics-kpi-cards">';
+        
+        $html .= '<div class="kpi-card kpi-visitors">';
+        $html .= '<div class="kpi-icon"><i class="fas fa-users"></i></div>';
+        $html .= '<div class="kpi-content">';
+        $html .= '<span class="kpi-number" id="kpi-visitors">' . number_format($stats['total_users']) . '</span>';
+        $html .= '<span class="kpi-label">Visiteurs</span>';
         $html .= '</div>';
         $html .= '</div>';
         
-        $html .= '<div class="stat-card">';
-        $html .= '<div class="stat-icon"><i class="fas fa-clock"></i></div>';
-        $html .= '<div class="stat-content">';
-        $html .= '<span class="stat-number">' . GoogleAnalyticsSimple::formatDuration($stats['avg_session_duration']) . '</span>';
-        $html .= '<span class="stat-label">Durée moyenne</span>';
+        $html .= '<div class="kpi-card kpi-pageviews">';
+        $html .= '<div class="kpi-icon"><i class="fas fa-eye"></i></div>';
+        $html .= '<div class="kpi-content">';
+        $html .= '<span class="kpi-number" id="kpi-pageviews">' . number_format($stats['total_pageviews']) . '</span>';
+        $html .= '<span class="kpi-label">Pages vues</span>';
         $html .= '</div>';
         $html .= '</div>';
         
-        $html .= '<div class="stat-card">';
-        $html .= '<div class="stat-icon"><i class="fas fa-broadcast-tower"></i></div>';
-        $html .= '<div class="stat-content">';
-        $html .= '<span class="stat-number">' . $realtime['total_active_users'] . '</span>';
-        $html .= '<span class="stat-label">En ligne maintenant</span>';
+        $html .= '<div class="kpi-card kpi-duration">';
+        $html .= '<div class="kpi-icon"><i class="fas fa-clock"></i></div>';
+        $html .= '<div class="kpi-content">';
+        $html .= '<span class="kpi-number" id="kpi-duration">' . GoogleAnalyticsSimple::formatDuration($stats['avg_session_duration']) . '</span>';
+        $html .= '<span class="kpi-label">Durée moyenne</span>';
+        $html .= '<div class="kpi-progress">';
+        $progressPercent = min(100, ($stats['avg_session_duration'] / 300) * 100); // 5 min = 100%
+        $html .= '<div class="kpi-progress-bar" style="width: ' . $progressPercent . '%"></div>';
         $html .= '</div>';
         $html .= '</div>';
         $html .= '</div>';
         
-        // Pages populaires
-        $html .= '<div class="analytics-details">';
+        $html .= '<div class="kpi-card kpi-bounce">';
+        $html .= '<div class="kpi-icon"><i class="fas fa-chart-line"></i></div>';
+        $html .= '<div class="kpi-content">';
+        $html .= '<span class="kpi-number" id="kpi-bounce">' . round($stats['bounce_rate'] * 100, 1) . '%</span>';
+        $html .= '<span class="kpi-label">Taux de rebond</span>';
+        $html .= '</div>';
+        $html .= '</div>';
+        $html .= '</div>';
+        
+        $html .= '<div class="kpi-card kpi-realtime">';
+        $html .= '<div class="kpi-icon"><i class="fas fa-broadcast-tower"></i></div>';
+        $html .= '<div class="kpi-content">';
+        $html .= '<span class="kpi-number">' . $realtime['total_active_users'] . '</span>';
+        $html .= '<span class="kpi-label">En ligne maintenant</span>';
+        $html .= '</div>';
+        $html .= '</div>';
+        
+        $html .= '</div>';
+        
+        // Graphique d'évolution temporelle
+        $html .= '<div class="analytics-chart-container">';
+        $html .= '<h4><i class="fas fa-chart-area"></i> Évolution dans le temps</h4>';
+        $html .= '<canvas id="analyticsTimeSeriesChart"></canvas>';
+        $html .= '</div>';
+        
+        // Grille avec pages populaires et sources
+        $html .= '<div class="analytics-grid">';
+        
+        // Pages populaires avec barres de progression
+        $html .= '<div class="analytics-box popular-pages-visual">';
         $html .= '<h4><i class="fas fa-file-alt"></i> Pages populaires</h4>';
-        $html .= '<div class="pages-list">';
+        $html .= '<div class="pages-list-visual">';
+        
+        $maxPageviews = max(array_column($topPages, 'pageviews'));
         foreach ($topPages as $index => $page) {
-            $html .= '<div class="page-item">';
-            $html .= '<div class="page-rank">' . ($index + 1) . '</div>';
+            $percentage = $maxPageviews > 0 ? ($page['pageviews'] / $maxPageviews) * 100 : 0;
+            $html .= '<div class="page-item-visual">';
             $html .= '<div class="page-info">';
+            $html .= '<span class="page-rank">' . ($index + 1) . '</span>';
+            $html .= '<div class="page-details">';
             $html .= '<div class="page-title">' . htmlspecialchars($page['title']) . '</div>';
             $html .= '<div class="page-path">' . htmlspecialchars($page['path']) . '</div>';
             $html .= '</div>';
+            $html .= '</div>';
             $html .= '<div class="page-stats">';
-            $html .= '<span class="page-views">' . $page['pageviews'] . ' vues</span>';
+            $html .= '<div class="page-progress">';
+            $html .= '<div class="page-progress-bar" style="width: ' . $percentage . '%"></div>';
+            $html .= '</div>';
+            $html .= '<span class="page-views">' . number_format($page['pageviews']) . '</span>';
             $html .= '</div>';
             $html .= '</div>';
         }
         $html .= '</div>';
+        $html .= '</div>';
         
-        // Sources de trafic
+        // Sources de trafic avec graphique donut
+        $html .= '<div class="analytics-box traffic-sources-visual">';
         $html .= '<h4><i class="fas fa-external-link-alt"></i> Sources de trafic</h4>';
-        $html .= '<div class="sources-list">';
+        $html .= '<div class="traffic-chart-container">';
+        $html .= '<canvas id="trafficSourcesChart"></canvas>';
+        $html .= '</div>';
+        $html .= '<div class="traffic-list">';
+        
+        // Icônes par type de source
+        $sourceIcons = [
+            'google' => 'fab fa-google',
+            'facebook' => 'fab fa-facebook',
+            'instagram' => 'fab fa-instagram',
+            'youtube' => 'fab fa-youtube',
+            'bing' => 'fab fa-microsoft',
+            'direct' => 'fas fa-link'
+        ];
+        
         foreach ($trafficSources as $source) {
-            $html .= '<div class="source-item">';
-            $html .= '<div class="source-info">';
-            $html .= '<div class="source-name">' . htmlspecialchars($source['source']) . '</div>';
-            $html .= '<div class="source-medium">' . htmlspecialchars($source['medium']) . '</div>';
+            $sourceName = strtolower($source['source']);
+            $icon = $sourceIcons[$sourceName] ?? 'fas fa-globe';
+            
+            $html .= '<div class="traffic-item">';
+            $html .= '<i class="' . $icon . ' traffic-icon"></i>';
+            $html .= '<div class="traffic-info">';
+            $html .= '<div class="traffic-name">' . htmlspecialchars($source['source']) . '</div>';
+            $html .= '<div class="traffic-medium">' . htmlspecialchars($source['medium']) . '</div>';
             $html .= '</div>';
-            $html .= '<div class="source-stats">';
-            $html .= '<span class="source-sessions">' . $source['sessions'] . ' sessions</span>';
-            $html .= '</div>';
+            $html .= '<span class="traffic-sessions">' . number_format($source['sessions']) . '</span>';
             $html .= '</div>';
         }
         $html .= '</div>';
         $html .= '</div>';
         
-        $html .= '</div>';
+        $html .= '</div>'; // analytics-grid
+        
+        $html .= '</div>'; // analytics-dashboard
+        
+        // Injecter les données pour les graphiques JavaScript
+        $html .= '<script>';
+        $html .= 'window.analyticsData = {';
+        $html .= '  timeSeries: {';
+        $html .= '    "7": ' . json_encode($timeSeries7) . ',';
+        $html .= '    "30": ' . json_encode($timeSeries30) . ',';
+        $html .= '    "90": ' . json_encode($timeSeries90);
+        $html .= '  },';
+        $html .= '  trafficSources: ' . json_encode($trafficSources) . ',';
+        $html .= '  currentPeriod: 30';
+        $html .= '};';
+        $html .= '</script>';
         
         return $html;
     }
 }
+

@@ -10,7 +10,7 @@ class GoogleAnalyticsReal {
     private $client;
     
     public function __construct() {
-        $this->propertyId = '12275333436'; // Property ID GA4 que tu as fourni
+        $this->propertyId = '508182192'; // Property ID GA4 correct
         $this->credentialsPath = __DIR__ . '/../../credentials/ga-service-account.json';
         $this->initializeClient();
     }
@@ -27,8 +27,10 @@ class GoogleAnalyticsReal {
             throw new Exception('Composer autoload non trouvé. Exécutez "composer install"');
         }
         
-        // Initialiser le client Google Analytics
-        require_once $autoloadPath;
+        // Initialiser le client Google Analytics (chargement conditionnel pour éviter les conflits)
+        if (!class_exists('Google\Client')) {
+            require_once $autoloadPath;
+        }
         
         if (!class_exists('Google\Client')) {
             throw new Exception('Classes Google non disponibles. Vérifiez l\'installation de composer');
@@ -45,29 +47,32 @@ class GoogleAnalyticsReal {
      * Récupère les statistiques générales
      */
     public function getGeneralStats($days = 30) {
-        $dateRange = [
-            'start_date' => date('Y-m-d', strtotime("-{$days} days")),
-            'end_date' => date('Y-m-d')
-        ];
-        
         $request = new \Google\Service\AnalyticsData\RunReportRequest([
-            'property' => "properties/{$this->propertyId}",
-            'date_ranges' => [$dateRange],
+            'dateRanges' => [
+                new \Google\Service\AnalyticsData\DateRange([
+                    'startDate' => date('Y-m-d', strtotime("-{$days} days")),
+                    'endDate' => date('Y-m-d')
+                ])
+            ],
             'dimensions' => [
-                ['name' => 'date']
+                new \Google\Service\AnalyticsData\Dimension(['name' => 'date'])
             ],
             'metrics' => [
-                ['name' => 'activeUsers'],
-                ['name' => 'screenPageViews'],
-                ['name' => 'averageSessionDuration'],
-                ['name' => 'bounceRate']
+                new \Google\Service\AnalyticsData\Metric(['name' => 'activeUsers']),
+                new \Google\Service\AnalyticsData\Metric(['name' => 'screenPageViews']),
+                new \Google\Service\AnalyticsData\Metric(['name' => 'averageSessionDuration']),
+                new \Google\Service\AnalyticsData\Metric(['name' => 'bounceRate'])
             ],
-            'order_bys' => [
-                ['dimension' => ['dimension_name' => 'date'], 'desc' => true]
+            'orderBys' => [
+                new \Google\Service\AnalyticsData\OrderBy([
+                    'dimension' => new \Google\Service\AnalyticsData\DimensionOrderBy(['dimensionName' => 'date']),
+                    'desc' => true
+                ])
             ]
         ]);
         
-        $response = $this->client->properties->runReport($request);
+        $propertyName = "properties/{$this->propertyId}";
+        $response = $this->client->properties->runReport($propertyName, $request);
         
         $stats = [
             'total_users' => 0,
@@ -112,29 +117,32 @@ class GoogleAnalyticsReal {
      * Récupère les pages les plus visitées
      */
     public function getTopPages($limit = 10) {
-        $dateRange = [
-            'start_date' => date('Y-m-d', strtotime('-30 days')),
-            'end_date' => date('Y-m-d')
-        ];
-        
         $request = new \Google\Service\AnalyticsData\RunReportRequest([
-            'property' => "properties/{$this->propertyId}",
-            'date_ranges' => [$dateRange],
+            'dateRanges' => [
+                new \Google\Service\AnalyticsData\DateRange([
+                    'startDate' => date('Y-m-d', strtotime('-30 days')),
+                    'endDate' => date('Y-m-d')
+                ])
+            ],
             'dimensions' => [
-                ['name' => 'pagePath'],
-                ['name' => 'pageTitle']
+                new \Google\Service\AnalyticsData\Dimension(['name' => 'pagePath']),
+                new \Google\Service\AnalyticsData\Dimension(['name' => 'pageTitle'])
             ],
             'metrics' => [
-                ['name' => 'screenPageViews'],
-                ['name' => 'activeUsers']
+                new \Google\Service\AnalyticsData\Metric(['name' => 'screenPageViews']),
+                new \Google\Service\AnalyticsData\Metric(['name' => 'activeUsers'])
             ],
-            'order_bys' => [
-                ['metric' => ['metric_name' => 'screenPageViews'], 'desc' => true]
+            'orderBys' => [
+                new \Google\Service\AnalyticsData\OrderBy([
+                    'metric' => new \Google\Service\AnalyticsData\MetricOrderBy(['metricName' => 'screenPageViews']),
+                    'desc' => true
+                ])
             ],
             'limit' => $limit
         ]);
         
-        $response = $this->client->properties->runReport($request);
+        $propertyName = "properties/{$this->propertyId}";
+        $response = $this->client->properties->runReport($propertyName, $request);
         
         $pages = [];
         foreach ($response->getRows() as $row) {
@@ -153,29 +161,32 @@ class GoogleAnalyticsReal {
      * Récupère les sources de trafic
      */
     public function getTrafficSources($limit = 10) {
-        $dateRange = [
-            'start_date' => date('Y-m-d', strtotime('-30 days')),
-            'end_date' => date('Y-m-d')
-        ];
-        
         $request = new \Google\Service\AnalyticsData\RunReportRequest([
-            'property' => "properties/{$this->propertyId}",
-            'date_ranges' => [$dateRange],
+            'dateRanges' => [
+                new \Google\Service\AnalyticsData\DateRange([
+                    'startDate' => date('Y-m-d', strtotime('-30 days')),
+                    'endDate' => date('Y-m-d')
+                ])
+            ],
             'dimensions' => [
-                ['name' => 'sessionSource'],
-                ['name' => 'sessionMedium']
+                new \Google\Service\AnalyticsData\Dimension(['name' => 'sessionSource']),
+                new \Google\Service\AnalyticsData\Dimension(['name' => 'sessionMedium'])
             ],
             'metrics' => [
-                ['name' => 'sessions'],
-                ['name' => 'activeUsers']
+                new \Google\Service\AnalyticsData\Metric(['name' => 'sessions']),
+                new \Google\Service\AnalyticsData\Metric(['name' => 'activeUsers'])
             ],
-            'order_bys' => [
-                ['metric' => ['metric_name' => 'sessions'], 'desc' => true]
+            'orderBys' => [
+                new \Google\Service\AnalyticsData\OrderBy([
+                    'metric' => new \Google\Service\AnalyticsData\MetricOrderBy(['metricName' => 'sessions']),
+                    'desc' => true
+                ])
             ],
             'limit' => $limit
         ]);
         
-        $response = $this->client->properties->runReport($request);
+        $propertyName = "properties/{$this->propertyId}";
+        $response = $this->client->properties->runReport($propertyName, $request);
         
         $sources = [];
         foreach ($response->getRows() as $row) {
@@ -195,18 +206,17 @@ class GoogleAnalyticsReal {
      */
     public function getRealtimeData() {
         $request = new \Google\Service\AnalyticsData\RunRealtimeReportRequest([
-            'property' => "properties/{$this->propertyId}",
             'dimensions' => [
-                ['name' => 'country'],
-                ['name' => 'pagePath']
+                new \Google\Service\AnalyticsData\Dimension(['name' => 'country'])
             ],
             'metrics' => [
-                ['name' => 'activeUsers']
+                new \Google\Service\AnalyticsData\Metric(['name' => 'activeUsers'])
             ],
             'limit' => 20
         ]);
         
-        $response = $this->client->properties->runRealtimeReport($request);
+        $propertyName = "properties/{$this->propertyId}";
+        $response = $this->client->properties->runRealtimeReport($propertyName, $request);
         
         $realtime = [
             'total_active_users' => 0,
@@ -216,7 +226,6 @@ class GoogleAnalyticsReal {
         
         foreach ($response->getRows() as $row) {
             $country = $row->getDimensionValues()[0]->getValue();
-            $page = $row->getDimensionValues()[1]->getValue();
             $users = (int)$row->getMetricValues()[0]->getValue();
             
             $realtime['total_active_users'] += $users;
@@ -226,12 +235,6 @@ class GoogleAnalyticsReal {
                 $realtime['countries'][$country] = 0;
             }
             $realtime['countries'][$country] += $users;
-            
-            // Grouper par page
-            if (!isset($realtime['current_pages'][$page])) {
-                $realtime['current_pages'][$page] = 0;
-            }
-            $realtime['current_pages'][$page] += $users;
         }
         
         return $realtime;
@@ -255,6 +258,29 @@ class GoogleAnalyticsReal {
      */
     public static function formatBounceRate($rate) {
         return round($rate * 100, 1) . '%';
+    }
+    
+    /**
+     * Récupère les données de séries temporelles pour graphiques
+     */
+    public function getTimeSeriesData($days = 30) {
+        $stats = $this->getGeneralStats($days);
+        
+        $timeSeries = [
+            'labels' => [],
+            'users' => [],
+            'pageviews' => []
+        ];
+        
+        foreach ($stats['daily_data'] as $day) {
+            // Formater la date en français
+            $date = new DateTime($day['date']);
+            $timeSeries['labels'][] = $date->format('d M');
+            $timeSeries['users'][] = $day['users'];
+            $timeSeries['pageviews'][] = $day['pageviews'];
+        }
+        
+        return $timeSeries;
     }
     
     /**

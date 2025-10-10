@@ -11,6 +11,11 @@ data-osons/
 forms/recaptcha-config.php
 credentials/
 
+# Fichiers temporaires et de test
+test-cookies.html
+TEST_RESULTS.md
+tools/test-*.php
+
 # Fichiers système
 .DS_Store
 

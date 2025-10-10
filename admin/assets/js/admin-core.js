@@ -11,6 +11,7 @@ class AdminCore {
     init() {
         this.bindEvents();
         this.initMobileMenu();
+        this.initDashboardTabs();
         this.restoreLastSection();
         // Test de débogage
         setTimeout(() => {
@@ -84,7 +85,41 @@ class AdminCore {
             }
         });
     }
-
+    
+    initDashboardTabs() {
+        // Gérer les onglets du widget fusionné Programme + Rendez-vous
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('tab-btn')) {
+                e.preventDefault();
+                
+                const tabBtn = e.target;
+                const tabName = tabBtn.getAttribute('data-tab');
+                const mergedCard = tabBtn.closest('.merged-card');
+                
+                if (!mergedCard) return;
+                
+                // Désactiver tous les onglets
+                mergedCard.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Masquer tous les contenus
+                mergedCard.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Activer l'onglet cliqué
+                tabBtn.classList.add('active');
+                
+                // Afficher le contenu correspondant
+                const targetContent = mergedCard.querySelector(`#tab-${tabName}`);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            }
+        });
+    }
+    
     bindEvents() {
         // Gestion du hash dans l'URL
         window.addEventListener('hashchange', () => this.handleHashChange());
