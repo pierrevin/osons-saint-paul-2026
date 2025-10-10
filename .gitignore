@@ -28,3 +28,11 @@ admin/.setup_completed
 # Fichiers système
 .DS_Store
 
+# Fichiers d'autoload Composer générés (doivent être régénérés sur chaque serveur)
+vendor/composer/autoload_classmap.php
+vendor/composer/autoload_namespaces.php
+vendor/composer/autoload_psr4.php
+vendor/composer/autoload_real.php
+vendor/composer/autoload_static.php
+vendor/composer/installed.php
+

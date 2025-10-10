@@ -2,9 +2,7 @@
 // MAINTENANCE MODE - Décommentez la ligne suivante pour activer
 session_start();
 
-// MODE MAINTENANCE DÉSACTIVÉ - Site public accessible
-// Pour réactiver le mode maintenance, décommentez les lignes suivantes :
-/*
+// MODE MAINTENANCE ACTIVÉ - Site public en maintenance
 // Vérifier si l'utilisateur est connecté à l'admin
 $user_connected = isset($_SESSION['user_id']) || isset($_SESSION['admin_logged_in']) || isset($_SESSION['authenticated']);
 
@@ -12,7 +10,6 @@ $user_connected = isset($_SESSION['user_id']) || isset($_SESSION['admin_logged_i
 if (!$user_connected) {
     include __DIR__ . '/maintenance.php'; exit;
 }
-*/
 
 // Site public dynamique basé sur index.html
 require_once __DIR__ . '/admin/config.php';
