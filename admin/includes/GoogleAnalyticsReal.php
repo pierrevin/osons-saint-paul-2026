@@ -20,38 +20,62 @@ class GoogleAnalyticsReal {
     }
     
     private function initializeClient() {
-        // Vérifier si le fichier de credentials existe
-        if (!file_exists($this->credentialsPath)) {
-            throw new Exception('Fichier de credentials Google Analytics manquant');
+        try {
+            // Vérifier si le fichier de credentials existe
+            if (!file_exists($this->credentialsPath)) {
+                throw new Exception('Fichier de credentials Google Analytics manquant');
+            }
+            
+            // Vérifier si le fichier credentials est valide JSON
+            $credentialsContent = file_get_contents($this->credentialsPath);
+            $credentials = json_decode($credentialsContent, true);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new Exception('Fichier de credentials Google Analytics mal formé (JSON invalide)');
+            }
+            
+            // Vérifier les clés essentielles
+            if (!isset($credentials['type']) || !isset($credentials['private_key']) || !isset($credentials['client_email'])) {
+                throw new Exception('Fichier de credentials Google Analytics incomplet (clés manquantes)');
+            }
+            
+            // Vérifier si le fichier autoload existe
+            $autoloadPath = __DIR__ . '/../../vendor/autoload.php';
+            if (!file_exists($autoloadPath)) {
+                throw new Exception('Composer autoload non trouvé. Exécutez "composer install"');
+            }
+            
+            // Initialiser le client Google Analytics (chargement conditionnel pour éviter les conflits)
+            if (!class_exists('Google\Client')) {
+                require_once $autoloadPath;
+            }
+            
+            if (!class_exists('Google\Client')) {
+                throw new Exception('Classes Google non disponibles. Vérifiez l\'installation de composer');
+            }
+            
+            $client = new \Google\Client();
+            $client->setAuthConfig($this->credentialsPath);
+            $client->addScope(\Google\Service\AnalyticsData::ANALYTICS_READONLY);
+            
+            $this->client = new \Google\Service\AnalyticsData($client);
+            
+        } catch (Exception $e) {
+            // Logger l'erreur pour debug
+            error_log("GoogleAnalyticsReal initialization error: " . $e->getMessage());
+            throw $e;
         }
-        
-        // Vérifier si le fichier autoload existe
-        $autoloadPath = __DIR__ . '/../../vendor/autoload.php';
-        if (!file_exists($autoloadPath)) {
-            throw new Exception('Composer autoload non trouvé. Exécutez "composer install"');
-        }
-        
-        // Initialiser le client Google Analytics (chargement conditionnel pour éviter les conflits)
-        if (!class_exists('Google\Client')) {
-            require_once $autoloadPath;
-        }
-        
-        if (!class_exists('Google\Client')) {
-            throw new Exception('Classes Google non disponibles. Vérifiez l\'installation de composer');
-        }
-        
-        $client = new \Google\Client();
-        $client->setAuthConfig($this->credentialsPath);
-        $client->addScope(\Google\Service\AnalyticsData::ANALYTICS_READONLY);
-        
-        $this->client = new \Google\Service\AnalyticsData($client);
     }
     
     /**
      * Récupère les statistiques générales
      */
     public function getGeneralStats($days = 30) {
-        $request = new \Google\Service\AnalyticsData\RunReportRequest([
+        try {
+            if (!$this->client) {
+                throw new Exception('Client Google Analytics non initialisé');
+            }
+            
+            $request = new \Google\Service\AnalyticsData\RunReportRequest([
             'dateRanges' => [
                 new \Google\Service\AnalyticsData\DateRange([
                     'startDate' => date('Y-m-d', strtotime("-{$days} days")),
@@ -75,18 +99,18 @@ class GoogleAnalyticsReal {
             ]
         ]);
         
-        $propertyName = "properties/{$this->propertyId}";
-        $response = $this->client->properties->runReport($propertyName, $request);
-        
-        $stats = [
-            'total_users' => 0,
-            'total_pageviews' => 0,
-            'avg_session_duration' => 0,
-            'bounce_rate' => 0,
-            'daily_data' => []
-        ];
-        
-        foreach ($response->getRows() as $row) {
+            $propertyName = "properties/{$this->propertyId}";
+            $response = $this->client->properties->runReport($propertyName, $request);
+            
+            $stats = [
+                'total_users' => 0,
+                'total_pageviews' => 0,
+                'avg_session_duration' => 0,
+                'bounce_rate' => 0,
+                'daily_data' => []
+            ];
+            
+            foreach ($response->getRows() as $row) {
             $date = $row->getDimensionValues()[0]->getValue();
             $users = $row->getMetricValues()[0]->getValue();
             $pageviews = $row->getMetricValues()[1]->getValue();
@@ -105,23 +129,41 @@ class GoogleAnalyticsReal {
                 'session_duration' => (float)$sessionDuration,
                 'bounce_rate' => (float)$bounceRate
             ];
+            }
+            
+            // Calculer les moyennes
+            $dayCount = count($stats['daily_data']);
+            if ($dayCount > 0) {
+                $stats['avg_session_duration'] = $stats['avg_session_duration'] / $dayCount;
+                $stats['bounce_rate'] = $stats['bounce_rate'] / $dayCount;
+            }
+            
+            return $stats;
+            
+        } catch (Exception $e) {
+            error_log("GoogleAnalyticsReal getGeneralStats error: " . $e->getMessage());
+            // Retourner des données par défaut en cas d'erreur
+            return [
+                'total_users' => 0,
+                'total_pageviews' => 0,
+                'avg_session_duration' => 0,
+                'bounce_rate' => 0,
+                'daily_data' => [],
+                'error' => $e->getMessage()
+            ];
         }
-        
-        // Calculer les moyennes
-        $dayCount = count($stats['daily_data']);
-        if ($dayCount > 0) {
-            $stats['avg_session_duration'] = $stats['avg_session_duration'] / $dayCount;
-            $stats['bounce_rate'] = $stats['bounce_rate'] / $dayCount;
-        }
-        
-        return $stats;
     }
     
     /**
      * Récupère les pages les plus visitées
      */
     public function getTopPages($limit = 10) {
-        $request = new \Google\Service\AnalyticsData\RunReportRequest([
+        try {
+            if (!$this->client) {
+                throw new Exception('Client Google Analytics non initialisé');
+            }
+            
+            $request = new \Google\Service\AnalyticsData\RunReportRequest([
             'dateRanges' => [
                 new \Google\Service\AnalyticsData\DateRange([
                     'startDate' => date('Y-m-d', strtotime('-30 days')),
@@ -209,7 +251,12 @@ class GoogleAnalyticsReal {
      * Récupère les données en temps réel
      */
     public function getRealtimeData() {
-        $request = new \Google\Service\AnalyticsData\RunRealtimeReportRequest([
+        try {
+            if (!$this->client) {
+                throw new Exception('Client Google Analytics non initialisé');
+            }
+            
+            $request = new \Google\Service\AnalyticsData\RunRealtimeReportRequest([
             'dimensions' => [
                 new \Google\Service\AnalyticsData\Dimension(['name' => 'country'])
             ],
@@ -242,6 +289,16 @@ class GoogleAnalyticsReal {
         }
         
         return $realtime;
+        
+        } catch (Exception $e) {
+            error_log("GoogleAnalyticsReal getRealtimeData error: " . $e->getMessage());
+            return [
+                'total_active_users' => 0,
+                'countries' => [],
+                'current_pages' => [],
+                'error' => $e->getMessage()
+            ];
+        }
     }
     
     /**

@@ -190,12 +190,30 @@ class DashboardSection extends AdminSection {
         $topPages = $analytics->getTopPages(5);
         $trafficSources = $analytics->getTrafficSources(5);
         
+        // Vérifier s'il y a des erreurs dans les données
+        $hasAnalyticsError = false;
+        if (isset($stats['error']) || isset($realtime['error'])) {
+            $hasAnalyticsError = true;
+            $analyticsErrorMessage = $stats['error'] ?? $realtime['error'] ?? 'Erreur inconnue Google Analytics';
+        }
+        
         // Récupérer les données pour les différentes périodes
         $timeSeries7 = $analytics->getTimeSeriesData(7);
         $timeSeries30 = $analytics->getTimeSeriesData(30);
         $timeSeries90 = $analytics->getTimeSeriesData(90);
         
         $html = '<div class="analytics-dashboard">';
+        
+        // Afficher un message d'erreur si nécessaire
+        if ($hasAnalyticsError) {
+            $html .= '<div class="analytics-error-notice">';
+            $html .= '<div class="alert alert-warning">';
+            $html .= '<i class="fas fa-exclamation-triangle"></i>';
+            $html .= '<strong>Attention :</strong> ' . htmlspecialchars($analyticsErrorMessage);
+            $html .= '<br><small>Les statistiques peuvent être incomplètes ou inexactes.</small>';
+            $html .= '</div>';
+            $html .= '</div>';
+        }
         
         // En-tête avec sélecteur de période
         $html .= '<div class="analytics-header">';
