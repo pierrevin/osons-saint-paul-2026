@@ -362,11 +362,11 @@ class DashboardSection extends AdminSection {
         $html .= '<script>';
         $html .= 'window.analyticsData = {';
         $html .= '  timeSeries: {';
-        $html .= '    "7": ' . json_encode($timeSeries7) . ',';
-        $html .= '    "30": ' . json_encode($timeSeries30) . ',';
-        $html .= '    "90": ' . json_encode($timeSeries90);
+        $html .= '    "7": ' . (json_encode($timeSeries7) ?: '{"labels":[],"users":[],"pageviews":[]}') . ',';
+        $html .= '    "30": ' . (json_encode($timeSeries30) ?: '{"labels":[],"users":[],"pageviews":[]}') . ',';
+        $html .= '    "90": ' . (json_encode($timeSeries90) ?: '{"labels":[],"users":[],"pageviews":[]}');
         $html .= '  },';
-        $html .= '  trafficSources: ' . json_encode($trafficSources) . ',';
+        $html .= '  trafficSources: ' . (json_encode($trafficSources) ?: '[]') . ',';
         $html .= '  currentPeriod: 30';
         $html .= '};';
         $html .= '</script>';
