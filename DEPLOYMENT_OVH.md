@@ -72,7 +72,30 @@
 
 ## 🔧 Configuration Post-Déploiement
 
-### 1. **Permissions des dossiers :**
+### 1. **Configuration initiale (PREMIER DÉPLOIEMENT) :**
+
+**⚠️ IMPORTANT :** Après le premier déploiement Git, vous devez configurer l'accès admin :
+
+1. **Uploader le script de setup :**
+   - Uploader `admin/setup_initial.php` sur le serveur
+   - Accéder à : `https://osons-saint-paul.fr/admin/setup_initial.php`
+   - Cliquer sur le lien pour lancer le setup
+
+2. **Le script va automatiquement :**
+   - ✅ Débloquer l'accès admin (supprimer les tentatives de connexion)
+   - ✅ Créer `admin/config.php` depuis le template
+   - ✅ Restaurer `admin/users.json` avec vos 3 utilisateurs
+   - ✅ Créer les dossiers et fichiers de logs
+   - ✅ Configurer les permissions
+
+3. **Se connecter immédiatement :**
+   - Utilisateur admin : `admin`
+   - Utilisateur éditeur : `editeur` 
+   - Utilisateur éditeur : `vincenot_editeur`
+
+4. **⚠️ SÉCURITÉ :** Supprimer `admin/setup_initial.php` après usage !
+
+### 2. **Permissions des dossiers :**
 ```bash
 chmod 755 uploads/
 chmod 755 data-osons/
@@ -80,7 +103,7 @@ chmod 755 admin/logs/
 chmod 644 .htaccess
 ```
 
-### 2. **Protection des logs :**
+### 3. **Protection des logs :**
 Ajouter dans `.htaccess` :
 ```apache
 # Protection des logs
@@ -96,10 +119,10 @@ Ajouter dans `.htaccess` :
 </Files>
 ```
 
-### 3. **Vérifications :**
+### 4. **Vérifications :**
 - [ ] Site accessible en HTTPS
 - [ ] Favicons s'affichent correctement
-- [ ] Admin fonctionne
+- [ ] Admin fonctionne (après setup initial)
 - [ ] Formulaires fonctionnent
 - [ ] Images s'affichent
 - [ ] Sitemap accessible : `/sitemap.xml`

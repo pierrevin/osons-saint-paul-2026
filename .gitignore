@@ -21,6 +21,10 @@ test-cookies.html
 TEST_RESULTS.md
 tools/test-*.php
 
+# Script de setup initial (sécurité)
+admin/setup_initial.php
+admin/.setup_completed
+
 # Fichiers système
 .DS_Store
 
