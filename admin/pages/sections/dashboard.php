@@ -156,11 +156,19 @@ class DashboardSection extends AdminSection {
             }
             
             // Utiliser les vraies données
-            $analytics = new GoogleAnalyticsReal();
+            try {
+                $analytics = new GoogleAnalyticsReal();
+            } catch (Exception $e) {
+                throw new Exception('Erreur lors de l\'initialisation Google Analytics : ' . $e->getMessage());
+            }
             
         } catch (Exception $e) {
             $errorMessage = $e->getMessage();
             error_log("Google Analytics Error: " . $errorMessage);
+        } catch (Error $e) {
+            // Capturer aussi les erreurs fatales PHP
+            $errorMessage = 'Erreur fatale Google Analytics : ' . $e->getMessage();
+            error_log("Google Analytics Fatal Error: " . $errorMessage);
         }
         
         // Si erreur, afficher message et arrêter
