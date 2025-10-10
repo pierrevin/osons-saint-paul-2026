@@ -9,6 +9,7 @@ data-osons/
 
 # Configuration sécurisée (ne jamais déployer)
 forms/recaptcha-config.php
+credentials/
 
 # Fichiers système
 .DS_Store
