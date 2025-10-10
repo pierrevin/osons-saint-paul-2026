@@ -11,6 +11,11 @@ data-osons/
 forms/recaptcha-config.php
 credentials/
 
+# Données admin de production (CRITIQUE - ne jamais écraser)
+admin/users.json
+admin/logs/
+admin/config.php
+
 # Fichiers temporaires et de test
 test-cookies.html
 TEST_RESULTS.md

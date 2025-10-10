@@ -1,0 +1,57 @@
+<?php
+/**
+ * Configuration Template - À copier en config.php et adapter
+ * 
+ * INSTRUCTIONS :
+ * 1. Copier ce fichier vers admin/config.php
+ * 2. Adapter les chemins selon votre serveur
+ * 3. Ne jamais commiter config.php (dans .gitignore)
+ */
+
+// Définition des constantes de base
+define('ROOT_PATH', __DIR__ . '/..');
+
+// Configuration des chemins selon l'environnement
+if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'localhost') {
+    // Développement local
+    define('DATA_PATH', ROOT_PATH . '/data');
+    define('UPLOADS_PATH', ROOT_PATH . '/uploads');
+    define('IMAGES_PATH', ROOT_PATH . '/uploads');
+} else {
+    // Production - adapter selon votre serveur
+    $envDataDir = $_ENV['DATA_DIR'] ?? null;
+    if ($envDataDir) {
+        define('DATA_PATH', rtrim($envDataDir, '/'));
+    } else {
+        // Chemin par défaut production
+        define('DATA_PATH', ROOT_PATH . '/data-osons');
+    }
+    define('UPLOADS_PATH', ROOT_PATH . '/uploads');
+    define('IMAGES_PATH', ROOT_PATH . '/uploads');
+}
+
+// Configuration des logs
+$log_file = DATA_PATH . '/admin_log.json';
+
+// Fonctions utilitaires
+function saveJsonFile($filename, $data) {
+    global $log_file;
+    $file_path = DATA_PATH . '/' . $filename;
+    
+    // Créer une sauvegarde
+    $backup_path = DATA_PATH . '/backups/' . $filename . '.' . date('Y-m-d-H-i-s') . '.json';
+    if (file_exists($file_path)) {
+        copy($file_path, $backup_path);
+    }
+    
+    return file_put_contents($file_path, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+}
+
+function loadJsonFile($filename) {
+    $file_path = DATA_PATH . '/' . $filename;
+    if (file_exists($file_path)) {
+        return json_decode(file_get_contents($file_path), true);
+    }
+    return [];
+}
+?>
