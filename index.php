@@ -33,7 +33,7 @@ $content = get_json_data('site_content.json');
     <meta property="og:url" content="https://osons-saint-paul.fr/">
     <meta property="og:title" content="Osons Saint-Paul 2026 - Liste citoyenne pour les municipales">
     <meta property="og:description" content="Liste citoyenne pour les municipales 2026 à Saint-Paul-sur-Save. Un projet participatif pour construire ensemble le village vivant et partagé.">
-    <meta property="og:image" content="https://osons-saint-paul.fr/<?= htmlspecialchars($content['hero']['background_image'] ?? 'Images/hero_test.png') ?>">
+    <meta property="og:image" content="https://osons-saint-paul.fr/uploads/og-image.png">
     <meta property="og:locale" content="fr_FR">
     <meta property="og:site_name" content="Osons Saint-Paul 2026">
     
@@ -42,7 +42,7 @@ $content = get_json_data('site_content.json');
     <meta name="twitter:url" content="https://osons-saint-paul.fr/">
     <meta name="twitter:title" content="Osons Saint-Paul 2026 - Liste citoyenne pour les municipales">
     <meta name="twitter:description" content="Liste citoyenne pour les municipales 2026 à Saint-Paul-sur-Save. Un projet participatif pour construire ensemble le village vivant et partagé.">
-    <meta name="twitter:image" content="https://osons-saint-paul.fr/<?= htmlspecialchars($content['hero']['background_image'] ?? 'Images/hero_test.png') ?>">
+    <meta name="twitter:image" content="https://osons-saint-paul.fr/uploads/og-image.png">
     
     <!-- Preconnect pour optimisation performances -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,7 +120,7 @@ $content = get_json_data('site_content.json');
         <div class="hero-background">
             <picture>
                 <?php
-                $bg = $content['hero']['background_image'] ?? 'Images/hero_test.png';
+                $bg = $content['hero']['background_image'] ?? 'uploads/hero_default.png';
                 $bgMobile = $content['hero']['background_image_mobile'] ?? $bg;
                 // Forcer un chemin absolu local si c'est un upload
                 if (!preg_match('#^https?://#', $bg) && strpos($bg, '/') !== 0) { $bg = '/' . ltrim($bg, '/'); }
@@ -254,7 +254,7 @@ $content = get_json_data('site_content.json');
     </section>
 
     <!-- Citation de transition : Programme → Équipe -->
-    <div class="transition-quote programme-equipe" style="background-image: url('<?= htmlspecialchars($content['citations']['citation1']['background_image'] ?? 'Images/hero_test.png') ?>');">
+    <div class="transition-quote programme-equipe" style="background-image: url('<?= htmlspecialchars($content['citations']['citation1']['background_image'] ?? 'uploads/hero_default.png') ?>');">
         <div class="transition-quote-content">
             <blockquote class="transition-quote-text">
                 <span class="quote-text"><?= htmlspecialchars($content['citations']['citation1']['text'] ?? 'Considérer l\'être humain et la préservation de la nature comme composante centrale de l\'action publique') ?></span>
@@ -279,7 +279,7 @@ $content = get_json_data('site_content.json');
             
             <!-- Image Hero Mobile (visible uniquement sur mobile) -->
             <div class="hero-mobile-image">
-                <img src="<?= htmlspecialchars($content['hero']['background_image'] ?? 'Images/hero_test.png') ?>" alt="Équipe Osons Saint-Paul - Photo de groupe" loading="lazy">
+                <img src="<?= htmlspecialchars($content['hero']['background_image'] ?? 'uploads/hero_default.png') ?>" alt="Équipe Osons Saint-Paul - Photo de groupe" loading="lazy">
             </div>
             
             <div class="team-grid">
@@ -315,7 +315,7 @@ $content = get_json_data('site_content.json');
     </section>
 
     <!-- Citation de transition : Équipe → Rencontres -->
-    <div class="transition-quote equipe-rencontres" style="background-image: url('<?= htmlspecialchars($content['citations']['citation2']['background_image'] ?? 'Images/hero_test.png') ?>');">
+    <div class="transition-quote equipe-rencontres" style="background-image: url('<?= htmlspecialchars($content['citations']['citation2']['background_image'] ?? 'uploads/hero_default.png') ?>');">
         <div class="transition-quote-content">
             <blockquote class="transition-quote-text">
                 <span class="quote-text"><?= htmlspecialchars($content['citations']['citation2']['text'] ?? 'Favoriser, au sein du conseil municipal, le débat d\'idées dans le respect des points de vue') ?></span>
@@ -461,7 +461,7 @@ $content = get_json_data('site_content.json');
     </section>
 
     <!-- Citation de transition : Rencontres → Charte -->
-    <div class="transition-quote rencontres-charte" style="background-image: url('<?= htmlspecialchars($content['citations']['citation3']['background_image'] ?? 'Images/hero_test.png') ?>');">
+    <div class="transition-quote rencontres-charte" style="background-image: url('<?= htmlspecialchars($content['citations']['citation3']['background_image'] ?? 'uploads/hero_default.png') ?>');">
         <div class="transition-quote-content">
             <blockquote class="transition-quote-text">
                 <span class="quote-text"><?= htmlspecialchars($content['citations']['citation3']['text'] ?? 'Porter une politique en faveur des plus fragiles par des actions favorisant l\'inclusion et l\'autonomie') ?></span>
@@ -504,7 +504,7 @@ $content = get_json_data('site_content.json');
     </section>
 
     <!-- Citation de transition : Charte → Vos idées -->
-    <div class="transition-quote charte-idees" style="background-image: url('<?= htmlspecialchars($content['citations']['citation4']['background_image'] ?? 'Images/hero_test.png') ?>');">
+    <div class="transition-quote charte-idees" style="background-image: url('<?= htmlspecialchars($content['citations']['citation4']['background_image'] ?? 'uploads/hero_default.png') ?>');">
         <div class="transition-quote-content">
             <blockquote class="transition-quote-text">
                 <span class="quote-text"><?= htmlspecialchars($content['citations']['citation4']['text'] ?? 'S\'engager à être cohérent.es entre nos intentions et nos actes') ?></span>
