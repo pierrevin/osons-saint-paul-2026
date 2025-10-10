@@ -10,8 +10,11 @@ function generateCSRFToken() {
     return $_SESSION['csrf_token'];
 }
 
+// Chargement de la configuration
+require_once __DIR__ . '/../admin/config.php';
+
 // Chargement du contenu du site
-$data_path = defined('ROOT_PATH') ? ROOT_PATH . '/data/site_content.json' : '../data/site_content.json';
+$data_path = DATA_PATH . '/site_content.json';
 $content = file_exists($data_path) ? json_decode(file_get_contents($data_path), true) : [];
 ?>
 <!DOCTYPE html>

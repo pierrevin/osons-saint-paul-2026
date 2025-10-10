@@ -21,13 +21,29 @@ class ProgrammeSection extends AdminSection {
         $citizenProposals = array_values(array_filter($citizenProposals, function($p) {
             return ($p['status'] ?? '') !== 'deleted';
         }));
-        // Séparer par statut
+        // Séparer par statut (citoyennes)
         $pendingProposals = array_filter($citizenProposals, function($p) { return ($p['status'] ?? '') === 'pending'; });
-        $approvedProposals = array_filter($citizenProposals, function($p) { return ($p['status'] ?? '') === 'approved'; });
+
+        // Construire l'ensemble des propositions citoyennes déjà intégrées dans les cartes équipe
+        $integratedCitizenIds = [];
+        foreach ($teamProposals as $tp) {
+            if (isset($tp['citizen_proposal_id']) && $tp['citizen_proposal_id']) {
+                $integratedCitizenIds[(string)$tp['citizen_proposal_id']] = true;
+            }
+        }
+
+        // Propositions citoyennes approuvées à afficher: exclure celles déjà intégrées (pour éviter doublon visuel)
+        $approvedCitizenProposals = array_filter($citizenProposals, function($p) use ($integratedCitizenIds) {
+            if (($p['status'] ?? '') !== 'approved') { return false; }
+            $pid = (string)($p['id'] ?? '');
+            return !isset($integratedCitizenIds[$pid]);
+        });
         $rejectedProposals = array_filter($citizenProposals, function($p) { return ($p['status'] ?? '') === 'rejected'; });
         
-        // Mélanger les propositions approuvées avec celles de l'équipe
-        $allApprovedProposals = array_merge($approvedProposals, $teamProposals);
+        // Construire la liste "validées" = cartes équipe + cartes citoyennes validées (sans doublons visuels)
+        // On conserve TOUTES les cartes équipe (y compris celles issues d'une citoyenne intégrée)
+        // et on ajoute les citoyennes validées (objets avec clé 'data')
+        $allApprovedProposals = array_merge($teamProposals, $approvedCitizenProposals);
         
         // Trier par ordre d'affichage (les propositions d'équipe en premier, puis les citoyennes par date)
         usort($allApprovedProposals, function($a, $b) {
@@ -148,7 +164,7 @@ class ProgrammeSection extends AdminSection {
     }
     
     private function loadCitizenProposals() {
-        $propositionsFile = __DIR__ . '/../../../data/propositions.json';
+        $propositionsFile = DATA_PATH . '/propositions.json';
         if (file_exists($propositionsFile)) {
             $data = json_decode(file_get_contents($propositionsFile), true);
             return $data['propositions'] ?? [];
@@ -189,25 +205,36 @@ class ProgrammeSection extends AdminSection {
     }
     
     private function renderApprovedProposalCard($proposal) {
-        $isCitizen = isset($proposal['data']) && is_array($proposal['data']);
-        $title = $isCitizen ? $proposal['data']['titre'] : $proposal['title'];
-        $description = $isCitizen ? $proposal['data']['description'] : $proposal['description'];
+        // Badge citoyen si:
+        // - case "badge citoyen" cochée (citizen_proposal true),
+        // - objet citoyen brut (clé 'data'),
+        // - ou carte équipe issue d'une intégration citoyenne (citizen_proposal_id)
+        $isCitizenBadge = (!empty($proposal['citizen_proposal']))
+            || (isset($proposal['data']) && is_array($proposal['data']))
+            || (!empty($proposal['citizen_proposal_id']));
+
+        // Source des données pour le contenu: préférer les données citoyennes si présentes, sinon données équipe
+        $hasCitizenData = isset($proposal['data']) && is_array($proposal['data']);
+        $title = $hasCitizenData ? ($proposal['data']['titre'] ?? '') : ($proposal['title'] ?? '');
+        $description = $hasCitizenData ? ($proposal['data']['description'] ?? '') : ($proposal['description'] ?? '');
         
         $html = '<div class="proposal-card approved-card">';
         $html .= '<div class="proposal-header">';
         $html .= '<h5>' . htmlspecialchars($title) . '</h5>';
         $html .= '<span class="status-badge approved">VALIDÉE</span>';
-        $html .= '<span class="source-badge ' . ($isCitizen ? 'citizen' : 'team') . '">';
-        $html .= $isCitizen ? '<i class="fas fa-user"></i> Citoyen' : '<i class="fas fa-users"></i> Équipe';
+        $html .= '<span class="source-badge ' . ($isCitizenBadge ? 'citizen' : 'team') . '">';
+        $html .= $isCitizenBadge ? '<i class="fas fa-user"></i> Citoyen' : '<i class="fas fa-users"></i> Équipe';
         $html .= '</span>';
         $html .= '</div>';
         
         $html .= '<div class="proposal-content">';
         $html .= '<p>' . htmlspecialchars($description) . '</p>';
         
-        if (!$isCitizen && !empty($proposal['items'])) {
+        // Aperçu des points clés pour les deux types de cartes
+        $items = $hasCitizenData ? ($proposal['data']['items'] ?? []) : ($proposal['items'] ?? []);
+        if (!empty($items) && is_array($items)) {
             $html .= '<ul class="proposal-items">';
-            foreach ($proposal['items'] as $item) {
+            foreach ($items as $item) {
                 $html .= '<li>' . htmlspecialchars($item) . '</li>';
             }
             $html .= '</ul>';
@@ -282,6 +309,10 @@ class ProgrammeSection extends AdminSection {
         
         try {
             switch ($action) {
+                // Alias pour compat JS ancien en cache
+                case 'set_citizen_proposal_status':
+                    $action = 'set_citizen_status';
+                    // pas de break; on enchaîne vers le case suivant
                 case 'add_proposal':
                     return $this->addProposal($data);
                 case 'edit_proposal':
@@ -305,7 +336,7 @@ class ProgrammeSection extends AdminSection {
     }
     
     private function addProposal($data) {
-        $siteContentPath = __DIR__ . '/../../../data/site_content.json';
+        $siteContentPath = DATA_PATH . '/site_content.json';
         if (!file_exists($siteContentPath)) {
             throw new Exception('Contenu du site introuvable');
         }
@@ -328,7 +359,8 @@ class ProgrammeSection extends AdminSection {
             'pillar' => trim($data['pillar'] ?? 'proteger'),
             'icon' => 'default',
             'color' => $this->pillarToColor($data['pillar'] ?? ''),
-            'citizen_proposal' => false,
+            // Badge citoyen selon la case cochée dans l'admin
+            'citizen_proposal' => (isset($data['display_citizen_badge']) && (string)$data['display_citizen_badge'] === '1'),
             'items' => $items,
         ];
 
@@ -359,7 +391,7 @@ class ProgrammeSection extends AdminSection {
 
         if ($isCitizen) {
             // Modifier une proposition citoyenne (même si approuvée)
-            $citizenProposalsFile = __DIR__ . '/../../../data/propositions.json';
+            $citizenProposalsFile = DATA_PATH . '/propositions.json';
             if (!file_exists($citizenProposalsFile)) {
                 throw new Exception('Fichier des propositions citoyennes introuvable');
             }
@@ -406,7 +438,7 @@ class ProgrammeSection extends AdminSection {
             }
 
             // Mettre à jour la carte publique si cette proposition citoyenne est déjà intégrée au site
-            $siteContentPath = __DIR__ . '/../../../data/site_content.json';
+            $siteContentPath = DATA_PATH . '/site_content.json';
             if (file_exists($siteContentPath)) {
                 $siteContent = json_decode(file_get_contents($siteContentPath), true);
                 if (isset($siteContent['programme']['proposals']) && is_array($siteContent['programme']['proposals'])) {
@@ -469,7 +501,7 @@ class ProgrammeSection extends AdminSection {
         }
 
         // Modifier une proposition d'équipe
-        $siteContentPath = __DIR__ . '/../../../data/site_content.json';
+        $siteContentPath = DATA_PATH . '/site_content.json';
         if (!file_exists($siteContentPath)) {
             throw new Exception('Contenu du site introuvable');
         }
@@ -484,6 +516,10 @@ class ProgrammeSection extends AdminSection {
                 if (isset($data['pillar'])) { $p['pillar'] = $data['pillar']; $p['color'] = $this->pillarToColor($data['pillar']); }
                 if (isset($data['items'])) {
                     $p['items'] = array_filter(array_map('trim', explode("\n", $data['items'])));
+                }
+                // Mettre à jour le badge citoyen si case cochée
+                if (isset($data['display_citizen_badge'])) {
+                    $p['citizen_proposal'] = ((string)$data['display_citizen_badge'] === '1');
                 }
                 $found = true;
                 break;
@@ -504,7 +540,7 @@ class ProgrammeSection extends AdminSection {
         }
         
         // 1) Tenter de supprimer une carte d'équipe (site_content.json par ID numérique)
-        $siteContentPath = __DIR__ . '/../../../data/site_content.json';
+        $siteContentPath = DATA_PATH . '/site_content.json';
         if (file_exists($siteContentPath)) {
             $content = json_decode(file_get_contents($siteContentPath), true);
             $proposals = array_values($content['programme']['proposals'] ?? []);
@@ -522,7 +558,7 @@ class ProgrammeSection extends AdminSection {
         }
 
         // 2) Sinon, tenter d'archiver (soft delete) une proposition citoyenne (propositions.json par ID string)
-        $citizenProposalsFile = __DIR__ . '/../../../data/propositions.json';
+        $citizenProposalsFile = DATA_PATH . '/propositions.json';
         if (file_exists($citizenProposalsFile)) {
             $citizenData = json_decode(file_get_contents($citizenProposalsFile), true);
             $citizenList = array_values($citizenData['propositions'] ?? []);
@@ -558,7 +594,7 @@ class ProgrammeSection extends AdminSection {
         $proposalId = $data['proposal_id'] ?? null;
         if (!$proposalId) { throw new Exception('ID de proposition manquant'); }
 
-        $citizenProposalsFile = __DIR__ . '/../../../data/propositions.json';
+        $citizenProposalsFile = DATA_PATH . '/propositions.json';
         if (!file_exists($citizenProposalsFile)) { throw new Exception('Fichier des propositions citoyennes introuvable'); }
 
         $citizenData = json_decode(file_get_contents($citizenProposalsFile), true);
@@ -589,7 +625,7 @@ class ProgrammeSection extends AdminSection {
         }
 
         // Charger les propositions citoyennes
-        $citizenProposalsFile = __DIR__ . '/../../../data/propositions.json';
+        $citizenProposalsFile = DATA_PATH . '/propositions.json';
         if (!file_exists($citizenProposalsFile)) {
             throw new Exception('Fichier des propositions citoyennes introuvable');
         }
@@ -655,9 +691,24 @@ class ProgrammeSection extends AdminSection {
             throw new Exception('Erreur lors de la sauvegarde');
         }
 
+        // Envoyer l'email d'acceptation au citoyen
+        if ($approvedProposal && isset($approvedProposal['data']['email'])) {
+            try {
+                require_once __DIR__ . '/../../../forms/email-service.php';
+                $emailResult = EmailService::sendStatusUpdateEmail(
+                    $approvedProposal['data']['email'], 
+                    $approvedProposal, 
+                    'approved'
+                );
+                error_log('Email d\'acceptation envoyé: ' . ($emailResult['success'] ? 'SUCCESS' : 'FAILED') . ' - ' . ($emailResult['error'] ?? ''));
+            } catch (Exception $e) {
+                error_log('Erreur envoi email acceptation: ' . $e->getMessage());
+            }
+        }
+
         // Synchroniser avec le site public (site_content.json)
         if ($approvedProposal) {
-            $siteContentPath = __DIR__ . '/../../../data/site_content.json';
+            $siteContentPath = DATA_PATH . '/site_content.json';
             if (!file_exists($siteContentPath)) {
                 throw new Exception('Contenu du site introuvable');
             }
@@ -762,7 +813,7 @@ class ProgrammeSection extends AdminSection {
         }
 
         // Charger les propositions citoyennes
-        $citizenProposalsFile = __DIR__ . '/../../../data/propositions.json';
+        $citizenProposalsFile = DATA_PATH . '/propositions.json';
         if (!file_exists($citizenProposalsFile)) {
             throw new Exception('Fichier des propositions citoyennes introuvable');
         }
@@ -795,11 +846,14 @@ class ProgrammeSection extends AdminSection {
         }
 
         // Envoyer l'email de rejet si possible
-        if ($citizenEmail && class_exists('EmailService')) {
+        if ($citizenEmail) {
             try {
-                $emailService = new EmailService();
+                require_once __DIR__ . '/../../../forms/email-service.php';
                 $proposalTitle = $proposals[array_search($proposalId, array_column($proposals, 'id'))]['data']['titre'] ?? 'Votre proposition';
-                $emailService->sendRejectionEmail($citizenEmail, $rejectionReason, $proposalTitle);
+                $proposalData = $proposals[array_search($proposalId, array_column($proposals, 'id'))];
+                $proposalData['rejection_reason'] = $rejectionReason;
+                $emailResult = EmailService::sendStatusUpdateEmail($citizenEmail, $proposalData, 'rejected');
+                error_log('Email de rejet envoyé: ' . ($emailResult['success'] ? 'SUCCESS' : 'FAILED') . ' - ' . ($emailResult['error'] ?? ''));
             } catch (Exception $e) {
                 // Log l'erreur mais ne pas faire échouer l'opération
                 error_log('Erreur envoi email rejet: ' . $e->getMessage());
@@ -819,7 +873,7 @@ class ProgrammeSection extends AdminSection {
             throw new Exception('Statut invalide');
         }
 
-        $citizenProposalsFile = __DIR__ . '/../../../data/propositions.json';
+        $citizenProposalsFile = DATA_PATH . '/propositions.json';
         if (!file_exists($citizenProposalsFile)) {
             throw new Exception('Fichier des propositions citoyennes introuvable');
         }
@@ -848,7 +902,7 @@ class ProgrammeSection extends AdminSection {
         }
         
         // Synchroniser le site public: retirer la carte si elle n'est plus approuvée
-        $siteContentPath = __DIR__ . '/../../../data/site_content.json';
+        $siteContentPath = DATA_PATH . '/site_content.json';
         if (file_exists($siteContentPath)) {
             $siteContent = json_decode(file_get_contents($siteContentPath), true);
             if (isset($siteContent['programme']['proposals']) && is_array($siteContent['programme']['proposals'])) {

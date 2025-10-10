@@ -101,7 +101,7 @@ function setCitizenProposalStatus(proposalId, status) {
             data.rejection_reason = reason;
         }
         
-        submitProposalAction('set_citizen_proposal_status', data);
+        submitProposalAction('set_citizen_status', data);
     }
 }
 
@@ -172,7 +172,9 @@ function prepareModalForEdit(proposalData) {
     if (idInput) idInput.value = proposalData.id || '';
     
     // Proposition citoyenne ?
-    const isCitizen = proposalData.citizen_proposal || (proposalData.data && proposalData.data.titre);
+    // IMPORTANT: On ne considère "citoyenne" pour l'édition que si l'objet contient des données citoyennes brutes (clé data)
+    // Une carte d'équipe portant un badge citoyen doit rester éditée comme carte d'équipe
+    const isCitizen = !!(proposalData.data && proposalData.data.titre);
     const citizenInput = modal.querySelector('#citizen-proposal');
     if (citizenInput) citizenInput.value = isCitizen ? '1' : '0';
     

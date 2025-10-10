@@ -114,7 +114,7 @@ class HeroSection extends AdminSection {
         }
         
         // Persister dans data/site_content.json
-        $dataFile = __DIR__ . '/../../../data/site_content.json';
+        $dataFile = DATA_PATH . '/site_content.json';
         $all = file_exists($dataFile) ? json_decode(file_get_contents($dataFile), true) : [];
         if (!is_array($all)) { $all = []; }
         $all['hero'] = array_merge($all['hero'] ?? [], $heroData);

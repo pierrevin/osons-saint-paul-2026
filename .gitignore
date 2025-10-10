@@ -1,0 +1,12 @@
+# Contenus runtime (ne pas déployer via Git)
+data/site_content.json
+data/propositions.json
+data/admin_log.json
+data/backups/
+
+# Données persistantes de production (CRITIQUE - ne jamais déployer)
+data-osons/
+
+# Fichiers système
+.DS_Store
+

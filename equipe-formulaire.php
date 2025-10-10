@@ -7,7 +7,8 @@
 session_start();
 
 // Charger les données existantes
-$dataFile = __DIR__ . '/data/site_content.json';
+require_once __DIR__ . '/admin/config.php';
+$dataFile = DATA_PATH . '/site_content.json';
 $content = file_exists($dataFile) ? json_decode(file_get_contents($dataFile), true) : [];
 if (!is_array($content)) { $content = []; }
 
@@ -581,6 +582,8 @@ function processSelectedImage($originalPath) {
             cursor: pointer;
             transition: all 0.3s ease;
             border: 3px solid transparent;
+            width: 100%;
+            max-width: none;
         }
         
         .gallery-item:hover {
@@ -753,10 +756,32 @@ function processSelectedImage($originalPath) {
             .gallery-grid {
                 grid-template-columns: 1fr;
                 gap: 1rem;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .gallery-item {
+                width: 100%;
+                max-width: none;
             }
             
             .gallery-item img {
-                height: 250px; /* Plus grande sur mobile en une seule colonne */
+                width: 100%;
+                height: auto;
+                aspect-ratio: 3/4; /* Force le ratio 3:4 sur mobile */
+                object-fit: contain;
+                object-position: center;
+                background: #f8f9fa;
+            }
+            
+            .gallery-item-overlay {
+                height: 100%; /* S'adapte automatiquement au ratio de l'image */
+                background: rgba(0, 0, 0, 0.2); /* Overlay plus discret */
+            }
+            
+            .gallery-item:hover .gallery-item-overlay {
+                background: rgba(0, 0, 0, 0.4); /* Overlay plus visible au survol */
             }
             
             .selected-photo {
@@ -888,10 +913,27 @@ function processSelectedImage($originalPath) {
             .gallery-grid {
                 grid-template-columns: 1fr;
                 gap: 0.8rem;
+                width: 100%;
+                margin: 0;
+                padding: 0;
             }
             
             .gallery-item img {
-                height: 200px; /* Plus grande sur smartphone en une seule colonne */
+                width: 100%;
+                height: auto;
+                aspect-ratio: 3/4; /* Force le ratio 3:4 sur smartphone */
+                object-fit: contain;
+                object-position: center;
+                background: #f8f9fa;
+            }
+            
+            .gallery-item-overlay {
+                height: 100%; /* S'adapte automatiquement au ratio de l'image */
+                background: rgba(0, 0, 0, 0.15); /* Overlay encore plus discret */
+            }
+            
+            .gallery-item:hover .gallery-item-overlay {
+                background: rgba(0, 0, 0, 0.35); /* Overlay plus visible au survol */
             }
             
             .header h1 {

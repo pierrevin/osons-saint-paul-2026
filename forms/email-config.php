@@ -14,12 +14,12 @@ define('FALLBACK_EMAIL_ENABLED', true);
 // ===== CONFIGURATION DES ADRESSES =====
 // Email de l'administrateur (recevra les notifications)
 if (!defined('ADMIN_EMAIL')) {
-    define('ADMIN_EMAIL', 'admin@osons-saintpaul.fr');
+    define('ADMIN_EMAIL', 'bonjour@osons-saint-paul.fr');
 }
 
 // Email d'expédition (doit être configuré sur votre serveur)
 if (!defined('FROM_EMAIL')) {
-    define('FROM_EMAIL', 'noreply@osons-saintpaul.fr');
+    define('FROM_EMAIL', 'bonjour@osons-saint-paul.fr');
 }
 
 // Nom de l'expéditeur

@@ -1,20 +1,9 @@
 <?php
 session_start();
-require_once 'config.php';
-require_once 'email-service.php';
+ob_start(); // Capture la sortie pour éviter "headers already sent"
 
-// Fonction pour générer un token CSRF
-function generateCSRFToken() {
-    if (!isset($_SESSION['csrf_token_contact'])) {
-        $_SESSION['csrf_token_contact'] = bin2hex(random_bytes(32));
-    }
-    return $_SESSION['csrf_token_contact'];
-}
-
-// Validation CSRF
-function validateCSRFToken($token) {
-    return isset($_SESSION['csrf_token_contact']) && hash_equals($_SESSION['csrf_token_contact'], $token);
-}
+require_once __DIR__ . '/email-config.php';
+require_once __DIR__ . '/email-service.php';
 
 // Traitement du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -151,8 +140,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </html>
     ";
     
-    // Envoyer l'email
-    $email_sent = sendEmail($to, $subject_email, $message_html);
+    // Envoyer l'email à l'admin
+    $admin_result = EmailService::sendEmail($to, $subject_email, $message_html);
+    
+    // Envoyer l'email de confirmation à l'utilisateur
+    $user_result = EmailService::sendContactConfirmationEmail($email, $nom);
+    
+    $email_sent = $admin_result['success'] && $user_result['success'];
     
     // Enregistrer dans les logs
     $log_file = '../logs/contact_logs.log';

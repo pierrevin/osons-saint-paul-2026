@@ -8,7 +8,25 @@ define('ADMIN_EMAIL', 'admin@osonssaintpaul.fr');
 
 // Chemins
 define('ROOT_PATH', dirname(__DIR__));
-define('DATA_PATH', ROOT_PATH . '/data');
+
+// Répertoire de données persistant : priorités multiples
+// 1. Variable d'environnement DATA_DIR (si définie sur l'hébergeur)
+// 2. Dossier data-osons/ à la racine du compte (hors www, sécurisé)
+// 3. Dossier data-osons/ dans le projet (si uploadé avec le code)
+// 4. Fallback classique: data/ dans le projet
+$envDataDir = getenv('DATA_DIR');
+if ($envDataDir && is_dir($envDataDir)) {
+    define('DATA_PATH', rtrim($envDataDir, '/'));
+} elseif (is_dir(dirname(ROOT_PATH) . '/data-osons')) {
+    // Hors www: /home/USER/data-osons
+    define('DATA_PATH', dirname(ROOT_PATH) . '/data-osons');
+} elseif (is_dir(ROOT_PATH . '/data-osons')) {
+    // Dans www: data-osons uploadé avec le projet
+    define('DATA_PATH', ROOT_PATH . '/data-osons');
+} else {
+    // Fallback: data/ classique
+    define('DATA_PATH', ROOT_PATH . '/data');
+}
 define('UPLOADS_PATH', ROOT_PATH . '/uploads');
 define('IMAGES_PATH', UPLOADS_PATH . '/images');
 

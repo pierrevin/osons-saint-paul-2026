@@ -1,4 +1,15 @@
 <?php
+// MAINTENANCE MODE - Décommentez la ligne suivante pour activer
+session_start();
+
+// Vérifier si l'utilisateur est connecté à l'admin
+$user_connected = isset($_SESSION['user_id']) || isset($_SESSION['admin_logged_in']) || isset($_SESSION['authenticated']);
+
+// Si l'utilisateur n'est pas connecté, afficher la maintenance
+if (!$user_connected) {
+    include __DIR__ . '/maintenance.php'; exit;
+}
+
 // Site public dynamique basé sur index.html
 require_once __DIR__ . '/admin/config.php';
 
@@ -21,13 +32,21 @@ $content = get_json_data('site_content.json');
     
     <!-- CSS principal -->
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Google reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeOrNorAAAAAGfkiHS2IqTbd5QbQHvinxR_4oek"></script>
 </head>
 <body>
     <!-- Header sticky -->
     <header class="header-sticky" id="headerSticky" role="banner">
         <div class="header-content">
+            <?php
+            $logoPng = 'uploads/Osons1.png';
+            $logoWebp = 'uploads/Osons1.webp';
+            $logoSrc = file_exists(__DIR__ . '/' . $logoWebp) ? $logoWebp : $logoPng;
+            ?>
             <a href="#programme" class="header-logo" aria-label="Découvrir le programme">
-                <img src="uploads/Osons1.png" alt="Logo Osons Saint-Paul" class="logo-img">
+                <img src="<?= htmlspecialchars($logoSrc) ?>" alt="Logo Osons Saint-Paul" class="logo-img">
             </a>
             <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mainNav">
                 <span></span>
@@ -456,18 +475,20 @@ $content = get_json_data('site_content.json');
                 <div class="idees-text">
                     <p class="idees-description"><?= htmlspecialchars($content['idees']['description'] ?? 'Partagez vos idées, vos préoccupations, vos suggestions. Votre voix compte dans notre projet municipal.') ?></p>
                     
-                    <?php if (isset($_GET['success']) && $_GET['success'] == '1'): ?>
+                    <?php if (isset($_SESSION['success'])): ?>
                         <div class="alert alert-success">
                             <strong>✅ Message envoyé !</strong><br>
-                            Merci pour votre message. Nous vous répondrons dans les plus brefs délais.
+                            <?= htmlspecialchars($_SESSION['success']) ?>
                         </div>
+                        <?php unset($_SESSION['success']); ?>
                     <?php endif; ?>
                     
-                    <?php if (isset($_GET['error'])): ?>
+                    <?php if (isset($_SESSION['error'])): ?>
                         <div class="alert alert-error">
                             <strong>❌ Erreur :</strong><br>
-                            <?= htmlspecialchars($_GET['error']) ?>
+                            <?= htmlspecialchars($_SESSION['error']) ?>
                         </div>
+                        <?php unset($_SESSION['error']); ?>
                     <?php endif; ?>
                     
                     <!-- Formulaire de contact -->
@@ -540,7 +561,10 @@ $content = get_json_data('site_content.json');
             <div class="footer-content">
                 <div class="footer-column">
                     <div class="footer-logo">
-                        <img src="uploads/Osons1.png" alt="Logo Osons Saint-Paul" class="footer-logo-img">
+                        <?php
+                        $footerLogoSrc = file_exists(__DIR__ . '/' . $logoWebp) ? $logoWebp : $logoPng;
+                        ?>
+                        <img src="<?= htmlspecialchars($footerLogoSrc) ?>" alt="Logo Osons Saint-Paul" class="footer-logo-img">
                         <span class="footer-logo-text">Osons Saint-Paul</span>
                     </div>
                     <p class="footer-description">Une liste citoyenne qui place l'humain au cœur de ses préoccupations. Ensemble, construisons le Saint-Paul de demain.</p>
@@ -663,6 +687,66 @@ $content = get_json_data('site_content.json');
             // Initialiser les deux formulaires
             handleNewsletterForm('newsletter-footer', 'newsletter-success-footer', 'newsletter-error-footer');
             handleNewsletterForm('newsletter-section', 'newsletter-success-section', 'newsletter-error-section');
+        });
+    </script>
+
+    <!-- Correctif filtres programme (délégation robuste) -->
+    <script>
+        (function(){
+            document.addEventListener('click', function(e){
+                var btn = e.target.closest && e.target.closest('.filter-btn');
+                if (!btn) return;
+                e.preventDefault();
+                var filter = btn.getAttribute('data-filter') || 'all';
+                // Activer visuel
+                document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+                btn.classList.add('active');
+                // Appliquer filtre
+                document.querySelectorAll('.proposition-card').forEach(function(card){
+                    var category = card.getAttribute('data-category');
+                    var isCitizen = !!card.querySelector('.card-badge.citoyenne');
+                    var show = (filter === 'all') || (filter === 'citoyens' ? isCitizen : (category === filter && !isCitizen));
+                    if (show) {
+                        card.style.display = '';
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.92)';
+                        setTimeout(function(){ card.style.display = 'none'; }, 120);
+                    }
+                });
+            });
+        })();
+    </script>
+
+    <!-- Gestion reCAPTCHA v3 pour le formulaire de contact -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.querySelector('form[action="forms/contact.php"]');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const form = this;
+                    
+                    grecaptcha.ready(function() {
+                        grecaptcha.execute('6LeOrNorAAAAAGfkiHS2IqTbd5QbQHvinxR_4oek', {action: 'submit_contact'}).then(function(token) {
+                            // Ajouter le token au formulaire
+                            let recaptchaInput = form.querySelector('input[name="recaptcha_token"]');
+                            if (!recaptchaInput) {
+                                recaptchaInput = document.createElement('input');
+                                recaptchaInput.type = 'hidden';
+                                recaptchaInput.name = 'recaptcha_token';
+                                form.appendChild(recaptchaInput);
+                            }
+                            recaptchaInput.value = token;
+                            
+                            // Soumettre le formulaire
+                            form.submit();
+                        });
+                    });
+                });
+            }
         });
     </script>
 </body>

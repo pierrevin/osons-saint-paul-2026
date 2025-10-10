@@ -24,7 +24,7 @@ require_once __DIR__ . '/sections/logs_securite.php';
 check_auth();
 
 // Charger les données du site
-$site_content_file = __DIR__ . '/../../data/site_content.json';
+$site_content_file = DATA_PATH . '/site_content.json';
 $content = file_exists($site_content_file) ? json_decode(file_get_contents($site_content_file), true) : [];
 
 // Calculer les statistiques
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $isAjax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
         
         // Helpers lecture/écriture contenu site
-        $siteFile = __DIR__ . '/../../data/site_content.json';
+        $siteFile = DATA_PATH . '/site_content.json';
         $loadSite = function() use ($siteFile) {
             return file_exists($siteFile) ? json_decode(file_get_contents($siteFile), true) : [];
         };
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 break;
             // ===== CHARTE CRUD =====
             case 'add_principle': {
-                $data = file_exists(__DIR__ . '/../../data/site_content.json') ? json_decode(file_get_contents(__DIR__ . '/../../data/site_content.json'), true) : [];
+                $data = file_exists(DATA_PATH . '/site_content.json') ? json_decode(file_get_contents(DATA_PATH . '/site_content.json'), true) : [];
                 $principles = $data['charte']['principles'] ?? [];
                 $id = $_POST['id'] ?? uniqid('p_', true);
                 $title = trim($_POST['title'] ?? '');
@@ -89,12 +89,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'thematique' => trim($_POST['thematique'] ?? ($_POST['source'] ?? ''))
                 ];
                 $data['charte']['principles'] = $principles;
-                file_put_contents(__DIR__ . '/../../data/site_content.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                file_put_contents(DATA_PATH . '/site_content.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
                 $result = ['success' => true, 'message' => 'Principe ajouté'];
                 if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
                 break; }
             case 'edit_principle': {
-                $data = file_exists(__DIR__ . '/../../data/site_content.json') ? json_decode(file_get_contents(__DIR__ . '/../../data/site_content.json'), true) : [];
+                $data = file_exists(DATA_PATH . '/site_content.json') ? json_decode(file_get_contents(DATA_PATH . '/site_content.json'), true) : [];
                 $principles = $data['charte']['principles'] ?? [];
                 $id = $_POST['id'] ?? '';
                 if ($id === '') throw new Exception('ID manquant');
@@ -108,25 +108,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 unset($p);
                 $data['charte']['principles'] = $principles;
-                file_put_contents(__DIR__ . '/../../data/site_content.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                file_put_contents(DATA_PATH . '/site_content.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
                 $result = ['success' => true, 'message' => 'Principe modifié'];
                 if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
                 break; }
             case 'delete_principle': {
-                $data = file_exists(__DIR__ . '/../../data/site_content.json') ? json_decode(file_get_contents(__DIR__ . '/../../data/site_content.json'), true) : [];
+                $data = file_exists(DATA_PATH . '/site_content.json') ? json_decode(file_get_contents(DATA_PATH . '/site_content.json'), true) : [];
                 $principles = $data['charte']['principles'] ?? [];
                 $id = $_POST['id'] ?? '';
                 if ($id === '') throw new Exception('ID manquant');
                 $principles = array_values(array_filter($principles, function($p) use ($id) { return ($p['id'] ?? '') != $id; }));
                 $data['charte']['principles'] = $principles;
-                file_put_contents(__DIR__ . '/../../data/site_content.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                file_put_contents(DATA_PATH . '/site_content.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
                 $result = ['success' => true, 'message' => 'Principe supprimé'];
                 if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
                 break; }
 
             // ===== RENDEZ-VOUS CRUD =====
             case 'add_event': {
-                $data = file_exists(__DIR__ . '/../../data/site_content.json') ? json_decode(file_get_contents(__DIR__ . '/../../data/site_content.json'), true) : [];
+                $data = file_exists(DATA_PATH . '/site_content.json') ? json_decode(file_get_contents(DATA_PATH . '/site_content.json'), true) : [];
                 $events = $data['rendez_vous']['events'] ?? [];
                 $id = $_POST['id'] ?? uniqid('ev_', true);
                 $title = trim($_POST['title'] ?? '');
@@ -139,12 +139,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'location' => trim($_POST['location'] ?? '')
                 ];
                 $data['rendez_vous']['events'] = $events;
-                file_put_contents(__DIR__ . '/../../data/site_content.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                file_put_contents(DATA_PATH . '/site_content.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
                 $result = ['success' => true, 'message' => 'Événement ajouté'];
                 if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
                 break; }
             case 'edit_event': {
-                $data = file_exists(__DIR__ . '/../../data/site_content.json') ? json_decode(file_get_contents(__DIR__ . '/../../data/site_content.json'), true) : [];
+                $data = file_exists(DATA_PATH . '/site_content.json') ? json_decode(file_get_contents(DATA_PATH . '/site_content.json'), true) : [];
                 $events = $data['rendez_vous']['events'] ?? [];
                 $id = $_POST['id'] ?? '';
                 if ($id === '') throw new Exception('ID manquant');
@@ -159,18 +159,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 unset($ev);
                 $data['rendez_vous']['events'] = $events;
-                file_put_contents(__DIR__ . '/../../data/site_content.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                file_put_contents(DATA_PATH . '/site_content.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
                 $result = ['success' => true, 'message' => 'Événement modifié'];
                 if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
                 break; }
             case 'delete_event': {
-                $data = file_exists(__DIR__ . '/../../data/site_content.json') ? json_decode(file_get_contents(__DIR__ . '/../../data/site_content.json'), true) : [];
+                $data = file_exists(DATA_PATH . '/site_content.json') ? json_decode(file_get_contents(DATA_PATH . '/site_content.json'), true) : [];
                 $events = $data['rendez_vous']['events'] ?? [];
                 $id = $_POST['id'] ?? '';
                 if ($id === '') throw new Exception('ID manquant');
                 $events = array_values(array_filter($events, function($ev) use ($id) { return ($ev['id'] ?? '') != $id; }));
                 $data['rendez_vous']['events'] = $events;
-                file_put_contents(__DIR__ . '/../../data/site_content.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                file_put_contents(DATA_PATH . '/site_content.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
                 $result = ['success' => true, 'message' => 'Événement supprimé'];
                 if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
                 break; }
@@ -756,13 +756,6 @@ $sections = [
                             </select>
                         </div>
                         
-                        <div class="form-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="display-citizen-badge" name="display_citizen_badge" value="1">
-                                <label for="display-citizen-badge">🏛️ Afficher le badge "Proposition citoyenne" sur le site</label>
-                            </div>
-                            <small class="form-help">Cochez cette case pour identifier cette proposition comme venant d'un citoyen sur le site public</small>
-                        </div>
                     </div>
                     
                     <!-- VERSO - Points clés -->
@@ -791,6 +784,16 @@ $sections = [
                             <label for="rejection-reason-text">Expliquez pourquoi cette proposition est rejetée *</label>
                             <textarea id="rejection-reason-text" name="rejection_reason" rows="3" placeholder="Cette proposition ne correspond pas à nos priorités car..."></textarea>
                             <small class="form-help">Cette raison sera envoyée par email au citoyen</small>
+                        </div>
+                    </div>
+                    <!-- Options d'affichage (placées en bas pour une meilleure lisibilité) -->
+                    <div class="form-section">
+                        <div class="form-group">
+                            <div class="inline-checkbox">
+                                <input type="checkbox" id="display-citizen-badge" name="display_citizen_badge" value="1">
+                                <label for="display-citizen-badge">🏛️ Afficher le badge "Proposition citoyenne" sur le site</label>
+                            </div>
+                            <small class="form-help">Identifie visuellement cette carte comme issue d'une proposition citoyenne</small>
                         </div>
                     </div>
                 </form>
@@ -1163,6 +1166,11 @@ $sections = [
     <div class="auto-save-indicator" id="auto-save-indicator">
         <i class="fas fa-sync-alt"></i>
         <span>Auto-sauvegarde...</span>
+    </div>
+    
+    <!-- Indicateur de répertoire de données -->
+    <div style="position: fixed; bottom: 10px; right: 10px; background: <?php echo (strpos(DATA_PATH, 'data-osons') !== false) ? '#d4edda' : '#fff3cd'; ?>; color: <?php echo (strpos(DATA_PATH, 'data-osons') !== false) ? '#155724' : '#856404'; ?>; padding: 8px 15px; border-radius: 5px; font-size: 0.75rem; font-family: 'Courier New', monospace; box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 9998;">
+        <?php echo (strpos(DATA_PATH, 'data-osons') !== false) ? '✅ Données persistantes (data-osons)' : '⚠️ Données temporaires (data)'; ?>
     </div>
     
     <!-- Messages de feedback -->

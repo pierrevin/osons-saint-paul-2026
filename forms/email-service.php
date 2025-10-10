@@ -40,7 +40,7 @@ class EmailTemplates {
                     <p>Merci pour votre engagement citoyen !</p>
                     <div class='footer'>
                         <p>L'équipe Osons Saint-Paul 2026</p>
-                        <p>Pour toute question : admin@osons-saintpaul.fr</p>
+                        <p>Pour toute question : bonjour@osons-saint-paul.fr</p>
                     </div>
                 </div>
             </body>
@@ -94,10 +94,11 @@ class EmailTemplates {
                         <strong>Statut :</strong> {$statusText}
                     </div>
                     " . ($status === 'integrated' ? "<p>🎉 Félicitations ! Votre proposition fait maintenant partie de notre programme officiel.</p>" : "") . "
+                    " . ($status === 'rejected' && isset($data['rejection_reason']) ? "<div class='highlight' style='background: #fff3cd; border-left-color: #ffc107;'><strong>Raison du rejet :</strong><br>" . nl2br(htmlspecialchars($data['rejection_reason'])) . "</div>" : "") . "
                     <p>Merci pour votre engagement citoyen !</p>
                     <div class='footer'>
                         <p>L'équipe Osons Saint-Paul 2026</p>
-                        <p>Pour toute question : admin@osons-saintpaul.fr</p>
+                        <p>Pour toute question : bonjour@osons-saint-paul.fr</p>
                     </div>
                 </div>
             </body>
@@ -155,7 +156,47 @@ class EmailTemplates {
                         <span class='label'>ID :</span>
                         <span class='value'>" . htmlspecialchars($data['id'] ?? 'N/A') . "</span>
                     </div>
-                    <p><a href='" . (isset($_SERVER['HTTPS']) ? 'https' : 'http') . "://" . $_SERVER['HTTP_HOST'] . "/admin/pages/schema_admin.php' class='admin-link'>Voir dans l'interface admin</a></p>
+                    <p><a href='" . (isset($_SERVER['HTTPS']) ? 'https' : 'http') . "://" . $_SERVER['HTTP_HOST'] . "/admin/pages/schema_admin_new.php' class='admin-link'>Voir dans l'interface admin</a></p>
+                </div>
+            </body>
+            </html>
+            "
+        ];
+    }
+    
+    public static function getContactConfirmationTemplate($nom) {
+        return [
+            'subject' => 'Confirmation - Message bien reçu',
+            'html' => "
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset='UTF-8'>
+                <title>Confirmation de message</title>
+                <style>
+                    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; }
+                    .header { background: #2F6E4F; color: white; padding: 20px; text-align: center; border-radius: 10px 10px 0 0; }
+                    .content { background: #f9f9f9; padding: 20px; border-radius: 0 0 10px 10px; }
+                    .highlight { background: #fff; padding: 15px; border-left: 4px solid #2F6E4F; margin: 20px 0; }
+                    .footer { text-align: center; margin-top: 20px; font-size: 0.9rem; color: #666; }
+                </style>
+            </head>
+            <body>
+                <div class='header'>
+                    <h1>✅ Message bien reçu !</h1>
+                </div>
+                <div class='content'>
+                    <p>Bonjour " . htmlspecialchars($nom) . ",</p>
+                    <p>Nous avons bien reçu votre message et vous en remercions.</p>
+                    <div class='highlight'>
+                        <p><strong>Notre équipe vous répondra dans les plus brefs délais.</strong></p>
+                        <p>En attendant, n'hésitez pas à consulter notre programme et nos propositions sur le site.</p>
+                    </div>
+                    <p>Merci pour votre intérêt et votre engagement !</p>
+                    <div class='footer'>
+                        <p>L'équipe Osons Saint-Paul 2026</p>
+                        <p>Pour toute question : bonjour@osons-saint-paul.fr</p>
+                    </div>
                 </div>
             </body>
             </html>
@@ -169,7 +210,7 @@ class EmailService {
     
     public static function sendEmail($to, $subject, $htmlContent, $fromEmail = null, $fromName = null) {
         $fromEmail = $fromEmail ?: FROM_EMAIL;
-        $fromName = $fromName ?: SITE_NAME;
+        $fromName = $fromName ?: FROM_NAME;
         
         // Essayer d'abord Brevo
         if (BREVO_API_KEY !== 'YOUR_BREVO_API_KEY_HERE' && !empty(BREVO_API_KEY)) {
@@ -257,6 +298,11 @@ class EmailService {
     public static function sendNewProposalNotification($adminEmail, $propositionData) {
         $template = EmailTemplates::getNewProposalNotificationTemplate($propositionData);
         return self::sendEmail($adminEmail, $template['subject'], $template['html']);
+    }
+    
+    public static function sendContactConfirmationEmail($email, $nom) {
+        $template = EmailTemplates::getContactConfirmationTemplate($nom);
+        return self::sendEmail($email, $template['subject'], $template['html']);
     }
 }
 
