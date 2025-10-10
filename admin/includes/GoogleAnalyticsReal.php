@@ -201,12 +201,22 @@ class GoogleAnalyticsReal {
         }
         
         return $pages;
+        
+        } catch (Exception $e) {
+            error_log("GoogleAnalyticsReal getTopPages error: " . $e->getMessage());
+            return [];
+        }
     }
     
     /**
      * Récupère les sources de trafic
      */
     public function getTrafficSources($limit = 10) {
+        try {
+            if (!$this->client) {
+                throw new Exception('Client Google Analytics non initialisé');
+            }
+            
         $request = new \Google\Service\AnalyticsData\RunReportRequest([
             'dateRanges' => [
                 new \Google\Service\AnalyticsData\DateRange([
@@ -245,6 +255,11 @@ class GoogleAnalyticsReal {
         }
         
         return $sources;
+        
+        } catch (Exception $e) {
+            error_log("GoogleAnalyticsReal getTrafficSources error: " . $e->getMessage());
+            return [];
+        }
     }
     
     /**
@@ -325,23 +340,33 @@ class GoogleAnalyticsReal {
      * Récupère les données de séries temporelles pour graphiques
      */
     public function getTimeSeriesData($days = 30) {
-        $stats = $this->getGeneralStats($days);
-        
-        $timeSeries = [
-            'labels' => [],
-            'users' => [],
-            'pageviews' => []
-        ];
-        
-        foreach ($stats['daily_data'] as $day) {
-            // Formater la date en français
-            $date = new DateTime($day['date']);
-            $timeSeries['labels'][] = $date->format('d M');
-            $timeSeries['users'][] = $day['users'];
-            $timeSeries['pageviews'][] = $day['pageviews'];
+        try {
+            $stats = $this->getGeneralStats($days);
+            
+            $timeSeries = [
+                'labels' => [],
+                'users' => [],
+                'pageviews' => []
+            ];
+            
+            foreach ($stats['daily_data'] as $day) {
+                // Formater la date en français
+                $date = new DateTime($day['date']);
+                $timeSeries['labels'][] = $date->format('d M');
+                $timeSeries['users'][] = $day['users'];
+                $timeSeries['pageviews'][] = $day['pageviews'];
+            }
+            
+            return $timeSeries;
+            
+        } catch (Exception $e) {
+            error_log("GoogleAnalyticsReal getTimeSeriesData error: " . $e->getMessage());
+            return [
+                'labels' => [],
+                'users' => [],
+                'pageviews' => []
+            ];
         }
-        
-        return $timeSeries;
     }
     
     /**
