@@ -1,0 +1,61 @@
+# Robots.txt pour Osons Saint-Paul 2026
+# https://osons-saint-paul.fr
+
+# Règles pour tous les robots
+User-agent: *
+
+# Pages publiques autorisées
+Allow: /
+Allow: /index.php
+Allow: /forms/proposition-citoyenne.php
+Allow: /forms/politique-confidentialite.php
+Allow: /mentions-legales.php
+Allow: /gestion-cookies.php
+Allow: /merci-inscription.php
+
+# Ressources statiques autorisées
+Allow: /styles.css
+Allow: /script.js
+Allow: /assets/
+Allow: /Images/
+Allow: /uploads/gallery/
+Allow: /uploads/gallery_optimized/
+Allow: /*.webp$
+Allow: /*.jpg$
+Allow: /*.png$
+
+# Bloquer les zones d'administration et sensibles
+Disallow: /admin/
+Disallow: /tools/
+Disallow: /data/
+Disallow: /data-osons/
+Disallow: /logs/
+Disallow: /backups/
+Disallow: /archive/
+Disallow: /credentials/
+Disallow: /vendor/
+Disallow: /docs/scripts/
+
+# Bloquer les fichiers de configuration
+Disallow: /composer.json
+Disallow: /composer.lock
+Disallow: /*.log
+Disallow: /*.md
+
+# Bloquer les scripts de traitement de formulaires
+Disallow: /forms/process-form.php
+Disallow: /forms/contact.php
+Disallow: /forms/subscribe-newsletter.php
+Disallow: /forms/admin/
+
+# Configuration spécifique GoogleBot
+User-agent: Googlebot
+Crawl-delay: 1
+
+# Configuration spécifique Bingbot
+User-agent: Bingbot
+Crawl-delay: 1
+
+# Référence au sitemap
+Sitemap: https://osons-saint-paul.fr/sitemap.xml
+

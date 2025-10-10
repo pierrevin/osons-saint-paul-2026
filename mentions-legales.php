@@ -3,7 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mentions légales - Osons Saint-Paul</title>
+    <title>Mentions légales | Osons Saint-Paul 2026</title>
+    <meta name="description" content="Mentions légales du site Osons Saint-Paul 2026. Informations sur l'éditeur, l'hébergeur et les conditions d'utilisation.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://osons-saint-paul.fr/mentions-legales.php">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://osons-saint-paul.fr/mentions-legales.php">
+    <meta property="og:title" content="Mentions légales | Osons Saint-Paul 2026">
+    <meta property="og:description" content="Informations légales du site Osons Saint-Paul 2026.">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Osons Saint-Paul 2026">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Mentions légales | Osons Saint-Paul 2026">
+    <meta name="twitter:description" content="Informations légales du site Osons Saint-Paul 2026.">
+    
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     

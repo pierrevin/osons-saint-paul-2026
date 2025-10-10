@@ -10,8 +10,13 @@ if (file_exists('data/site_content.json')) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription confirmée - Osons Saint-Paul 2026</title>
-    <meta name="description" content="Merci pour votre inscription à notre newsletter. Vous recevrez nos prochaines actualités et rendez-vous.">
+    <title>Inscription confirmée | Osons Saint-Paul 2026</title>
+    <meta name="description" content="Merci pour votre inscription à la newsletter Osons Saint-Paul 2026. Vous recevrez nos actualités, rendez-vous et propositions citoyennes.">
+    <meta name="robots" content="noindex, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://osons-saint-paul.fr/merci-inscription.php">
+    
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="Ofeuille.png" type="image/png">

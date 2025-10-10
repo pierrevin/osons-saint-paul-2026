@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    
+    <!-- Page d'accueil - Priorité maximale, mise à jour hebdomadaire -->
+    <url>
+        <loc>https://osons-saint-paul.fr/</loc>
+        <lastmod>2025-10-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- Formulaire de proposition citoyenne - Haute priorité -->
+    <url>
+        <loc>https://osons-saint-paul.fr/forms/proposition-citoyenne.php</loc>
+        <lastmod>2025-10-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Confirmation newsletter -->
+    <url>
+        <loc>https://osons-saint-paul.fr/merci-inscription.php</loc>
+        <lastmod>2025-10-10</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <!-- Mentions légales - Priorité moyenne -->
+    <url>
+        <loc>https://osons-saint-paul.fr/mentions-legales.php</loc>
+        <lastmod>2025-10-10</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <!-- Politique de confidentialité -->
+    <url>
+        <loc>https://osons-saint-paul.fr/forms/politique-confidentialite.php</loc>
+        <lastmod>2025-10-10</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <!-- Gestion des cookies -->
+    <url>
+        <loc>https://osons-saint-paul.fr/gestion-cookies.php</loc>
+        <lastmod>2025-10-10</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    
+</urlset>
+

@@ -3,7 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des cookies - Osons Saint-Paul</title>
+    <title>Gestion des cookies | Osons Saint-Paul 2026</title>
+    <meta name="description" content="Gérez vos préférences de cookies sur le site Osons Saint-Paul 2026. Information sur l'utilisation des cookies et protection de vos données.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://osons-saint-paul.fr/gestion-cookies.php">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://osons-saint-paul.fr/gestion-cookies.php">
+    <meta property="og:title" content="Gestion des cookies | Osons Saint-Paul 2026">
+    <meta property="og:description" content="Gérez vos préférences de cookies sur le site Osons Saint-Paul 2026.">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Osons Saint-Paul 2026">
+    
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     

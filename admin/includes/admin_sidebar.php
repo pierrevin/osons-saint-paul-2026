@@ -58,7 +58,7 @@ $active_class = function($page) use ($current_page) {
     <div class="sidebar-header">
         <img src="../../uploads/Osons1.png" alt="Logo Osons" />
         <h2>Administration</h2>
-        <a href="../../index.php" target="_blank" class="view-site-btn">
+        <a href="../../index.php?utm_source=admin&utm_medium=internal&utm_campaign=admin_preview" target="_blank" class="view-site-btn">
             <i class="fas fa-external-link-alt"></i>
             Voir le site
         </a>
@@ -83,14 +83,14 @@ $active_class = function($page) use ($current_page) {
         
         <!-- Menu d'administration -->
         <li class="menu-item <?= $active_class('proposez') ?>">
-            <a href="../../proposez.php" target="_blank">
+            <a href="../../forms/proposition-citoyenne.php?utm_source=admin&utm_medium=internal&utm_campaign=admin_menu" target="_blank">
                 <i class="fas fa-lightbulb"></i>
                 <span>Proposez</span>
             </a>
         </li>
         
         <li class="menu-item <?= $active_class('equipe-formulaire') ?>">
-            <a href="../../equipe-formulaire.php" target="_blank">
+            <a href="../../equipe-formulaire.php?utm_source=admin&utm_medium=internal&utm_campaign=admin_menu" target="_blank">
                 <i class="fas fa-users"></i>
                 <span>Formulaire Équipe</span>
             </a>
@@ -100,6 +100,23 @@ $active_class = function($page) use ($current_page) {
             <a href="reponse-questionnaire.php">
                 <i class="fas fa-chart-bar"></i>
                 <span>Réponses Questionnaire</span>
+            </a>
+        </li>
+        
+        <li class="menu-separator"><hr></li>
+        
+        <!-- Outils marketing -->
+        <li class="menu-item <?= $active_class('generateur-utm') ?>">
+            <a href="generateur-utm.php">
+                <i class="fas fa-link"></i>
+                <span>Générateur UTM</span>
+            </a>
+        </li>
+        
+        <li class="menu-item <?= $active_class('documentation-utm') ?>">
+            <a href="documentation-utm.php">
+                <i class="fas fa-book"></i>
+                <span>Guide UTM & URLs</span>
             </a>
         </li>
     </ul>

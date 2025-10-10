@@ -6,10 +6,9 @@ session_start();
 $user_connected = isset($_SESSION['user_id']) || isset($_SESSION['admin_logged_in']) || isset($_SESSION['authenticated']);
 
 // Si l'utilisateur n'est pas connecté, afficher la maintenance
-// DÉSACTIVÉ POUR LES TESTS LOCAUX - Réactiver en production
-// if (!$user_connected) {
-//     include __DIR__ . '/maintenance.php'; exit;
-// }
+if (!$user_connected) {
+    include __DIR__ . '/maintenance.php'; exit;
+}
 
 // Site public dynamique basé sur index.html
 require_once __DIR__ . '/admin/config.php';
@@ -23,7 +22,45 @@ $content = get_json_data('site_content.json');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title><?= htmlspecialchars($content['hero']['title'] ?? 'Osons Saint-Paul 2026 - Construisons ensemble le village vivant et partagé') ?></title>
-    <meta name="description" content="Liste citoyenne Osons Saint-Paul pour les élections municipales 2026. Un projet participatif pour construire ensemble le village de demain.">
+    <meta name="description" content="Liste citoyenne Osons Saint-Paul pour les municipales 2026 à Saint-Paul-sur-Save (31530). Programme participatif, équipe engagée, propositions citoyennes. Démocratie locale et écologie.">
+    <meta name="keywords" content="Saint-Paul-sur-Save, municipales 2026, liste citoyenne, programme participatif, élections municipales 31530, démocratie locale, propositions citoyennes">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://osons-saint-paul.fr/">
+    
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://osons-saint-paul.fr/">
+    <meta property="og:title" content="Osons Saint-Paul 2026 - Liste citoyenne pour les municipales">
+    <meta property="og:description" content="Liste citoyenne pour les municipales 2026 à Saint-Paul-sur-Save. Un projet participatif pour construire ensemble le village vivant et partagé.">
+    <meta property="og:image" content="https://osons-saint-paul.fr/<?= htmlspecialchars($content['hero']['background_image'] ?? 'Images/hero_test.png') ?>">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Osons Saint-Paul 2026">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://osons-saint-paul.fr/">
+    <meta name="twitter:title" content="Osons Saint-Paul 2026 - Liste citoyenne pour les municipales">
+    <meta name="twitter:description" content="Liste citoyenne pour les municipales 2026 à Saint-Paul-sur-Save. Un projet participatif pour construire ensemble le village vivant et partagé.">
+    <meta name="twitter:image" content="https://osons-saint-paul.fr/<?= htmlspecialchars($content['hero']['background_image'] ?? 'Images/hero_test.png') ?>">
+    
+    <!-- Preconnect pour optimisation performances -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://www.google.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#ec654f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Osons Saint-Paul">
     
     <!-- Polices Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
@@ -38,13 +75,13 @@ $content = get_json_data('site_content.json');
     <script src="https://www.google.com/recaptcha/api.js?render=6LeOrNorAAAAAGfkiHS2IqTbd5QbQHvinxR_4oek"></script>
     
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B544VTFXWF"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ME92TR3X97"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-B544VTFXWF');
+      gtag('config', 'G-ME92TR3X97');
     </script>
 </head>
 <body>
@@ -191,7 +228,7 @@ $content = get_json_data('site_content.json');
                                     ?>
                                 </div>
                                 <div class="card-title-overlay">
-                                    <h3><?= htmlspecialchars($proposal['title']) ?></h3>
+                                    <div class="card-title-text"><?= htmlspecialchars($proposal['title']) ?></div>
                                 </div>
                             </div>
                         </div>
@@ -764,6 +801,87 @@ $content = get_json_data('site_content.json');
     
     <!-- Système de consentement des cookies -->
     <script src="/assets/js/cookie-consent.js"></script>
+    
+    <!-- Données structurées Schema.org - Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "PoliticalOrganization",
+        "name": "Osons Saint-Paul",
+        "alternateName": "Osons Saint-Paul 2026",
+        "url": "https://osons-saint-paul.fr",
+        "logo": "https://osons-saint-paul.fr/uploads/Osons1.png",
+        "description": "Liste citoyenne pour les élections municipales 2026 à Saint-Paul-sur-Save. Un projet participatif qui place l'humain et l'environnement au cœur des préoccupations.",
+        "foundingDate": "2025",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Saint-Paul-sur-Save",
+            "postalCode": "31530",
+            "addressCountry": "FR"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "bonjour@osons-saint-paul.fr",
+            "contactType": "General Inquiries",
+            "availableLanguage": "fr"
+        },
+        "sameAs": [
+            "https://facebook.com/osons-saint-paul",
+            "https://instagram.com/osons-saint-paul"
+        ]
+    }
+    </script>
+    
+    <!-- Données structurées Schema.org - Events -->
+    <?php if (!empty($normalized)): foreach ($normalized as $event): ?>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Event",
+        "name": <?= json_encode($event['title'] ?? '') ?>,
+        "description": <?= json_encode($event['description'] ?? '') ?>,
+        "startDate": "<?= date('c', $event['_ts']) ?>",
+        "endDate": "<?= date('c', $event['_ts'] + 7200) ?>",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        <?php if (!empty($event['location'])): ?>
+        "location": {
+            "@type": "Place",
+            "name": <?= json_encode($event['location']) ?>,
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Saint-Paul-sur-Save",
+                "postalCode": "31530",
+                "addressCountry": "FR"
+            }
+        },
+        <?php endif; ?>
+        "organizer": {
+            "@type": "PoliticalOrganization",
+            "name": "Osons Saint-Paul",
+            "url": "https://osons-saint-paul.fr"
+        }
+    }
+    </script>
+    <?php endforeach; endif; ?>
+    
+    <!-- Données structurées Schema.org - Team Members -->
+    <?php foreach ($content['equipe']['members'] ?? [] as $member): ?>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": <?= json_encode($member['name'] ?? '') ?>,
+        "jobTitle": <?= json_encode($member['role'] ?? '') ?>,
+        "description": <?= json_encode($member['description'] ?? '') ?>,
+        "image": "https://osons-saint-paul.fr/<?= htmlspecialchars($member['image'] ?? $member['photo'] ?? '') ?>",
+        "memberOf": {
+            "@type": "PoliticalOrganization",
+            "name": "Osons Saint-Paul"
+        }
+    }
+    </script>
+    <?php endforeach; ?>
 </body>
 </html>
 <!-- Test webhook Fri Oct 10 13:10:56 CEST 2025 -->

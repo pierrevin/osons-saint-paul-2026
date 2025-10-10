@@ -22,7 +22,26 @@ $content = file_exists($data_path) ? json_decode(file_get_contents($data_path), 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proposition Citoyenne - Osons Saint-Paul 2026</title>
+    <title>Faites une proposition citoyenne | Osons Saint-Paul 2026</title>
+    <meta name="description" content="Proposez vos idées pour Saint-Paul-sur-Save ! Participez à l'élaboration du programme des municipales 2026 avec la liste citoyenne Osons Saint-Paul.">
+    <meta name="keywords" content="proposition citoyenne, participation citoyenne, Saint-Paul-sur-Save, démocratie participative, idées citoyennes">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://osons-saint-paul.fr/forms/proposition-citoyenne.php">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://osons-saint-paul.fr/forms/proposition-citoyenne.php">
+    <meta property="og:title" content="Faites une proposition citoyenne | Osons Saint-Paul 2026">
+    <meta property="og:description" content="Partagez vos idées pour améliorer Saint-Paul-sur-Save. Participez au programme citoyen pour les municipales 2026.">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Osons Saint-Paul 2026">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Faites une proposition citoyenne | Osons Saint-Paul 2026">
+    <meta name="twitter:description" content="Partagez vos idées pour améliorer Saint-Paul-sur-Save.">
+    
     <link rel="stylesheet" href="../styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,13 +50,13 @@ $content = file_exists($data_path) ? json_decode(file_get_contents($data_path), 
     <script src="https://www.google.com/recaptcha/api.js?render=6LeOrNorAAAAAGfkiHS2IqTbd5QbQHvinxR_4oek"></script>
     
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B544VTFXWF"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ME92TR3X97"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-B544VTFXWF');
+      gtag('config', 'G-ME92TR3X97');
     </script>
     <style>
         /* Styles spécifiques au formulaire */

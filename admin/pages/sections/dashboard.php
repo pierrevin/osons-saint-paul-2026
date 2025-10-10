@@ -202,6 +202,9 @@ class DashboardSection extends AdminSection {
         $html .= '<div class="analytics-title">';
         $html .= '<h3><i class="fas fa-chart-line"></i> Statistiques Google Analytics</h3>';
         $html .= '<div class="data-indicator real-data"><i class="fas fa-check-circle"></i> Données réelles</div>';
+        $html .= '<div class="analytics-property-info">';
+        $html .= '<span class="property-id">Property ID: ' . $analytics->getPropertyId() . '</span>';
+        $html .= '</div>';
         $html .= '</div>';
         
         // Sélecteur de période
@@ -276,7 +279,8 @@ class DashboardSection extends AdminSection {
         $html .= '<h4><i class="fas fa-file-alt"></i> Pages populaires</h4>';
         $html .= '<div class="pages-list-visual">';
         
-        $maxPageviews = max(array_column($topPages, 'pageviews'));
+        $pageviewsColumn = array_column($topPages, 'pageviews');
+        $maxPageviews = !empty($pageviewsColumn) ? max($pageviewsColumn) : 1;
         foreach ($topPages as $index => $page) {
             $percentage = $maxPageviews > 0 ? ($page['pageviews'] / $maxPageviews) * 100 : 0;
             $html .= '<div class="page-item-visual">';

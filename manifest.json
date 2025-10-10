@@ -1,0 +1,52 @@
+{
+  "name": "Osons Saint-Paul 2026",
+  "short_name": "Osons SP",
+  "description": "Liste citoyenne pour les élections municipales 2026 à Saint-Paul-sur-Save. Programme participatif, équipe engagée, propositions citoyennes.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#ec654f",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["politics", "government", "social"],
+  "lang": "fr-FR",
+  "dir": "ltr",
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Programme",
+      "short_name": "Programme",
+      "description": "Découvrir notre programme participatif",
+      "url": "/#programme",
+      "icons": []
+    },
+    {
+      "name": "Proposition",
+      "short_name": "Proposition",
+      "description": "Faire une proposition citoyenne",
+      "url": "/forms/proposition-citoyenne.php",
+      "icons": []
+    },
+    {
+      "name": "Équipe",
+      "short_name": "Équipe",
+      "description": "Rencontrer l'équipe",
+      "url": "/#equipe",
+      "icons": []
+    }
+  ]
+}
+

@@ -10,9 +10,13 @@ class GoogleAnalyticsReal {
     private $client;
     
     public function __construct() {
-        $this->propertyId = '508182192'; // Property ID GA4 correct
+        $this->propertyId = '508180392'; // Nouvelle propriété G-ME92TR3X97
         $this->credentialsPath = __DIR__ . '/../../credentials/ga-service-account.json';
         $this->initializeClient();
+    }
+    
+    public function getPropertyId() {
+        return $this->propertyId;
     }
     
     private function initializeClient() {

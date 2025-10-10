@@ -381,10 +381,12 @@ $sections = [
     <!-- JavaScript de navigation - DOIT être dans le head -->
     <script>
         // Fonction de navigation (nouveau système uniquement)
-        function navigateToSection(sectionId) {if (window.AdminCore && window.AdminCore.navigateTo) {
+        function navigateToSection(sectionId) {
+            if (window.AdminCore && window.AdminCore.navigateTo) {
                 window.AdminCore.navigateTo(sectionId);
                 return;
-            }}
+            }
+        }
         
         // Fonctions pour la gestion des utilisateurs
         function editUser(userId) {
@@ -650,7 +652,8 @@ $sections = [
             // Attendre un peu pour que tous les scripts soient chargés
             setTimeout(() => {
                 const urlParams = new URLSearchParams(window.location.search);
-                const section = urlParams.get('section') || 'dashboard';navigateToSection(section);
+                const section = urlParams.get('section') || 'dashboard';
+                navigateToSection(section);
             }, 100);
         });
     </script>
