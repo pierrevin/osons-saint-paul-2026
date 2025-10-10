@@ -192,9 +192,13 @@ class DashboardSection extends AdminSection {
         
         // Vérifier s'il y a des erreurs dans les données
         $hasAnalyticsError = false;
-        if (isset($stats['error']) || isset($realtime['error'])) {
+        $analyticsErrorMessage = $analytics->getInitializationError();
+        
+        if ($analyticsErrorMessage || isset($stats['error']) || isset($realtime['error'])) {
             $hasAnalyticsError = true;
-            $analyticsErrorMessage = $stats['error'] ?? $realtime['error'] ?? 'Erreur inconnue Google Analytics';
+            if (!$analyticsErrorMessage) {
+                $analyticsErrorMessage = $stats['error'] ?? $realtime['error'] ?? 'Erreur inconnue Google Analytics';
+            }
         }
         
         // Récupérer les données pour les différentes périodes

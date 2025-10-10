@@ -8,15 +8,51 @@ class GoogleAnalyticsReal {
     private $propertyId;
     private $credentialsPath;
     private $client;
+    private $initialized = false;
+    private $initializationError = null;
     
     public function __construct() {
         $this->propertyId = '508180392'; // Nouvelle propriété G-ME92TR3X97
         $this->credentialsPath = __DIR__ . '/../../credentials/ga-service-account.json';
-        $this->initializeClient();
+        // Ne plus initialiser automatiquement - lazy loading
     }
     
     public function getPropertyId() {
         return $this->propertyId;
+    }
+    
+    /**
+     * S'assure que le client Google Analytics est initialisé
+     * Lazy loading pour éviter de casser l'admin si l'initialisation échoue
+     */
+    private function ensureInitialized() {
+        // Si déjà initialisé avec succès, retourner true
+        if ($this->initialized && $this->client) {
+            return true;
+        }
+        
+        // Si erreur précédente, ne pas réessayer et retourner false
+        if ($this->initializationError !== null) {
+            return false;
+        }
+        
+        // Tenter l'initialisation
+        try {
+            $this->initializeClient();
+            $this->initialized = true;
+            return true;
+        } catch (Exception $e) {
+            $this->initializationError = $e->getMessage();
+            error_log("GoogleAnalyticsReal initialization failed: " . $e->getMessage());
+            return false;
+        }
+    }
+    
+    /**
+     * Récupère le message d'erreur d'initialisation si disponible
+     */
+    public function getInitializationError() {
+        return $this->initializationError;
     }
     
     private function initializeClient() {
@@ -71,8 +107,9 @@ class GoogleAnalyticsReal {
      */
     public function getGeneralStats($days = 30) {
         try {
-            if (!$this->client) {
-                throw new Exception('Client Google Analytics non initialisé');
+            // Lazy loading : initialiser le client si nécessaire
+            if (!$this->ensureInitialized()) {
+                throw new Exception($this->initializationError ?? 'Client Google Analytics non initialisé');
             }
             
             $request = new \Google\Service\AnalyticsData\RunReportRequest([
@@ -159,8 +196,9 @@ class GoogleAnalyticsReal {
      */
     public function getTopPages($limit = 10) {
         try {
-            if (!$this->client) {
-                throw new Exception('Client Google Analytics non initialisé');
+            // Lazy loading : initialiser le client si nécessaire
+            if (!$this->ensureInitialized()) {
+                throw new Exception($this->initializationError ?? 'Client Google Analytics non initialisé');
             }
             
             $request = new \Google\Service\AnalyticsData\RunReportRequest([
@@ -213,11 +251,12 @@ class GoogleAnalyticsReal {
      */
     public function getTrafficSources($limit = 10) {
         try {
-            if (!$this->client) {
-                throw new Exception('Client Google Analytics non initialisé');
+            // Lazy loading : initialiser le client si nécessaire
+            if (!$this->ensureInitialized()) {
+                throw new Exception($this->initializationError ?? 'Client Google Analytics non initialisé');
             }
             
-        $request = new \Google\Service\AnalyticsData\RunReportRequest([
+            $request = new \Google\Service\AnalyticsData\RunReportRequest([
             'dateRanges' => [
                 new \Google\Service\AnalyticsData\DateRange([
                     'startDate' => date('Y-m-d', strtotime('-30 days')),
@@ -267,8 +306,9 @@ class GoogleAnalyticsReal {
      */
     public function getRealtimeData() {
         try {
-            if (!$this->client) {
-                throw new Exception('Client Google Analytics non initialisé');
+            // Lazy loading : initialiser le client si nécessaire
+            if (!$this->ensureInitialized()) {
+                throw new Exception($this->initializationError ?? 'Client Google Analytics non initialisé');
             }
             
             $request = new \Google\Service\AnalyticsData\RunRealtimeReportRequest([
