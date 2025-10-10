@@ -151,6 +151,11 @@ class DashboardSection extends AdminSection {
                 throw new Exception('Classes Google non disponibles après chargement de l\'autoloader');
             }
             
+            // Vérifier les dépendances spécifiques
+            if (!class_exists('Google\Auth\Credentials\ServiceAccountCredentials')) {
+                throw new Exception('Dépendance Google Auth manquante (ServiceAccountCredentials). Exécutez "composer install" sur le serveur.');
+            }
+            
             if (!file_exists(__DIR__ . '/../../../credentials/ga-service-account.json')) {
                 throw new Exception('Fichier credentials Google Analytics manquant');
             }
