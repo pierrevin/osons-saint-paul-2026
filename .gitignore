@@ -7,6 +7,9 @@ data/backups/
 # Données persistantes de production (CRITIQUE - ne jamais déployer)
 data-osons/
 
+# Configuration sécurisée (ne jamais déployer)
+forms/recaptcha-config.php
+
 # Fichiers système
 .DS_Store
 
