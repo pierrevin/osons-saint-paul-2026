@@ -88,7 +88,7 @@
 
 ### reCAPTCHA v3
 - **Site Key** : `6LeOrNorAAAAAGfkiHS2IqTbd5QbQHvinxR_4oek`
-- **Secret Key** : `6LeOrNorAAAAAAyrKUig543vV-h1OJlb9xefHYhA`
+- **Secret Key** : `[CONFIGURÉ VIA VARIABLE D'ENVIRONNEMENT]`
 
 ---
 

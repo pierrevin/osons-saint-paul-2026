@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Vérification reCAPTCHA v3
     if (isset($_POST['recaptcha_token'])) {
-        $recaptcha_secret = '6LeOrNorAAAAAAyrKUig543vV-h1OJlb9xefHYhA';
+        $recaptcha_secret = getenv('RECAPTCHA_SECRET') ?: 'YOUR_RECAPTCHA_SECRET_HERE';
         $recaptcha_token = $_POST['recaptcha_token'];
         
         $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
