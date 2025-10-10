@@ -12,9 +12,9 @@ forms/recaptcha-config.php
 credentials/
 
 # Données admin de production (CRITIQUE - ne jamais écraser)
-admin/users.json
+# admin/users.json - VERSIONNÉ pour déploiement automatique
 admin/logs/
-admin/config.php
+# admin/config.php - VERSIONNÉ pour déploiement automatique
 
 # Fichiers temporaires et de test
 test-cookies.html

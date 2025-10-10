@@ -1,0 +1,236 @@
+{
+    "hero": {
+        "title": "Construisons ensemble le village vivant et partagé",
+        "button_primary": "Découvrir le programme",
+        "button_secondary": "Faire une proposition",
+        "background_image": "uploads\/hero_1759748494_68e3a18ee0479.webp"
+    },
+    "programme": {
+        "h2": "Notre Programme",
+        "h3": "Osons intégrer vos idées",
+        "title": "Notre Programme",
+        "subtitle": "Osons intégrer vos idées",
+        "description": "Un programme co-construit avec les habitants",
+        "proposals": [
+            {
+                "id": 1,
+                "title": "3",
+                "description": "Protéger et valoriser notre patrimoine naturel pour les générations futures.",
+                "icon": "default",
+                "color": "#65ae99",
+                "pillar": "proteger",
+                "citizen_proposal": false,
+                "items": [
+                    "Protection des espaces verts",
+                    "Développement de la biodiversité",
+                    "Gestion durable des ressources"
+                ]
+            },
+            {
+                "id": 2,
+                "title": "Test ",
+                "description": "Créer des espaces de rencontre et de solidarité pour tous les habitants.",
+                "icon": "default",
+                "color": "#fcc549",
+                "pillar": "tisser",
+                "citizen_proposal": false,
+                "items": [
+                    "Amélioration des équipements publics",
+                    "Soutien aux associations",
+                    "Événements communautaires"
+                ]
+            },
+            {
+                "id": 4,
+                "title": "5",
+                "description": "Assurer une gestion transparente et participative de la commune.",
+                "icon": "default",
+                "color": "#004a6d",
+                "pillar": "ouvrir",
+                "citizen_proposal": false,
+                "items": [
+                    "Transparence des décisions",
+                    "Participation citoyenne",
+                    "Communication régulière"
+                ]
+            },
+            {
+                "id": 5,
+                "title": "6",
+                "description": "Accompagner la commune vers un modèle plus durable et respectueux de l'environnement.",
+                "icon": "default",
+                "color": "#65ae99",
+                "pillar": "proteger",
+                "citizen_proposal": false,
+                "items": [
+                    "Énergies renouvelables",
+                    "Mobilité douce",
+                    "Réduction des déchets"
+                ]
+            },
+            {
+                "id": 6,
+                "title": "7",
+                "description": "Investir dans l'avenir en soutenant l'éducation et les activités pour les jeunes.",
+                "icon": "default",
+                "color": "#fcc549",
+                "pillar": "tisser",
+                "citizen_proposal": false,
+                "items": [
+                    "Soutien aux écoles",
+                    "Activités périscolaires",
+                    "Accompagnement des familles"
+                ]
+            },
+            {
+                "title": "ddd",
+                "description": "dd",
+                "pillar": "dessiner",
+                "color": "#4e9eb0",
+                "items": [],
+                "source": "citoyenne",
+                "citizen_proposal": true,
+                "citizen_proposal_id": "prop_68e8b853d2e014.62519175",
+                "id": 7
+            }
+        ]
+    },
+    "equipe": {
+        "h2": "Notre Équipe",
+        "h3": "Osez nous aborder",
+        "title": "Notre Équipe",
+        "subtitle": "Osez nous aborder",
+        "description": "Une équipe de citoyens engagés pour Saint-Paul",
+        "members": [
+            {
+                "id": "member_68e431c3780995.41462425",
+                "name": "Pierre Vincenot",
+                "role": "Chef d'entreprise",
+                "age": "43",
+                "description": "Mettre mes compétences en communication pour faciliter la transmission des informations au sein de la commune, associer les habitants aux décisions.",
+                "photo": "uploads\/member_1759785411_68e431c377a5f.webp",
+                "image": "uploads\/member_1759785411_68e431c377a5f.webp"
+            }
+        ]
+    },
+    "rendez_vous": {
+        "h2": "Nos rendez-vous",
+        "h3": "Osons échanger",
+        "title": "Nos rendez-vous",
+        "subtitle": "Osons échanger",
+        "description": "Rejoignez-nous lors de nos rencontres pour échanger et construire ensemble",
+        "events": [
+            {
+                "id": "ev_68e40ffbe1d719.38659634",
+                "title": "Porte à porte pour vous écouter...",
+                "description": "Vous rencontrer et recueillir vos propositions pour enrichir notre programme",
+                "date": "2025-11-07T18:00",
+                "location": "Chez vous"
+            }
+        ]
+    },
+    "charte": {
+        "h2": "Notre charte",
+        "h3": "Osons nous engager",
+        "title": "Notre charte",
+        "subtitle": "Nos engagements",
+        "description": "S’engager en tant qu'élu sur une liste municipale, c’est choisir de mettre ses compétences, son énergie et son temps au service de l’intérêt général sur plusieurs années, avec une participation active aux réunions, commissions et projets municipaux.\r\nVoici les principes sur lesquels nous nous engageons  et qui fondent nos actions.",
+        "intro_text": "Cette charte définit nos engagements et nos valeurs. Elle guide notre action et garantit notre cohérence. <b>Ensemble, nous construisons l'avenir de Saint-Paul<\/b>",
+        "intro_highlight": "",
+        "principles": [
+            {
+                "id": "p_68e41696786c23.84918016",
+                "title": "Intérêt général",
+                "description": "Poursuivre le seul intérêt général à l’exclusion de tout intérêt personnel, directement ou indirectement, ou de tout autre intérêt particulier.",
+                "thematique": "Charte de l'élu local"
+            },
+            {
+                "id": "p_68e416fcc00668.61359019",
+                "title": "Humanité et nature",
+                "description": "Considérer l’être humain et la préservation de la nature comme composante centrale de l’action publique.",
+                "thematique": "Transversal"
+            },
+            {
+                "id": "p_68e4171020c8f8.33120324",
+                "title": "Transparence",
+                "description": "Concevoir et élaborer la dépense publique en termes de transparence et de responsabilité.",
+                "thematique": "Gestion"
+            },
+            {
+                "id": "p_68e417296d6925.20213846",
+                "title": "Inclusion",
+                "description": "Porter une politique inclusive attentive à l’ensemble des citoyens, plus particulièrement aux plus fragiles, par des actions favorisant l’inclusion, l’autonomie et l’accès au droit.",
+                "thematique": "Solidarité et équité sociale"
+            },
+            {
+                "id": "p_68e4174d268414.21119720",
+                "title": "Égalité",
+                "description": "Agir contre les discriminations d’origine et de genre.",
+                "thematique": "Soutien"
+            },
+            {
+                "id": "p_68e41766762ba6.24903031",
+                "title": "Dialogue",
+                "description": "Favoriser, au sein du conseil municipal, le débat d’idées dans le respect des points de vue en œuvrant à la clarté et à la transparence des informations.",
+                "thematique": "Vie démocratique"
+            },
+            {
+                "id": "p_68e41777a1d394.41303767",
+                "title": "Participation",
+                "description": "Articuler démocratie représentative et démocratie participative afin de favoriser l’investissement citoyen dans la vie publique.",
+                "thematique": "Gouvernance citoyenne"
+            },
+            {
+                "id": "p_68e417914527d4.86834072",
+                "title": "Lien social",
+                "description": "S’attacher à permettre l’accueil, la rencontre et le lien intergénérationnel.",
+                "thematique": "Cohésion"
+            },
+            {
+                "id": "p_68e417aa6c5631.34479945",
+                "title": "Coéhrence",
+                "description": "S’engager à être cohérent·es entre nos intentions et nos actes.",
+                "thematique": "Alignement"
+            }
+        ]
+    },
+    "citations": {
+        "citation1": {
+            "text": "Considérer l'être humain et la préservation de la nature comme composante centrale de l'action publique",
+            "author": "Notre vision",
+            "background_image": "uploads\/citation_1759768182_68e3ee767f389.webp"
+        },
+        "citation2": {
+            "text": "Favoriser, au sein du conseil municipal, le débat d'idées dans le respect des points de vue",
+            "author": "Notre méthode de travai",
+            "background_image": "uploads\/citation_1759768147_68e3ee53765ab.webp"
+        },
+        "citation3": {
+            "text": "Porter une politique en faveur des plus fragiles par des actions favorisant l'inclusion et l'autonomie",
+            "author": "Notre engagement social",
+            "background_image": "uploads\/citation_1759769083_68e3f1fb370c2.webp"
+        },
+        "citation4": {
+            "text": "S'engager à être cohérent.es entre nos intentions et nos actes",
+            "author": "Notre cohérence",
+            "background_image": "uploads\/citation_1759782127_68e424ef1aa4a.webp"
+        }
+    },
+    "idees": {
+        "title": "Contactez-nous",
+        "subtitle": "Osez nous écrire",
+        "description": "Envoyez nous un email, une infos, une proposition, un encouragement et nous vous répondrons avec plaisir",
+        "contact_email": "bonjour@osonssaintpaul.fr",
+        "contact_phone": "05 61 XX XX XX"
+    },
+    "mediatheque": {
+        "title": "Bibliothèque numérique",
+        "subtitle": "Osons nous documenter",
+        "description": "Retrouvez tous nos documents, photos, vidéos et actualités dans notre espace de partage.",
+        "drive_url": "https:\/\/drive.google.com\/drive\/u\/0\/folders\/1e6PhBtXfn3diRkbloDjPDLIkh-d67h7B",
+        "button_text": "Accéder aux documents"
+    },
+    "rencontres": {
+        "events": []
+    }
+}
