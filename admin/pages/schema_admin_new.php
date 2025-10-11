@@ -644,30 +644,40 @@ $sections = [
             } else {}
         }
         
-        // Gestion du menu mobile
-        function toggleMobileMenu() {
+        // DÉCLARER LA FONCTION DANS LE SCOPE GLOBAL
+        window.toggleMobileMenu = function() {
+            console.log('toggleMobileMenu called');
             const sidebar = document.querySelector('.admin-sidebar');
             const overlay = document.getElementById('mobile-menu-overlay');
             const toggle = document.getElementById('mobile-menu-toggle');
+            
+            console.log('Sidebar:', sidebar);
+            console.log('Overlay:', overlay);
+            console.log('Toggle:', toggle);
             
             if (!sidebar || !overlay || !toggle) {
                 console.error('Éléments menu mobile manquants');
                 return;
             }
             
+            console.log('Toggling classes...');
             sidebar.classList.toggle('mobile-open');
             overlay.classList.toggle('active');
             
-            // Changer l'icône
+            console.log('Sidebar classes:', sidebar.classList);
+            console.log('Overlay classes:', overlay.classList);
+            
             const icon = toggle.querySelector('i');
             if (sidebar.classList.contains('mobile-open')) {
                 icon.classList.remove('fa-bars');
                 icon.classList.add('fa-times');
+                console.log('Menu ouvert');
             } else {
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
+                console.log('Menu fermé');
             }
-        }
+        };
         
         // Charger automatiquement la section appropriée au chargement de la page
         document.addEventListener('DOMContentLoaded', function() {

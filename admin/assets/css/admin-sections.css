@@ -569,11 +569,39 @@
     
     .analytics-box {
         padding: 1rem;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        box-sizing: border-box;
     }
     
     .page-item-visual,
     .traffic-item {
         padding: 0.5rem;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+    
+    .page-item-visual .page-info,
+    .traffic-item .traffic-info {
+        flex: 1;
+        min-width: 0;
+        max-width: 150px;
+    }
+    
+    .page-title,
+    .traffic-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    .page-path,
+    .traffic-medium {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     
     .page-progress {
