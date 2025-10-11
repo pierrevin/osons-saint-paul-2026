@@ -34,7 +34,12 @@ const AdminAnalytics = {
      */
     initTimeSeriesChart: function() {
         const canvas = document.getElementById('analyticsTimeSeriesChart');
-        if (!canvas) return;
+        if (!canvas) {
+            console.log('⚠️ Canvas analyticsTimeSeriesChart non trouvé');
+            return;
+        }
+        
+        console.log('📊 Initialisation graphique évolution temporelle');
         
         const ctx = canvas.getContext('2d');
         const data = window.analyticsData.timeSeries[this.currentPeriod];
@@ -43,6 +48,10 @@ const AdminAnalytics = {
         if (this.charts.timeSeries) {
             this.charts.timeSeries.destroy();
         }
+        
+        // Adapter l'aspect ratio selon la taille d'écran
+        const isMobile = window.innerWidth <= 768;
+        const aspectRatio = isMobile ? 1.5 : 2.5;
         
         this.charts.timeSeries = new Chart(ctx, {
             type: 'line',
@@ -57,8 +66,8 @@ const AdminAnalytics = {
                         borderWidth: 2,
                         fill: true,
                         tension: 0.4,
-                        pointRadius: 3,
-                        pointHoverRadius: 5,
+                        pointRadius: isMobile ? 2 : 3,
+                        pointHoverRadius: isMobile ? 4 : 5,
                         pointBackgroundColor: '#3b82f6',
                         pointBorderColor: '#fff',
                         pointBorderWidth: 2
@@ -71,8 +80,8 @@ const AdminAnalytics = {
                         borderWidth: 2,
                         fill: true,
                         tension: 0.4,
-                        pointRadius: 3,
-                        pointHoverRadius: 5,
+                        pointRadius: isMobile ? 2 : 3,
+                        pointHoverRadius: isMobile ? 4 : 5,
                         pointBackgroundColor: '#10b981',
                         pointBorderColor: '#fff',
                         pointBorderWidth: 2
@@ -82,7 +91,7 @@ const AdminAnalytics = {
             options: {
                 responsive: true,
                 maintainAspectRatio: true,
-                aspectRatio: 2.5,
+                aspectRatio: aspectRatio,
                 interaction: {
                     mode: 'index',
                     intersect: false
@@ -161,7 +170,12 @@ const AdminAnalytics = {
      */
     initTrafficSourcesChart: function() {
         const canvas = document.getElementById('trafficSourcesChart');
-        if (!canvas) return;
+        if (!canvas) {
+            console.log('⚠️ Canvas trafficSourcesChart non trouvé');
+            return;
+        }
+        
+        console.log('📊 Initialisation graphique sources de trafic');
         
         const ctx = canvas.getContext('2d');
         const sources = window.analyticsData.trafficSources;
@@ -187,6 +201,10 @@ const AdminAnalytics = {
             '#84cc16'  // Lime
         ];
         
+        // Adapter l'aspect ratio selon la taille d'écran
+        const isMobile = window.innerWidth <= 768;
+        const aspectRatio = isMobile ? 1.2 : 1.5;
+        
         this.charts.trafficSources = new Chart(ctx, {
             type: 'doughnut',
             data: {
@@ -197,13 +215,13 @@ const AdminAnalytics = {
                     borderWidth: 2,
                     borderColor: '#fff',
                     hoverBorderWidth: 3,
-                    hoverOffset: 10
+                    hoverOffset: isMobile ? 5 : 10
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: true,
-                aspectRatio: 1.5,
+                aspectRatio: aspectRatio,
                 plugins: {
                     legend: {
                         display: false // On affiche déjà une liste en dessous
@@ -328,6 +346,16 @@ document.addEventListener('sectionChanged', function(e) {
         setTimeout(() => {
             AdminAnalytics.init();
         }, 100);
+    }
+});
+
+// Support pour le nouvel événement section-loaded
+document.addEventListener('section-loaded', function(e) {
+    if (e.detail && e.detail.sectionId === 'dashboard') {
+        console.log('📊 Section dashboard chargée, initialisation des graphiques');
+        setTimeout(() => {
+            AdminAnalytics.init();
+        }, 200);
     }
 });
 
