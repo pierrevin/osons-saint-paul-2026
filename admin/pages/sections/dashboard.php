@@ -253,11 +253,16 @@ class DashboardSection extends AdminSection {
         // Indicateurs KPI principaux
         $html .= '<div class="analytics-kpi-cards">';
         
+        // CARTE FUSIONNÉE : Visiteurs + En ligne
         $html .= '<div class="kpi-card kpi-visitors">';
         $html .= '<div class="kpi-icon"><i class="fas fa-users"></i></div>';
         $html .= '<div class="kpi-content">';
         $html .= '<span class="kpi-number" id="kpi-visitors">' . number_format($stats['total_users']) . '</span>';
         $html .= '<span class="kpi-label">Visiteurs</span>';
+        $html .= '<div class="kpi-realtime-badge">';
+        $html .= '<i class="fas fa-circle pulse-dot"></i>';
+        $html .= '<span>' . $realtime['total_active_users'] . ' en ligne</span>';
+        $html .= '</div>';
         $html .= '</div>';
         $html .= '</div>';
         
@@ -288,17 +293,8 @@ class DashboardSection extends AdminSection {
         $html .= '<span class="kpi-label">Taux de rebond</span>';
         $html .= '</div>';
         $html .= '</div>';
-        $html .= '</div>';
         
-        $html .= '<div class="kpi-card kpi-realtime">';
-        $html .= '<div class="kpi-icon"><i class="fas fa-broadcast-tower"></i></div>';
-        $html .= '<div class="kpi-content">';
-        $html .= '<span class="kpi-number">' . $realtime['total_active_users'] . '</span>';
-        $html .= '<span class="kpi-label">En ligne maintenant</span>';
-        $html .= '</div>';
-        $html .= '</div>';
-        
-        $html .= '</div>';
+        $html .= '</div>'; // Fin analytics-kpi-cards
         
         // Graphique d'évolution temporelle
         $html .= '<div class="analytics-chart-container">';

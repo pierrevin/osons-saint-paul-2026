@@ -374,9 +374,9 @@ $sections = [
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     
     <!-- CSS modulaire -->
-    <link rel="stylesheet" href="../assets/css/admin-core.css">
-    <link rel="stylesheet" href="../assets/css/admin-components.css">
-    <link rel="stylesheet" href="../assets/css/admin-sections.css">
+    <link rel="stylesheet" href="../assets/css/admin-core.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="../assets/css/admin-components.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="../assets/css/admin-sections.css?v=<?= time() ?>">
     
     <!-- JavaScript de navigation - DOIT être dans le head -->
     <script>
@@ -644,15 +644,32 @@ $sections = [
             } else {}
         }
         
-        // Charger automatiquement la section appropriée au chargement de la page
-        document.addEventListener('DOMContentLoaded', function() {            const menuItems = document.querySelectorAll('.menu-item a');menuItems.forEach((item, index) => {
-                console.log(`  ${index}: ${item.textContent.trim()} - onclick: ${item.getAttribute('onclick')}`);
-            });
+        // Gestion du menu mobile
+        function toggleMobileMenu() {
+            const sidebar = document.querySelector('.admin-sidebar');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            const toggle = document.getElementById('mobile-menu-toggle');
             
-            // Attendre un peu pour que tous les scripts soient chargés
+            sidebar.classList.toggle('mobile-open');
+            overlay.classList.toggle('active');
+            
+            // Changer l'icône
+            const icon = toggle.querySelector('i');
+            if (sidebar.classList.contains('mobile-open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        }
+        
+        // Charger automatiquement la section appropriée au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Attendre que tous les scripts soient chargés
             setTimeout(() => {
                 const urlParams = new URLSearchParams(window.location.search);
-                const section = urlParams.get('section') || 'dashboard';
+                const section = urlParams.get('section') || 'dashboard'; // Dashboard par défaut
                 navigateToSection(section);
             }, 100);
         });
@@ -680,6 +697,14 @@ $sections = [
     </style>
 </head>
 <body class="admin-body">
+    <!-- Bouton hamburger mobile -->
+    <button class="mobile-menu-toggle" id="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Overlay pour fermer le menu -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay" onclick="toggleMobileMenu()"></div>
+    
     <div class="admin-container">
         <?php include __DIR__ . '/../includes/admin_sidebar.php'; ?>
         
@@ -687,8 +712,20 @@ $sections = [
         <main class="admin-main">
             <div class="admin-header">
                 <div class="header-left">
+                    <!-- Logo mobile (visible uniquement sur mobile) -->
+                    <div class="header-logo-mobile">
+                        <img src="../../uploads/Osons1.png" alt="Logo Osons" />
+                    </div>
                     <h1>Administration du Site</h1>
                     <p>Gérez le contenu de votre site web</p>
+                </div>
+                <div class="header-actions">
+                    <a href="../../index.php?utm_source=admin&utm_medium=internal&utm_campaign=admin_preview" 
+                       target="_blank" 
+                       class="view-site-btn-mobile">
+                        <i class="fas fa-external-link-alt"></i>
+                        Voir le site
+                    </a>
                 </div>
             </div>
             

@@ -467,6 +467,31 @@
     color: var(--gray-700);
 }
 
+/* Badge realtime pour carte visiteurs */
+.kpi-realtime-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: 12px;
+    font-size: 0.75rem;
+    color: #dc2626;
+    font-weight: 500;
+}
+
+.pulse-dot {
+    font-size: 0.5rem;
+    color: #ef4444;
+    animation: pulse-realtime 2s ease-in-out infinite;
+}
+
+@keyframes pulse-realtime {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     .analytics-grid {
@@ -478,20 +503,93 @@
     }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
     .analytics-dashboard {
         padding: 1rem;
     }
     
+    .analytics-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .analytics-period-selector {
+        width: 100%;
+        flex-direction: column;
+    }
+    
+    .period-btn {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .analytics-kpi-cards {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .kpi-card {
+        padding: 1rem;
+    }
+    
+    .kpi-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.2rem;
+    }
+    
+    .kpi-number {
+        font-size: 1.5rem;
+    }
+    
+    .analytics-chart-container {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .analytics-chart-container canvas {
+        max-height: 200px;
+    }
+    
+    .analytics-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .analytics-box {
+        padding: 1rem;
+    }
+    
+    .page-item-visual,
+    .traffic-item {
+        padding: 0.5rem;
+    }
+    
+    .page-progress {
+        width: 60px;
+    }
+    
+    .traffic-chart-container canvas {
+        max-height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
     .analytics-kpi-cards {
         grid-template-columns: 1fr;
     }
     
-    .analytics-header {
-        flex-direction: column;
+    .kpi-card {
+        flex-direction: row;
     }
     
-    .page-progress {
-        width: 80px;
+    .page-item-visual .page-title,
+    .traffic-name {
+        font-size: 0.8rem;
+    }
+    
+    .page-item-visual .page-path,
+    .traffic-medium {
+        font-size: 0.7rem;
     }
 }
