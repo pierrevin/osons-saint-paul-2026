@@ -644,40 +644,6 @@ $sections = [
             } else {}
         }
         
-        // DÉCLARER LA FONCTION DANS LE SCOPE GLOBAL
-        window.toggleMobileMenu = function() {
-            console.log('toggleMobileMenu called');
-            const sidebar = document.querySelector('.admin-sidebar');
-            const overlay = document.getElementById('mobile-menu-overlay');
-            const toggle = document.getElementById('mobile-menu-toggle');
-            
-            console.log('Sidebar:', sidebar);
-            console.log('Overlay:', overlay);
-            console.log('Toggle:', toggle);
-            
-            if (!sidebar || !overlay || !toggle) {
-                console.error('Éléments menu mobile manquants');
-                return;
-            }
-            
-            console.log('Toggling classes...');
-            sidebar.classList.toggle('mobile-open');
-            overlay.classList.toggle('active');
-            
-            console.log('Sidebar classes:', sidebar.classList);
-            console.log('Overlay classes:', overlay.classList);
-            
-            const icon = toggle.querySelector('i');
-            if (sidebar.classList.contains('mobile-open')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-                console.log('Menu ouvert');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-                console.log('Menu fermé');
-            }
-        };
         
         // Charger automatiquement la section appropriée au chargement de la page
         document.addEventListener('DOMContentLoaded', function() {
@@ -710,10 +676,135 @@ $sections = [
             to { transform: rotate(360deg); }
         }
     </style>
+    
+    <!-- MENU MOBILE - JavaScript simple et direct -->
+    <script>
+    // MENU MOBILE - Code simple et direct
+    (function() {
+        'use strict';
+        
+        function initMobileMenu() {
+            const menuToggle = document.getElementById('mobile-menu-toggle');
+            const menuClose = document.getElementById('mobile-menu-close');
+            const menuContainer = document.getElementById('mobile-menu-container');
+            const menuOverlay = document.getElementById('mobile-menu-overlay-new');
+            const menuItems = document.querySelectorAll('.mobile-menu-item[data-section]');
+            
+            console.log('Init mobile menu...');
+            
+            if (!menuToggle || !menuContainer || !menuOverlay) {
+                console.error('Éléments menu mobile manquants');
+                return;
+            }
+            
+            // Ouvrir le menu
+            menuToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Ouverture menu mobile');
+                menuContainer.classList.add('open');
+                menuOverlay.classList.add('open');
+            });
+            
+            // Fermer le menu
+            function closeMenu() {
+                console.log('Fermeture menu mobile');
+                menuContainer.classList.remove('open');
+                menuOverlay.classList.remove('open');
+            }
+            
+            if (menuClose) {
+                menuClose.addEventListener('click', closeMenu);
+            }
+            
+            menuOverlay.addEventListener('click', closeMenu);
+            
+            // Navigation
+            menuItems.forEach(function(item) {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const section = this.getAttribute('data-section');
+                    console.log('Navigation vers:', section);
+                    
+                    // Retirer active de tous
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    // Ajouter active au cliqué
+                    this.classList.add('active');
+                    
+                    // Charger la section
+                    if (window.loadSection) {
+                        window.loadSection(section);
+                    }
+                    
+                    // Fermer le menu
+                    closeMenu();
+                });
+            });
+            
+            console.log('Menu mobile initialisé avec succès');
+        }
+        
+        // Attendre que le DOM soit chargé
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initMobileMenu);
+        } else {
+            initMobileMenu();
+        }
+    })();
+    </script>
 </head>
 <body class="admin-body">
+    <!-- MENU MOBILE DÉDIÉ -->
+    <div class="mobile-menu-container" id="mobile-menu-container">
+        <div class="mobile-menu-header">
+            <img src="../../uploads/Osons1.png" alt="Logo Osons" />
+            <h2>Menu</h2>
+            <button class="mobile-menu-close" id="mobile-menu-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <nav class="mobile-menu-nav">
+            <a href="#" data-section="dashboard" class="mobile-menu-item active">
+                <i class="fas fa-chart-line"></i>
+                <span>Tableau de Bord</span>
+            </a>
+            <a href="#" data-section="content" class="mobile-menu-item">
+                <i class="fas fa-file-alt"></i>
+                <span>Contenu</span>
+            </a>
+            <a href="#" data-section="propositions" class="mobile-menu-item">
+                <i class="fas fa-lightbulb"></i>
+                <span>Propositions</span>
+            </a>
+            <a href="#" data-section="agenda" class="mobile-menu-item">
+                <i class="fas fa-calendar"></i>
+                <span>Agenda</span>
+            </a>
+            <a href="#" data-section="gallery" class="mobile-menu-item">
+                <i class="fas fa-images"></i>
+                <span>Galerie</span>
+            </a>
+            <a href="#" data-section="equipe" class="mobile-menu-item">
+                <i class="fas fa-users"></i>
+                <span>Équipe</span>
+            </a>
+            <a href="#" data-section="analytics" class="mobile-menu-item">
+                <i class="fas fa-chart-bar"></i>
+                <span>Analytics</span>
+            </a>
+            <a href="#" data-section="settings" class="mobile-menu-item">
+                <i class="fas fa-cog"></i>
+                <span>Paramètres</span>
+            </a>
+            <a href="../logout.php" class="mobile-menu-item mobile-menu-logout">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Déconnexion</span>
+            </a>
+        </nav>
+    </div>
+
     <!-- Overlay pour fermer le menu -->
-    <div class="mobile-menu-overlay" id="mobile-menu-overlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu-overlay-new" id="mobile-menu-overlay-new"></div>
     
     <div class="admin-container">
         <?php include __DIR__ . '/../includes/admin_sidebar.php'; ?>
@@ -729,7 +820,7 @@ $sections = [
                     <h1>Administration du Site</h1>
                 </div>
                 <!-- BOUTON HAMBURGER INTÉGRÉ DANS LE HEADER -->
-                <button class="mobile-menu-toggle" id="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
