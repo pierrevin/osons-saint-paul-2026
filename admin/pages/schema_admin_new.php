@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $result = $rendezVousSection->handleSubmission($_POST);
                 break;
             // ===== CHARTE CRUD =====
-            case 'add_principle': {
+            case 'add_principle':
                 $data = file_exists(DATA_PATH . '/site_content.json') ? json_decode(file_get_contents(DATA_PATH . '/site_content.json'), true) : [];
                 $principles = $data['charte']['principles'] ?? [];
                 $id = $_POST['id'] ?? uniqid('p_', true);
@@ -92,8 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 file_put_contents(DATA_PATH . '/site_content.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
                 $result = ['success' => true, 'message' => 'Principe ajouté'];
                 if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
-                break; }
-            case 'edit_principle': {
+                break;
+            case 'edit_principle':
                 $data = file_exists(DATA_PATH . '/site_content.json') ? json_decode(file_get_contents(DATA_PATH . '/site_content.json'), true) : [];
                 $principles = $data['charte']['principles'] ?? [];
                 $id = $_POST['id'] ?? '';
@@ -111,8 +111,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 file_put_contents(DATA_PATH . '/site_content.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
                 $result = ['success' => true, 'message' => 'Principe modifié'];
                 if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
-                break; }
-            case 'delete_principle': {
+                break;
+            case 'delete_principle':
                 $data = file_exists(DATA_PATH . '/site_content.json') ? json_decode(file_get_contents(DATA_PATH . '/site_content.json'), true) : [];
                 $principles = $data['charte']['principles'] ?? [];
                 $id = $_POST['id'] ?? '';
@@ -122,10 +122,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 file_put_contents(DATA_PATH . '/site_content.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
                 $result = ['success' => true, 'message' => 'Principe supprimé'];
                 if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
-                break; }
+                break;
 
             // ===== RENDEZ-VOUS CRUD =====
-            case 'add_event': {
+            case 'add_event':
                 $data = file_exists(DATA_PATH . '/site_content.json') ? json_decode(file_get_contents(DATA_PATH . '/site_content.json'), true) : [];
                 $events = $data['rendez_vous']['events'] ?? [];
                 $id = $_POST['id'] ?? uniqid('ev_', true);
@@ -142,8 +142,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 file_put_contents(DATA_PATH . '/site_content.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
                 $result = ['success' => true, 'message' => 'Événement ajouté'];
                 if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
-                break; }
-            case 'edit_event': {
+                break;
+            case 'edit_event':
                 $data = file_exists(DATA_PATH . '/site_content.json') ? json_decode(file_get_contents(DATA_PATH . '/site_content.json'), true) : [];
                 $events = $data['rendez_vous']['events'] ?? [];
                 $id = $_POST['id'] ?? '';
@@ -162,8 +162,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 file_put_contents(DATA_PATH . '/site_content.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
                 $result = ['success' => true, 'message' => 'Événement modifié'];
                 if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
-                break; }
-            case 'delete_event': {
+                break;
+            case 'delete_event':
                 $data = file_exists(DATA_PATH . '/site_content.json') ? json_decode(file_get_contents(DATA_PATH . '/site_content.json'), true) : [];
                 $events = $data['rendez_vous']['events'] ?? [];
                 $id = $_POST['id'] ?? '';
@@ -173,10 +173,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 file_put_contents(DATA_PATH . '/site_content.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
                 $result = ['success' => true, 'message' => 'Événement supprimé'];
                 if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
-                break; }
+                break;
             
             // ===== ÉQUIPE =====
-            case 'add_member': {
+            case 'add_member':
                 require_once __DIR__ . '/../includes/image_processor.php';
                 $data = $loadSite();
                 $members = $data['equipe']['members'] ?? [];
@@ -213,8 +213,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $saveSite($data);
                 $result = ['success' => true, 'message' => 'Membre ajouté'];
                 if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
-                break; }
-            case 'edit_member': {
+                break;
+            case 'edit_member':
                 require_once __DIR__ . '/../includes/image_processor.php';
                 $data = $loadSite();
                 $members = $data['equipe']['members'] ?? [];
@@ -252,8 +252,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $saveSite($data);
                 $result = ['success' => true, 'message' => 'Membre modifié'];
                 if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
-                break; }
-            case 'delete_member': {
+                break;
+            case 'delete_member':
                 $data = $loadSite();
                 $members = $data['equipe']['members'] ?? [];
                 $id = $_POST['id'] ?? '';
@@ -263,9 +263,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $saveSite($data);
                 $result = ['success' => true, 'message' => 'Membre supprimé'];
                 if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
-                break; }
+                break;
 
-            case 'reorder_members': {
+            case 'reorder_members':
                 $data = $loadSite();
                 $members = $data['equipe']['members'] ?? [];
                 $ids = $_POST['ids'] ?? [];
@@ -288,7 +288,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $saveSite($data);
                 $result = ['success' => true, 'message' => 'Ordre des membres mis à jour'];
                 if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
-                break; }
+                break;
                 
             case 'update_programme_section':
                 $programmeSection = new ProgrammeSection($content);
@@ -675,146 +675,218 @@ $sections = [
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+        
+        /* MENU HAMBURGER ULTRA-SIMPLE */
+        .hamburger-simple {
+            background: #ec654f;
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hamburger-simple:hover {
+            background: #d5543f;
+        }
+        
+        .sidebar-simple {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            z-index: 2000;
+            transition: left 0.3s ease;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-simple.open {
+            left: 0;
+        }
+        
+        .sidebar-content {
+            padding: 2rem 1rem;
+        }
+        
+        .sidebar-content h3 {
+            color: #004a6d;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #ec654f;
+            padding-bottom: 0.5rem;
+        }
+        
+        .sidebar-content a {
+            display: block;
+            padding: 1rem;
+            color: #495057;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        
+        .sidebar-content a:hover {
+            background: #ec654f;
+            color: white;
+        }
+        
+        .overlay-simple {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .overlay-simple.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .admin-sidebar {
+                display: none !important;
+            }
+            
+            .admin-main {
+                margin-left: 0 !important;
+                width: 100% !important;
+            }
+            
+            .admin-header {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                padding: 1rem !important;
+                background: white !important;
+                border-bottom: 1px solid #e9ecef !important;
+            }
+            
+            .header-left {
+                display: flex !important;
+                align-items: center !important;
+                gap: 0.75rem !important;
+            }
+            
+            .header-logo-mobile img {
+                width: 40px !important;
+                height: auto !important;
+            }
+            
+            .admin-header h1 {
+                font-size: 1.2rem !important;
+                margin: 0 !important;
+                color: #004a6d !important;
+            }
+            
+            .header-actions-row {
+                width: 100% !important;
+                padding: 0.5rem 1rem !important;
+                background: #f8f9fa !important;
+                border-bottom: 1px solid #e9ecef !important;
+            }
+            
+            .view-site-btn-mobile {
+                display: inline-block !important;
+                padding: 0.5rem 1rem !important;
+                background: #ec654f !important;
+                color: white !important;
+                text-decoration: none !important;
+                border-radius: 4px !important;
+                font-size: 0.9rem !important;
+            }
+        }
     </style>
     
-    <!-- MENU MOBILE - JavaScript simple et direct -->
+    <!-- MENU HAMBURGER ULTRA-SIMPLE -->
     <script>
-    // MENU MOBILE - Code simple et direct
-    (function() {
-        'use strict';
+    // Menu hamburger ultra-simple - sans conflits
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚀 Initialisation menu hamburger simple');
         
-        function initMobileMenu() {
-            const menuToggle = document.getElementById('mobile-menu-toggle');
-            const menuClose = document.getElementById('mobile-menu-close');
-            const menuContainer = document.getElementById('mobile-menu-container');
-            const menuOverlay = document.getElementById('mobile-menu-overlay-new');
-            const menuItems = document.querySelectorAll('.mobile-menu-item[data-section]');
-            
-            console.log('Init mobile menu...');
-            
-            if (!menuToggle || !menuContainer || !menuOverlay) {
-                console.error('Éléments menu mobile manquants');
-                return;
-            }
-            
-            // Ouvrir le menu
-            menuToggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation(); // EMPÊCHER LA PROPAGATION
-                console.log('Ouverture menu mobile');
-                menuContainer.classList.add('open');
-                menuOverlay.classList.add('open');
-            });
-            
-            // Fermer le menu
-            function closeMenu() {
-                console.log('Fermeture menu mobile');
-                menuContainer.classList.remove('open');
-                menuOverlay.classList.remove('open');
-            }
-            
-            if (menuClose) {
-                menuClose.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    closeMenu();
-                });
-            }
-            
-            // Overlay : fermer seulement si déjà ouvert
-            menuOverlay.addEventListener('click', function(e) {
-                if (menuContainer.classList.contains('open')) {
-                    closeMenu();
-                }
-            });
-            
-            // Navigation
-            menuItems.forEach(function(item) {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const section = this.getAttribute('data-section');
-                    console.log('Navigation vers:', section);
-                    
-                    // Retirer active de tous
-                    menuItems.forEach(i => i.classList.remove('active'));
-                    // Ajouter active au cliqué
-                    this.classList.add('active');
-                    
-                    // Charger la section
-                    if (window.loadSection) {
-                        window.loadSection(section);
-                    }
-                    
-                    // Fermer le menu
-                    closeMenu();
-                });
-            });
-            
-            console.log('Menu mobile initialisé avec succès');
+        const hamburger = document.getElementById('hamburger-simple');
+        const sidebar = document.getElementById('sidebar-simple');
+        const overlay = document.getElementById('overlay-simple');
+        
+        if (!hamburger || !sidebar || !overlay) {
+            console.error('Éléments menu manquants');
+            return;
         }
         
-        // Attendre que le DOM soit chargé
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initMobileMenu);
-        } else {
-            initMobileMenu();
+        // Ouvrir le menu
+        hamburger.addEventListener('click', function() {
+            console.log('🍔 Clic hamburger détecté');
+            sidebar.classList.add('open');
+            overlay.classList.add('open');
+        });
+        
+        // Fermer le menu
+        function closeMenu() {
+            console.log('❌ Fermeture menu');
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
         }
-    })();
+        
+        overlay.addEventListener('click', closeMenu);
+        
+        // Fonction globale pour charger les sections
+        window.loadSection = function(section) {
+            console.log('📄 Navigation vers:', section);
+            closeMenu();
+            
+            // Utiliser window.adminCore si disponible
+            if (window.adminCore && typeof window.adminCore.navigateTo === 'function') {
+                console.log('✅ Utilisation de adminCore.navigateTo');
+                window.adminCore.navigateTo(section);
+            } else if (typeof navigateToSection === 'function') {
+                console.log('✅ Utilisation de navigateToSection');
+                navigateToSection(section);
+            } else {
+                console.log('⚠️ Fallback: rechargement page');
+                window.location.href = '?section=' + section;
+            }
+        };
+        
+        console.log('✅ Menu hamburger initialisé');
+    });
     </script>
 </head>
 <body class="admin-body">
-    <!-- MENU MOBILE DÉDIÉ -->
-    <div class="mobile-menu-container" id="mobile-menu-container">
-        <div class="mobile-menu-header">
-            <img src="../../uploads/Osons1.png" alt="Logo Osons" />
-            <h2>Menu</h2>
-            <button class="mobile-menu-close" id="mobile-menu-close">
-                <i class="fas fa-times"></i>
-            </button>
+    <!-- MENU HAMBURGER ULTRA-SIMPLE -->
+    <div id="sidebar-simple" class="sidebar-simple">
+        <div class="sidebar-content">
+            <h3>Menu Admin</h3>
+            <a href="#" onclick="loadSection('dashboard'); return false;">📊 Dashboard</a>
+            <a href="#" onclick="loadSection('hero'); return false;">🏠 Hero</a>
+            <a href="#" onclick="loadSection('programme'); return false;">💡 Programme</a>
+            <a href="#" onclick="loadSection('citations'); return false;">💬 Citations</a>
+            <a href="#" onclick="loadSection('equipe'); return false;">👥 Équipe</a>
+            <a href="#" onclick="loadSection('rendez_vous'); return false;">📅 Rendez-vous</a>
+            <a href="#" onclick="loadSection('charte'); return false;">📜 Charte</a>
+            <a href="#" onclick="loadSection('contact'); return false;">📧 Contact</a>
+            <a href="#" onclick="loadSection('mediatheque'); return false;">📚 Médiathèque</a>
+            <a href="#" onclick="loadSection('gestion_utilisateurs'); return false;">👤 Utilisateurs</a>
+            <a href="#" onclick="loadSection('logs_securite'); return false;">📋 Logs</a>
+            <a href="../logout.php">🚪 Déconnexion</a>
         </div>
-        
-        <nav class="mobile-menu-nav">
-            <a href="#" data-section="dashboard" class="mobile-menu-item active">
-                <i class="fas fa-chart-line"></i>
-                <span>Tableau de Bord</span>
-            </a>
-            <a href="#" data-section="content" class="mobile-menu-item">
-                <i class="fas fa-file-alt"></i>
-                <span>Contenu</span>
-            </a>
-            <a href="#" data-section="propositions" class="mobile-menu-item">
-                <i class="fas fa-lightbulb"></i>
-                <span>Propositions</span>
-            </a>
-            <a href="#" data-section="agenda" class="mobile-menu-item">
-                <i class="fas fa-calendar"></i>
-                <span>Agenda</span>
-            </a>
-            <a href="#" data-section="gallery" class="mobile-menu-item">
-                <i class="fas fa-images"></i>
-                <span>Galerie</span>
-            </a>
-            <a href="#" data-section="equipe" class="mobile-menu-item">
-                <i class="fas fa-users"></i>
-                <span>Équipe</span>
-            </a>
-            <a href="#" data-section="analytics" class="mobile-menu-item">
-                <i class="fas fa-chart-bar"></i>
-                <span>Analytics</span>
-            </a>
-            <a href="#" data-section="settings" class="mobile-menu-item">
-                <i class="fas fa-cog"></i>
-                <span>Paramètres</span>
-            </a>
-            <a href="../logout.php" class="mobile-menu-item mobile-menu-logout">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>Déconnexion</span>
-            </a>
-        </nav>
     </div>
-
-    <!-- Overlay pour fermer le menu -->
-    <div class="mobile-menu-overlay-new" id="mobile-menu-overlay-new"></div>
+    
+    <!-- Overlay simple -->
+    <div id="overlay-simple" class="overlay-simple"></div>
     
     <div class="admin-container">
         <?php include __DIR__ . '/../includes/admin_sidebar.php'; ?>
@@ -829,10 +901,8 @@ $sections = [
                     </div>
                     <h1>Administration du Site</h1>
                 </div>
-                <!-- BOUTON HAMBURGER INTÉGRÉ DANS LE HEADER -->
-                <button class="mobile-menu-toggle" id="mobile-menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <!-- Bouton hamburger simple -->
+                <button id="hamburger-simple" class="hamburger-simple">☰</button>
             </div>
             <div class="header-actions-row">
                 <a href="../../index.php?utm_source=admin&utm_medium=internal&utm_campaign=admin_preview" 

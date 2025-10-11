@@ -23,28 +23,9 @@ class AdminCore {
     }
     
     initMobileMenu() {
-        // Créer le bouton hamburger mobile
-        const mobileToggle = document.createElement('button');
-        mobileToggle.className = 'mobile-menu-toggle';
-        mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
-        mobileToggle.setAttribute('aria-label', 'Ouvrir le menu');
-        document.body.appendChild(mobileToggle);
-
-        // Gestion du clic sur le bouton hamburger
-        mobileToggle.addEventListener('click', () => {
-            const sidebar = document.querySelector('.admin-sidebar');
-            const isOpen = sidebar.classList.contains('mobile-open');
-            
-            if (isOpen) {
-                sidebar.classList.remove('mobile-open');
-                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                mobileToggle.setAttribute('aria-label', 'Ouvrir le menu');
-            } else {
-                sidebar.classList.add('mobile-open');
-                mobileToggle.innerHTML = '<i class="fas fa-times"></i>';
-                mobileToggle.setAttribute('aria-label', 'Fermer le menu');
-            }
-        });
+        // DÉSACTIVÉ COMPLÈTEMENT : Ancienne fonction menu mobile (conflit avec nouveau menu)
+        console.log('⚠️ Ancienne fonction initMobileMenu() désactivée - nouveau menu mobile utilisé');
+        return; // Sortir immédiatement de la fonction
 
         // Fermer le menu en cliquant sur un lien
         document.addEventListener('click', (e) => {
