@@ -636,9 +636,211 @@ $sections = [
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+        
+        /* MENU HAMBURGER ULTRA-SIMPLE */
+        .hamburger-simple {
+            background: #ec654f;
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hamburger-simple:hover {
+            background: #d5543f;
+        }
+        
+        .sidebar-simple {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            z-index: 2000;
+            transition: left 0.3s ease;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-simple.open {
+            left: 0;
+        }
+        
+        .sidebar-content {
+            padding: 2rem 1rem;
+        }
+        
+        .sidebar-content h3 {
+            color: #004a6d;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #ec654f;
+            padding-bottom: 0.5rem;
+        }
+        
+        .sidebar-content a {
+            display: block;
+            padding: 1rem;
+            color: #495057;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        
+        .sidebar-content a:hover {
+            background: #ec654f;
+            color: white;
+        }
+        
+        .overlay-simple {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .overlay-simple.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .admin-sidebar {
+                display: none !important;
+            }
+            
+            .admin-main {
+                margin-left: 0 !important;
+                width: 100% !important;
+            }
+            
+            .admin-header {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                padding: 1rem !important;
+                background: white !important;
+                border-bottom: 1px solid #e9ecef !important;
+            }
+            
+            .header-left {
+                display: flex !important;
+                align-items: center !important;
+                gap: 0.75rem !important;
+            }
+            
+            .header-logo-mobile img {
+                width: 40px !important;
+                height: auto !important;
+            }
+            
+            .admin-header h1 {
+                font-size: 1.2rem !important;
+                margin: 0 !important;
+                color: #004a6d !important;
+            }
+            
+            .header-actions-row {
+                width: 100% !important;
+                padding: 0.5rem 1rem !important;
+                background: #f8f9fa !important;
+                border-bottom: 1px solid #e9ecef !important;
+            }
+            
+            .view-site-btn-mobile {
+                display: inline-block !important;
+                padding: 0.5rem 1rem !important;
+                background: #ec654f !important;
+                color: white !important;
+                text-decoration: none !important;
+                border-radius: 4px !important;
+                font-size: 0.9rem !important;
+            }
+        }
     </style>
+    
+    <!-- MENU HAMBURGER ULTRA-SIMPLE -->
+    <script>
+    // Menu hamburger ultra-simple - sans conflits
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚀 Initialisation menu hamburger simple');
+        
+        const hamburger = document.getElementById('hamburger-simple');
+        const sidebar = document.getElementById('sidebar-simple');
+        const overlay = document.getElementById('overlay-simple');
+        
+        if (!hamburger || !sidebar || !overlay) {
+            console.error('Éléments menu manquants');
+            return;
+        }
+        
+        // Ouvrir le menu
+        hamburger.addEventListener('click', function() {
+            console.log('🍔 Clic hamburger détecté');
+            sidebar.classList.add('open');
+            overlay.classList.add('open');
+        });
+        
+        // Fermer le menu
+        function closeMenu() {
+            console.log('❌ Fermeture menu');
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+        }
+        
+        overlay.addEventListener('click', closeMenu);
+        
+        // Fonction globale pour charger les sections
+        window.loadSection = function(section) {
+            console.log('📄 Navigation vers:', section);
+            closeMenu();
+            
+            // Utiliser window.adminCore si disponible
+            if (window.adminCore && typeof window.adminCore.navigateTo === 'function') {
+                console.log('✅ Utilisation de adminCore.navigateTo');
+                window.adminCore.navigateTo(section);
+            } else if (typeof navigateToSection === 'function') {
+                console.log('✅ Utilisation de navigateToSection');
+                navigateToSection(section);
+            } else {
+                console.log('⚠️ Fallback: rechargement page');
+                window.location.href = '?section=' + section;
+            }
+        };
+        
+        console.log('✅ Menu hamburger initialisé');
+    });
+    </script>
 </head>
 <body class="admin-body">
+    <!-- MENU HAMBURGER ULTRA-SIMPLE -->
+    <div id="sidebar-simple" class="sidebar-simple">
+        <div class="sidebar-content">
+            <h3>Menu Éditeur</h3>
+            <a href="#" onclick="loadSection('dashboard'); return false;">📊 Dashboard</a>
+            <a href="#" onclick="loadSection('programme'); return false;">💡 Programme</a>
+            <a href="#" onclick="loadSection('rendez_vous'); return false;">📅 Rendez-vous</a>
+            <a href="../logout.php">🚪 Déconnexion</a>
+        </div>
+    </div>
+    
+    <!-- Overlay simple -->
+    <div id="overlay-simple" class="overlay-simple"></div>
+    
     <div class="admin-container">
         <?php include __DIR__ . '/../includes/admin_sidebar.php'; ?>
         
@@ -646,9 +848,22 @@ $sections = [
         <main class="admin-main">
             <div class="admin-header">
                 <div class="header-left">
+                    <!-- Logo mobile (visible uniquement sur mobile) -->
+                    <div class="header-logo-mobile">
+                        <img src="../../uploads/Osons1.png" alt="Logo Osons" />
+                    </div>
                     <h1>Administration du Site</h1>
-                    <p>Gérez le contenu de votre site web</p>
                 </div>
+                <!-- Bouton hamburger simple -->
+                <button id="hamburger-simple" class="hamburger-simple">☰</button>
+            </div>
+            <div class="header-actions-row">
+                <a href="../../index.php?utm_source=admin&utm_medium=internal&utm_campaign=admin_preview" 
+                   target="_blank" 
+                   class="view-site-btn-mobile">
+                    <i class="fas fa-external-link-alt"></i>
+                    Voir le site
+                </a>
             </div>
             
             <!-- Workspace principal -->
