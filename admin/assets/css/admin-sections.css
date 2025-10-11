@@ -504,6 +504,17 @@
 }
 
 @media (max-width: 768px) {
+    /* FORCER LES CARTES EN COLONNE UNIQUE */
+    .stats-overview {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+    }
+    
+    .stat-card {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
     .analytics-dashboard {
         padding: 1rem;
     }

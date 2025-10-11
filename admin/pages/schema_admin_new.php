@@ -650,6 +650,11 @@ $sections = [
             const overlay = document.getElementById('mobile-menu-overlay');
             const toggle = document.getElementById('mobile-menu-toggle');
             
+            if (!sidebar || !overlay || !toggle) {
+                console.error('Éléments menu mobile manquants');
+                return;
+            }
+            
             sidebar.classList.toggle('mobile-open');
             overlay.classList.toggle('active');
             
@@ -697,11 +702,6 @@ $sections = [
     </style>
 </head>
 <body class="admin-body">
-    <!-- Bouton hamburger mobile -->
-    <button class="mobile-menu-toggle" id="mobile-menu-toggle" onclick="toggleMobileMenu()">
-        <i class="fas fa-bars"></i>
-    </button>
-    
     <!-- Overlay pour fermer le menu -->
     <div class="mobile-menu-overlay" id="mobile-menu-overlay" onclick="toggleMobileMenu()"></div>
     
@@ -717,16 +717,19 @@ $sections = [
                         <img src="../../uploads/Osons1.png" alt="Logo Osons" />
                     </div>
                     <h1>Administration du Site</h1>
-                    <p>Gérez le contenu de votre site web</p>
                 </div>
-                <div class="header-actions">
-                    <a href="../../index.php?utm_source=admin&utm_medium=internal&utm_campaign=admin_preview" 
-                       target="_blank" 
-                       class="view-site-btn-mobile">
-                        <i class="fas fa-external-link-alt"></i>
-                        Voir le site
-                    </a>
-                </div>
+                <!-- BOUTON HAMBURGER INTÉGRÉ DANS LE HEADER -->
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="header-actions-row">
+                <a href="../../index.php?utm_source=admin&utm_medium=internal&utm_campaign=admin_preview" 
+                   target="_blank" 
+                   class="view-site-btn-mobile">
+                    <i class="fas fa-external-link-alt"></i>
+                    Voir le site
+                </a>
             </div>
             
             <!-- Workspace principal -->
