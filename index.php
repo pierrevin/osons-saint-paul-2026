@@ -13,6 +13,7 @@ if (!$user_connected) {
 
 // Site public dynamique basé sur index.html
 require_once __DIR__ . '/admin/config.php';
+require_once __DIR__ . '/image-helper.php';
 
 // Charger les données du site
 $content = get_json_data('site_content.json');
@@ -63,27 +64,56 @@ $content = get_json_data('site_content.json');
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Osons Saint-Paul">
     
-    <!-- Polices Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Polices Google Fonts - Chargement asynchrone -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Caveat:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Caveat:wght@400;600&display=swap" rel="stylesheet"></noscript>
     
-    <!-- Font Awesome pour les icônes -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font Awesome - Chargement différé -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     
-    <!-- CSS principal -->
-    <link rel="stylesheet" href="styles.css">
+    <!-- CSS Critique Inline -->
+    <style>
+        :root{--coral:#ec654f;--dark-blue:#004a6d;--cream:#FAF5EE}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:var(--dark-blue);background:#FFF;line-height:1.6;overflow-x:hidden}.header-sticky{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(236,101,79,.1);transition:all .3s ease;transform:translateY(-100%);opacity:0}.header-sticky.visible{transform:translateY(0);opacity:1}.hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}.hero-background{position:absolute;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center;z-index:-2}.hero-content{position:relative;z-index:1;text-align:center;color:#fff;width:100%}.hero-title{font-size:clamp(2.3rem,4.6vw,3.6rem);font-weight:700;margin-bottom:.8rem;color:#FFF;text-shadow:2px 2px 8px rgba(0,0,0,.5)}.btn{display:inline-block;padding:1rem 2rem;border-radius:50px;text-decoration:none;font-weight:600;transition:all .3s ease;border:2px solid transparent;cursor:pointer}.btn-primary{background:var(--coral);color:#fff;border-color:var(--coral)}
+    </style>
     
-    <!-- Google reCAPTCHA v3 -->
-    <script src="https://www.google.com/recaptcha/api.js?render=6LeOrNorAAAAAGfkiHS2IqTbd5QbQHvinxR_4oek"></script>
+    <!-- CSS principal - Chargement différé -->
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
     
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ME92TR3X97"></script>
+    <!-- Google reCAPTCHA v3 - Chargement lazy -->
+    <script>
+        window.recaptchaLoaded = false;
+        function loadRecaptcha() {
+            if (!window.recaptchaLoaded) {
+                window.recaptchaLoaded = true;
+                const script = document.createElement('script');
+                script.src = 'https://www.google.com/recaptcha/api.js?render=6LeOrNorAAAAAGfkiHS2IqTbd5QbQHvinxR_4oek';
+                document.head.appendChild(script);
+            }
+        }
+        // Charger au focus du formulaire de contact
+        document.addEventListener('DOMContentLoaded', function() {
+            const forms = document.querySelectorAll('form[action*="contact"]');
+            forms.forEach(form => {
+                form.addEventListener('focus', loadRecaptcha, {once: true, capture: true});
+                const inputs = form.querySelectorAll('input, textarea');
+                inputs.forEach(input => input.addEventListener('focus', loadRecaptcha, {once: true}));
+            });
+        });
+    </script>
+    
+    <!-- Google tag (gtag.js) - Chargement différé -->
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-ME92TR3X97"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-ME92TR3X97');
     </script>
+    
+    <!-- Préchargement image logo optimisée -->
+    <link rel="preload" as="image" href="/Ofeuille-70.webp" fetchpriority="high">
 </head>
 <body>
     <!-- Header sticky -->
@@ -126,15 +156,22 @@ $content = get_json_data('site_content.json');
                 // Forcer un chemin absolu local si c'est un upload
                 if (!preg_match('#^https?://#', $bg) && strpos($bg, '/') !== 0) { $bg = '/' . ltrim($bg, '/'); }
                 if (!preg_match('#^https?://#', $bgMobile) && strpos($bgMobile, '/') !== 0) { $bgMobile = '/' . ltrim($bgMobile, '/'); }
+                
+                // Utiliser les versions optimisées
+                $hero_srcset = get_background_image_srcset(ltrim($bg, '/'));
+                $hero_mobile_srcset = get_background_image_srcset(ltrim($bgMobile, '/'));
                 ?>
-                <source media="(max-width: 768px)" srcset="<?= htmlspecialchars($bgMobile) ?>">
-                <img src="<?= htmlspecialchars($bg) ?>" alt="Équipe Osons Saint-Paul - image hero" style="width:0;height:0;opacity:0;position:absolute;" onload="this.parentElement.parentElement.style.backgroundImage='url(' + this.src + ')'">
+                <source media="(max-width: 768px)" srcset="<?= htmlspecialchars($hero_mobile_srcset['mobile']) ?>">
+                <img src="<?= htmlspecialchars($hero_srcset['desktop']) ?>" alt="Équipe Osons Saint-Paul - image hero" style="width:0;height:0;opacity:0;position:absolute;" onload="this.parentElement.parentElement.style.backgroundImage='url(' + this.src + ')'" fetchpriority="high">
             </picture>
             <div class="hero-overlay"></div>
         </div>
         <!-- Logo scroll-down en tête du hero -->
         <div class="section-divider-logo" role="button" aria-label="Voir la suite" tabindex="0">
-            <img src="/Ofeuille.png" alt="Osons Saint-Paul">
+            <picture>
+                <source srcset="/Ofeuille-70.webp 1x, /Ofeuille-140.webp 2x" type="image/webp">
+                <img src="/Ofeuille-140.png" srcset="/Ofeuille-70.png 1x, /Ofeuille-140.png 2x" alt="Osons Saint-Paul" width="70" height="70">
+            </picture>
         </div>
 
         <div class="hero-content">
@@ -255,7 +292,11 @@ $content = get_json_data('site_content.json');
     </section>
 
     <!-- Citation de transition : Programme → Équipe -->
-    <div class="transition-quote programme-equipe" style="background-image: url('<?= htmlspecialchars($content['citations']['citation1']['background_image'] ?? 'uploads/hero_default.png') ?>');">
+    <?php
+    $citation1_bg = $content['citations']['citation1']['background_image'] ?? 'uploads/hero_default.png';
+    $citation1_srcset = get_background_image_srcset($citation1_bg);
+    ?>
+    <div class="transition-quote programme-equipe" style="background-image: url('<?= htmlspecialchars($citation1_srcset['desktop']) ?>');">
         <div class="transition-quote-content">
             <blockquote class="transition-quote-text">
                 <span class="quote-text"><?= htmlspecialchars($content['citations']['citation1']['text'] ?? 'Considérer l\'être humain et la préservation de la nature comme composante centrale de l\'action publique') ?></span>
@@ -280,7 +321,7 @@ $content = get_json_data('site_content.json');
             
             <!-- Image Hero Mobile (visible uniquement sur mobile) -->
             <div class="hero-mobile-image">
-                <img src="<?= htmlspecialchars($content['hero']['background_image'] ?? 'uploads/hero_default.png') ?>" alt="Équipe Osons Saint-Paul - Photo de groupe" loading="lazy">
+                <img src="<?= htmlspecialchars($content['hero']['background_image'] ?? 'uploads/hero_default.png') ?>" alt="Équipe Osons Saint-Paul - Photo de groupe" loading="lazy" width="768" height="432">
             </div>
             
             <div class="team-grid">
@@ -291,7 +332,7 @@ $content = get_json_data('site_content.json');
                         $image_url = $member['image'] ?? $member['photo'] ?? 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face&auto=format&q=80';
                         $alt_text = htmlspecialchars($member['name'] ?? 'Membre de l\'équipe');
                         ?>
-                        <img src="<?= htmlspecialchars($image_url) ?>" alt="<?= $alt_text ?>" loading="lazy" width="300" height="300">
+                        <img src="<?= htmlspecialchars($image_url) ?>" alt="<?= $alt_text ?>" loading="lazy" width="300" height="400" decoding="async">
                         <div class="member-overlay">
                             <h3 class="member-name"><?= htmlspecialchars($member['name'] ?? 'Nom non défini') ?></h3>
                             <p class="member-role"><?= htmlspecialchars($member['role'] ?? 'Rôle non défini') ?></p>
@@ -316,7 +357,11 @@ $content = get_json_data('site_content.json');
     </section>
 
     <!-- Citation de transition : Équipe → Rencontres -->
-    <div class="transition-quote equipe-rencontres" style="background-image: url('<?= htmlspecialchars($content['citations']['citation2']['background_image'] ?? 'uploads/hero_default.png') ?>');">
+    <?php
+    $citation2_bg = $content['citations']['citation2']['background_image'] ?? 'uploads/hero_default.png';
+    $citation2_srcset = get_background_image_srcset($citation2_bg);
+    ?>
+    <div class="transition-quote equipe-rencontres" style="background-image: url('<?= htmlspecialchars($citation2_srcset['desktop']) ?>');">
         <div class="transition-quote-content">
             <blockquote class="transition-quote-text">
                 <span class="quote-text"><?= htmlspecialchars($content['citations']['citation2']['text'] ?? 'Favoriser, au sein du conseil municipal, le débat d\'idées dans le respect des points de vue') ?></span>
@@ -462,7 +507,11 @@ $content = get_json_data('site_content.json');
     </section>
 
     <!-- Citation de transition : Rencontres → Charte -->
-    <div class="transition-quote rencontres-charte" style="background-image: url('<?= htmlspecialchars($content['citations']['citation3']['background_image'] ?? 'uploads/hero_default.png') ?>');">
+    <?php
+    $citation3_bg = $content['citations']['citation3']['background_image'] ?? 'uploads/hero_default.png';
+    $citation3_srcset = get_background_image_srcset($citation3_bg);
+    ?>
+    <div class="transition-quote rencontres-charte" style="background-image: url('<?= htmlspecialchars($citation3_srcset['desktop']) ?>');">
         <div class="transition-quote-content">
             <blockquote class="transition-quote-text">
                 <span class="quote-text"><?= htmlspecialchars($content['citations']['citation3']['text'] ?? 'Porter une politique en faveur des plus fragiles par des actions favorisant l\'inclusion et l\'autonomie') ?></span>
@@ -505,7 +554,11 @@ $content = get_json_data('site_content.json');
     </section>
 
     <!-- Citation de transition : Charte → Vos idées -->
-    <div class="transition-quote charte-idees" style="background-image: url('<?= htmlspecialchars($content['citations']['citation4']['background_image'] ?? 'uploads/hero_default.png') ?>');">
+    <?php
+    $citation4_bg = $content['citations']['citation4']['background_image'] ?? 'uploads/hero_default.png';
+    $citation4_srcset = get_background_image_srcset($citation4_bg);
+    ?>
+    <div class="transition-quote charte-idees" style="background-image: url('<?= htmlspecialchars($citation4_srcset['desktop']) ?>');">
         <div class="transition-quote-content">
             <blockquote class="transition-quote-text">
                 <span class="quote-text"><?= htmlspecialchars($content['citations']['citation4']['text'] ?? 'S\'engager à être cohérent.es entre nos intentions et nos actes') ?></span>
@@ -678,8 +731,8 @@ $content = get_json_data('site_content.json');
         })();
     </script>
     
-    <!-- Script principal -->
-    <script src="script.js"></script>
+    <!-- Script principal - Chargement différé -->
+    <script defer src="script.js"></script>
     
     <!-- Newsletter Handler -->
     <script>
