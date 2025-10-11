@@ -700,6 +700,7 @@ $sections = [
             // Ouvrir le menu
             menuToggle.addEventListener('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation(); // EMPÊCHER LA PROPAGATION
                 console.log('Ouverture menu mobile');
                 menuContainer.classList.add('open');
                 menuOverlay.classList.add('open');
@@ -713,10 +714,19 @@ $sections = [
             }
             
             if (menuClose) {
-                menuClose.addEventListener('click', closeMenu);
+                menuClose.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    closeMenu();
+                });
             }
             
-            menuOverlay.addEventListener('click', closeMenu);
+            // Overlay : fermer seulement si déjà ouvert
+            menuOverlay.addEventListener('click', function(e) {
+                if (menuContainer.classList.contains('open')) {
+                    closeMenu();
+                }
+            });
             
             // Navigation
             menuItems.forEach(function(item) {
