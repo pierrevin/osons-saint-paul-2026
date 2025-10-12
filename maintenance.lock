@@ -1,0 +1,6 @@
+{
+    "enabled": true,
+    "activated_at": "2025-01-12 00:00:00",
+    "activated_by": "migration_system",
+    "note": "Migration de l'ancien système de maintenance vers le système avec bouton toggle"
+}

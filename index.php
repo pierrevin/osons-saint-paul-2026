@@ -1,14 +1,20 @@
 <?php
-// MAINTENANCE MODE - Décommentez la ligne suivante pour activer
+// MAINTENANCE MODE - Géré par le fichier maintenance.lock
 session_start();
 
-// MODE MAINTENANCE ACTIVÉ - Site public en maintenance
-// Vérifier si l'utilisateur est connecté à l'admin
-$user_connected = isset($_SESSION['user_id']) || isset($_SESSION['admin_logged_in']) || isset($_SESSION['authenticated']);
+// Vérifier si le mode maintenance est activé (via le bouton admin)
+$maintenanceLockFile = __DIR__ . '/maintenance.lock';
+$maintenanceActive = file_exists($maintenanceLockFile);
 
-// Si l'utilisateur n'est pas connecté, afficher la maintenance
-if (!$user_connected) {
-    include __DIR__ . '/maintenance.php'; exit;
+// Si la maintenance est active ET que l'utilisateur n'est pas connecté à l'admin
+if ($maintenanceActive) {
+    $user_connected = isset($_SESSION['user_id']) || isset($_SESSION['admin_logged_in']) || isset($_SESSION['authenticated']);
+    
+    // Si l'utilisateur n'est pas connecté, afficher la maintenance
+    if (!$user_connected) {
+        include __DIR__ . '/maintenance.php'; 
+        exit;
+    }
 }
 
 // Site public dynamique basé sur index.html
