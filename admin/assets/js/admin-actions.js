@@ -38,9 +38,19 @@ class AdminActions {
         document.addEventListener('DOMContentLoaded', () => {
             this.tryInitEquipeDnD();
         });
+        
         document.addEventListener('section-loaded', (e) => {
             if (e.detail && e.detail.sectionId === 'equipe') {
-                this.tryInitEquipeDnD();
+                // Petit délai pour s'assurer que le DOM est mis à jour
+                setTimeout(() => {
+                    this.tryInitEquipeDnD();
+                }, 100);
+            }
+            if (e.detail && e.detail.sectionId === 'programme') {
+                // Petit délai pour s'assurer que le DOM est mis à jour
+                setTimeout(() => {
+                    this.tryInitProgrammeDnD();
+                }, 100);
             }
         });
     }
@@ -258,14 +268,14 @@ class AdminActions {
     tryInitEquipeDnD() {
         const grid = document.querySelector('.members-grid');
         if (!grid || grid.dataset.dndInitialized === '1') return;
+        
         const cards = grid.querySelectorAll('.member-card');
         if (!cards.length) return;
 
         grid.dataset.dndInitialized = '1';
 
         let dragSrcEl = null;
-        let placeholder = document.createElement('div');
-        placeholder.className = 'member-card placeholder';
+        const self = this; // Capturer le contexte pour handleDragEnd
 
         const handleDragStart = function(e) {
             dragSrcEl = this;
@@ -293,14 +303,16 @@ class AdminActions {
             e.preventDefault();
         };
 
-        const handleDragEnd = () => {
+        const handleDragEnd = function() {
             if (dragSrcEl) dragSrcEl.classList.remove('dragging');
             dragSrcEl = null;
-            this.persistEquipeOrder(grid);
+            self.persistEquipeOrder(grid);
         };
 
         cards.forEach(card => {
             card.setAttribute('draggable', 'true');
+            card.draggable = true;
+            
             card.addEventListener('dragstart', handleDragStart);
             card.addEventListener('dragover', handleDragOver);
             card.addEventListener('drop', handleDrop);
@@ -325,6 +337,91 @@ class AdminActions {
             .then(json => {
                 if (!json.success) throw new Error(json.message || 'Échec de la mise à jour de l\'ordre');
                 this.showSuccess('Ordre des membres sauvegardé');
+            })
+            .catch(err => this.showError(err.message));
+    }
+
+    /**
+     * Activer le glisser-déposer pour réordonner les propositions du programme.
+     */
+    tryInitProgrammeDnD() {
+        const grids = document.querySelectorAll('.proposals-grid');
+        if (!grids.length) return;
+        
+        grids.forEach(grid => {
+            if (grid.dataset.dndInitialized === '1') {
+                return;
+            }
+            
+            const cards = grid.querySelectorAll('.proposal-card');
+            if (!cards.length) return;
+
+            grid.dataset.dndInitialized = '1';
+            const self = this;
+
+            let dragSrcEl = null;
+
+            const handleDragStart = function(e) {
+                dragSrcEl = this;
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/plain', this.dataset.id || '');
+                this.classList.add('dragging');
+            };
+
+            const handleDragOver = function(e) {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+                const target = e.currentTarget;
+                if (!dragSrcEl || target === dragSrcEl) return;
+                const bounding = target.getBoundingClientRect();
+                const offset = e.clientY - bounding.top;
+                const shouldInsertBefore = offset < bounding.height / 2;
+                if (shouldInsertBefore) {
+                    grid.insertBefore(dragSrcEl, target);
+                } else {
+                    grid.insertBefore(dragSrcEl, target.nextSibling);
+                }
+            };
+
+            const handleDrop = (e) => {
+                e.preventDefault();
+            };
+
+            const handleDragEnd = function() {
+                if (dragSrcEl) dragSrcEl.classList.remove('dragging');
+                dragSrcEl = null;
+                self.persistProgrammeOrder(grid);
+            };
+
+            cards.forEach(card => {
+                card.setAttribute('draggable', 'true');
+                card.draggable = true;
+                
+                card.addEventListener('dragstart', handleDragStart);
+                card.addEventListener('dragover', handleDragOver);
+                card.addEventListener('drop', handleDrop);
+                card.addEventListener('dragend', handleDragEnd);
+            });
+        });
+    }
+
+    /**
+     * Envoyer l'ordre des propositions au backend.
+     */
+    persistProgrammeOrder(grid) {
+        if (!grid) return;
+        const ids = Array.from(grid.querySelectorAll('.proposal-card')).map(el => el.dataset.id || el.id).filter(Boolean);
+        if (!ids.length) return;
+        const url = window.location.href.split('#')[0];
+        const fd = new FormData();
+        fd.append('action', 'reorder_proposals');
+        fd.append('ids', JSON.stringify(ids));
+        fd.append('redirect_section', 'programme');
+        fetch(url, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd })
+            .then(r => r.json())
+            .then(json => {
+                if (!json.success) throw new Error(json.message || 'Échec de la mise à jour de l\'ordre');
+                this.showSuccess('Ordre des propositions sauvegardé');
             })
             .catch(err => this.showError(err.message));
     }
@@ -571,3 +668,22 @@ window.markFormChanged = function() {
 document.addEventListener('DOMContentLoaded', () => {
     window.adminActions = new AdminActions();
 });
+
+// Fonction globale pour forcer l'initialisation du DnD (utile pour le debug)
+window.initEquipeDnD = function() {
+    if (window.adminActions) {
+        window.adminActions.tryInitEquipeDnD();
+    } else {
+        console.error('❌ AdminActions non initialisé');
+    }
+};
+
+window.initProgrammeDnD = function() {
+    if (window.adminActions) {
+        window.adminActions.tryInitProgrammeDnD();
+    } else {
+        console.error('❌ AdminActions non initialisé');
+    }
+};
+
+

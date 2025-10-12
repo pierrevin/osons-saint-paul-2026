@@ -374,3 +374,4 @@ Avant chaque déploiement important :
 **Auteur** : Pierre Vincenot  
 **Projet** : Osons Saint-Paul 2026
 
+

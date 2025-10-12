@@ -173,7 +173,7 @@ class ProgrammeSection extends AdminSection {
     }
     
     private function renderPendingProposalCard($proposal) {
-        $html = '<div class="proposal-card pending-card">';
+        $html = '<div class="proposal-card pending-card" data-id="' . htmlspecialchars($proposal['id'], ENT_QUOTES, 'UTF-8') . '">';
         $html .= '<div class="proposal-header">';
         $html .= '<h5>' . htmlspecialchars($proposal['data']['titre']) . '</h5>';
         $html .= '<span class="status-badge pending">EN ATTENTE</span>';
@@ -218,7 +218,7 @@ class ProgrammeSection extends AdminSection {
         $title = $hasCitizenData ? ($proposal['data']['titre'] ?? '') : ($proposal['title'] ?? '');
         $description = $hasCitizenData ? ($proposal['data']['description'] ?? '') : ($proposal['description'] ?? '');
         
-        $html = '<div class="proposal-card approved-card">';
+        $html = '<div class="proposal-card approved-card" data-id="' . htmlspecialchars($proposal['id'], ENT_QUOTES, 'UTF-8') . '">';
         $html .= '<div class="proposal-header">';
         $html .= '<h5>' . htmlspecialchars($title) . '</h5>';
         $html .= '<span class="status-badge approved">VALIDÉE</span>';
@@ -272,7 +272,7 @@ class ProgrammeSection extends AdminSection {
     }
     
     private function renderRejectedProposalCard($proposal) {
-        $html = '<div class="proposal-card rejected-card">';
+        $html = '<div class="proposal-card rejected-card" data-id="' . htmlspecialchars($proposal['id'], ENT_QUOTES, 'UTF-8') . '">';
         $html .= '<div class="proposal-header">';
         $html .= '<h5>' . htmlspecialchars($proposal['data']['titre']) . '</h5>';
         $html .= '<span class="status-badge rejected">REJETÉE</span>';

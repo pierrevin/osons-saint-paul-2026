@@ -2,19 +2,27 @@
 
 /* ===== NOUVEAUX STYLES DASHBOARD REFONTE ===== */
 
-/* Info de propriété Google Analytics */
-.analytics-property-info {
+/* Info de propriété Google Analytics - Version compacte */
+.analytics-info-compact {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     margin-top: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: #f0f0f0;
-    border-radius: 4px;
-    font-size: 0.85rem;
 }
 
-.analytics-property-info .property-id {
+.analytics-info-compact .data-indicator {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+}
+
+.analytics-info-compact .property-id {
     font-family: monospace;
     color: #666;
     font-weight: 600;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    background: #f0f0f0;
+    border-radius: 4px;
 }
 
 /* Cartes Programme et Rendez-vous séparées */
@@ -631,4 +639,176 @@
     .traffic-medium {
         font-size: 0.7rem;
     }
+}
+
+/* ===== DRAG AND DROP ÉQUIPE ===== */
+
+/* Rendre les cartes membres déplaçables */
+.members-grid .member-card {
+    cursor: grab;
+    transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+    user-select: none;
+}
+
+.members-grid .member-card:active {
+    cursor: grabbing;
+}
+
+/* État pendant le glissement */
+.members-grid .member-card.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    border: 2px dashed var(--primary-color);
+}
+
+/* Indicateur visuel pour les cartes */
+.members-grid .member-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 74, 109, 0.1) 0%, rgba(14, 127, 173, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+.members-grid .member-card:hover::before {
+    opacity: 1;
+}
+
+/* Ajouter un indicateur de grip visuel */
+.member-card {
+    position: relative;
+}
+
+.member-card::after {
+    content: '⋮⋮';
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    color: var(--gray-400);
+    font-size: 1rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.member-card:hover::after {
+    opacity: 0.6;
+}
+
+.member-card.dragging::after {
+    opacity: 0;
+}
+
+/* Animation fluide de réarrangement */
+.members-grid {
+    position: relative;
+}
+
+.members-grid .member-card {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Message d'aide pour les utilisateurs */
+.members-section .section-header::after {
+    content: 'Glissez-déposez les cartes pour réorganiser';
+    display: block;
+    font-size: 0.85rem;
+    color: var(--gray-500);
+    font-weight: normal;
+    margin-top: 0.5rem;
+}
+
+/* ===== DRAG AND DROP PROGRAMME ===== */
+
+/* Rendre les cartes proposition déplaçables */
+.proposals-grid .proposal-card {
+    cursor: grab;
+    transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+    user-select: none;
+}
+
+.proposals-grid .proposal-card:active {
+    cursor: grabbing;
+}
+
+/* État pendant le glissement */
+.proposals-grid .proposal-card.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    border: 2px dashed var(--primary-color);
+}
+
+/* Indicateur visuel pour les cartes proposition */
+.proposals-grid .proposal-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 74, 109, 0.1) 0%, rgba(14, 127, 173, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+.proposals-grid .proposal-card:hover::before {
+    opacity: 1;
+}
+
+/* Ajouter un indicateur de grip visuel pour les propositions */
+.proposal-card {
+    position: relative;
+}
+
+.proposal-card::after {
+    content: '⋮⋮';
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    color: var(--gray-400);
+    font-size: 1rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.proposal-card:hover::after {
+    opacity: 0.6;
+}
+
+.proposal-card.dragging::after {
+    opacity: 0;
+}
+
+/* Animation fluide de réarrangement */
+.proposals-grid {
+    position: relative;
+}
+
+.proposals-grid .proposal-card {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Message d'aide pour les propositions */
+.proposals-zone .zone-header::after {
+    content: 'Glissez-déposez les cartes pour réorganiser';
+    display: block;
+    font-size: 0.85rem;
+    color: var(--gray-500);
+    font-weight: normal;
+    margin-top: 0.5rem;
 }

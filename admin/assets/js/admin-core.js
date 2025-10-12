@@ -182,7 +182,9 @@ class AdminCore {
             // Émettre un événement pour signaler que la section est chargée
             const evt = new CustomEvent('section-loaded', { detail: { sectionId } });
             document.dispatchEvent(evt);
-        } catch (error) {}
+        } catch (error) {
+            console.error('❌ Erreur dans navigateTo:', error);
+        }
     }
     
     updateMenuState(activeSectionId) {
@@ -194,20 +196,26 @@ class AdminCore {
         // Ajouter la classe active à l'élément correspondant
         const activeLink = document.querySelector(`[onclick*="'${activeSectionId}'"]`);
         if (activeLink) {
-            activeLink.closest('.menu-item').classList.add('active');
+            const menuItem = activeLink.closest('.menu-item');
+            if (menuItem) {
+                menuItem.classList.add('active');
+            }
         }
     }
     
     restoreLastSection() {
-        try {
-            const lastSection = localStorage.getItem('adminLastSection');
-            if (lastSection) {
-                // Délai pour s'assurer que le DOM est prêt
-                setTimeout(() => {
-                    this.navigateTo(lastSection);
-                }, 50);
-            }
-        } catch (e) {}
+        const hash = window.location.hash.replace('#', '');
+        if (hash) {
+            // Charger la section de l'URL si hash présent
+            setTimeout(() => {
+                this.navigateTo(hash);
+            }, 50);
+        } else {
+            // Pas de hash, charger le dashboard par défaut
+            setTimeout(() => {
+                this.navigateTo('dashboard');
+            }, 50);
+        }
     }
     
     // Méthode publique pour navigation depuis l'extérieur

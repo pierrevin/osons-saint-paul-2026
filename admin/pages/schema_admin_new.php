@@ -23,6 +23,10 @@ require_once __DIR__ . '/sections/logs_securite.php';
 // Vérifier l'authentification
 check_auth();
 
+// Vérifier l'état de la maintenance
+$maintenanceLockFile = __DIR__ . '/../../maintenance.lock';
+$maintenanceActive = file_exists($maintenanceLockFile);
+
 // Charger les données du site
 $site_content_file = DATA_PATH . '/site_content.json';
 $content = file_exists($site_content_file) ? json_decode(file_get_contents($site_content_file), true) : [];
@@ -290,6 +294,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
                 break;
                 
+            case 'reorder_proposals':
+                $data = $loadSite();
+                $proposals = $data['programme']['proposals'] ?? [];
+                $ids = $_POST['ids'] ?? [];
+                if (is_string($ids)) {
+                    $decoded = json_decode($ids, true);
+                    if (is_array($decoded)) { $ids = $decoded; }
+                    else { $ids = array_filter(array_map('trim', explode(',', $ids))); }
+                }
+                if (!is_array($ids) || empty($ids)) {
+                    throw new Exception('Liste des IDs invalide');
+                }
+                $byId = [];
+                foreach ($proposals as $p) { $byId[$p['id'] ?? ''] = $p; }
+                $reordered = [];
+                foreach ($ids as $pid) {
+                    if (isset($byId[$pid])) { $reordered[] = $byId[$pid]; unset($byId[$pid]); }
+                }
+                if (!empty($byId)) { foreach ($byId as $remaining) { $reordered[] = $remaining; } }
+                $data['programme']['proposals'] = $reordered;
+                $saveSite($data);
+                $result = ['success' => true, 'message' => 'Ordre des propositions mis à jour'];
+                if ($isAjax) { header('Content-Type: application/json'); echo json_encode($result); exit; }
+                break;
+                
             case 'update_programme_section':
                 $programmeSection = new ProgrammeSection($content);
                 $result = $programmeSection->handleSubmission($_POST);
@@ -304,6 +333,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             case 'set_citizen_status':
                 $programmeSection = new ProgrammeSection($content);
                 $result = $programmeSection->handleSubmission($_POST);
+                break;
+            
+            case 'toggle_maintenance':
+                // Vérifier que l'utilisateur est admin
+                if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
+                    throw new Exception('Action réservée aux administrateurs');
+                }
+                
+                $maintenanceLockFile = __DIR__ . '/../../maintenance.lock';
+                $isCurrentlyActive = file_exists($maintenanceLockFile);
+                
+                if ($isCurrentlyActive) {
+                    // Désactiver la maintenance
+                    if (file_exists($maintenanceLockFile)) {
+                        unlink($maintenanceLockFile);
+                    }
+                    $result = ['success' => true, 'message' => 'Mode maintenance désactivé', 'status' => 'off'];
+                } else {
+                    // Activer la maintenance
+                    $lockData = [
+                        'enabled' => true,
+                        'activated_at' => date('Y-m-d H:i:s'),
+                        'activated_by' => $_SESSION['username'] ?? 'admin'
+                    ];
+                    file_put_contents($maintenanceLockFile, json_encode($lockData, JSON_PRETTY_PRINT));
+                    $result = ['success' => true, 'message' => 'Mode maintenance activé', 'status' => 'on'];
+                }
+                
+                if ($isAjax) { 
+                    header('Content-Type: application/json'); 
+                    echo json_encode($result); 
+                    exit; 
+                }
                 break;
                 
             default:
@@ -575,23 +637,74 @@ $sections = [
             submitForm.submit();
         }
 
+        // Toggle du mode maintenance
+        function toggleMaintenance() {
+            const button = document.getElementById('maintenance-toggle');
+            if (!button) return;
+            
+            // Désactiver le bouton pendant la requête
+            button.disabled = true;
+            
+            const url = window.location.href.split('#')[0];
+            const fd = new FormData();
+            fd.append('action', 'toggle_maintenance');
+            
+            fetch(url, { 
+                method: 'POST', 
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }, 
+                body: fd 
+            })
+            .then(r => r.json())
+            .then(json => {
+                if (json.success) {
+                    // Mettre à jour l'interface
+                    const isActive = json.status === 'on';
+                    button.classList.toggle('active', isActive);
+                    button.querySelector('i').className = isActive ? 'fas fa-toggle-on' : 'fas fa-toggle-off';
+                    button.querySelector('.maintenance-status').textContent = isActive ? 'ON' : 'OFF';
+                    button.title = isActive ? 'Désactiver le mode maintenance' : 'Activer le mode maintenance';
+                    
+                    // Afficher le message
+                    if (window.adminActions) {
+                        window.adminActions.showSuccess(json.message);
+                    }
+                } else {
+                    if (window.adminActions) {
+                        window.adminActions.showError(json.message || 'Erreur lors du changement de mode');
+                    }
+                }
+            })
+            .catch(err => {
+                if (window.adminActions) {
+                    window.adminActions.showError('Erreur de connexion au serveur');
+                }
+            })
+            .finally(() => {
+                button.disabled = false;
+            });
+        }
+        
         // Toggle de la zone rejetée
         function toggleRejectedZone() {
             const content = document.getElementById('rejected-content');
             const header = document.querySelector('.rejected-zone .zone-header');
             
-            if (content.style.display === 'none') {
+            if (!content) return;
+            
+            if (content.style.display === 'none' || content.style.display === '') {
                 content.style.display = 'block';
-                header.classList.add('active');
+                if (header) header.classList.add('active');
             } else {
                 content.style.display = 'none';
-                header.classList.remove('active');
+                if (header) header.classList.remove('active');
             }
         }
         
         // Fonctions pour les actions des propositions
         function editProposal(id) {
-            // Charger les données et ouvrir le modal en mode édition        }
+            // Charger les données et ouvrir le modal en mode édition
+            // TODO: implémenter
+        }
         
         function deleteProposal(id) {
             if (confirm('Êtes-vous sûr de vouloir supprimer cette proposition ?')) {
@@ -649,6 +762,12 @@ $sections = [
         document.addEventListener('DOMContentLoaded', function() {
             // Attendre que tous les scripts soient chargés
             setTimeout(() => {
+                // Vérifier d'abord le hash, puis les query params, sinon dashboard
+                const hash = window.location.hash.replace('#', '');
+                if (hash) {
+                    // Le hash a priorité (géré par admin-core.js)
+                    return;
+                }
                 const urlParams = new URLSearchParams(window.location.search);
                 const section = urlParams.get('section') || 'dashboard'; // Dashboard par défaut
                 navigateToSection(section);
@@ -676,6 +795,80 @@ $sections = [
             to { transform: rotate(360deg); }
         }
         
+        /* BOUTON MAINTENANCE TOGGLE */
+        .maintenance-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            margin-left: 1.5rem;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            background: white;
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .maintenance-toggle:hover {
+            border-color: #999;
+            background: #f5f5f5;
+        }
+        
+        .maintenance-toggle:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .maintenance-toggle i {
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        
+        .maintenance-toggle .maintenance-label {
+            color: #666;
+        }
+        
+        .maintenance-toggle .maintenance-status {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            background: #e0e0e0;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+        
+        /* État actif (ON) */
+        .maintenance-toggle.active {
+            border-color: #ff6b6b;
+            background: #fff5f5;
+        }
+        
+        .maintenance-toggle.active i {
+            color: #ff6b6b;
+        }
+        
+        .maintenance-toggle.active .maintenance-status {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        /* État inactif (OFF) */
+        .maintenance-toggle:not(.active) i {
+            color: #999;
+        }
+        
+        /* Responsive - cacher sur mobile */
+        @media (max-width: 768px) {
+            .maintenance-toggle {
+                display: none;
+            }
+        }
+        
         /* MENU HAMBURGER ULTRA-SIMPLE */
         .hamburger-simple {
             background: #ec654f;
@@ -687,9 +880,16 @@ $sections = [
             cursor: pointer;
             width: 45px;
             height: 45px;
-            display: flex;
+            display: none; /* Caché par défaut sur desktop */
             align-items: center;
             justify-content: center;
+        }
+        
+        /* Afficher uniquement sur mobile */
+        @media (max-width: 768px) {
+            .hamburger-simple {
+                display: flex;
+            }
         }
         
         .hamburger-simple:hover {
@@ -900,6 +1100,16 @@ $sections = [
                         <img src="../../uploads/Osons1.png" alt="Logo Osons" />
                     </div>
                     <h1>Administration du Site</h1>
+                    <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'): ?>
+                        <button id="maintenance-toggle" 
+                                class="maintenance-toggle <?= $maintenanceActive ? 'active' : '' ?>" 
+                                onclick="toggleMaintenance()"
+                                title="<?= $maintenanceActive ? 'Désactiver le mode maintenance' : 'Activer le mode maintenance' ?>">
+                            <i class="fas fa-<?= $maintenanceActive ? 'toggle-on' : 'toggle-off' ?>"></i>
+                            <span class="maintenance-label">Maintenance</span>
+                            <span class="maintenance-status"><?= $maintenanceActive ? 'ON' : 'OFF' ?></span>
+                        </button>
+                    <?php endif; ?>
                 </div>
                 <!-- Bouton hamburger simple -->
                 <button id="hamburger-simple" class="hamburger-simple">☰</button>
@@ -1395,10 +1605,6 @@ $sections = [
         <span>Auto-sauvegarde...</span>
     </div>
     
-    <!-- Indicateur de répertoire de données -->
-    <div style="position: fixed; bottom: 10px; right: 10px; background: <?php echo (strpos(DATA_PATH, 'data-osons') !== false) ? '#d4edda' : '#fff3cd'; ?>; color: <?php echo (strpos(DATA_PATH, 'data-osons') !== false) ? '#155724' : '#856404'; ?>; padding: 8px 15px; border-radius: 5px; font-size: 0.75rem; font-family: 'Courier New', monospace; box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 9998;">
-        <?php echo (strpos(DATA_PATH, 'data-osons') !== false) ? '✅ Données persistantes (data-osons)' : '⚠️ Données temporaires (data)'; ?>
-    </div>
     
     <!-- Messages de feedback -->
     <?php if (isset($_SESSION['admin_success'])): ?>

@@ -21,6 +21,10 @@ if (!isset($_SESSION['user_role']) || !in_array($_SESSION['user_role'], ['editeu
     exit;
 }
 
+// Vérifier l'état de la maintenance (pour les admins)
+$maintenanceLockFile = __DIR__ . '/../../maintenance.lock';
+$maintenanceActive = file_exists($maintenanceLockFile);
+
 // Charger les données du site
 $site_content_file = __DIR__ . '/../../data/site_content.json';
 $content = file_exists($site_content_file) ? json_decode(file_get_contents($site_content_file), true) : [];
@@ -535,6 +539,48 @@ $sections = [
             submitForm.submit();
         }
 
+        // Toggle du mode maintenance
+        function toggleMaintenance() {
+            const button = document.getElementById('maintenance-toggle');
+            if (!button) return;
+            
+            // Désactiver le bouton pendant la requête
+            button.disabled = true;
+            
+            // Rediriger vers schema_admin_new.php pour l'action (car elle y est définie)
+            const url = '../pages/schema_admin_new.php';
+            const fd = new FormData();
+            fd.append('action', 'toggle_maintenance');
+            
+            fetch(url, { 
+                method: 'POST', 
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }, 
+                body: fd 
+            })
+            .then(r => r.json())
+            .then(json => {
+                if (json.success) {
+                    // Mettre à jour l'interface
+                    const isActive = json.status === 'on';
+                    button.classList.toggle('active', isActive);
+                    button.querySelector('i').className = isActive ? 'fas fa-toggle-on' : 'fas fa-toggle-off';
+                    button.querySelector('.maintenance-status').textContent = isActive ? 'ON' : 'OFF';
+                    button.title = isActive ? 'Désactiver le mode maintenance' : 'Activer le mode maintenance';
+                    
+                    // Afficher le message
+                    alert(json.message);
+                } else {
+                    alert(json.message || 'Erreur lors du changement de mode');
+                }
+            })
+            .catch(err => {
+                alert('Erreur de connexion au serveur');
+            })
+            .finally(() => {
+                button.disabled = false;
+            });
+        }
+        
         // Toggle de la zone rejetée
         function toggleRejectedZone() {
             const content = document.getElementById('rejected-content');
@@ -637,6 +683,80 @@ $sections = [
             to { transform: rotate(360deg); }
         }
         
+        /* BOUTON MAINTENANCE TOGGLE */
+        .maintenance-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            margin-left: 1.5rem;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            background: white;
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .maintenance-toggle:hover {
+            border-color: #999;
+            background: #f5f5f5;
+        }
+        
+        .maintenance-toggle:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .maintenance-toggle i {
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        
+        .maintenance-toggle .maintenance-label {
+            color: #666;
+        }
+        
+        .maintenance-toggle .maintenance-status {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            background: #e0e0e0;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+        
+        /* État actif (ON) */
+        .maintenance-toggle.active {
+            border-color: #ff6b6b;
+            background: #fff5f5;
+        }
+        
+        .maintenance-toggle.active i {
+            color: #ff6b6b;
+        }
+        
+        .maintenance-toggle.active .maintenance-status {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        /* État inactif (OFF) */
+        .maintenance-toggle:not(.active) i {
+            color: #999;
+        }
+        
+        /* Responsive - cacher sur mobile */
+        @media (max-width: 768px) {
+            .maintenance-toggle {
+                display: none;
+            }
+        }
+        
         /* MENU HAMBURGER ULTRA-SIMPLE */
         .hamburger-simple {
             background: #ec654f;
@@ -648,9 +768,16 @@ $sections = [
             cursor: pointer;
             width: 45px;
             height: 45px;
-            display: flex;
+            display: none; /* Caché par défaut sur desktop */
             align-items: center;
             justify-content: center;
+        }
+        
+        /* Afficher uniquement sur mobile */
+        @media (max-width: 768px) {
+            .hamburger-simple {
+                display: flex;
+            }
         }
         
         .hamburger-simple:hover {
@@ -853,6 +980,16 @@ $sections = [
                         <img src="../../uploads/Osons1.png" alt="Logo Osons" />
                     </div>
                     <h1>Administration du Site</h1>
+                    <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'): ?>
+                        <button id="maintenance-toggle" 
+                                class="maintenance-toggle <?= $maintenanceActive ? 'active' : '' ?>" 
+                                onclick="toggleMaintenance()"
+                                title="<?= $maintenanceActive ? 'Désactiver le mode maintenance' : 'Activer le mode maintenance' ?>">
+                            <i class="fas fa-<?= $maintenanceActive ? 'toggle-on' : 'toggle-off' ?>"></i>
+                            <span class="maintenance-label">Maintenance</span>
+                            <span class="maintenance-status"><?= $maintenanceActive ? 'ON' : 'OFF' ?></span>
+                        </button>
+                    <?php endif; ?>
                 </div>
                 <!-- Bouton hamburger simple -->
                 <button id="hamburger-simple" class="hamburger-simple">☰</button>

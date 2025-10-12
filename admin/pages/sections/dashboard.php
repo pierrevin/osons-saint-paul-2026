@@ -236,8 +236,8 @@ class DashboardSection extends AdminSection {
         $html .= '<div class="analytics-header">';
         $html .= '<div class="analytics-title">';
         $html .= '<h3><i class="fas fa-chart-line"></i> Statistiques Google Analytics</h3>';
+        $html .= '<div class="analytics-info-compact">';
         $html .= '<div class="data-indicator real-data"><i class="fas fa-check-circle"></i> Données réelles</div>';
-        $html .= '<div class="analytics-property-info">';
         $html .= '<span class="property-id">Property ID: ' . $analytics->getPropertyId() . '</span>';
         $html .= '</div>';
         $html .= '</div>';
